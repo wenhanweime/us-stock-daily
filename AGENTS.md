@@ -9,9 +9,10 @@
 - 本仓库公开发布在 GitHub Pages（https://wenhanweime.github.io/us-stock-daily/）：
   **涉密 / 未脱敏 / 含个人隐私的内容禁止发布。**
 
-## 两条内容线
+## 三条内容线
 - **每日观察**（自动）：`docs/reports/<date>.html`，由 `generate_report.py` + launchd 每天约 12:00 生成，**勿手改**。
 - **深度研究**（手动）：`docs/research/<slug>/index.html`，每篇为自包含子模块，由 `publish_research.py` 收纳发布。
+- **关键词监控**（自动）：`docs/monitor/index.html` + `docs/monitor.json`，由 `monitor.py`（桶配置在 `keywords.py`）+ launchd `com.pot.us-stock-monitor` 每小时 :17 生成，**勿手改**。盯存储/光模块关键词放量，按推文 ID 去重计数 + 放量告警。
 
 ## 发布一篇深度研究
 ```bash
@@ -33,6 +34,7 @@ python3 publish_research.py --src <报告.html> --slug <英文短横线> \
 
 ## 关键文件
 - `generate_report.py` 每日观察 · `queries.py` 抓取口径
-- `research.py` 子模块管理 + 首页统一渲染 · `publish_research.py` 发布 CLI
+- `monitor.py` 关键词监控 · `keywords.py` 监控桶配置（改这里增删关键词）
+- `research.py` 子模块管理 + 首页统一渲染（每日观察/深度研究/关键词监控三区） · `publish_research.py` 发布 CLI
 - `docs/assets/theme.css` + `terminal.js` 共享设计系统 · `templates/` 模板与规范
 - Claude Code 用户另有 skill：`us-stock-research-publish`（封装上述流程）

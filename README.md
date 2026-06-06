@@ -1,11 +1,12 @@
 # 美股投研 (us-stock-daily)
 
-一个统一的美股 / 半导体 / AI 基建投研站，两条内容线：
+一个统一的美股 / 半导体 / AI 基建投研站，三条内容线：
 
 - **每日观察**（自动）：每天抓取 X 上美股高赞讨论，grok 原生检索聚合当日热点 / 个股 / 情绪。
 - **深度研究**（手动）：不定期产出的个股 / 产业链 / 主题研报，每篇作为一个自包含「子模块」收纳进站点。
+- **关键词监控**（自动）：每小时检索存储 / 光模块关键词，按推文 ID 去重统计「放量」并告警。
 
-两线共用一个首页（`docs/index.html`，自动重渲染，互不覆盖）。
+三线共用一个首页（`docs/index.html`，自动重渲染，互不覆盖）。
 
 **站点**：https://wenhanweime.github.io/us-stock-daily/
 
@@ -32,6 +33,14 @@ python3 publish_research.py --src <报告.html> \
 
 > 对应 Claude skill：`~/.claude/skills/us-stock-research-publish/`（产出研报后让 agent 自动走这条流程）。
 
+## 关键词监控（自动）
+`launchd com.pot.us-stock-monitor`（每小时 :17）→ `monitor.py`：每个簇跑一次 grok Latest 检索 →
+按**推文 ID 跨小时去重**得每桶「本轮新增」→ 放量告警（≥4 且 ≥2.5× 近 24 轮基线）→ 写
+`docs/monitor/index.html` + `docs/monitor.json` → 调 `research.render_home()` 刷新统一首页 → push。
+- 监控对象（桶）改 `keywords.py`；当前：存储簇=美光$MU / 闪迪$SNDK / 海力士Hynix / 存储HBM，光簇=光模块 / CPO硅光 / $SIVE。
+- 新增数是**采样代理**：grok 每簇约 40 条上限，低频词准、高频词偏保守（页面标「采样上限」）；要精确计数需 Apify / X API。
+- 只改样式不调 grok：`python3 monitor.py --render`（用上轮数据重渲染 + 刷首页 + push）。
+
 ## 风格固化（「研究终端」）
 全站统一视觉：暖纸底 `#f6f4ef` + 绿 accent `#0b6b57` + Inter 字体 + 侧栏导航 + 顶栏全局搜索 + KPI 指标卡 + 可排序表（样板：`docs/research/ai-infra-dashboard/`）。
 - `docs/assets/theme.css` — 共享设计系统（首页 + 日报用，研报内联同款）
@@ -42,10 +51,11 @@ python3 publish_research.py --src <报告.html> \
 ## 目录
 - `generate_report.py` — 每日观察主入口（launchd 自动）
 - `queries.py` — 抓取的查询措辞（**改这里调整角度/口径**）
-- `research.py` — 深度研究子模块管理 + 首页统一渲染（被上面两者共用）
+- `monitor.py` — 关键词监控主入口（launchd 每小时自动） · `keywords.py` — 监控桶配置（**改这里增删关键词**）
+- `research.py` — 子模块管理 + 首页统一渲染（每日观察/深度研究/关键词监控三区共用）
 - `publish_research.py` — 深度研究发布 CLI
-- `docs/` — GitHub Pages 根（`/docs` on `main`）：`index.html` / `feed.json` / `research.json` / `assets/style.css` / `reports/*.html` / `research/<slug>/`
-- `data/raw/<date>/` — 每期原始 grok JSON（本地留档，不入库）
+- `docs/` — GitHub Pages 根（`/docs` on `main`）：`index.html` / `feed.json` / `research.json` / `monitor.json` / `assets/` / `reports/*.html` / `research/<slug>/` / `monitor/`
+- `data/` — 原始 grok JSON、监控去重 state（`monitor_state.json`）等本地留档，不入库
 - `logs/` — launchd 运行日志（不入库）
 
 ## 手动运行

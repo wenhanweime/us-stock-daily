@@ -16,6 +16,7 @@ DOCS_DIR = BASE_DIR / "docs"
 RESEARCH_DIR = DOCS_DIR / "research"
 RESEARCH_JSON = DOCS_DIR / "research.json"
 FEED_JSON = DOCS_DIR / "feed.json"
+MONITOR_JSON = DOCS_DIR / "monitor.json"
 
 SITE_NAME = "美股投研"
 
@@ -44,6 +45,16 @@ def load_research() -> dict:
 
 def load_feed() -> dict:
     return _load(FEED_JSON)
+
+
+def load_monitor() -> dict:
+    """关键词监控状态（由 monitor.py 写 docs/monitor.json）；缺失安全降级。"""
+    if MONITOR_JSON.exists():
+        try:
+            return json.loads(MONITOR_JSON.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return {}
 
 
 def save_research(data: dict) -> None:
@@ -171,10 +182,30 @@ def render_home(feed: Optional[dict] = None) -> None:
                _esc(e.get("teaser", "") or tks)))
     dchips_html = "".join(dchips) or '<p class="empty-state visible">暂无日报。</p>'
 
+    # 关键词监控（第三条线）
+    mon = load_monitor()
+    mon_buckets = mon.get("buckets", [])
+    mon_kw = mon.get("keywords", len(mon_buckets))
+    mon_spiked = mon.get("spiked", [])
+    mon_updated = ("最后更新 %s。" % _esc(mon.get("last_updated"))) if mon.get("last_updated") else ""
+    if mon_buckets:
+        mchips = []
+        for b in mon_buckets:
+            flag = " 🔺放量" if b.get("spike") else ""
+            mchips.append(
+                '<a class="doc-chip filter-item" href="monitor/index.html">'
+                '<span>新增 %s · 采样 %s%s</span><strong>%s</strong></a>'
+                % (b.get("new", 0), b.get("sampled", 0), flag, _esc(b.get("name"))))
+        mon_chips_html = "".join(mchips)
+    else:
+        mon_chips_html = '<p class="empty-state visible">监控未启动。</p>'
+
     # 指标
     tickers_cov = len({t for e in rentries for t in (e.get("tickers") or [])})
     metrics = [(len(rentries), "深度研究"), (tickers_cov, "覆盖个股标的"),
-               (len(dentries), "每日观察期数"), (last or "—", "最新更新")]
+               (len(dentries), "每日观察期数"), (mon_kw or "—", "监控关键词"),
+               (len(mon_spiked) if mon_buckets else "—", "放量告警"),
+               (last or "—", "最新更新")]
     metric_html = "".join(
         '<div class="metric"><strong>%s</strong><span>%s</span></div>'
         % (_esc(v), _esc(l)) for v, l in metrics)
@@ -197,6 +228,7 @@ def render_home(feed: Optional[dict] = None) -> None:
       <p class="nav-group-title">Sections</p>
       <a class="nav-link" href="#research"><span>RS</span><strong>深度研究</strong></a>
       <a class="nav-link" href="#daily"><span>DAY</span><strong>每日观察</strong></a>
+      <a class="nav-link" href="#monitor"><span>MON</span><strong>关键词监控</strong></a>
     </nav>
     <nav class="nav-group" aria-label="深度研究">
       <p class="nav-group-title">Research</p>
@@ -232,6 +264,12 @@ def render_home(feed: Optional[dict] = None) -> None:
       <div class="panel-head"><div><p class="eyebrow">Daily Market Watch</p>
         <h2>每日观察</h2><p>每天北京时间约 12:00 自动更新。最后更新：{_esc(last)}。</p></div></div>
       <div class="doc-map">{dchips_html}</div>
+    </section>
+    <section class="panel" id="monitor">
+      <div class="panel-head"><div><p class="eyebrow">Keyword Velocity Monitor</p>
+        <h2>关键词监控</h2><p>每小时检索存储 / 光模块关键词，按推文 ID 去重统计放量。{mon_updated}</p></div></div>
+      <div class="doc-map">{mon_chips_html}</div>
+      <p style="margin:12px 0 0"><a class="source-link" href="monitor/index.html">查看完整监控看板 →</a></p>
     </section>
     <p class="empty-state" id="emptyState">没有匹配的内容。</p>
     <footer class="footer">grok 原生 X 检索 · 内容由 AI 聚合可能有误 · 仅供研究，非投资建议</footer>
