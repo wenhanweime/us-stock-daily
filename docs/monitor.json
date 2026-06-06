@@ -1,47 +1,47 @@
 {
-  "last_updated": "2026-06-07 04:17",
+  "last_updated": "2026-06-07 05:17",
   "keywords": 7,
   "spiked": [],
   "buckets": [
     {
       "name": "美光 $MU",
-      "new": 18,
-      "sampled": 21,
-      "spike": false
-    },
-    {
-      "name": "闪迪 $SNDK",
-      "new": 3,
-      "sampled": 3,
-      "spike": false
-    },
-    {
-      "name": "海力士 Hynix",
-      "new": 4,
-      "sampled": 5,
-      "spike": false
-    },
-    {
-      "name": "存储/HBM/DRAM",
-      "new": 14,
+      "new": 16,
       "sampled": 16,
       "spike": false
     },
     {
-      "name": "光模块/光通信",
-      "new": 2,
-      "sampled": 2,
-      "spike": false
-    },
-    {
-      "name": "CPO/硅光",
+      "name": "闪迪 $SNDK",
       "new": 4,
       "sampled": 4,
       "spike": false
     },
     {
+      "name": "海力士 Hynix",
+      "new": 0,
+      "sampled": 0,
+      "spike": false
+    },
+    {
+      "name": "存储/HBM/DRAM",
+      "new": 13,
+      "sampled": 13,
+      "spike": false
+    },
+    {
+      "name": "光模块/光通信",
+      "new": 4,
+      "sampled": 7,
+      "spike": false
+    },
+    {
+      "name": "CPO/硅光",
+      "new": 8,
+      "sampled": 9,
+      "spike": false
+    },
+    {
       "name": "SIVE $SIVE",
-      "new": 22,
+      "new": 18,
       "sampled": 22,
       "spike": false
     }
