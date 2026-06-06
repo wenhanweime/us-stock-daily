@@ -183,55 +183,116 @@ def _us_trading_hint(now_cst: datetime) -> str:
 def render_report_page(date_str: str, now_cst: datetime, model: str,
                        summary_md: str, angles: List[Tuple[str, dict]],
                        agg: Dict) -> str:
-    ticker_html = "".join(
-        f"<tr><td>{i+1}</td><td class='tk'>{_html.escape(t)}</td>"
-        f"<td>{n}</td></tr>"
+    ticker_rows = "".join(
+        f"<tr><td class='num'>{i+1}</td><td class='tk'>{_html.escape(t)}</td>"
+        f"<td class='num'>{n}</td></tr>"
         for i, (t, n) in enumerate(agg["tickers"]))
     author_html = "".join(
-        f"<li><span class='at'>@{_html.escape(a)}</span> · {n} 帖</li>"
+        f'<span class="badge filter-item">@{_html.escape(a)} · {n}</span>'
         for a, n in agg["authors"])
 
-    sections = []
-    for label, data in angles:
+    sections, nav_sections = [], []
+    for idx, (label, data) in enumerate(angles, 1):
         if not data:
             continue
+        anchor = f"sec-{idx}"
+        nav_sections.append(
+            f'<a class="nav-link" href="#{anchor}"><span>{idx:02d}</span>'
+            f'<strong>{_html.escape(label)}</strong></a>')
         body = md_to_html(data.get("content", ""))
         srcs = data.get("sources") or []
         src_links = "".join(
             f'<a href="{_html.escape(s.get("url",""))}" target="_blank" '
             f'rel="noopener">{i+1}</a> '
             for i, s in enumerate(srcs) if s.get("url"))
-        src_block = f'<div class="sources">来源：{src_links}</div>' if src_links else ""
+        src_block = f'<div class="table-note">来源：{src_links}</div>' if src_links else ""
         sections.append(
-            f'<details><summary>{_html.escape(label)}</summary>'
-            f'<div class="md">{body}</div>{src_block}</details>')
+            f'<section class="panel filter-item" id="{anchor}">'
+            f'<div class="panel-head"><div><p class="eyebrow">板块 {idx:02d}</p>'
+            f'<h2>{_html.escape(label)}</h2></div></div>'
+            f'<div class="markdown-body">{body}</div>{src_block}</section>')
 
     summary_html = md_to_html(summary_md) if summary_md else \
-        '<p class="warn">今日导读综合查询未成功，请见下方分板块详情。</p>'
+        '<p class="muted">今日导读综合查询未成功，请见下方分板块详情。</p>'
+
+    metrics = [(agg["unique_tweets"], "去重高赞推文"), (len(agg["tickers"]), "提及个股"),
+               (len(agg["authors"]), "高产账号"), (date_str, "交易日批次")]
+    metric_html = "".join(
+        f'<div class="metric"><strong>{_html.escape(str(v))}</strong>'
+        f'<span>{_html.escape(l)}</span></div>' for v, l in metrics)
 
     return f"""<!doctype html>
 <html lang="zh-Hans"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f4ef">
 <title>{SITE_TITLE} · {date_str}</title>
-<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/theme.css">
 </head><body>
-<header class="site-header"><a href="../index.html">← {SITE_TITLE}</a></header>
-<main class="report">
-  <h1>{date_str} 美股观察日报</h1>
-  <div class="meta">生成于 {now_cst:%Y-%m-%d %H:%M} (北京时间) · 模型 {_html.escape(model or 'grok')}
-   · 去重唯一高赞推文 <b>{agg['unique_tweets']}</b> 条 · {_us_trading_hint(now_cst)}</div>
-  <section class="hero md">{summary_html}</section>
-  <section class="stats">
-    <div class="card"><h3>最热个股 / Ticker</h3>
-      <table class="ticker"><thead><tr><th>#</th><th>代码</th><th>提及</th></tr></thead>
-      <tbody>{ticker_html or '<tr><td colspan=3>—</td></tr>'}</tbody></table></div>
-    <div class="card"><h3>高产账号</h3><ul class="authors">{author_html or '<li>—</li>'}</ul></div>
-  </section>
-  <h2>分板块详情</h2>
-  {''.join(sections) or '<p class="warn">分板块查询均未成功。</p>'}
-  <footer>数据来源：grok 原生 X 检索（Top 模式）· 点赞为检索时近似值 · 仅供研究，非投资建议</footer>
-</main></body></html>"""
+<a class="skip-link" href="#main">跳到主内容</a>
+<div class="app-shell">
+  <aside class="sidebar" aria-label="导航">
+    <div class="brand"><h1>{date_str}<br>美股观察日报</h1>
+      <p><a class="back-link" href="../index.html">← 返回投研站</a></p></div>
+    <nav class="nav-group" aria-label="本期">
+      <p class="nav-group-title">本期</p>
+      <a class="nav-link" href="#overview"><span>00</span><strong>总览</strong></a>
+      <a class="nav-link" href="#summary"><span>RD</span><strong>今日导读</strong></a>
+      <a class="nav-link" href="#tickers"><span>TK</span><strong>最热个股</strong></a>
+      <a class="nav-link" href="#authors"><span>AT</span><strong>高产账号</strong></a>
+    </nav>
+    <nav class="nav-group" aria-label="分板块">
+      <p class="nav-group-title">分板块</p>
+      {''.join(nav_sections)}
+    </nav>
+  </aside>
+  <main class="main" id="main">
+    <div class="topbar" role="search">
+      <div class="search-wrap"><label for="searchInput">搜索个股 / 账号 / 板块</label>
+        <div class="search-row">
+          <input id="searchInput" type="search" autocomplete="off" placeholder="例如 NVDA、HBM、利率、看空…" aria-describedby="rowCount">
+          <span class="badge" id="rowCount" aria-live="polite">—</span>
+        </div></div>
+      <div class="tool-buttons">
+        <button type="button" id="resetSearch">重置</button>
+        <a class="source-link" href="../index.html">← 投研站首页</a>
+      </div>
+    </div>
+    <section class="hero-panel" id="overview">
+      <div class="overview-copy">
+        <p class="eyebrow">Daily Market Watch · {_html.escape(model or 'grok')}</p>
+        <h2>{date_str} 美股观察日报</h2>
+        <p>生成于 {now_cst:%Y-%m-%d %H:%M}（北京时间）· {_us_trading_hint(now_cst)}。表格可点表头排序，搜索同步过滤。</p>
+      </div>
+      <div class="metric-grid">{metric_html}</div>
+    </section>
+    <section class="panel" id="summary">
+      <div class="panel-head"><div><p class="eyebrow">Editor's Brief</p>
+        <h2>今日导读</h2></div></div>
+      <div class="markdown-body">{summary_html}</div>
+    </section>
+    <section class="panel" id="tickers">
+      <div class="panel-head"><div><p class="eyebrow">Most Mentioned</p>
+        <h2>最热个股 / Ticker</h2><p>按提及量排序，点表头可重排。</p></div></div>
+      <div class="table-shell"><table class="sortable">
+        <thead><tr><th><button class="sort-button">#</button></th>
+          <th><button class="sort-button">代码</button></th>
+          <th><button class="sort-button">提及</button></th></tr></thead>
+        <tbody>{ticker_rows or '<tr><td colspan=3>—</td></tr>'}</tbody></table></div>
+      <div class="table-note">提及量为检索文本中 $代码 出现次数的近似统计。</div>
+    </section>
+    <section class="panel" id="authors">
+      <div class="panel-head"><div><p class="eyebrow">Top Voices</p>
+        <h2>高产账号</h2><p>本期被去重高赞推文覆盖最多的账号。</p></div></div>
+      <div class="status-strip">{author_html or '<span class="badge">—</span>'}</div>
+    </section>
+    {''.join(sections) or '<section class="panel"><div class="panel-head"><h2>分板块详情</h2></div><p class="table-note">分板块查询均未成功。</p></section>'}
+    <p class="empty-state" id="emptyState">没有匹配的内容。</p>
+    <footer class="footer">数据来源：grok 原生 X 检索（Top 模式）· 点赞为检索时近似值 · 仅供研究，非投资建议</footer>
+  </main>
+</div>
+<script src="../assets/terminal.js"></script>
+</body></html>"""
 
 
 def update_feed(entry: Dict) -> Dict:

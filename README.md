@@ -32,6 +32,13 @@ python3 publish_research.py --src <报告.html> \
 
 > 对应 Claude skill：`~/.claude/skills/us-stock-research-publish/`（产出研报后让 agent 自动走这条流程）。
 
+## 风格固化（「研究终端」）
+全站统一视觉：暖纸底 `#f6f4ef` + 绿 accent `#0b6b57` + Inter 字体 + 侧栏导航 + 顶栏全局搜索 + KPI 指标卡 + 可排序表（样板：`docs/research/ai-infra-dashboard/`）。
+- `docs/assets/theme.css` — 共享设计系统（首页 + 日报用，研报内联同款）
+- `docs/assets/terminal.js` — 共享交互（搜索过滤 + 表头排序）
+- `templates/research-report.html` — 研报模板（自包含，复制即用）
+- `templates/STYLE_GUIDE.md` — 设计令牌 / 组件清单 / 可粘 LLM 的 prompt
+
 ## 目录
 - `generate_report.py` — 每日观察主入口（launchd 自动）
 - `queries.py` — 抓取的查询措辞（**改这里调整角度/口径**）

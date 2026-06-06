@@ -130,30 +130,115 @@ def _daily_items(feed: dict) -> str:
 def render_home(feed: Optional[dict] = None) -> None:
     feed = feed if feed is not None else load_feed()
     research = load_research()
-    cards = _research_cards(research)
-    items = _daily_items(feed)
-    last = feed.get("last_updated", "")
-    research_section = (
-        f'<section class="block"><h2 class="sec">深度研究</h2>'
-        f'<div class="rgrid">{cards}</div></section>') if cards else ""
+    rentries = research.get("entries", [])
+    dentries = feed.get("entries", [])
+    last = (feed.get("last_updated", "") or "")[:10]
+
+    # 侧栏：深度研究导航
+    rnav = []
+    for i, e in enumerate(rentries):
+        rnav.append('<a class="nav-link" href="#r-%s"><span>%02d</span>'
+                    '<strong>%s</strong></a>'
+                    % (_esc(e.get("slug")), i + 1, _esc(e.get("title"))))
+    rnav_html = "".join(rnav) or '<p class="nav-group-title">暂无</p>'
+
+    # 深度研究卡片
+    rcards = []
+    for e in rentries:
+        tks = " ".join("$" + t for t in (e.get("tickers") or [])[:4])
+        badges = "".join('<span class="badge">%s</span>' % _esc(t)
+                         for t in (e.get("tags") or [])[:5])
+        rcards.append(
+            '<article class="player-card filter-item" id="r-%s">'
+            '<header><h3><a href="%s">%s</a></h3>'
+            '<span class="ticker">%s</span></header>'
+            '<p class="muted" style="margin:0 0 10px;font-size:13px;line-height:1.55">%s</p>'
+            '<div class="tag-row">%s<span class="badge accent">%s</span></div>'
+            '</article>'
+            % (_esc(e.get("slug")), _esc(e.get("path")), _esc(e.get("title")),
+               _esc(tks), _esc(e.get("teaser")), badges, _esc(e.get("date"))))
+    rcards_html = "".join(rcards) or '<p class="empty-state visible">暂无深度研究。</p>'
+
+    # 每日观察 chips
+    dchips = []
+    for e in dentries:
+        path = e.get("report_path") or ("reports/%s.html" % e.get("date"))
+        tks = " ".join(t for t, _ in (e.get("tickers") or [])[:5])
+        dchips.append(
+            '<a class="doc-chip filter-item" href="%s">'
+            '<span>%s · %s 高赞</span><strong>%s</strong></a>'
+            % (_esc(path), _esc(e.get("date")), e.get("unique_tweets", 0),
+               _esc(e.get("teaser", "") or tks)))
+    dchips_html = "".join(dchips) or '<p class="empty-state visible">暂无日报。</p>'
+
+    # 指标
+    tickers_cov = len({t for e in rentries for t in (e.get("tickers") or [])})
+    metrics = [(len(rentries), "深度研究"), (tickers_cov, "覆盖个股标的"),
+               (len(dentries), "每日观察期数"), (last or "—", "最新更新")]
+    metric_html = "".join(
+        '<div class="metric"><strong>%s</strong><span>%s</span></div>'
+        % (_esc(v), _esc(l)) for v, l in metrics)
+
     DOCS_DIR.mkdir(parents=True, exist_ok=True)
     (DOCS_DIR / "index.html").write_text(f"""<!doctype html>
 <html lang="zh-Hans"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f4ef">
 <title>{_esc(SITE_NAME)}</title>
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/theme.css">
 </head><body>
-<header class="site-header"><b>{_esc(SITE_NAME)}</b></header>
-<main class="home">
-  <p class="lede">美股 / 半导体 / AI 基建投研：每日抓取 X 高赞讨论的「观察日报」，
-   以及不定期产出的「深度研究」。仅供研究，非投资建议。</p>
-  {research_section}
-  <section class="block"><h2 class="sec">每日观察</h2>
-  <p class="sub">每天北京时间约 12:00 自动更新。最后更新：{_esc(last)}</p>
-  <ul class="archive">{items or '<li>暂无数据</li>'}</ul></section>
-  <footer>grok 原生 X 检索 · 仅供研究，非投资建议</footer>
-</main></body></html>""", encoding="utf-8")
+<a class="skip-link" href="#main">跳到主内容</a>
+<div class="app-shell">
+  <aside class="sidebar" aria-label="导航">
+    <div class="brand"><h1>{_esc(SITE_NAME)}</h1>
+      <p>美股 · 半导体 · AI 基建 · 投资研究终端</p></div>
+    <nav class="nav-group" aria-label="板块">
+      <p class="nav-group-title">Sections</p>
+      <a class="nav-link" href="#research"><span>RS</span><strong>深度研究</strong></a>
+      <a class="nav-link" href="#daily"><span>DAY</span><strong>每日观察</strong></a>
+    </nav>
+    <nav class="nav-group" aria-label="深度研究">
+      <p class="nav-group-title">Research</p>
+      {rnav_html}
+    </nav>
+  </aside>
+  <main class="main" id="main">
+    <div class="topbar" role="search">
+      <div class="search-wrap"><label for="searchInput">搜索研报 / 个股 / 主题</label>
+        <div class="search-row">
+          <input id="searchInput" type="search" autocomplete="off" placeholder="例如 硅光、HBM、MU、CPO…" aria-describedby="rowCount">
+          <span class="badge" id="rowCount" aria-live="polite">—</span>
+        </div></div>
+      <div class="tool-buttons">
+        <button type="button" id="resetSearch">重置</button>
+        <a class="source-link" href="https://github.com/wenhanweime/us-stock-daily" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <section class="hero-panel" id="overview">
+      <div class="overview-copy">
+        <p class="eyebrow">Investment Research Terminal</p>
+        <h2>把美股投研沉淀成可检索、可追踪、可复盘的研究终端</h2>
+        <p>「每日观察」自动聚合 X 高赞讨论，「深度研究」沉淀个股与产业链深挖。顶部搜索可同时过滤研报与日报。仅供研究，非投资建议。</p>
+      </div>
+      <div class="metric-grid">{metric_html}</div>
+    </section>
+    <section class="panel" id="research">
+      <div class="panel-head"><div><p class="eyebrow">Deep Dives</p>
+        <h2>深度研究</h2><p>个股 / 产业链 / 主题研报，每篇为自包含子模块。</p></div></div>
+      <div class="player-grid">{rcards_html}</div>
+    </section>
+    <section class="panel" id="daily">
+      <div class="panel-head"><div><p class="eyebrow">Daily Market Watch</p>
+        <h2>每日观察</h2><p>每天北京时间约 12:00 自动更新。最后更新：{_esc(last)}。</p></div></div>
+      <div class="doc-map">{dchips_html}</div>
+    </section>
+    <p class="empty-state" id="emptyState">没有匹配的内容。</p>
+    <footer class="footer">grok 原生 X 检索 · 内容由 AI 聚合可能有误 · 仅供研究，非投资建议</footer>
+  </main>
+</div>
+<script src="assets/terminal.js"></script>
+</body></html>""", encoding="utf-8")
 
 
 if __name__ == "__main__":
