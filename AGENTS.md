@@ -16,7 +16,7 @@
 
 ## 发布一篇深度研究
 ```bash
-cd ~/Documents/us-stock-daily
+cd ~/automation/us-stock-daily
 python3 publish_research.py --src <报告.html> --slug <英文短横线> \
   --title "<标题>" --date YYYY-MM-DD --tags 硅光,CPO --tickers AVGO,MRVL --teaser "<一句话>"
 ```

@@ -50,7 +50,7 @@
 ## 发布
 填好后：
 ```bash
-cd ~/Documents/us-stock-daily
+cd ~/automation/us-stock-daily
 python3 publish_research.py --src 你的报告.html --slug some-topic \
   --title "标题" --date YYYY-MM-DD --tags 硅光,CPO --tickers AVGO,MRVL --teaser "一句话"
 ```

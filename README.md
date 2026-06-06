@@ -22,7 +22,7 @@
 ## 深度研究：发布一篇研报（手动）
 把一篇**自包含的研报 HTML** 收纳为站点子模块并发布：
 ```bash
-cd ~/Documents/us-stock-daily
+cd ~/automation/us-stock-daily
 python3 publish_research.py --src <报告.html> \
   --slug silicon-photonics-cpo-2026 --title "硅光 / CPO 产业全景 2026" \
   --date 2026-05-31 --tags 硅光,CPO,光互联 --tickers AVGO,MRVL \
@@ -60,7 +60,7 @@ python3 publish_research.py --src <报告.html> \
 
 ## 手动运行
 ```bash
-cd ~/Documents/us-stock-daily
+cd ~/automation/us-stock-daily
 python3 generate_report.py
 ```
 
