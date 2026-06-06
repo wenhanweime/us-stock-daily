@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SK hynix 000660.KS Research Report</title>
+  <style>
+    :root {
+      --bg: #f5f7f6;
+      --paper: #ffffff;
+      --ink: #17201c;
+      --muted: #5e6a66;
+      --line: #d9e0dc;
+      --teal: #0f766e;
+      --teal-soft: #d7f0ec;
+      --amber: #b7791f;
+      --amber-soft: #f7e7c6;
+      --coral: #c2412d;
+      --coral-soft: #f5d6d0;
+      --green: #2f7d32;
+      --green-soft: #dff1df;
+      --blue: #2b6cb0;
+      --blue-soft: #dceafa;
+      --violet: #6b46c1;
+      --violet-soft: #e8ddff;
+      --shadow: 0 12px 30px rgba(21, 35, 30, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    body { margin: 0; }
+
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .shell {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+
+    .hero {
+      min-height: 520px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(320px, 0.96fr);
+      gap: 28px;
+      align-items: stretch;
+      padding: 42px;
+      background:
+        linear-gradient(135deg, rgba(15,118,110,0.12), rgba(183,121,31,0.10)),
+        #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
+      margin: 18px 0 14px;
+      font-size: clamp(38px, 5vw, 72px);
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 780px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .eyebrow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 30px;
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.78);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      align-content: start;
+    }
+
+    .metric {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      padding: 17px;
+      min-height: 124px;
+    }
+
+    .metric .label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .metric .value {
+      margin-top: 8px;
+      font-size: clamp(23px, 2.2vw, 28px);
+      line-height: 1.05;
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .metric .sub {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin: 18px 0 28px;
+      padding: 10px;
+      background: rgba(245,247,246,0.92);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+    }
+
+    .nav a {
+      flex: 0 0 auto;
+      padding: 9px 11px;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    section {
+      margin: 28px 0;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(26px, 3vw, 42px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 12px;
+      font-size: 19px;
+      line-height: 1.2;
+    }
+
+    .note {
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 19px;
+    }
+
+    .panel.teal { background: var(--teal-soft); border-color: #a6d8d0; }
+    .panel.amber { background: var(--amber-soft); border-color: #e5c584; }
+    .panel.coral { background: var(--coral-soft); border-color: #eab0a5; }
+    .panel.green { background: var(--green-soft); border-color: #b9ddb9; }
+    .panel.blue { background: var(--blue-soft); border-color: #b5d2f0; }
+    .panel.violet { background: var(--violet-soft); border-color: #c9b7ee; }
+
+    .large-number {
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 880;
+      margin: 12px 0 8px;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 11px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--muted);
+      background: #f8faf9;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); }
+    .table-wrap table th, .table-wrap table td { white-space: nowrap; }
+
+    .bar-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr) 90px;
+      gap: 12px;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .track {
+      height: 20px;
+      background: #eef2ef;
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .fill {
+      height: 100%;
+      width: var(--w);
+      background: var(--c);
+    }
+
+    .range {
+      position: relative;
+      height: 42px;
+      background: #eef2ef;
+      border: 1px solid var(--line);
+      margin-bottom: 10px;
+    }
+
+    .range span {
+      position: absolute;
+      left: var(--l);
+      width: var(--w);
+      top: 9px;
+      height: 22px;
+      background: var(--c);
+      border: 1px solid rgba(0,0,0,0.12);
+    }
+
+    .axis {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: -2px;
+    }
+
+    .source-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .source-list li {
+      padding: 12px 13px;
+      border: 1px solid var(--line);
+      background: #fbfcfb;
+    }
+
+    .callout {
+      border-left: 5px solid var(--teal);
+      padding: 16px 18px;
+      background: #f7fbfa;
+      color: var(--ink);
+    }
+
+    .warn {
+      border-left-color: var(--amber);
+      background: #fff9eb;
+    }
+
+    .risk-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .risk {
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .risk strong { display: block; margin-bottom: 6px; }
+
+    .tree {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .tree .node {
+      border: 1px solid var(--line);
+      padding: 16px;
+      min-height: 210px;
+      background: #fff;
+    }
+
+    .node ul, .panel ul { margin: 10px 0 0; padding-left: 18px; }
+    .node li, .panel li { margin: 7px 0; }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      display: inline-block;
+      background: var(--c);
+      margin-right: 5px;
+      vertical-align: -1px;
+    }
+
+    footer {
+      padding: 30px 0 50px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      .hero, .grid-2, .grid-3, .tree, .risk-list { grid-template-columns: 1fr; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero { padding: 28px; }
+      .shell { padding: 18px; }
+      section { padding: 22px; }
+      .section-head { display: block; }
+      .bar-row { grid-template-columns: 110px minmax(0, 1fr) 72px; }
+      .metric { min-height: auto; }
+      .table-wrap table th, .table-wrap table td {
+        white-space: normal;
+        font-size: 12px;
+        padding: 9px 8px;
+      }
+    }
+
+    @media print {
+      .nav { display: none; }
+      .shell { max-width: none; padding: 0; }
+      section, .hero { box-shadow: none; break-inside: avoid; }
+      body { background: #fff; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <div class="eyebrow">
+          <span class="pill">KR_EQUITY</span>
+          <span class="pill">000660.KS</span>
+          <span class="pill">6-12 个月</span>
+          <span class="pill">USD/KRW 1,462.35</span>
+        </div>
+        <h1>SK hynix<br>产能锁定版研究报告</h1>
+        <p>核心变化：2026 年 HBM、DRAM、NAND 需求与产能锁定证据被纳入基本面预测，而不是只作为 AI 情绪因子。报告区分事实、假设、预测、估值、风险审计；不构成交易建议。</p>
+      </div>
+      <div class="hero-grid">
+        <div class="metric">
+          <div class="label">Current proxy price</div>
+          <div class="value">$1,153</div>
+          <div class="sub">KRW 1,686,000，延迟行情代理</div>
+        </div>
+        <div class="metric">
+          <div class="label">Base fair range</div>
+          <div class="value">$1,299-$1,710</div>
+          <div class="sub">KRW 1.90M-2.50M</div>
+        </div>
+        <div class="metric">
+          <div class="label">Base EPS</div>
+          <div class="value">$143.60</div>
+          <div class="sub">KRW 210k，未来四季度</div>
+        </div>
+        <div class="metric">
+          <div class="label">Probability-weighted</div>
+          <div class="value">$1,764</div>
+          <div class="sub">未校准情景概率</div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="nav" aria-label="Report sections">
+      <a href="#conclusion">结论</a>
+      <a href="#evidence">证据</a>
+      <a href="#driver-tree">驱动树</a>
+      <a href="#forecast">预测</a>
+      <a href="#valuation">估值</a>
+      <a href="#peers">同业</a>
+      <a href="#risks">风险</a>
+      <a href="#tracking">跟踪</a>
+    </nav>
+
+    <section id="conclusion">
+      <div class="section-head">
+        <h2>1. Executive Conclusion</h2>
+        <p class="note">这是研究判断摘要，不是目标价或交易指令。情景概率为 <strong>uncalibrated structured probabilities</strong>。</p>
+      </div>
+      <div class="grid-3">
+        <div class="panel teal">
+          <h3>基本面主线</h3>
+          <p>HBM 供给紧张和 2026 产能锁定把 SK hynix 从普通存储周期股推向“AI 存储稀缺产能”框架。收入下限、毛利率韧性和估值周期折价都需要上修。</p>
+        </div>
+        <div class="panel amber">
+          <h3>估值读数</h3>
+          <p>以 $1,153 当前价格代理计算，更新后 base EPS 的隐含 P/E 约 8.0x；若产能锁定证据持续成立，当前价格没有完全反映 base case。</p>
+        </div>
+        <div class="panel coral">
+          <h3>核心约束</h3>
+          <p>订单/产能锁定不等于利润完全锁定。仍需验证 take-or-pay、价格地板、客户分配、取消罚则和 HBM4/HBM4E 量产节奏。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="evidence">
+      <div class="section-head">
+        <h2>2. Evidence Map</h2>
+        <p class="note">事实优先使用官方披露和电话会文本；行情和部分客户集中度为代理数据，证据等级较低。</p>
+      </div>
+      <div class="grid-2">
+        <div>
+          <h3>产能锁定证据</h3>
+          <ul class="source-list">
+            <li>Q3 2025 call：公司称 2026 年 HBM 主要客户供应计划已最终确定。<br><a href="https://stockanalysis.com/quote/krx/000660/transcripts/366315-q3-2025/">Source</a></li>
+            <li>Q3 2025 call：公司称 2026 年 DRAM、NAND、HBM 客户需求覆盖产能，产能基本售罄。<br><a href="https://stockanalysis.com/quote/krx/000660/transcripts/366315-q3-2025/">Source</a></li>
+            <li>Q1 2026 call：未来三年 HBM 客户需求超过当前供应能力，多年 LTA 可提高盈利稳定性。<br><a href="https://stockanalysis.com/quote/krx/000660/transcripts/547968-q1-2026/">Source</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>财务事实底座</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Metric</th><th class="num">1Q26</th><th class="num">FY2025</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Revenue</td><td class="num">KRW 52.576T</td><td class="num">KRW 97.147T</td></tr>
+                <tr><td>Operating profit</td><td class="num">KRW 37.610T</td><td class="num">KRW 47.206T</td></tr>
+                <tr><td>Net profit</td><td class="num">KRW 40.346T</td><td class="num">KRW 42.948T</td></tr>
+                <tr><td>Operating margin</td><td class="num">72%</td><td class="num">49%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="small">Sources: <a href="https://news.skhynix.com.cn/q1-2026-business-results/">SK hynix 1Q26</a>, <a href="https://news.skhynix.com.cn/sk-hynix-announces-4q25-financial-results/">SK hynix FY2025</a></p>
+        </div>
+      </div>
+      <div class="callout warn" style="margin-top:18px;">
+        DART 年报入口已确认，但本轮未完成全文结构化抽取；客户集中度、地理收入、最终稀释股本仍需直接从 DART/ KRX 补强。
+      </div>
+    </section>
+
+    <section id="driver-tree">
+      <div class="section-head">
+        <h2>3. Business Driver Tree</h2>
+        <p class="note">增长模型从需求驱动改为供给约束：Revenue = allocated capacity x yield x qualified shipment mix x ASP。</p>
+      </div>
+      <div class="tree">
+        <div class="node">
+          <h3>HBM</h3>
+          <strong>核心公式</strong>
+          <p>qualified HBM stacks x HBM ASP</p>
+          <ul>
+            <li>HBM3E / HBM4 / HBM4E 客户验证</li>
+            <li>TSV、先进封装、良率和产能爬坡</li>
+            <li>Nvidia 与 hyperscaler 需求可见度</li>
+            <li>高 ASP 与高毛利率结构性拉升</li>
+          </ul>
+        </div>
+        <div class="node">
+          <h3>Conventional DRAM</h3>
+          <strong>核心公式</strong>
+          <p>DRAM bit shipment x blended ASP</p>
+          <ul>
+            <li>AI server memory pull-through</li>
+            <li>DDR5 / SOCAMM2 / server module mix</li>
+            <li>行业供给纪律和库存周期</li>
+            <li>1c nm 迁移与成本曲线</li>
+          </ul>
+        </div>
+        <div class="node">
+          <h3>NAND / eSSD</h3>
+          <strong>核心公式</strong>
+          <p>NAND bit shipment x blended ASP</p>
+          <ul>
+            <li>AI data center eSSD 需求</li>
+            <li>QLC / 321-layer 转换</li>
+            <li>Solidigm 协同</li>
+            <li>价格周期仍比 HBM 更脆弱</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="forecast">
+      <div class="section-head">
+        <h2>4. Forecast Update</h2>
+        <p class="note">以下为产能锁定版情景预测，不是公司 guidance。USD 口径仅为汇率换算，经营假设仍以 KRW 模型为主。</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Segment Revenue, KRW T</h3>
+          <div class="bar-list">
+            <div class="bar-row"><strong>HBM Bear</strong><div class="track"><div class="fill" style="--w:59%;--c:var(--teal);"></div></div><span>95</span></div>
+            <div class="bar-row"><strong>HBM Base</strong><div class="track"><div class="fill" style="--w:78%;--c:var(--teal);"></div></div><span>125</span></div>
+            <div class="bar-row"><strong>HBM Bull</strong><div class="track"><div class="fill" style="--w:100%;--c:var(--teal);"></div></div><span>160</span></div>
+            <div class="bar-row"><strong>DRAM Base</strong><div class="track"><div class="fill" style="--w:59%;--c:var(--blue);"></div></div><span>95</span></div>
+            <div class="bar-row"><strong>NAND Base</strong><div class="track"><div class="fill" style="--w:26%;--c:var(--amber);"></div></div><span>42</span></div>
+          </div>
+          <div class="legend">
+            <span><span class="dot" style="--c:var(--teal);"></span>HBM</span>
+            <span><span class="dot" style="--c:var(--blue);"></span>DRAM</span>
+            <span><span class="dot" style="--c:var(--amber);"></span>NAND/eSSD</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Financial Forecast, USD B</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Metric</th><th class="num">Bear</th><th class="num">Base</th><th class="num">Bull</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Revenue</td><td class="num">150.4</td><td class="num">184.6</td><td class="num">229.1</td></tr>
+                <tr><td>Operating profit</td><td class="num">82.7</td><td class="num">116.2</td><td class="num">155.9</td></tr>
+                <tr><td>Net profit</td><td class="num">68.4</td><td class="num">99.2</td><td class="num">133.3</td></tr>
+                <tr><td>EPS, USD</td><td class="num">99.16</td><td class="num">143.60</td><td class="num">193.52</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="small">FX: 1 USD = KRW 1,462.35. Source: Trading Economics USD/KRW May 8, 2026 snapshot.</p>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top:18px;">
+        <div class="panel green">
+          <h3>2027 Base Revenue</h3>
+          <div class="large-number">$239.3B</div>
+          <div class="small">KRW 350T，取决于 HBM4E 与 Yongin/M15X 爬坡。</div>
+        </div>
+        <div class="panel blue">
+          <h3>2027 Base Net Profit</h3>
+          <div class="large-number">$119.7B</div>
+          <div class="small">KRW 175T，仍需扣除折旧和扩产节奏风险。</div>
+        </div>
+        <div class="panel violet">
+          <h3>2027 Base EPS</h3>
+          <div class="large-number">$173.70</div>
+          <div class="small">KRW 254k，工作股本假设 690M。</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="valuation">
+      <div class="section-head">
+        <h2>5. Valuation And Implied Expectations</h2>
+        <p class="note">估值方法：Forward P/E、EV/EBITDA、P/B-ROE、周期中枢利润、SOTP。产能锁定使周期折价收窄，但不取消周期风险。</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3>USD Per Share Range</h3>
+          <div class="range"><span style="--l:12%;--w:7%;--c:var(--coral);"></span></div>
+          <div class="small">Bear: $752-$957</div>
+          <div class="range"><span style="--l:28%;--w:14%;--c:var(--teal);"></span></div>
+          <div class="small">Base: $1,299-$1,710</div>
+          <div class="range"><span style="--l:49%;--w:21%;--c:var(--blue);"></span></div>
+          <div class="small">Bull: $1,915-$2,530</div>
+          <div class="range"><span style="--l:75%;--w:24%;--c:var(--violet);"></span></div>
+          <div class="small">Mania: $2,530-$3,282</div>
+          <div class="axis"><span>$500</span><span>$1,500</span><span>$2,500</span><span>$3,300</span></div>
+        </div>
+
+        <div class="panel">
+          <h3>Scenario Probability</h3>
+          <svg viewBox="0 0 360 210" role="img" aria-label="Scenario probability chart" width="100%" height="210">
+            <rect x="0" y="0" width="360" height="210" fill="#ffffff"></rect>
+            <line x1="48" y1="170" x2="335" y2="170" stroke="#d9e0dc"></line>
+            <line x1="48" y1="30" x2="48" y2="170" stroke="#d9e0dc"></line>
+            <rect x="68" y="123" width="46" height="47" fill="#c2412d"></rect>
+            <rect x="139" y="30" width="46" height="140" fill="#0f766e"></rect>
+            <rect x="210" y="76" width="46" height="94" fill="#2b6cb0"></rect>
+            <rect x="281" y="139" width="46" height="31" fill="#6b46c1"></rect>
+            <text x="91" y="192" text-anchor="middle" font-size="12" fill="#5e6a66">Bear</text>
+            <text x="162" y="192" text-anchor="middle" font-size="12" fill="#5e6a66">Base</text>
+            <text x="233" y="192" text-anchor="middle" font-size="12" fill="#5e6a66">Bull</text>
+            <text x="304" y="192" text-anchor="middle" font-size="12" fill="#5e6a66">Mania</text>
+            <text x="91" y="116" text-anchor="middle" font-size="13" font-weight="700" fill="#17201c">15%</text>
+            <text x="162" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#17201c">45%</text>
+            <text x="233" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="#17201c">30%</text>
+            <text x="304" y="133" text-anchor="middle" font-size="13" font-weight="700" fill="#17201c">10%</text>
+          </svg>
+          <div class="callout">
+            Probability-weighted midpoint: <strong>$1,764/share</strong>. Current proxy: <strong>$1,153/share</strong>. The spread depends on HBM contract durability and 2027 visibility.
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrap" style="margin-top:18px;">
+        <table>
+          <thead>
+            <tr><th>Scenario</th><th class="num">EPS USD</th><th class="num">P/E at current proxy</th><th>Interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Bear</td><td class="num">$99.16</td><td class="num">11.6x</td><td>Execution slip but no normal demand collapse.</td></tr>
+            <tr><td>Base</td><td class="num">$143.60</td><td class="num">8.0x</td><td>Capacity lock holds; peak margin normalized down.</td></tr>
+            <tr><td>Bull</td><td class="num">$193.52</td><td class="num">6.0x</td><td>HBM4/HBM4E durability plus DRAM/NAND shortage.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="peers">
+      <div class="section-head">
+        <h2>6. Peer And Chain Position</h2>
+        <p class="note">Samsung 和 Micron 是存储竞争参照；TSMC 和 Nvidia 是 AI 链条需求与供给瓶颈参照，不是直接估值 peer。</p>
+      </div>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Samsung Electronics</h3>
+          <p>1Q26 DS revenue KRW 81.7T，DS operating profit KRW 53.7T，Memory sales KRW 74.8T。HBM4/SOCAMM2 是 SK hynix 估值折价或溢价的最大竞争变量。</p>
+        </div>
+        <div class="panel">
+          <h3>Micron</h3>
+          <p>FQ2 2026 revenue $23.86B；FQ3 revenue guide $33.5B ± $0.75B，gross margin guide about 81%。确认全球 memory pricing power，但 GAAP/non-GAAP 口径需调整。</p>
+        </div>
+        <div class="panel">
+          <h3>TSMC</h3>
+          <p>1Q26 revenue $35.90B，gross margin 66.2%。它是 AI accelerator foundry 和先进封装链条信号，不是 memory 估值 peer。</p>
+        </div>
+        <div class="panel">
+          <h3>Nvidia</h3>
+          <p>Q4 FY26 Data Center revenue $62.3B，Q1 FY27 revenue guide $78B ± 2%。它是 HBM 需求和客户集中度的核心轴。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="risks">
+      <div class="section-head">
+        <h2>7. Risk Red Team</h2>
+        <p class="note">更新后的空头观点不再是“2026 需求消失”，而是合同质量、良率、客户集中、竞争追赶和折旧节奏。</p>
+      </div>
+      <div class="risk-list">
+        <div class="risk"><strong>Contract quality</strong>若 LTA 只是 volume visibility 而非 take-or-pay，收入安全性高于利润率安全性。</div>
+        <div class="risk"><strong>HBM4/HBM4E execution</strong>良率、验证或规格变更会把锁定需求延后或转移到竞争对手。</div>
+        <div class="risk"><strong>Customer concentration</strong>Nvidia 与 hyperscaler 平台节奏变化会放大季度波动。</div>
+        <div class="risk"><strong>Capex and depreciation</strong>M15X/Yongin/EUV 投资上升，若爬坡慢，折旧会提前压低利润率。</div>
+        <div class="risk"><strong>Competitive catch-up</strong>Samsung/Micron HBM4/HBM4E 资格认证进展会压缩稀缺租金。</div>
+        <div class="risk"><strong>FX and geopolitics</strong>KRW 升值、出口管制、中国市场与原材料风险会影响 USD 口径收益。</div>
+      </div>
+    </section>
+
+    <section id="tracking">
+      <div class="section-head">
+        <h2>8. Tracking Checklist</h2>
+        <p class="note">下一轮验证的目标是把“需求可见度”进一步拆成可执行、可计量的合同和产能数据。</p>
+      </div>
+      <div class="grid-2">
+        <div class="panel green">
+          <h3>High Priority</h3>
+          <ul>
+            <li>Q2 2026 call 是否维持 2026 sold-out 语言。</li>
+            <li>HBM4 出货节奏和客户资格认证。</li>
+            <li>HBM4E 2H26 sample 与 2027 mass production 计划。</li>
+            <li>DRAM/NAND contract ASP，而非仅 spot price。</li>
+            <li>M15X ramp 与 Yongin Phase 1 cleanroom readiness。</li>
+          </ul>
+        </div>
+        <div class="panel amber">
+          <h3>Data Gaps</h3>
+          <ul>
+            <li>DART 年报全文表格抽取：客户、地区、分部、股本。</li>
+            <li>KRX 一手股价、市值、股本快照。</li>
+            <li>BOK USD/KRW 官方序列。</li>
+            <li>DRAM/NAND contract price 数据源。</li>
+            <li>一致预期和 sell-side 估值分布。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="section-head">
+        <h2>9. Source Links</h2>
+        <p class="note">完整证据文件位于 output/000660.KS/evidence_pack；本页保留外部来源入口。</p>
+      </div>
+      <ul class="source-list">
+        <li><a href="https://news.skhynix.com.cn/q1-2026-business-results/">SK hynix 1Q26 official release</a></li>
+        <li><a href="https://news.skhynix.com.cn/sk-hynix-announces-4q25-financial-results/">SK hynix FY2025 / 4Q25 official release</a></li>
+        <li><a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260317000635">DART 2025 business report entry</a></li>
+        <li><a href="https://stockanalysis.com/quote/krx/000660/transcripts/547968-q1-2026/">SK hynix Q1 2026 call transcript mirror</a></li>
+        <li><a href="https://stockanalysis.com/quote/krx/000660/transcripts/366315-q3-2025/">SK hynix Q3 2025 call transcript mirror</a></li>
+        <li><a href="https://images.samsung.com/is/content/samsung/assets/global/ir/docs/2026_1Q_conference_eng.pdf">Samsung Electronics 1Q26 presentation</a></li>
+        <li><a href="https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-results-second-quarter-fiscal-2026">Micron FQ2 2026 release</a></li>
+        <li><a href="https://investor.tsmc.com/english/quarterly-results/2026/q1">TSMC 1Q26 results</a></li>
+        <li><a href="https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Fourth-Quarter-and-Fiscal-2026/">Nvidia FY2026 release</a></li>
+        <li><a href="https://tradingeconomics.com/south-korea/currency">Trading Economics USD/KRW snapshot</a></li>
+      </ul>
+    </section>
+
+    <footer>
+      Generated from local research files: capacity_locked_update.md, usd_converted_update.md, final_report.md, evidence_map.md. The report separates facts, assumptions, forecasts, valuation and risk review. It does not execute trades or provide broker-order instructions.
+    </footer>
+  </main>
+</body>
+</html>

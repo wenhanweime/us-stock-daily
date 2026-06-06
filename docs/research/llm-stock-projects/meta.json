@@ -1,0 +1,15 @@
+{
+  "slug": "llm-stock-projects",
+  "title": "GitHub 大模型 x 股票研究项目调研",
+  "date": "2026-05-31",
+  "tags": [
+    "量化",
+    "LLM",
+    "开源"
+  ],
+  "tickers": [],
+  "teaser": "GitHub 上大模型 × 股票研究的开源项目调研与对比。",
+  "cover": null,
+  "path": "research/llm-stock-projects/index.html",
+  "added_at": "2026-06-06 21:03:33"
+}

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>硅光 / CPO 产业全景 2026 — 玩家、收入、需求</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0b1020; --panel:#141b2e; --panel2:#1b2640; --line:#27314d;
+    --txt:#e8edfa; --mut:#94a3c4; --accent:#38bdf8; --accent2:#a78bfa;
+    --green:#34d399; --amber:#fbbf24; --red:#f87171; --pink:#f472b6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Segoe UI",Roboto,sans-serif;
+    background:linear-gradient(160deg,#0b1020,#0d1428);color:var(--txt);line-height:1.6;padding:0 0 60px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  header{padding:48px 0 28px;border-bottom:1px solid var(--line);margin-bottom:32px}
+  h1{font-size:30px;font-weight:800;letter-spacing:-.5px;background:linear-gradient(90deg,#38bdf8,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .sub{color:var(--mut);margin-top:10px;font-size:15px}
+  h2{font-size:21px;margin:42px 0 14px;font-weight:700;display:flex;align-items:center;gap:10px}
+  h2::before{content:"";width:5px;height:22px;background:linear-gradient(180deg,#38bdf8,#a78bfa);border-radius:3px}
+  h3{font-size:16px;margin:18px 0 8px;color:var(--accent)}
+  p{color:#cdd6ee;margin:8px 0}
+  .grid{display:grid;gap:16px}
+  .cards{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .kpi{font-size:26px;font-weight:800;color:#fff}
+  .kpi.green{color:var(--green)} .kpi.amber{color:var(--amber)} .kpi.blue{color:var(--accent)} .kpi.pink{color:var(--pink)}
+  .lbl{color:var(--mut);font-size:13px;margin-top:4px}
+  .chartbox{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin-top:8px}
+  .chartbox canvas{max-height:340px}
+  table{width:100%;border-collapse:collapse;background:var(--panel);border-radius:12px;overflow:hidden;font-size:13.5px;margin-top:8px}
+  th,td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--panel2);color:#fff;font-weight:600;font-size:13px}
+  tr:last-child td{border-bottom:none}
+  td b{color:#fff}
+  .tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11.5px;font-weight:600;margin:2px 3px 2px 0}
+  .t-lead{background:rgba(52,211,153,.15);color:var(--green);border:1px solid rgba(52,211,153,.3)}
+  .t-mid{background:rgba(56,189,248,.13);color:var(--accent);border:1px solid rgba(56,189,248,.3)}
+  .t-niche{background:rgba(148,163,196,.13);color:var(--mut);border:1px solid rgba(148,163,196,.3)}
+  .note{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25);border-radius:12px;padding:14px 16px;color:#fde9b0;font-size:13.5px;margin-top:14px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.two{grid-template-columns:1fr}}
+  ul{margin:6px 0 6px 20px;color:#cdd6ee} li{margin:5px 0}
+  .pill{font-size:12px;color:var(--mut)}
+  footer{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);color:var(--mut);font-size:12.5px}
+  footer a{color:var(--accent);text-decoration:none}
+  .timeline{position:relative;margin:12px 0 0 8px;padding-left:22px;border-left:2px solid var(--line)}
+  .tl{position:relative;margin:0 0 16px}
+  .tl::before{content:"";position:absolute;left:-29px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(56,189,248,.15)}
+  .tl.up::before{background:var(--accent2);box-shadow:0 0 0 4px rgba(167,139,250,.15)}
+  .tl .yr{font-weight:700;color:#fff}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>硅光子 / 共封装光学(CPO)产业全景 · 2026</h1>
+  <div class="sub">玩家对比 · 收入数据 · 已确认需求 vs 潜在需求 &nbsp;|&nbsp; 数据采集:2026-05-31 · 来源:Smart Search(xAI responses 实时检索)</div>
+</header>
+
+<!-- KPI -->
+<div class="grid cards">
+  <div class="card"><div class="kpi blue">2026</div><div class="lbl">业界普遍称为"硅光放量元年",CPO 进入早期量产爬坡</div></div>
+  <div class="card"><div class="kpi green">~$2.7B→$9.6B</div><div class="lbl">硅光(SiPho)市场:2025 → 2030,CAGR ~28–29%</div></div>
+  <div class="card"><div class="kpi amber">~0.5%</div><div class="lbl">2026 年 CPO 在 AI 数据中心光模块中的渗透率(仍极低)</div></div>
+  <div class="card"><div class="kpi pink">$4B+</div><div class="lbl">NVIDIA 对光器件的投资(Coherent+Lumentum 各 $2B,2026/4)</div></div>
+</div>
+
+<!-- 玩家对比 -->
+<h2>一、主要玩家对比(2025–2026)</h2>
+<table>
+  <tr><th>公司</th><th>定位</th><th>最新进展</th><th>硅光/CPO 收入</th><th>关键客户/订单</th></tr>
+  <tr>
+    <td><b>台积电 TSMC</b><br><span class="tag t-lead">先进CPO龙头</span></td>
+    <td>封装/集成平台<br>(COUPE)</td>
+    <td>COUPE 用 SoIC-X 混合键合把 EIC 叠在 PIC 上;可插拔 2025 认证,CoWoS-CPO 2026 量产</td>
+    <td>未单独披露(并入先进封装/HPC);2025 HPC 占营收 ~55%</td>
+    <td>NVIDIA(Spectrum-X/Quantum-X)、Broadcom</td>
+  </tr>
+  <tr>
+    <td><b>GlobalFoundries</b><br><span class="tag t-lead">商用代工龙头</span></td>
+    <td>纯商用硅光代工<br>(Fotonix / SCALE)</td>
+    <td>2026/5 推 SCALE(首个 OCI MSA 合规 CPO);收购新加坡 AMF 扩产能,200mm→300mm</td>
+    <td><b>2025 &gt;$200M</b> → 2026 ~$400M(翻倍)→ 2028 底 &gt;$1B run-rate</td>
+    <td>可插拔为主;SENKO、Corning、EXFO 合作</td>
+  </tr>
+  <tr>
+    <td><b>Tower Semiconductor</b><br><span class="tag t-lead">商用代工龙头</span></td>
+    <td>多厂硅光代工<br>(200/300mm)</td>
+    <td>产能 2025 底翻倍、2026 中翻三倍(投资 ~$920M);全硅 400G/lane 调制器</td>
+    <td><b>2025 ~$228M</b>(翻倍);Q4'25 年化 ~$380M;签 <b>$1.3B</b> 合约(2027 收入)+ $290M 预付款</td>
+    <td>头部超大规模厂/模块厂;部分 1.6T 硅光 IC 主供</td>
+  </tr>
+  <tr>
+    <td><b>Broadcom</b><br><span class="tag t-mid">系统/CPO交换机</span></td>
+    <td>CPO 交换机+DSP<br>垂直整合</td>
+    <td>第三代 CPO(Tomahawk 6 / Davisson,102.4Tbps)已出货;较可插拔省电 ~65%(Meta 实测)</td>
+    <td>未单列;AI 收入 2025 ~$20B → FY26 指引 ~$50B,网络约占 1/3</td>
+    <td>Meta、Google、Amazon(定制 ASIC);找台积电代工</td>
+  </tr>
+  <tr>
+    <td><b>Marvell</b><br><span class="tag t-mid">系统/光引擎</span></td>
+    <td>Fabless,光互联<br>(Photonic Fabric)</td>
+    <td>收购 Celestial AI(~$3.25B,2026/2)、Polariton;6.4T 光引擎,主打 scale-up</td>
+    <td>FY26 总营收 ~$8.2B → FY27 指引 ~$11.5B(光学并入数据中心)</td>
+    <td>NVIDIA、微软、亚马逊、谷歌(定制芯片)</td>
+  </tr>
+  <tr>
+    <td><b>Intel</b><br><span class="tag t-niche">老牌/自用为主</span></td>
+    <td>垂直整合 IDM</td>
+    <td>硅光先驱(激光器单片集成强);代工重组中,对外放量有限</td>
+    <td>公开层面淡化,不单列;并入多元组合</td>
+    <td>超大规模厂(光 I/O)、Acacia 合作</td>
+  </tr>
+  <tr>
+    <td><b>X-FAB / SMART Photonics / LIGENTEC</b><br><span class="tag t-niche">欧洲利基</span></td>
+    <td>欧洲硅光代工/联盟<br>(photonixFAB)</td>
+    <td>X-FAB 牵头欧盟 photonixFAB 联盟;InP-on-Si 集成;NVIDIA 仅为评估方非量产客户</td>
+    <td>X-FAB 微系统&光子 Q1'26 ~$33.7M(含 MEMS,+42% YoY)</td>
+    <td>R&D/主权供应链;规模远小于 GF/Tower</td>
+  </tr>
+</table>
+<div class="note">⚠️ <b>口径提醒</b>:台积电、Broadcom、Marvell、Intel 都<b>不单独披露硅光/CPO 收入</b>,只能看其 AI/网络/先进封装的整体口径;只有 GlobalFoundries 与 Tower 这类<b>纯商用硅光代工</b>有相对干净的硅光收入数字,因此下方收入图主要对比这两家。</div>
+
+<!-- 收入对比图 -->
+<h2>二、硅光代工收入对比(GF vs Tower)</h2>
+<div class="chartbox"><canvas id="revChart"></canvas></div>
+<div class="note">柱状对应各家披露的<b>里程碑年份</b>:2025=实际;2026=预期/年化 run-rate;"2027–28"中 GF=2028 年底 &gt;$1B run-rate、Tower=$1.3B <b>在手合约</b>(确认 2027 收入)。两家口径与年份并不完全一致,仅示意成长斜率。</div>
+
+<!-- 市场规模 -->
+<h2>三、市场规模预测</h2>
+<div class="two">
+  <div class="chartbox"><canvas id="tamChart"></canvas></div>
+  <div class="chartbox"><canvas id="cpoChart"></canvas></div>
+</div>
+<div class="note">⚠️ <b>预测分歧极大</b>:CPO 的 TAM 各家口径差几个数量级——保守估计 $2.43B(2025)→$4.67B(2030);激进的"AI-CPO"口径 $9B(2025)→<b>$122.5B(2034)</b>;IDTechEx 称 2036 年 &gt;$20B。硅光(SiPho)口径相对一致($2.7B→$9.6B@2030)。把高值当方向、低值当底线来看。</div>
+
+<!-- 已确认需求 -->
+<h2>四、已确认的需求(订单/设计导入/部署)</h2>
+<div class="grid cards">
+  <div class="card">
+    <h3>NVIDIA</h3>
+    <ul>
+      <li>Quantum-X(InfiniBand)光交换机:2025 推出、2026 商用爬坡</li>
+      <li>Spectrum-X(以太网)Photonics:2026 下半年</li>
+      <li>1.6T 硅光光引擎(规划 3.2T)</li>
+      <li><b>$4B+</b> 投资锁定激光产能(Coherent/Lumentum,供货至 2030)</li>
+      <li>2026 初代 CPO 出货 <b>~1–1.5 万台</b>(市场试水)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Broadcom</h3>
+    <ul>
+      <li>Tomahawk 6 / Davisson CPO 交换机,<b>102.4 Tbps</b></li>
+      <li>Meta 实测:100 万链路小时无掉线,省电 ~65%</li>
+      <li>已向超大规模厂出货,2026 进入放量</li>
+      <li>合作:台积电、HPE、Corning</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>超大规模厂 CapEx(2025–26)</h3>
+    <ul>
+      <li>微软 ~$80B、谷歌 ~$75B、Meta $60–65B</li>
+      <li>合计 <b>$200B–400B+</b>/年,部分投向 CPO/网络升级</li>
+      <li>均在测试/认证 51.2T+ 平台的 CPO 交换</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 潜在需求 -->
+<h2>五、潜在/未来需求:Scale-out 先行,Scale-up 才是大头</h2>
+<div class="timeline">
+  <div class="tl"><div class="yr">2025–2026 · Scale-out(机架间/交换机)先放量</div>
+    NVIDIA / Broadcom 的 51.2–102.4 Tbps+ 交换机率先用 CPO,服务 AI 训练集群。这是<b>已经在发生</b>的需求,但渗透率仍 ~0.5%。</div>
+  <div class="tl up"><div class="yr">2027+ · Scale-up(GPU 封装内,替代 NVLink/铜)放量</div>
+    把光直接做进 GPU/加速器封装,替代铜互联。NVIDIA Rubin(~2027+)、AWS Trainium 等定制芯片是关键。<b>长期看这才是体量最大的部分</b>(GPU 光 I/O attach rate 上升)。</div>
+  <div class="tl up"><div class="yr">驱动力</div>
+    800G → 1.6T / 3.2T 接口;万亿参数模型的 PB 级数据搬运;MW 级集群的功耗/散热墙;CPO 较可插拔省电 <b>30–50%</b>。</div>
+</div>
+<div class="note">📌 <b>投资视角</b>:已确认需求集中在 <b>NVIDIA + Broadcom 的 scale-out 交换机</b>,且 2026 仍是"试水级"小量(NVIDIA ~1–1.5 万台)。真正的大体量(scale-up / GPU 封装光 I/O)要等 2027+,且高度依赖 Rubin 等下一代平台兑现。<b>"需求确定性"按梯队排:NVIDIA/Broadcom 设计导入(高)&gt; 代工产能在手合约 Tower $1.3B / GF run-rate(中高)&gt; 远期 TAM 预测(分歧大、谨慎)。</b></div>
+
+<footer>
+  <p><b>主要来源</b>(经 Smart Search 实时检索):LightCounting《2026 硅光元年》、TrendForce(TSMC COUPE 2026 量产 / GF 硅光 2026 翻倍过 $1B@2028)、GlobalFoundries Q1'26 财报、Tower Semiconductor $1.3B 合约公告、SemiAnalysis(CPO scaling)、IDTechEx / MarketsandMarkets / Yole(TAM 预测)、io-fund(NVIDIA $4B 光学战略)、Marvell FY26 财报、X-FAB 官网 & photonixFAB 联盟页。</p>
+  <p style="margin-top:8px">⚠️ 本页为信息整理,非投资建议。市场预测在不同机构间差异巨大,数字会快速变化;关键数据请以各公司最新财报与官方公告为准。生成于 2026-05-31。</p>
+</footer>
+</div>
+
+<script>
+Chart.defaults.color = '#94a3c4';
+Chart.defaults.font.family = '-apple-system,PingFang SC,Segoe UI,sans-serif';
+const grid = {color:'rgba(39,49,77,.6)'};
+
+// 1) 硅光代工收入
+new Chart(document.getElementById('revChart'),{
+  type:'bar',
+  data:{labels:['2025 (实际)','2026 (预期)','2027–28 (目标/在手)'],
+    datasets:[
+      {label:'GlobalFoundries (USD M)',data:[200,400,1000],backgroundColor:'#38bdf8',borderRadius:6},
+      {label:'Tower Semiconductor (USD M)',data:[228,380,1300],backgroundColor:'#a78bfa',borderRadius:6}
+    ]},
+  options:{responsive:true,plugins:{legend:{position:'top'},
+    tooltip:{callbacks:{label:c=>c.dataset.label.split(' ')[0]+': $'+c.parsed.y+'M'}}},
+    scales:{y:{grid,title:{display:true,text:'硅光收入 (百万美元)'},ticks:{callback:v=>'$'+v+'M'}},x:{grid:{display:false}}}}
+});
+
+// 2) 硅光 (SiPho) 市场 TAM
+new Chart(document.getElementById('tamChart'),{
+  type:'line',
+  data:{labels:['2025','2030','2034'],
+    datasets:[{label:'硅光 SiPho 市场 (USD B)',data:[2.7,9.6,22],
+      borderColor:'#34d399',backgroundColor:'rgba(52,211,153,.15)',fill:true,tension:.35,pointRadius:5,pointBackgroundColor:'#34d399'}]},
+  options:{responsive:true,plugins:{legend:{position:'top'},title:{display:true,text:'硅光市场规模(口径较一致,CAGR≈28–29%)'},
+    tooltip:{callbacks:{label:c=>'$'+c.parsed.y+'B'}}},
+    scales:{y:{grid,ticks:{callback:v=>'$'+v+'B'}},x:{grid:{display:false}}}}
+});
+
+// 3) CPO 市场:保守 vs 激进
+new Chart(document.getElementById('cpoChart'),{
+  type:'bar',
+  data:{labels:['2025','2030 (保守)','2034 (激进 AI-CPO)','2036 (IDTechEx)'],
+    datasets:[{label:'CPO 市场 (USD B)',data:[2.43,4.67,122.5,20],
+      backgroundColor:['#fbbf24','#fbbf24','#f472b6','#38bdf8'],borderRadius:6}]},
+  options:{responsive:true,plugins:{legend:{display:false},title:{display:true,text:'CPO 市场预测(各机构分歧极大)'},
+    tooltip:{callbacks:{label:c=>'$'+c.parsed.y+'B'}}},
+    scales:{y:{grid,type:'logarithmic',title:{display:true,text:'对数轴 · USD B'}},x:{grid:{display:false}}}}
+});
+</script>
+</body>
+</html>

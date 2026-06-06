@@ -1,0 +1,98 @@
+{
+  "entries": [
+    {
+      "slug": "silicon-photonics-cpo-2026",
+      "title": "硅光 / CPO 产业全景 2026",
+      "date": "2026-05-31",
+      "tags": [
+        "硅光",
+        "CPO",
+        "光互联"
+      ],
+      "tickers": [
+        "AVGO",
+        "MRVL",
+        "COHR",
+        "LITE"
+      ],
+      "teaser": "硅光 / CPO 产业全景 2026：玩家、收入与需求拆解。",
+      "cover": null,
+      "path": "research/silicon-photonics-cpo-2026/index.html",
+      "added_at": "2026-06-06 21:03:33"
+    },
+    {
+      "slug": "silicon-photonics-laser",
+      "title": "硅光激光集成 — 四条技术路线图解",
+      "date": "2026-05-31",
+      "tags": [
+        "硅光",
+        "激光",
+        "光模块"
+      ],
+      "tickers": [
+        "LITE",
+        "COHR",
+        "AVGO"
+      ],
+      "teaser": "硅光激光集成的四条技术路线图解与优劣对比。",
+      "cover": null,
+      "path": "research/silicon-photonics-laser/index.html",
+      "added_at": "2026-06-06 21:03:33"
+    },
+    {
+      "slug": "llm-stock-projects",
+      "title": "GitHub 大模型 x 股票研究项目调研",
+      "date": "2026-05-31",
+      "tags": [
+        "量化",
+        "LLM",
+        "开源"
+      ],
+      "tickers": [],
+      "teaser": "GitHub 上大模型 × 股票研究的开源项目调研与对比。",
+      "cover": null,
+      "path": "research/llm-stock-projects/index.html",
+      "added_at": "2026-06-06 21:03:33"
+    },
+    {
+      "slug": "ai-infra-dashboard",
+      "title": "AI 基建投资研究仪表盘",
+      "date": "2026-05-29",
+      "tags": [
+        "AI基建",
+        "存储",
+        "HBM",
+        "光互联"
+      ],
+      "tickers": [
+        "MU",
+        "AVGO",
+        "NVDA",
+        "TSM"
+      ],
+      "teaser": "AI 工厂物理供应链十大主题：存储超级周期、电源半导体、光互联、推理 ASIC 等。",
+      "cover": null,
+      "path": "research/ai-infra-dashboard/index.html",
+      "added_at": "2026-06-06 21:03:33"
+    },
+    {
+      "slug": "sk-hynix",
+      "title": "SK hynix 000660.KS 个股深度",
+      "date": "2026-05-10",
+      "tags": [
+        "存储",
+        "HBM",
+        "个股"
+      ],
+      "tickers": [
+        "000660.KS",
+        "MU"
+      ],
+      "teaser": "SK hynix (000660.KS) 个股深度：HBM 龙头的供需与估值。",
+      "cover": null,
+      "path": "research/sk-hynix/index.html",
+      "added_at": "2026-06-06 21:03:33"
+    }
+  ],
+  "last_updated": "2026-06-06 21:03:33"
+}

@@ -254,28 +254,10 @@ def update_feed(entry: Dict) -> Dict:
 
 
 def render_index(feed: Dict) -> None:
-    items = []
-    for e in feed.get("entries", []):
-        tks = " ".join(t for t, _ in (e.get("tickers") or [])[:6])
-        items.append(
-            f'<li><a class="d" href="reports/{e["date"]}.html">{e["date"]}</a>'
-            f'<div class="t">{_html.escape(e.get("teaser",""))}</div>'
-            f'<div class="s">{e.get("unique_tweets",0)} 条高赞 · {_html.escape(tks)}</div></li>')
-    last = feed.get("last_updated", "")
-    (DOCS_DIR / "index.html").write_text(f"""<!doctype html>
-<html lang="zh-Hans"><head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{SITE_TITLE}</title>
-<link rel="stylesheet" href="assets/style.css">
-</head><body>
-<header class="site-header"><b>{SITE_TITLE}</b></header>
-<main class="home">
-  <p class="lede">每日自动抓取 X (Twitter) 上美股高赞讨论，聚合当日最热话题、个股与情绪。
-   每天北京时间约 12:00 更新。最后更新：{_html.escape(last)}</p>
-  <ul class="archive">{''.join(items) or '<li>暂无数据</li>'}</ul>
-  <footer>grok 原生 X 检索 · 仅供研究，非投资建议</footer>
-</main></body></html>""", encoding="utf-8")
+    # 首页改由 research.render_home 统一渲染（每日观察 + 深度研究两区），
+    # 确保每日 cron 重写 index.html 时不会覆盖「深度研究」板块。
+    import research
+    research.render_home(feed)
 
 
 # ---------------------------------------------------------------------------

@@ -1,7 +1,11 @@
-# 股市观察日报 (us-stock-daily)
+# 美股投研 (us-stock-daily)
 
-每日自动抓取 X (Twitter) 上**美股高赞讨论**，用 grok 原生检索聚合当日最热话题 / 个股 / 情绪，
-生成静态网页并推送到 GitHub Pages。
+一个统一的美股 / 半导体 / AI 基建投研站，两条内容线：
+
+- **每日观察**（自动）：每天抓取 X 上美股高赞讨论，grok 原生检索聚合当日热点 / 个股 / 情绪。
+- **深度研究**（手动）：不定期产出的个股 / 产业链 / 主题研报，每篇作为一个自包含「子模块」收纳进站点。
+
+两线共用一个首页（`docs/index.html`，自动重渲染，互不覆盖）。
 
 **站点**：https://wenhanweime.github.io/us-stock-daily/
 
@@ -14,10 +18,26 @@
 
 > 串行调用是有意为之：grok 网关并发会限流（见个人记忆）。整期约 10–12 分钟。
 
+## 深度研究：发布一篇研报（手动）
+把一篇**自包含的研报 HTML** 收纳为站点子模块并发布：
+```bash
+cd ~/Documents/us-stock-daily
+python3 publish_research.py --src <报告.html> \
+  --slug silicon-photonics-cpo-2026 --title "硅光 / CPO 产业全景 2026" \
+  --date 2026-05-31 --tags 硅光,CPO,光互联 --tickers AVGO,MRVL \
+  --teaser "一句话摘要"           # 省略的字段会自动从 HTML 推断；加 --no-push 只收纳不发布
+```
+脚本会拷贝到 `docs/research/<slug>/index.html` → 写 `meta.json` → 更新 `research.json`
+→ 重渲染首页 → `git push`。同 slug 再发=覆盖更新。**公开站，勿发未脱敏内容。**
+
+> 对应 Claude skill：`~/.claude/skills/us-stock-research-publish/`（产出研报后让 agent 自动走这条流程）。
+
 ## 目录
-- `generate_report.py` — 主入口
+- `generate_report.py` — 每日观察主入口（launchd 自动）
 - `queries.py` — 抓取的查询措辞（**改这里调整角度/口径**）
-- `docs/` — GitHub Pages 根（`/docs` on `main`）：`index.html` / `feed.json` / `assets/style.css` / `reports/*.html`
+- `research.py` — 深度研究子模块管理 + 首页统一渲染（被上面两者共用）
+- `publish_research.py` — 深度研究发布 CLI
+- `docs/` — GitHub Pages 根（`/docs` on `main`）：`index.html` / `feed.json` / `research.json` / `assets/style.css` / `reports/*.html` / `research/<slug>/`
 - `data/raw/<date>/` — 每期原始 grok JSON（本地留档，不入库）
 - `logs/` — launchd 运行日志（不入库）
 

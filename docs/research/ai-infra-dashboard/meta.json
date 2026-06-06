@@ -1,0 +1,21 @@
+{
+  "slug": "ai-infra-dashboard",
+  "title": "AI 基建投资研究仪表盘",
+  "date": "2026-05-29",
+  "tags": [
+    "AI基建",
+    "存储",
+    "HBM",
+    "光互联"
+  ],
+  "tickers": [
+    "MU",
+    "AVGO",
+    "NVDA",
+    "TSM"
+  ],
+  "teaser": "AI 工厂物理供应链十大主题：存储超级周期、电源半导体、光互联、推理 ASIC 等。",
+  "cover": null,
+  "path": "research/ai-infra-dashboard/index.html",
+  "added_at": "2026-06-06 21:03:33"
+}
