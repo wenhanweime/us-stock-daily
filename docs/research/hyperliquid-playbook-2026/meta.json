@@ -1,0 +1,22 @@
+{
+  "slug": "hyperliquid-playbook-2026",
+  "title": "Hyperliquid 深度拆解 · 玩法 / 架构 / 风险 (2026)",
+  "date": "2026-06-07",
+  "tags": [
+    "Hyperliquid",
+    "HIP-3",
+    "永续",
+    "链上衍生品",
+    "套利"
+  ],
+  "tickers": [
+    "HYPE",
+    "NVDA",
+    "MU",
+    "SKHX"
+  ],
+  "teaser": "不是一个 App，而是一条为交易而生的公链+全链上订单簿交易所：no-VC 空投+每日回购飞轮+HIP-3 让谁都能上架美股/pre-IPO 永续；含 JELLY 事件与风险拆解，附实时链上数据。",
+  "cover": null,
+  "path": "research/hyperliquid-playbook-2026/index.html",
+  "added_at": "2026-06-07 22:59:47"
+}

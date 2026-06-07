@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4ef">
+  <title>Hyperliquid 深度拆解 · 玩法 / 架构 / 风险 (2026) · 美股投研</title>
+  <style>
+/* theme.css — 「研究终端」共享设计系统
+   提取自 AI 基建投资研究仪表盘，供首页 + 每日观察 + 研报模板统一复用。
+   配色: warm paper #f6f4ef / 墨 #181916 / 绿 #0b6b57 / 金 #9a6500 / 红 #a33b2a / 蓝 #315f8a */
+
+:root {
+  color-scheme: light;
+  --bg: #f6f4ef;
+  --surface: #fffdfa;
+  --surface-2: #f0eee8;
+  --ink: #181916;
+  --muted: #676b62;
+  --line: #d9d5ca;
+  --line-strong: #bdb7aa;
+  --accent: #0b6b57;
+  --accent-2: #9a6500;
+  --danger: #a33b2a;
+  --cool: #315f8a;
+  --shadow: 0 18px 45px rgba(42, 38, 30, 0.08);
+  --radius: 8px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration-color: rgba(11, 107, 87, 0.45); text-underline-offset: 3px; }
+a:hover { color: var(--accent); }
+button, input, a { touch-action: manipulation; }
+button:focus-visible, input:focus-visible, a:focus-visible, summary:focus-visible {
+  outline: 3px solid rgba(11, 107, 87, 0.32);
+  outline-offset: 2px;
+}
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  transform: translateY(-150%);
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: white;
+}
+.skip-link:focus { transform: translateY(0); }
+.app-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); min-height: 100vh; }
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: max(18px, env(safe-area-inset-top)) 16px 18px max(16px, env(safe-area-inset-left));
+  border-right: 1px solid var(--line);
+  background: rgba(255, 253, 250, 0.92);
+  backdrop-filter: blur(12px);
+  overflow-y: auto;
+}
+.brand { padding: 4px 4px 18px; border-bottom: 1px solid var(--line); }
+.brand h1 { margin: 0; font-size: 20px; line-height: 1.18; letter-spacing: 0; text-wrap: balance; }
+.brand p { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.nav-group { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.nav-group-title { margin: 0 4px 8px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 7px 8px;
+  border-radius: 6px;
+  color: #30322e;
+  font-size: 13px;
+  line-height: 1.25;
+  text-decoration: none;
+}
+.nav-link:hover { background: #ece8df; color: var(--ink); }
+.nav-link span:first-child { width: 22px; flex: 0 0 auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+.main { min-width: 0; padding: 22px clamp(16px, 3vw, 34px) 60px; }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  margin: -22px calc(clamp(16px, 3vw, 34px) * -1) 20px;
+  padding: 14px clamp(16px, 3vw, 34px);
+  border-bottom: 1px solid var(--line);
+  background: rgba(246, 244, 239, 0.88);
+  backdrop-filter: blur(12px);
+}
+.search-wrap { min-width: 0; }
+.search-wrap label { display: block; margin-bottom: 5px; color: var(--muted); font-size: 12px; }
+.search-row { display: flex; gap: 8px; align-items: center; }
+#searchInput {
+  width: min(680px, 100%);
+  height: 38px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0 12px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 14px;
+}
+.tool-buttons { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.tool-buttons button, .source-link {
+  min-height: 36px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0 11px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.tool-buttons button:hover, .source-link:hover { border-color: var(--accent); color: var(--accent); }
+.hero-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 18px;
+  align-items: stretch;
+  margin-bottom: 18px;
+}
+.overview-copy, .metric-grid, .panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.overview-copy { padding: 22px; }
+.eyebrow { margin: 0 0 8px; color: var(--accent); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.overview-copy h2 { margin: 0; font-size: clamp(24px, 3vw, 38px); line-height: 1.08; letter-spacing: 0; text-wrap: balance; }
+.overview-copy p { max-width: 860px; margin: 14px 0 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
+.metric-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: hidden; }
+.metric { padding: 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-width: 0; }
+.metric:nth-child(2n) { border-right: 0; }
+.metric:nth-last-child(-n+2) { border-bottom: 0; }
+.metric strong { display: block; font-size: 28px; line-height: 1; font-variant-numeric: tabular-nums; }
+.metric span { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; line-height: 1.35; }
+.panel { margin: 18px 0; overflow: hidden; }
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--line);
+}
+.panel-head h2 { margin: 0; font-size: 20px; letter-spacing: 0; text-wrap: balance; }
+.panel-head p:not(.eyebrow) { margin: 6px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.table-shell { width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 880px; font-size: 13px; }
+th, td { padding: 10px 11px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; line-height: 1.42; overflow-wrap: anywhere; }
+thead th { position: sticky; top: 0; z-index: 1; background: #eeeae1; color: #353730; font-weight: 700; }
+tbody tr:hover { background: #fbf7ed; }
+tbody tr[hidden] { display: none; }
+.num, td:nth-child(6), td:nth-child(10) { font-variant-numeric: tabular-nums; }
+.rank-top { color: var(--accent); font-weight: 800; }
+.sort-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+.sort-button:hover { color: var(--accent); }
+.table-note { padding: 10px 20px 16px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); }
+.doc-map { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; padding: 16px 20px 20px; }
+.doc-chip {
+  display: block;
+  min-height: 72px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fbfaf6;
+  text-decoration: none;
+}
+.doc-chip:hover { border-color: var(--accent); background: #f3f0e8; }
+.doc-chip span { display: block; color: var(--muted); font-size: 11px; margin-bottom: 6px; }
+.doc-chip strong { display: block; font-size: 13px; line-height: 1.35; overflow-wrap: anywhere; }
+.markdown-body { padding: 2px 20px 24px; }
+.markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 { scroll-margin-top: 86px; letter-spacing: 0; text-wrap: balance; }
+.markdown-body h2 { margin: 24px 0 10px; font-size: 21px; }
+.markdown-body h3 { margin: 22px 0 8px; font-size: 17px; }
+.markdown-body h4 { margin: 18px 0 8px; font-size: 15px; }
+.markdown-body p, .markdown-body li { color: #30322d; font-size: 14px; line-height: 1.68; }
+.markdown-body ul, .markdown-body ol { padding-left: 22px; }
+.markdown-body blockquote {
+  margin: 14px 0;
+  padding: 10px 14px;
+  border-left: 4px solid var(--accent);
+  background: #f4f0e8;
+  color: #2f332c;
+}
+.markdown-body blockquote p { margin: 4px 0; color: #2f332c; }
+.markdown-body pre {
+  overflow-x: auto;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #171914;
+  color: #f8f3e7;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.markdown-body code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
+.status-strip { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 20px 18px; }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: #faf8f2;
+  color: #3b3d37;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.badge.accent { border-color: rgba(11, 107, 87, .35); color: var(--accent); }
+.badge.warn { border-color: rgba(154, 101, 0, .35); color: var(--accent-2); }
+.hidden-by-filter { display: none; }
+.empty-state { display: none; padding: 18px 20px; color: var(--muted); }
+.empty-state.visible { display: block; }
+.footer { margin-top: 28px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+@media (max-width: 1080px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  .nav-group:last-child { display: none; }
+  .hero-panel { grid-template-columns: 1fr; }
+  .topbar { grid-template-columns: 1fr; position: sticky; }
+  .tool-buttons { justify-content: flex-start; }
+}
+@media (max-width: 640px) {
+  .main { padding-inline: 12px; }
+  .topbar { margin-inline: -12px; padding-inline: 12px; }
+  .overview-copy { padding: 18px; }
+  .metric-grid { grid-template-columns: 1fr; }
+  .metric, .metric:nth-child(2n), .metric:nth-last-child(-n+2) { border-right: 0; border-bottom: 1px solid var(--line); }
+  .metric:last-child { border-bottom: 0; }
+  .panel-head { flex-direction: column; }
+  table { min-width: 760px; font-size: 12px; }
+  th, td { padding: 8px; }
+  .search-row { flex-direction: column; align-items: stretch; }
+  .badge { white-space: normal; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+.visual-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr); gap: 16px; padding: 16px 20px 22px; }
+.visual-card { border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; overflow: hidden; min-width: 0; }
+.visual-card h3 { margin: 0; padding: 14px 14px 8px; font-size: 16px; letter-spacing: 0; text-wrap: balance; }
+.visual-card p { margin: 0; padding: 0 14px 14px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+.diagram-wrap { overflow-x: auto; padding: 12px; overscroll-behavior-x: contain; }
+.diagram { width: 100%; min-width: 780px; height: auto; display: block; }
+.diagram text { font-family: inherit; fill: #20221e; }
+.diagram .node { fill: #fffdfa; stroke: #bdb7aa; stroke-width: 1.2; }
+.diagram .node-strong { fill: #eef6f1; stroke: #0b6b57; stroke-width: 1.4; }
+.diagram .node-warn { fill: #fff3d8; stroke: #9a6500; stroke-width: 1.3; }
+.diagram .node-risk { fill: #faece8; stroke: #a33b2a; stroke-width: 1.2; }
+.diagram .link { fill: none; stroke: #8f8a80; stroke-width: 1.2; marker-end: url(#arrow); }
+.diagram .link-strong { fill: none; stroke: #0b6b57; stroke-width: 2; marker-end: url(#arrow-green); }
+.diagram .label { font-size: 12px; font-weight: 700; }
+.diagram .small { font-size: 10.5px; fill: #676b62; }
+.diagram .lane { fill: #f2efe7; stroke: #d9d5ca; stroke-width: 1; }
+.player-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 12px; padding: 16px 20px 22px; }
+.player-card { border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; padding: 14px; min-width: 0; }
+.player-card header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.player-card h3 { margin: 0; font-size: 16px; letter-spacing: 0; }
+.player-card .ticker { font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.player-card dl { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 7px 10px; margin: 0; font-size: 13px; line-height: 1.48; }
+.player-card dt { color: var(--muted); }
+.player-card dd { margin: 0; color: #2c2e29; overflow-wrap: anywhere; }
+.player-card a { color: var(--accent); }
+.chain-map { padding: 16px 20px 22px; display: grid; gap: 12px; }
+.chain-row { display: grid; grid-template-columns: 150px repeat(5, minmax(120px, 1fr)); gap: 8px; align-items: stretch; }
+.chain-title { display: flex; align-items: center; padding: 10px; border-radius: var(--radius); background: #ece8df; font-weight: 800; font-size: 13px; }
+.chain-cell { min-height: 74px; padding: 10px; border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; font-size: 12px; line-height: 1.42; position: relative; }
+.chain-cell strong { display: block; margin-bottom: 5px; color: var(--ink); }
+.chain-cell::after { content: '→'; position: absolute; right: -13px; top: 50%; transform: translateY(-50%); color: var(--line-strong); font-weight: 800; }
+.chain-cell:last-child::after { content: ''; }
+.bottleneck { border-color: rgba(11, 107, 87, .45); background: #eef6f1; }
+.watch { border-color: rgba(154, 101, 0, .42); background: #fff7e8; }
+.risk-node { border-color: rgba(163, 59, 42, .38); background: #faece8; }
+.source-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px 14px; padding: 0 20px 22px; margin: 0; }
+.source-list li { list-style: none; font-size: 12px; line-height: 1.45; color: var(--muted); }
+.source-list a { color: var(--accent); }
+.timeline { padding: 16px 20px 22px; display: grid; gap: 10px; }
+.timeline-item { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; align-items: start; }
+.timeline-item time { padding: 8px 10px; border-radius: var(--radius); background: #ece8df; color: var(--ink); font-size: 12px; font-weight: 800; text-align: center; font-variant-numeric: tabular-nums; }
+.timeline-item div { padding: 10px 12px; border-left: 3px solid var(--accent); background: #fbfaf6; border-radius: 0 var(--radius) var(--radius) 0; font-size: 13px; line-height: 1.55; }
+@media (max-width: 900px) { .visual-grid { grid-template-columns: 1fr; } .chain-row { grid-template-columns: 1fr; } .chain-cell::after { content: '↓'; right: 12px; top: auto; bottom: -17px; transform: none; } .chain-cell:last-child::after { content: ''; } }
+@media (max-width: 640px) { .player-grid, .visual-grid, .chain-map, .timeline { padding-inline: 12px; } .player-card dl { grid-template-columns: 1fr; } .timeline-item { grid-template-columns: 1fr; } }
+
+/* ---- 站点 chrome 补充（首页 / 日报）---- */
+.brand a{color:inherit;text-decoration:none}
+.brand a:hover{color:var(--accent)}
+.lede-inline{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.muted{color:var(--muted)}
+.back-link{color:var(--muted);font-size:13px}
+.back-link:hover{color:var(--accent)}
+
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">跳到主内容</a>
+<div class="app-shell">
+  <aside class="sidebar" aria-label="导航">
+    <div class="brand">
+      <h1>Hyperliquid 深度拆解 · 玩法 / 架构 / 风险</h1>
+      <p>一条为交易而生的公链 + 全链上订单簿交易所 · 实时链上数据 + X/网络调研 · 2026-06-07</p>
+    </div>
+    <nav class="nav-group" aria-label="Primary">
+      <p class="nav-group-title">Dashboard</p>
+      <a class="nav-link" href="#overview"><span>00</span><strong>总览</strong></a>
+      <a class="nav-link" href="#markets"><span>MK</span><strong>主永续市场 Top</strong></a>
+      <a class="nav-link" href="#builders"><span>H3</span><strong>HIP-3 子市场</strong></a>
+      <a class="nav-link" href="#engine"><span>FW</span><strong>玩法飞轮</strong></a>
+      <a class="nav-link" href="#plays"><span>PL</span><strong>六种玩法</strong></a>
+      <a class="nav-link" href="#thesis"><span>TH</span><strong>研究正文</strong></a>
+      <a class="nav-link" href="#timeline"><span>EV</span><strong>事件 / 催化</strong></a>
+      <a class="nav-link" href="#risk"><span>RK</span><strong>风险标签</strong></a>
+      <a class="nav-link" href="#sources"><span>SR</span><strong>来源</strong></a>
+    </nav>
+  </aside>
+
+  <main class="main" id="main">
+    <div class="topbar" role="search">
+      <div class="search-wrap"><label for="searchInput">全局搜索 市场 / 玩法 / 风险 / 事件</label>
+        <div class="search-row">
+          <input id="searchInput" type="search" autocomplete="off" placeholder="例如 HIP-3、HLP、JELLY、资金费、xyz…" aria-describedby="rowCount">
+          <span class="badge" id="rowCount" aria-live="polite">—</span>
+        </div></div>
+      <div class="tool-buttons">
+        <button type="button" id="resetSearch">重置</button>
+        <a class="source-link" href="#sources">来源</a>
+      </div>
+    </div>
+
+    <section class="hero-panel" id="overview">
+      <div class="overview-copy">
+        <p class="eyebrow">Research Control Room</p>
+        <h2>Hyperliquid 到底是个什么东西</h2>
+        <p>它不是一个 App，而是「一条专门为交易而生的公链 + 跑在上面的全链上订单簿交易所」：用自研 HyperBFT 共识做到 CEX 级撮合，用 no-VC 空投 + 每日回购把利润还给用户，再用 HIP-3 让任何人都能上架美股 / pre-IPO / 商品 / 外汇永续、24/7 交易。本页把它的市场、玩法、飞轮与风险拆成一张可搜索、可排序的地图——数据为 2026-06-07 实时链上 + X/网络调研。</p>
+      </div>
+      <div class="metric-grid">
+        <div class="metric"><strong>$9.5B</strong><span>24h 永续名义成交额（179 个主市场）</span></div>
+        <div class="metric"><strong>~$640M/yr</strong><span>协议费回购 HYPE ≈ 市值 7%/年</span></div>
+        <div class="metric"><strong>0</strong><span>VC 融资 · 代币空投给真实用户</span></div>
+        <div class="metric"><strong>8</strong><span>HIP-3 子市场（xyz 上 87 个标的）</span></div>
+      </div>
+    </section>
+
+    <section class="panel" id="markets">
+      <div class="panel-head"><div><p class="eyebrow">Live Markets</p>
+        <h2>主永续市场 · 24h 成交 Top 10</h2><p>点表头排序；数值列按数字排序。数据：Hyperliquid 官方 API 实时（2026-06-07）。</p></div></div>
+      <div class="table-shell"><table class="sortable">
+        <thead><tr>
+          <th><button class="sort-button">市场</button></th>
+          <th><button class="sort-button">24h 成交 ($M)</button></th>
+          <th><button class="sort-button">未平仓 OI ($M)</button></th>
+          <th><button class="sort-button">资金费 (年化)</button></th>
+          <th><button class="sort-button">最大杠杆</button></th>
+        </tr></thead>
+        <tbody>
+          <tr><td>BTC</td><td class="num">5656</td><td class="num">2022</td><td class="num">+2%</td><td class="num">40x</td></tr>
+          <tr><td>ETH</td><td class="num">1290</td><td class="num">1055</td><td class="num">+10%</td><td class="num">25x</td></tr>
+          <tr><td>HYPE</td><td class="num">742</td><td class="num">1214</td><td class="num">+11%</td><td class="num">10x</td></tr>
+          <tr><td>ZEC</td><td class="num">583</td><td class="num">195</td><td class="num">-42%</td><td class="num">10x</td></tr>
+          <tr><td>SOL</td><td class="num">516</td><td class="num">221</td><td class="num">-8%</td><td class="num">20x</td></tr>
+          <tr><td>WLD</td><td class="num">130</td><td class="num">38</td><td class="num">-17%</td><td class="num">10x</td></tr>
+          <tr><td>XRP</td><td class="num">72</td><td class="num">79</td><td class="num">-4%</td><td class="num">20x</td></tr>
+          <tr><td>NEAR</td><td class="num">60</td><td class="num">57</td><td class="num">+11%</td><td class="num">10x</td></tr>
+          <tr><td>SUI</td><td class="num">47</td><td class="num">26</td><td class="num">+11%</td><td class="num">10x</td></tr>
+          <tr><td>LIT</td><td class="num">33</td><td class="num">62</td><td class="num">+11%</td><td class="num">5x</td></tr>
+        </tbody></table></div>
+      <div class="table-note">全市场合计：179 个活跃永续 · 24h 成交 ≈ $9.5B · 未平仓 OI ≈ $5.72B。HYPE 自己已是第三大永续（OI $1.2B）。资金费为年化（HL 每小时结算一次）。</div>
+    </section>
+
+    <section class="panel" id="builders">
+      <div class="panel-head"><div><p class="eyebrow">HIP-3 Markets</p>
+        <h2>HIP-3 builder 子市场一览</h2><p>谁都能质押 HYPE 部署一个永续市场、自设 oracle 与费率——这是美股 / 商品 / 外汇 / pre-IPO 标的的来源。</p></div></div>
+      <div class="table-shell"><table class="sortable">
+        <thead><tr>
+          <th><button class="sort-button">代号</button></th>
+          <th><button class="sort-button">全名</button></th>
+          <th><button class="sort-button">标的数</button></th>
+          <th><button class="sort-button">代表标的 / 备注</button></th>
+        </tr></thead>
+        <tbody>
+          <tr><td>xyz</td><td>XYZ</td><td class="num">87</td><td>最全：SKHX 海力士 · SMSN 三星 · EWY · MU · NVDA · 黄金 · 韩元</td></tr>
+          <tr><td>hyna</td><td>HyENA</td><td class="num">24</td><td>综合</td></tr>
+          <tr><td>km</td><td>Markets by Kinetiq</td><td class="num">22</td><td>AAPL · MU · NVDA</td></tr>
+          <tr><td>vntl</td><td>Ventuals</td><td class="num">15</td><td>综合</td></tr>
+          <tr><td>flx</td><td>Felix Exchange</td><td class="num">15</td><td>NVDA-USDH（Felix 部署，10x）</td></tr>
+          <tr><td>cash</td><td>dreamcash</td><td class="num">15</td><td>EWY · NVDA · MSFT</td></tr>
+          <tr><td>para</td><td>Paragon</td><td class="num">4</td><td>小型</td></tr>
+          <tr><td>abcd</td><td>ABCDEx</td><td class="num">0</td><td>空壳</td></tr>
+        </tbody></table></div>
+      <div class="table-note">2026-01 builder 市场未平仓 OI 已破 $790M（黄金/白银领跑）。部署方控制 oracle、可下架——铠侠 KIOXIA、韩元 KRW 已被下架，是真实的 builder/oracle 风险。</div>
+    </section>
+
+    <section class="panel" id="engine">
+      <div class="panel-head"><div><p class="eyebrow">Flywheel</p><h2>核心飞轮：成交 → 回购 → 币价</h2>
+        <p>97% 协议手续费进 Assistance Fund，每天自动在公开市场买回 HYPE——加密里最激进的回购机制之一。</p></div></div>
+      <div class="chain-map">
+        <div class="chain-row">
+          <div class="chain-title">回购飞轮</div>
+          <div class="chain-cell bottleneck"><strong>① 海量成交</strong>日均 &gt;$8B；maker 0.01% / taker 0.035%</div>
+          <div class="chain-cell"><strong>② 协议手续费</strong>月成交 ~$208B 累积</div>
+          <div class="chain-cell bottleneck"><strong>③ Assistance Fund</strong>97% 手续费进基金</div>
+          <div class="chain-cell watch"><strong>④ 每日回购 HYPE</strong>年化 ~$640M ≈ 市值 7%</div>
+          <div class="chain-cell"><strong>⑤ 币价/关注 ↑</strong>→ 回到 ①</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="plays">
+      <div class="panel-head"><div><p class="eyebrow">Playbook</p><h2>六种玩法（从浅到深）</h2></div></div>
+      <div class="player-grid">
+        <article class="player-card filter-item">
+          <header><h3>① 交易全球资产</h3><span class="ticker">24/7</span></header>
+          <dl><dt>是什么</dt><dd>无券商/无 KYC，链上做多空美股、商品、外汇、指数永续</dd>
+          <dt>难度</dt><dd>低</dd><dt>风险</dt><dd>深度薄、滑点大、杠杆爆仓</dd></dl>
+        </article>
+        <article class="player-card filter-item">
+          <header><h3>② 资金费收割 / cash-and-carry</h3><span class="ticker">CARRY</span></header>
+          <dl><dt>是什么</dt><dd>做空高资金费的永续 + 持有/对冲现货，delta 中性吃资金费</dd>
+          <dt>难度</dt><dd>中</dd><dt>风险</dt><dd>资金费翻转、对冲腿成本、两腿市场结构不同</dd></dl>
+        </article>
+        <article class="player-card filter-item">
+          <header><h3>③ pre-IPO 价格发现</h3><span class="ticker">CBRS</span></header>
+          <dl><dt>是什么</dt><dd>IPO 前永续抢跑定价；社区公认价差常「结构性套不动」，只在标的可交易时收敛</dd>
+          <dt>难度</dt><dd>高</dd><dt>风险</dt><dd>无法做空对侧/交割延迟/跳空</dd></dl>
+        </article>
+        <article class="player-card filter-item">
+          <header><h3>④ 存 HLP 当「庄」</h3><span class="ticker">HLP</span></header>
+          <dl><dt>是什么</dt><dd>把 USDC 存入社区做市金库，分做市/清算收益</dd>
+          <dt>难度</dt><dd>低</dd><dt>风险</dt><dd>亏损社会化（见 JELLY）、4 天锁定</dd></dl>
+        </article>
+        <article class="player-card filter-item">
+          <header><h3>⑤ 刷量撸空投</h3><span class="ticker">FARM</span></header>
+          <dl><dt>是什么</dt><dd>在新 perp DEX（DreamCash/Ostium/TradeXYZ…）刷量博空投</dd>
+          <dt>难度</dt><dd>中</dd><dt>风险</dt><dd>预期落空、手续费磨损</dd></dl>
+        </article>
+        <article class="player-card filter-item">
+          <header><h3>⑥ 自己部署市场</h3><span class="ticker">HIP-3</span></header>
+          <dl><dt>是什么</dt><dd>质押 HYPE 部署一个永续市场，自设 oracle/费率，抽成</dd>
+          <dt>难度</dt><dd>极高</dd><dt>风险</dt><dd>资本门槛、oracle 责任、合规</dd></dl>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel" id="thesis">
+      <div class="panel-head"><div><p class="eyebrow">Thesis</p><h2>研究正文：玩法 / 架构 / 暗面</h2></div></div>
+      <div class="markdown-body filter-item">
+        <h3>1. 技术层：凭什么能像币安一样快</h3>
+        <p>Hyperliquid 有自己的 L1，共识叫 <strong>HyperBFT</strong>（从 HotStuff 改造、为高频交易优化低延迟）。架构分两层：<strong>HyperCore</strong>（原生撮合 / 全链上中央限价订单簿）+ <strong>HyperEVM</strong>（通用智能合约层）。它不是 Uniswap 那种 AMM，而是真正的链上订单簿，所以体验接近 CEX。代价是去中心化程度有限——PoS、验证人只有约 20 个，需 &gt;2/3 质押 HYPE 才能出块。</p>
+
+        <h3>2. 经济飞轮：no-VC + 每天回购</h3>
+        <p>HYPE <strong>没有 VC、没有私募</strong>，2024 年 11 月直接空投给真实用户（史上最大空投之一）。费率极低（maker 0.01% / taker 0.035%），日均成交 &gt;$8B、月成交 ~$208B。关键在于：<strong>97% 的协议手续费进入 Assistance Fund，每天自动在公开市场回购 HYPE</strong>，年化回购约 $640M ≈ 市值 7%/年（比以太坊 EIP-1559 销毁猛 4–5 倍）。这构成「成交 → 收费 → 回购 → 币价/关注 → 更多成交」的飞轮。</p>
+
+        <h3>3. HLP：让普通人当「庄家」</h3>
+        <p>Hyperliquidity Provider（HLP）是社区金库（实测净值 ~$336M），既做市又充当清算的对手方，赚做市价差与清算的钱；用户可存 USDC 分润（4 天锁定）。但它的<strong>亏损是社会化的</strong>——这点在 JELLY 事件里被放大。</p>
+
+        <h3>4. HIP-3：把「谁都能上币」做成产品</h3>
+        <p>2025 年 10 月上线：足够资本（质押 HYPE）即可<strong>部署一个永续市场，自设 oracle 与费率</strong>。这正是 <code>xyz / km / cash / flx</code> 上能出现海力士、三星、英伟达、黄金、韩元、pre-IPO 等标的的根源；2026 年 1 月 builder 市场 OI 已破 $790M。<strong>HIP-4</strong>（2026 测试）进一步加入预测/结果市场与统一保证金（$50k 抵 $400k+ 名义敞口）。</p>
+
+        <h3>5. 暗面：JELLY 事件（2025-03）——这套玩法的照妖镜</h3>
+        <p>据 CoinDesk / Lookonchain：有人用约 $4.85M 的 JELLY 做局——在 HL 开空 + 链上现货拉盘，故意自爆仓让 <strong>HLP 接下空单</strong>，再猛拉现货，HLP 浮亏一度 −$13.5M、HYPE 当天跌 20%（币安顺势上线 JELLY，价格曾涨 560% 火上浇油）。</p>
+        <blockquote><p>Hyperliquid 的反应：约 20 个验证人投票，几分钟内强制下架 JELLY 并按对自己有利的价格结算，HLP 不亏反赚、用户退款。争议在于：一个号称「去中心化」的所，能像 CEX 一样临时改规则、自定结算价。</p></blockquote>
+
+        <h3>6. 监管与批评</h3>
+        <p>英国 FCA 已就 HL 永续发出警告；X 上有声音直言「Hyperliquid 没创新，就是 Binance 2.0，只是暂时的监管套利」。给全球用户无门槛的美股 / pre-IPO 敞口，本身游走在合规灰区；叠加验证人集中与多起安全事故，被评级机构标为结构性风险。</p>
+
+        <h3>7. 这对「套利者」意味着什么</h3>
+        <p>我们前几轮能在上面找到海力士/EWY/英伟达永续，正是 HIP-3 的产物。但要记住 JELLY 的底色：<strong>链上深度薄、oracle 可被操纵、规则能被约 20 个验证人临时改</strong>。X 上对「美股 vs 真实交易所价差套利」的主流共识是——大价差往往是「套利结构性做不了」的信号（无法做空对侧/交割延迟），真正能规模化赚的是<strong>资金费收割（cash-and-carry）</strong>，而不是抓价格差。</p>
+      </div>
+    </section>
+
+    <section class="panel" id="timeline">
+      <div class="panel-head"><div><p class="eyebrow">Catalysts</p><h2>事件 / 催化时间线</h2></div></div>
+      <div class="timeline">
+        <div class="timeline-item filter-item"><time>2024-11</time><div>HYPE 空投：无 VC、无私募，直接发给真实用户，史上最大空投之一。</div></div>
+        <div class="timeline-item filter-item"><time>2025-03</time><div>JELLY 事件：HLP 浮亏 −$13.5M、HYPE 跌 20%；验证人投票强制下架 + 结算，引发中心化质疑。</div></div>
+        <div class="timeline-item filter-item"><time>2025-10</time><div>HIP-3 上线：builder 可质押 HYPE 部署永续市场（股票/商品/外汇）。</div></div>
+        <div class="timeline-item filter-item"><time>2026-01</time><div>builder 市场未平仓 OI 突破 $790M，黄金/白银领跑。</div></div>
+        <div class="timeline-item filter-item"><time>2026-02</time><div>HIP-4（结果/预测市场 + 统一保证金）进入测试网。</div></div>
+        <div class="timeline-item filter-item"><time>2026-Q2</time><div>pre-IPO 永续价格发现走红：Cerebras $CBRS 定价 $185、开盘 $350，盘前 perp ~$340（灰度发推）；英国 FCA 就 HL 永续发警告。</div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="risk">
+      <div class="panel-head"><div><p class="eyebrow">Risk Rules</p><h2>风险 / 玩法标签</h2></div></div>
+      <div class="status-strip">
+        <span class="badge warn">中心化：~20 验证人可分钟级下架 / 改结算价（JELLY 实证）</span>
+        <span class="badge warn">HLP 亏损社会化 · 4 天锁定</span>
+        <span class="badge warn">HIP-3：部署方控 oracle、可下架（KIOXIA/KRW 已下）</span>
+        <span class="badge warn">监管：英国 FCA 警告 · 合规灰区</span>
+        <span class="badge">链上深度薄 → 大价差常「套不动」</span>
+        <span class="badge accent">飞轮：97% 费每日回购 HYPE ≈ 7%/年</span>
+        <span class="badge accent">可执行 alpha：资金费收割 (cash-and-carry)</span>
+      </div>
+    </section>
+
+    <section class="panel" id="sources">
+      <div class="panel-head"><div><p class="eyebrow">Sources</p><h2>数据来源</h2></div></div>
+      <ul class="source-list">
+        <li><a href="https://api.hyperliquid.xyz">Hyperliquid 官方 API — 实时市场/OI/资金费/HLP 金库/builder dex（2026-06-07 拉取）</a></li>
+        <li><a href="https://www.coindesk.com">CoinDesk / Lookonchain — JELLY 事件（HLP −$13.5M、HYPE −20%、强制结算）</a></li>
+        <li><a href="https://blog.redstone.finance">RedStone / CoinStats — HyperBFT 架构、HyperCore/HyperEVM、验证人质押</a></li>
+        <li><a href="https://buildix.trade">buildix.trade — 费率(maker 0.01%/taker 0.035%)、97% 费进 Assistance Fund、年化回购 ~$640M</a></li>
+        <li><a href="https://x.com/aixbt_agent">X @aixbt_agent — SPCX 60% gap「结构性套不动」/ CBRS 收敛</a></li>
+        <li><a href="https://x.com">X @econoar / @Grayscale / @x256xx — 基础设施/监管套利叙事、CBRS pre-IPO 价格发现</a></li>
+        <li><a href="https://datawallet.com">datawallet / hyperdash — HIP-3 机制与 builder 市场 OI（2026-01 &gt;$790M）</a></li>
+      </ul>
+    </section>
+
+    <p class="empty-state" id="emptyState">没有匹配的内容。</p>
+    <footer class="footer">数据口径：Hyperliquid 官方 API 实时快照（2026-06-07）+ X / 网络公开资料二次整理；价格/资金费随行就市，仅代表生成时点。本报告仅供研究，非投资建议。</footer>
+  </main>
+</div>
+
+<script>
+/* terminal.js — 「研究终端」共享交互：全局搜索过滤 + 表头排序。
+   依赖元素（可选，缺失自动跳过）：#searchInput #resetSearch #rowCount #emptyState
+   过滤目标：table.sortable 的行 + .filter-item 元素。 */
+(function () {
+  const input = document.getElementById('searchInput');
+  const resetBtn = document.getElementById('resetSearch');
+  const rowCount = document.getElementById('rowCount');
+  const emptyState = document.getElementById('emptyState');
+  const tables = Array.from(document.querySelectorAll('table.sortable'));
+  const items = Array.from(document.querySelectorAll('.filter-item'));
+  const norm = v => (v || '').toLowerCase().trim();
+  const asNum = v => {
+    const c = v.replace(/[$,%+~]/g, '').replace(/[^0-9.\-]/g, '');
+    if (!c || c === '-' || c === '.') return null;
+    const n = Number(c); return Number.isFinite(n) ? n : null;
+  };
+  function update() {
+    if (!input) return;
+    const q = norm(input.value); let vis = 0;
+    tables.forEach(t => Array.from(t.tBodies[0]?.rows || []).forEach(r => {
+      const m = !q || norm(r.innerText).includes(q); r.hidden = !m; if (m) vis++;
+    }));
+    items.forEach(el => {
+      const m = !q || norm(el.innerText).includes(q);
+      el.classList.toggle('hidden-by-filter', !m); if (m) vis++;
+    });
+    if (rowCount) rowCount.textContent = vis + ' 条匹配';
+    if (emptyState) emptyState.classList.toggle('visible', Boolean(q) && vis === 0);
+  }
+  tables.forEach(table => {
+    Array.from(table.tHead?.rows[0]?.cells || []).forEach((th, i) => {
+      const b = th.querySelector('button'); if (!b) return;
+      b.addEventListener('click', () => {
+        const dir = th.dataset.sort === 'asc' ? 'desc' : 'asc';
+        Array.from(th.parentElement.children).forEach(c => c.dataset.sort = '');
+        th.dataset.sort = dir;
+        const rows = Array.from(table.tBodies[0].rows);
+        rows.sort((a, c) => {
+          const av = a.cells[i]?.innerText.trim() || '', bv = c.cells[i]?.innerText.trim() || '';
+          const an = asNum(av), bn = asNum(bv);
+          const cmp = (an !== null && bn !== null) ? an - bn
+            : av.localeCompare(bv, 'zh-Hans-u-co-pinyin', { numeric: true, sensitivity: 'base' });
+          return dir === 'asc' ? cmp : -cmp;
+        });
+        rows.forEach(r => table.tBodies[0].appendChild(r));
+      });
+    });
+  });
+  if (resetBtn && input) resetBtn.addEventListener('click', () => { input.value = ''; update(); input.focus(); });
+  if (input) input.addEventListener('input', update);
+  update();
+})();
+
+</script>
+</body>
+</html>
