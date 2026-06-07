@@ -1,18 +1,18 @@
 {
-  "last_updated": "2026-06-08 03:17",
+  "last_updated": "2026-06-08 04:17",
   "keywords": 7,
   "spiked": [],
   "buckets": [
     {
       "name": "美光 $MU",
-      "new": 22,
-      "sampled": 23,
+      "new": 18,
+      "sampled": 18,
       "spike": false
     },
     {
       "name": "闪迪 $SNDK",
-      "new": 4,
-      "sampled": 4,
+      "new": 3,
+      "sampled": 3,
       "spike": false
     },
     {
@@ -23,26 +23,26 @@
     },
     {
       "name": "存储/HBM/DRAM",
-      "new": 20,
-      "sampled": 21,
+      "new": 14,
+      "sampled": 16,
       "spike": false
     },
     {
       "name": "光模块/光通信",
       "new": 1,
-      "sampled": 2,
+      "sampled": 9,
       "spike": false
     },
     {
       "name": "CPO/硅光",
-      "new": 7,
-      "sampled": 16,
+      "new": 4,
+      "sampled": 11,
       "spike": false
     },
     {
       "name": "SIVE $SIVE",
-      "new": 17,
-      "sampled": 24,
+      "new": 15,
+      "sampled": 15,
       "spike": false
     }
   ]
