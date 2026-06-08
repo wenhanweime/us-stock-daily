@@ -157,17 +157,18 @@ def render_home(feed: Optional[dict] = None) -> None:
     rcards = []
     for e in rentries:
         tks = " ".join("$" + t for t in (e.get("tickers") or [])[:4])
+        tk_html = ('<div class="card-tickers">%s</div>' % _esc(tks)) if tks else ''
         badges = "".join('<span class="badge">%s</span>' % _esc(t)
                          for t in (e.get("tags") or [])[:5])
         rcards.append(
             '<article class="player-card filter-item" id="r-%s">'
-            '<header><h3><a href="%s">%s</a></h3>'
-            '<span class="ticker">%s</span></header>'
-            '<p class="muted" style="margin:0 0 10px;font-size:13px;line-height:1.55">%s</p>'
+            '<h3 class="card-title"><a href="%s">%s</a></h3>'
+            '%s'
+            '<p class="card-teaser">%s</p>'
             '<div class="tag-row">%s<span class="badge accent">%s</span></div>'
             '</article>'
             % (_esc(e.get("slug")), _esc(e.get("path")), _esc(e.get("title")),
-               _esc(tks), _esc(e.get("teaser")), badges, _esc(e.get("date"))))
+               tk_html, _esc(e.get("teaser")), badges, _esc(e.get("date"))))
     rcards_html = "".join(rcards) or '<p class="empty-state visible">暂无深度研究。</p>'
 
     # 每日观察 chips

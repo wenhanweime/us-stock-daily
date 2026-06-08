@@ -320,3 +320,12 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
 .muted{color:var(--muted)}
 .back-link{color:var(--muted);font-size:13px}
 .back-link:hover{color:var(--accent)}
+
+/* 首页深度研究卡片：标题占整行，ticker 换到下方且可换行（修复长 ticker 挤压标题） */
+.player-card .card-title{margin:0 0 5px;font-size:17px;line-height:1.42;letter-spacing:0;text-wrap:balance}
+.player-card .card-title a{color:var(--ink);text-decoration:none}
+.player-card .card-title a:hover{color:var(--accent)}
+.player-card .card-tickers{margin:0 0 9px;color:var(--accent);font-size:12.5px;
+  font-variant-numeric:tabular-nums;line-height:1.5;overflow-wrap:anywhere}
+.player-card .card-teaser{margin:0 0 11px;color:var(--muted);font-size:13px;line-height:1.55;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
