@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f4ef">
+<meta name="description" content="三星/SK海力士回调研判：超跌而非需求转弱，X 高赞压倒性 buy the dip，HBM 超级周期未破。">
+<title>韩国存储双雄观察 — 三星 & SK海力士 (2026-06-06)</title>
+<style>
+/* theme.css — 「研究终端」共享设计系统
+   提取自 AI 基建投资研究仪表盘，供首页 + 每日观察 + 研报模板统一复用。
+   配色: warm paper #f6f4ef / 墨 #181916 / 绿 #0b6b57 / 金 #9a6500 / 红 #a33b2a / 蓝 #315f8a */
+
+:root {
+  color-scheme: light;
+  --bg: #f6f4ef;
+  --surface: #fffdfa;
+  --surface-2: #f0eee8;
+  --ink: #181916;
+  --muted: #676b62;
+  --line: #d9d5ca;
+  --line-strong: #bdb7aa;
+  --accent: #0b6b57;
+  --accent-2: #9a6500;
+  --danger: #a33b2a;
+  --cool: #315f8a;
+  --shadow: 0 18px 45px rgba(42, 38, 30, 0.08);
+  --radius: 8px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration-color: rgba(11, 107, 87, 0.45); text-underline-offset: 3px; }
+a:hover { color: var(--accent); }
+button, input, a { touch-action: manipulation; }
+button:focus-visible, input:focus-visible, a:focus-visible, summary:focus-visible {
+  outline: 3px solid rgba(11, 107, 87, 0.32);
+  outline-offset: 2px;
+}
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  transform: translateY(-150%);
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: white;
+}
+.skip-link:focus { transform: translateY(0); }
+.app-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); min-height: 100vh; }
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: max(18px, env(safe-area-inset-top)) 16px 18px max(16px, env(safe-area-inset-left));
+  border-right: 1px solid var(--line);
+  background: rgba(255, 253, 250, 0.92);
+  backdrop-filter: blur(12px);
+  overflow-y: auto;
+}
+.brand { padding: 4px 4px 18px; border-bottom: 1px solid var(--line); }
+.brand h1 { margin: 0; font-size: 20px; line-height: 1.18; letter-spacing: 0; text-wrap: balance; }
+.brand p { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.nav-group { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.nav-group-title { margin: 0 4px 8px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 7px 8px;
+  border-radius: 6px;
+  color: #30322e;
+  font-size: 13px;
+  line-height: 1.25;
+  text-decoration: none;
+}
+.nav-link:hover { background: #ece8df; color: var(--ink); }
+.nav-link span:first-child { width: 22px; flex: 0 0 auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+.main { min-width: 0; padding: 22px clamp(16px, 3vw, 34px) 60px; }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  margin: -22px calc(clamp(16px, 3vw, 34px) * -1) 20px;
+  padding: 14px clamp(16px, 3vw, 34px);
+  border-bottom: 1px solid var(--line);
+  background: rgba(246, 244, 239, 0.88);
+  backdrop-filter: blur(12px);
+}
+.search-wrap { min-width: 0; }
+.search-wrap label { display: block; margin-bottom: 5px; color: var(--muted); font-size: 12px; }
+.search-row { display: flex; gap: 8px; align-items: center; }
+#searchInput {
+  width: min(680px, 100%);
+  height: 38px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0 12px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 14px;
+}
+.tool-buttons { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.tool-buttons button, .source-link {
+  min-height: 36px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0 11px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.tool-buttons button:hover, .source-link:hover { border-color: var(--accent); color: var(--accent); }
+.hero-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 18px;
+  align-items: stretch;
+  margin-bottom: 18px;
+}
+.overview-copy, .metric-grid, .panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.overview-copy { padding: 22px; }
+.eyebrow { margin: 0 0 8px; color: var(--accent); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.overview-copy h2 { margin: 0; font-size: clamp(24px, 3vw, 38px); line-height: 1.08; letter-spacing: 0; text-wrap: balance; }
+.overview-copy p { max-width: 860px; margin: 14px 0 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
+.metric-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: hidden; }
+.metric { padding: 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-width: 0; }
+.metric:nth-child(2n) { border-right: 0; }
+.metric:nth-last-child(-n+2) { border-bottom: 0; }
+.metric strong { display: block; font-size: 28px; line-height: 1; font-variant-numeric: tabular-nums; }
+.metric span { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; line-height: 1.35; }
+.panel { margin: 18px 0; overflow: hidden; }
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--line);
+}
+.panel-head h2 { margin: 0; font-size: 20px; letter-spacing: 0; text-wrap: balance; }
+.panel-head p:not(.eyebrow) { margin: 6px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.table-shell { width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 880px; font-size: 13px; }
+th, td { padding: 10px 11px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; line-height: 1.42; overflow-wrap: anywhere; }
+thead th { position: sticky; top: 0; z-index: 1; background: #eeeae1; color: #353730; font-weight: 700; }
+tbody tr:hover { background: #fbf7ed; }
+tbody tr[hidden] { display: none; }
+.num, td:nth-child(6), td:nth-child(10) { font-variant-numeric: tabular-nums; }
+.rank-top { color: var(--accent); font-weight: 800; }
+.sort-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+.sort-button:hover { color: var(--accent); }
+.table-note { padding: 10px 20px 16px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); }
+.doc-map { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; padding: 16px 20px 20px; }
+.doc-chip {
+  display: block;
+  min-height: 72px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fbfaf6;
+  text-decoration: none;
+}
+.doc-chip:hover { border-color: var(--accent); background: #f3f0e8; }
+.doc-chip span { display: block; color: var(--muted); font-size: 11px; margin-bottom: 6px; }
+.doc-chip strong { display: block; font-size: 13px; line-height: 1.35; overflow-wrap: anywhere; }
+.markdown-body { padding: 2px 20px 24px; }
+.markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 { scroll-margin-top: 86px; letter-spacing: 0; text-wrap: balance; }
+.markdown-body h2 { margin: 24px 0 10px; font-size: 21px; }
+.markdown-body h3 { margin: 22px 0 8px; font-size: 17px; }
+.markdown-body h4 { margin: 18px 0 8px; font-size: 15px; }
+.markdown-body p, .markdown-body li { color: #30322d; font-size: 14px; line-height: 1.68; }
+.markdown-body ul, .markdown-body ol { padding-left: 22px; }
+.markdown-body blockquote {
+  margin: 14px 0;
+  padding: 10px 14px;
+  border-left: 4px solid var(--accent);
+  background: #f4f0e8;
+  color: #2f332c;
+}
+.markdown-body blockquote p { margin: 4px 0; color: #2f332c; }
+.markdown-body pre {
+  overflow-x: auto;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #171914;
+  color: #f8f3e7;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.markdown-body code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
+.status-strip { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 20px 18px; }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: #faf8f2;
+  color: #3b3d37;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.badge.accent { border-color: rgba(11, 107, 87, .35); color: var(--accent); }
+.badge.warn { border-color: rgba(154, 101, 0, .35); color: var(--accent-2); }
+.hidden-by-filter { display: none; }
+.empty-state { display: none; padding: 18px 20px; color: var(--muted); }
+.empty-state.visible { display: block; }
+.footer { margin-top: 28px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+@media (max-width: 1080px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  .nav-group:last-child { display: none; }
+  .hero-panel { grid-template-columns: 1fr; }
+  .topbar { grid-template-columns: 1fr; position: sticky; }
+  .tool-buttons { justify-content: flex-start; }
+}
+@media (max-width: 640px) {
+  .main { padding-inline: 12px; }
+  .topbar { margin-inline: -12px; padding-inline: 12px; }
+  .overview-copy { padding: 18px; }
+  .metric-grid { grid-template-columns: 1fr; }
+  .metric, .metric:nth-child(2n), .metric:nth-last-child(-n+2) { border-right: 0; border-bottom: 1px solid var(--line); }
+  .metric:last-child { border-bottom: 0; }
+  .panel-head { flex-direction: column; }
+  table { min-width: 760px; font-size: 12px; }
+  th, td { padding: 8px; }
+  .search-row { flex-direction: column; align-items: stretch; }
+  .badge { white-space: normal; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+.visual-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr); gap: 16px; padding: 16px 20px 22px; }
+.visual-card { border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; overflow: hidden; min-width: 0; }
+.visual-card h3 { margin: 0; padding: 14px 14px 8px; font-size: 16px; letter-spacing: 0; text-wrap: balance; }
+.visual-card p { margin: 0; padding: 0 14px 14px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+.diagram-wrap { overflow-x: auto; padding: 12px; overscroll-behavior-x: contain; }
+.diagram { width: 100%; min-width: 780px; height: auto; display: block; }
+.diagram text { font-family: inherit; fill: #20221e; }
+.diagram .node { fill: #fffdfa; stroke: #bdb7aa; stroke-width: 1.2; }
+.diagram .node-strong { fill: #eef6f1; stroke: #0b6b57; stroke-width: 1.4; }
+.diagram .node-warn { fill: #fff3d8; stroke: #9a6500; stroke-width: 1.3; }
+.diagram .node-risk { fill: #faece8; stroke: #a33b2a; stroke-width: 1.2; }
+.diagram .link { fill: none; stroke: #8f8a80; stroke-width: 1.2; marker-end: url(#arrow); }
+.diagram .link-strong { fill: none; stroke: #0b6b57; stroke-width: 2; marker-end: url(#arrow-green); }
+.diagram .label { font-size: 12px; font-weight: 700; }
+.diagram .small { font-size: 10.5px; fill: #676b62; }
+.diagram .lane { fill: #f2efe7; stroke: #d9d5ca; stroke-width: 1; }
+.player-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 12px; padding: 16px 20px 22px; }
+.player-card { border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; padding: 14px; min-width: 0; }
+.player-card header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.player-card h3 { margin: 0; font-size: 16px; letter-spacing: 0; }
+.player-card .ticker { font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.player-card dl { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 7px 10px; margin: 0; font-size: 13px; line-height: 1.48; }
+.player-card dt { color: var(--muted); }
+.player-card dd { margin: 0; color: #2c2e29; overflow-wrap: anywhere; }
+.player-card a { color: var(--accent); }
+.chain-map { padding: 16px 20px 22px; display: grid; gap: 12px; }
+.chain-row { display: grid; grid-template-columns: 150px repeat(5, minmax(120px, 1fr)); gap: 8px; align-items: stretch; }
+.chain-title { display: flex; align-items: center; padding: 10px; border-radius: var(--radius); background: #ece8df; font-weight: 800; font-size: 13px; }
+.chain-cell { min-height: 74px; padding: 10px; border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; font-size: 12px; line-height: 1.42; position: relative; }
+.chain-cell strong { display: block; margin-bottom: 5px; color: var(--ink); }
+.chain-cell::after { content: '→'; position: absolute; right: -13px; top: 50%; transform: translateY(-50%); color: var(--line-strong); font-weight: 800; }
+.chain-cell:last-child::after { content: ''; }
+.bottleneck { border-color: rgba(11, 107, 87, .45); background: #eef6f1; }
+.watch { border-color: rgba(154, 101, 0, .42); background: #fff7e8; }
+.risk-node { border-color: rgba(163, 59, 42, .38); background: #faece8; }
+.source-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px 14px; padding: 0 20px 22px; margin: 0; }
+.source-list li { list-style: none; font-size: 12px; line-height: 1.45; color: var(--muted); }
+.source-list a { color: var(--accent); }
+.timeline { padding: 16px 20px 22px; display: grid; gap: 10px; }
+.timeline-item { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; align-items: start; }
+.timeline-item time { padding: 8px 10px; border-radius: var(--radius); background: #ece8df; color: var(--ink); font-size: 12px; font-weight: 800; text-align: center; font-variant-numeric: tabular-nums; }
+.timeline-item div { padding: 10px 12px; border-left: 3px solid var(--accent); background: #fbfaf6; border-radius: 0 var(--radius) var(--radius) 0; font-size: 13px; line-height: 1.55; }
+@media (max-width: 900px) { .visual-grid { grid-template-columns: 1fr; } .chain-row { grid-template-columns: 1fr; } .chain-cell::after { content: '↓'; right: 12px; top: auto; bottom: -17px; transform: none; } .chain-cell:last-child::after { content: ''; } }
+@media (max-width: 640px) { .player-grid, .visual-grid, .chain-map, .timeline { padding-inline: 12px; } .player-card dl { grid-template-columns: 1fr; } .timeline-item { grid-template-columns: 1fr; } }
+
+/* ---- 站点 chrome 补充（首页 / 日报）---- */
+.brand a{color:inherit;text-decoration:none}
+.brand a:hover{color:var(--accent)}
+.lede-inline{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.muted{color:var(--muted)}
+.back-link{color:var(--muted);font-size:13px}
+.back-link:hover{color:var(--accent)}
+
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">跳到主内容</a>
+<div class="app-shell">
+  <aside class="sidebar" aria-label="导航">
+    <div class="brand"><h1>韩国存储双雄观察</h1>
+      <p>三星电子 005930.KS · SK海力士 000660.KS · 2026-06-06 · <a class="back-link" href="../../index.html">← 投研站</a></p></div>
+    <nav class="nav-group"><p class="nav-group-title">Dashboard</p>
+      <a class="nav-link" href="#overview"><span>00</span><strong>方向判断</strong></a>
+      <a class="nav-link" href="#price"><span>PX</span><strong>价格走势</strong></a>
+      <a class="nav-link" href="#voices"><span>X</span><strong>X 高赞观点</strong></a>
+      <a class="nav-link" href="#hbm4"><span>HBM</span><strong>HBM4 供应格局</strong></a>
+      <a class="nav-link" href="#bull-bear"><span>+/-</span><strong>多空对照</strong></a>
+      <a class="nav-link" href="#timeline"><span>EV</span><strong>催化时间线</strong></a>
+      <a class="nav-link" href="#sources"><span>SRC</span><strong>来源</strong></a>
+    </nav>
+  </aside>
+  <main class="main" id="main">
+    <div class="topbar" role="search">
+      <div class="search-wrap"><label for="searchInput">搜索观点 / 账号 / 主题</label>
+        <div class="search-row">
+          <input id="searchInput" type="search" autocomplete="off" placeholder="例如 HBM4、Bernstein、杠杆、Rubin…" aria-describedby="rowCount">
+          <span class="badge" id="rowCount" aria-live="polite">—</span>
+        </div></div>
+      <div class="tool-buttons"><button type="button" id="resetSearch">重置</button></div>
+    </div>
+    <section class="hero-panel" id="overview">
+      <div class="overview-copy">
+        <p class="eyebrow">Korea Memory · Direction Call</p>
+        <h2>这波 &gt;15% 回调是「超跌」，不是 AI 内存需求转弱</h2>
+        <p>诱因是宏观(美国强就业→加息预期)+ 韩国单股杠杆去化 + 对 NVDA Rubin 机柜 DRAM 配置缩减(192→96GB)的<strong>误读</strong>；缩减实为 HBM/模组供给紧、封装良率与风险管理，而非需求走弱。X 高赞内容<strong>压倒性「buy the dip」</strong>，HBM 超级周期叙事未破。方向：<strong>中长期偏多</strong>，短期波动大、等 MU 财报与 HBM4 量产确认。</p>
+      </div>
+      <div class="metric-grid">
+        <div class="metric"><strong>-7~11%</strong><span>SK海力士 关键交易日回调</span></div>
+        <div class="metric"><strong>60-70%</strong><span>SK海力士 HBM4(Rubin) 份额</span></div>
+        <div class="metric"><strong>&gt;150T</strong><span>双雄 Q2 合计 OP 预期(KRW,~$110B)</span></div>
+        <div class="metric"><strong>6/24</strong><span>下一催化：美光 MU 财报</span></div>
+      </div>
+    </section>
+    <section class="panel" id="price">
+      <div class="panel-head"><div><p class="eyebrow">Price Action</p><h2>价格走势</h2>
+        <p>近一交易日 + 盘后/隔夜（X 数据窗口约 6/5–6/8）。</p></div></div>
+      <div class="markdown-body filter-item"><ul>
+        <li>KOSPI 盘中一度触发熔断，约 <strong>-8~9%</strong>；存储权重股领跌。</li>
+        <li>SK海力士关键交易日 <strong>-7~11%</strong>，三星电子 <strong>-5~10%</strong>，部分存储名距高点回撤 <strong>15%+</strong>。</li>
+        <li>双雄市值近/超 <strong>$1T</strong>，前期涨幅巨大 → 获利了结 + 高预期。</li>
+        <li>韩国<strong>单股杠杆 ETF/swap</strong>去化放大波动（盘尾乌龙单致某杠杆 ETF 异常 +50%）。</li>
+        <li>触发点之一：对 NVDA Rubin 机柜 DRAM 配置 192→96GB 的解读分歧。</li>
+        <li><strong>企稳信号</strong>：周末期货 SK海力士 <strong>+1.48%</strong>、三星 <strong>+0.21%</strong>。</li>
+      </ul></div>
+    </section>
+    <section class="panel" id="voices">
+      <div class="panel-head"><div><p class="eyebrow">What X Is Saying</p><h2>X 高赞观点 (Top 模式)</h2>
+        <p>按互动排序，点表头可重排；搜索框可过滤。赞数为检索时近似值。</p></div></div>
+      <div class="table-shell"><table class="sortable">
+        <thead><tr><th><button class="sort-button">#</button></th>
+          <th><button class="sort-button">账号</button></th>
+          <th><button class="sort-button">近似赞</button></th>
+          <th><button class="sort-button">核心观点</button></th>
+          <th>链接</th></tr></thead>
+        <tbody><tr><td class="num">1</td><td><strong>@NVIDIAAIInfra</strong></td><td class="num">1,726</td><td>官宣 NVDA×SK海力士多年合作，为 Vera Rubin / Vera CPU / RTX / Jetson Thor 共研下一代内存</td><td><a href="https://x.com/NVIDIAAIInfra/status/2063761362396778613" target="_blank" rel="noopener">↗</a></td></tr><tr><td class="num">2</td><td><strong>@itsmichaelluu</strong></td><td class="num">2,729</td><td>崩盘即买 $MU/$SNDK，HBM 是「每台 AI 服务器里的氧气」，逢跌买</td><td><a href="https://x.com/itsmichaelluu/status/2062758891776061922" target="_blank" rel="noopener">↗</a></td></tr><tr><td class="num">3</td><td><strong>@StockMKTNewz</strong></td><td class="num">1,539</td><td>NVDA×SK海力士四平台合作；Jensen：AI 工厂离不开先进内存</td><td><a href="https://x.com/StockMKTNewz/status/2063759530303909941" target="_blank" rel="noopener">↗</a></td></tr><tr><td class="num">4</td><td><strong>@ParadisLabs</strong></td><td class="num">1,364</td><td>给 SK海力士 / $MU / $SNDK「强烈买入」，超级周期未变</td><td><a href="https://x.com/ParadisLabs/status/2063681841916256365" target="_blank" rel="noopener">↗</a></td></tr><tr><td class="num">5</td><td><strong>@babyfolio(Bernstein)</strong></td><td class="num">1,033</td><td>Bernstein：HBM4 2027 约 $53/GB，收入 3–4x 台阶，超看多双雄+$MU</td><td><a href="https://x.com/babyfolio/status/2063881015651705097" target="_blank" rel="noopener">↗</a></td></tr><tr><td class="num">6</td><td><strong>@SoSoValueCrypto</strong></td><td class="num">400</td><td>>15% 回调是对 Rubin DRAM 配置的误读，系供给/良率瓶颈非需求弱，逢跌买</td><td><a href="https://x.com/SoSoValueCrypto/status/2063965698041548844" target="_blank" rel="noopener">↗</a></td></tr><tr><td class="num">7</td><td><strong>@business(Bloomberg)</strong></td><td class="num">405</td><td>Jensen：新 Vera CPU 将采用 SK海力士内存芯片</td><td><a href="https://x.com/business/status/2063615720710197686" target="_blank" rel="noopener">↗</a></td></tr><tr><td class="num">8</td><td><strong>@ren_stocks</strong></td><td class="num">249</td><td>Jensen 首尔称缺货还要好几年，在晶圆上写「Please Make More HBM」</td><td><a href="https://x.com/ren_stocks/status/2063614648667066713" target="_blank" rel="noopener">↗</a></td></tr><tr><td class="num">9</td><td><strong>@DrNHJ</strong></td><td class="num">211</td><td>周末期货 SK +1.48% / 三星 +0.21%；PT 上调(三星530k/SK 3.2M KRW)，ASP +40–60% QoQ</td><td><a href="https://x.com/DrNHJ/status/2063532952370503919" target="_blank" rel="noopener">↗</a></td></tr><tr><td class="num">10</td><td><strong>@BourseAsieFR</strong></td><td class="num">high</td><td>三家 HBM4 均认证量产(SK~2/3、三星追赶、MU 2026 售罄)，三星早发 HBM4E 样品</td><td><a href="https://x.com/BourseAsieFR/status/2063849030254260367" target="_blank" rel="noopener">↗</a></td></tr><tr><td class="num">11</td><td><strong>@MizoChris</strong></td><td class="num">117</td><td>RAM 价或翻倍；三家优先 HBM，挤压消费级 DRAM/NAND 现货</td><td><a href="https://x.com/MizoChris/status/2063375261299802210" target="_blank" rel="noopener">↗</a></td></tr><tr><td class="num">12</td><td><strong>@neiltwitz(Counterpoint)</strong></td><td class="num">tech</td><td>三星 HBM5「热烟囱」HPB 散热 vs SK ICE 冷却；与台积电合作封装</td><td><a href="https://x.com/neiltwitz/status/2063483643704594561" target="_blank" rel="noopener">↗</a></td></tr><tr><td class="num">13</td><td><strong>@mad_dogdebt</strong></td><td class="num">132</td><td>加杠杆 all-in 三星+SK海力士；物理 AI=内存需求爆发，回调即机会</td><td><a href="https://x.com/mad_dogdebt/status/2063920141952594273" target="_blank" rel="noopener">↗</a></td></tr></tbody></table></div>
+      <div class="table-note">来源：grok 原生 X 检索（Top 模式）。Top 结果中<strong>无</strong>占主导的高赞看空贴。</div>
+    </section>
+    <section class="panel" id="hbm4">
+      <div class="panel-head"><div><p class="eyebrow">HBM4 Supply</p><h2>HBM4(Vera Rubin) 供应格局</h2>
+        <p>三家均已认证、Q3 2026 起量产交付。</p></div></div>
+      <div class="player-grid">
+        <article class="player-card filter-item"><header><h3>SK 海力士</h3><span class="ticker">000660.KS</span></header>
+          <dl><dt>份额</dt><dd>~60–70%，Rubin HBM4 主供，纯度最高</dd>
+          <dt>看点</dt><dd>NVDA 多年共研合作主角；ICE 冷却；缺货定价权强</dd>
+          <dt>PT</dt><dd>分析师上调至 ~3.2M KRW</dd></dl></article>
+        <article class="player-card filter-item"><header><h3>三星电子</h3><span class="ticker">005930.KS</span></header>
+          <dl><dt>份额</dt><dd>~25–30%，认证修复后追赶</dd>
+          <dt>看点</dt><dd>垂直整合(内存+代工+封装)；HBM4E 样品早发；HBM5「热烟囱」HPB</dd>
+          <dt>PT</dt><dd>分析师上调至 ~530k KRW</dd></dl></article>
+        <article class="player-card filter-item"><header><h3>美光 Micron</h3><span class="ticker">MU</span></header>
+          <dl><dt>份额</dt><dd>其余份额；2026 产能售罄</dd>
+          <dt>看点</dt><dd>板块情绪风向标，6/24 财报；$DRAM/$SNDK 联动</dd>
+          <dt>生态</dt><dd>$NVDA 需求 + $TSM 封装</dd></dl></article>
+      </div>
+    </section>
+    <section class="panel" id="bull-bear">
+      <div class="panel-head"><div><p class="eyebrow">Bull vs Bear</p><h2>多空对照</h2></div></div>
+      <div class="status-strip">
+        <span class="badge accent filter-item">多：NVDA×SK 多年合作 + 四平台</span>
+        <span class="badge accent filter-item">多：缺货「还要好几年」(Jensen)</span>
+        <span class="badge accent filter-item">多：Q2 创纪录 OP、ASP +40–60% QoQ</span>
+        <span class="badge accent filter-item">多：Bernstein HBM4 ~$53/GB→收入 3–4x</span>
+        <span class="badge accent filter-item">多：长协降波动、physical/agentic AI 抬升内存强度</span>
+        <span class="badge warn filter-item">空：宏观加息预期 + 强美元</span>
+        <span class="badge warn filter-item">空：高杠杆去化、估值与预期高</span>
+        <span class="badge warn filter-item">空：Rubin 配置/良率/封装短期扰动</span>
+        <span class="badge filter-item">变量：CXMT 追赶(目前仅供给、溢价格式落后)</span>
+        <span class="badge filter-item">变量：需新催化(MU 财报)前震荡</span>
+      </div>
+    </section>
+    <section class="panel" id="timeline">
+      <div class="panel-head"><div><p class="eyebrow">Catalysts</p><h2>催化时间线</h2></div></div>
+      <div class="timeline">
+        <div class="timeline-item filter-item"><time>6/24</time><div>美光 Micron 财报 — 存储板块短期情绪风向标。</div></div>
+        <div class="timeline-item filter-item"><time>2026 Q3</time><div>HBM4 量产交付起步（Vera Rubin 供应链）。</div></div>
+        <div class="timeline-item filter-item"><time>2026 Q2</time><div>三星 / SK海力士 创纪录季度营业利润预期（合计 &gt;150T KRW）。</div></div>
+        <div class="timeline-item filter-item"><time>2027</time><div>Bernstein 估 HBM4 ~$53/GB 随 Vera Rubin 放量，收入台阶 3–4x。</div></div>
+        <div class="timeline-item filter-item"><time>持续</time><div>扩产 + 认证（三星 HBM4E 样品 / HBM5 HPB、与台积电封装）。</div></div>
+      </div>
+    </section>
+    <section class="panel" id="sources">
+      <div class="panel-head"><div><p class="eyebrow">Sources</p><h2>代表性来源（X）</h2></div></div>
+      <ul class="source-list"><li><a href="https://x.com/NVIDIAAIInfra/status/2063761362396778613" target="_blank" rel="noopener">https://x.com/NVIDIAAIInfra/status/2063761362396778613</a></li><li><a href="https://x.com/StockMKTNewz/status/2063759530303909941" target="_blank" rel="noopener">https://x.com/StockMKTNewz/status/2063759530303909941</a></li><li><a href="https://x.com/SoSoValueCrypto/status/2063965698041548844" target="_blank" rel="noopener">https://x.com/SoSoValueCrypto/status/2063965698041548844</a></li><li><a href="https://x.com/babyfolio/status/2063881015651705097" target="_blank" rel="noopener">https://x.com/babyfolio/status/2063881015651705097</a></li><li><a href="https://x.com/ren_stocks/status/2063614648667066713" target="_blank" rel="noopener">https://x.com/ren_stocks/status/2063614648667066713</a></li><li><a href="https://x.com/DrNHJ/status/2063532952370503919" target="_blank" rel="noopener">https://x.com/DrNHJ/status/2063532952370503919</a></li></ul>
+    </section>
+    <p class="empty-state" id="emptyState">没有匹配的内容。</p>
+    <footer class="footer">数据来源：grok 原生 X 检索（Top 模式，grok-4.20-multi-agent-xhigh，窗口约 2026-06-05~08）· 点赞为检索时近似值 · 本页由 AI 聚合，可能有误 · <strong>仅供研究，非投资建议</strong>。</footer>
+  </main>
+</div>
+
+<script>
+/* terminal.js — 「研究终端」共享交互：全局搜索过滤 + 表头排序。
+   依赖元素（可选，缺失自动跳过）：#searchInput #resetSearch #rowCount #emptyState
+   过滤目标：table.sortable 的行 + .filter-item 元素。 */
+(function () {
+  const input = document.getElementById('searchInput');
+  const resetBtn = document.getElementById('resetSearch');
+  const rowCount = document.getElementById('rowCount');
+  const emptyState = document.getElementById('emptyState');
+  const tables = Array.from(document.querySelectorAll('table.sortable'));
+  const items = Array.from(document.querySelectorAll('.filter-item'));
+  const norm = v => (v || '').toLowerCase().trim();
+  const asNum = v => {
+    const c = v.replace(/[$,%+~]/g, '').replace(/[^0-9.\-]/g, '');
+    if (!c || c === '-' || c === '.') return null;
+    const n = Number(c); return Number.isFinite(n) ? n : null;
+  };
+  function update() {
+    if (!input) return;
+    const q = norm(input.value); let vis = 0;
+    tables.forEach(t => Array.from(t.tBodies[0]?.rows || []).forEach(r => {
+      const m = !q || norm(r.innerText).includes(q); r.hidden = !m; if (m) vis++;
+    }));
+    items.forEach(el => {
+      const m = !q || norm(el.innerText).includes(q);
+      el.classList.toggle('hidden-by-filter', !m); if (m) vis++;
+    });
+    if (rowCount) rowCount.textContent = vis + ' 条匹配';
+    if (emptyState) emptyState.classList.toggle('visible', Boolean(q) && vis === 0);
+  }
+  tables.forEach(table => {
+    Array.from(table.tHead?.rows[0]?.cells || []).forEach((th, i) => {
+      const b = th.querySelector('button'); if (!b) return;
+      b.addEventListener('click', () => {
+        const dir = th.dataset.sort === 'asc' ? 'desc' : 'asc';
+        Array.from(th.parentElement.children).forEach(c => c.dataset.sort = '');
+        th.dataset.sort = dir;
+        const rows = Array.from(table.tBodies[0].rows);
+        rows.sort((a, c) => {
+          const av = a.cells[i]?.innerText.trim() || '', bv = c.cells[i]?.innerText.trim() || '';
+          const an = asNum(av), bn = asNum(bv);
+          const cmp = (an !== null && bn !== null) ? an - bn
+            : av.localeCompare(bv, 'zh-Hans-u-co-pinyin', { numeric: true, sensitivity: 'base' });
+          return dir === 'asc' ? cmp : -cmp;
+        });
+        rows.forEach(r => table.tBodies[0].appendChild(r));
+      });
+    });
+  });
+  if (resetBtn && input) resetBtn.addEventListener('click', () => { input.value = ''; update(); input.focus(); });
+  if (input) input.addEventListener('input', update);
+  update();
+})();
+
+</script>
+</body>
+</html>

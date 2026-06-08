@@ -23,6 +23,28 @@
       "added_at": "2026-06-07 22:59:47"
     },
     {
+      "slug": "korea-memory-watch-20260606",
+      "title": "韩国存储双雄观察 — 三星 & SK海力士",
+      "date": "2026-06-06",
+      "tags": [
+        "存储",
+        "HBM",
+        "韩股",
+        "AI内存",
+        "HBM4"
+      ],
+      "tickers": [
+        "000660.KS",
+        "005930.KS",
+        "MU",
+        "NVDA"
+      ],
+      "teaser": ">15% 回调是宏观+杠杆+Rubin DRAM 误读的超跌，非 AI 需求转弱；X 高赞压倒性 buy the dip，HBM 超级周期未破。",
+      "cover": null,
+      "path": "research/korea-memory-watch-20260606/index.html",
+      "added_at": "2026-06-08 23:10:42"
+    },
+    {
       "slug": "silicon-photonics-cpo-2026",
       "title": "硅光 / CPO 产业全景 2026",
       "date": "2026-05-31",
@@ -116,5 +138,5 @@
       "added_at": "2026-06-06 21:03:33"
     }
   ],
-  "last_updated": "2026-06-07 22:59:47"
+  "last_updated": "2026-06-08 23:10:42"
 }
