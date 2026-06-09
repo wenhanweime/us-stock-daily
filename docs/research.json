@@ -13,10 +13,10 @@
       "tickers": [
         "SPCX"
       ],
-      "teaser": "",
+      "teaser": "SpaceX即将在6月12日完成史上最大规模的IPO，目标估值.77万亿。本报告综合Morningstar、Fortune等多方观点，深度分析估值是否合理。",
       "cover": null,
       "path": "research/spacex-ipo/index.html",
-      "added_at": "2026-06-10 00:55:27"
+      "added_at": "2026-06-10 01:02:26"
     },
     {
       "slug": "hyperliquid-playbook-2026",
@@ -156,5 +156,5 @@
       "added_at": "2026-06-06 21:03:33"
     }
   ],
-  "last_updated": "2026-06-10 00:55:27"
+  "last_updated": "2026-06-10 01:02:26"
 }
