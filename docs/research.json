@@ -1,6 +1,24 @@
 {
   "entries": [
     {
+      "slug": "spacex-ipo",
+      "title": "SpaceX IPO深度研究：首发值不值得买？",
+      "date": "2026-06-10",
+      "tags": [
+        "SpaceX",
+        "IPO",
+        "估值分析",
+        "航天"
+      ],
+      "tickers": [
+        "SPCX"
+      ],
+      "teaser": "",
+      "cover": null,
+      "path": "research/spacex-ipo/index.html",
+      "added_at": "2026-06-10 00:55:27"
+    },
+    {
       "slug": "hyperliquid-playbook-2026",
       "title": "Hyperliquid 深度拆解 · 玩法 / 架构 / 风险 (2026)",
       "date": "2026-06-07",
@@ -138,5 +156,5 @@
       "added_at": "2026-06-06 21:03:33"
     }
   ],
-  "last_updated": "2026-06-08 23:10:42"
+  "last_updated": "2026-06-10 00:55:27"
 }
