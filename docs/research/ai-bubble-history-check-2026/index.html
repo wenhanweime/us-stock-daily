@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4ef">
+  <title>AI 为真，股价会一直涨吗 · 用四次历史泡沫给当前美股定位</title>
+  <meta name="description" content="技术为真 ≠ 股价不崩。CAPE 41.6（140 年第二高）+ 七巨头集中度回到 2000 水平 + 超大厂 capex 吃光现金流；但恐惧贪婪指数 37、93% 散户已喊泡沫，当前更像 1998 而非 2000。附四次历史类比、实时仓位情绪与可操作判断。">
+  <style>
+/* theme.css — 「研究终端」共享设计系统 */
+:root {
+  color-scheme: light;
+  --bg: #f6f4ef;
+  --surface: #fffdfa;
+  --surface-2: #f0eee8;
+  --ink: #181916;
+  --muted: #676b62;
+  --line: #d9d5ca;
+  --line-strong: #bdb7aa;
+  --accent: #0b6b57;
+  --accent-2: #9a6500;
+  --danger: #a33b2a;
+  --cool: #315f8a;
+  --shadow: 0 18px 45px rgba(42, 38, 30, 0.08);
+  --radius: 8px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration-color: rgba(11, 107, 87, 0.45); text-underline-offset: 3px; }
+a:hover { color: var(--accent); }
+button, input, a { touch-action: manipulation; }
+button:focus-visible, input:focus-visible, a:focus-visible, summary:focus-visible {
+  outline: 3px solid rgba(11, 107, 87, 0.32);
+  outline-offset: 2px;
+}
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  transform: translateY(-150%);
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: white;
+}
+.skip-link:focus { transform: translateY(0); }
+.app-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); min-height: 100vh; }
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: max(18px, env(safe-area-inset-top)) 16px 18px max(16px, env(safe-area-inset-left));
+  border-right: 1px solid var(--line);
+  background: rgba(255, 253, 250, 0.92);
+  backdrop-filter: blur(12px);
+  overflow-y: auto;
+}
+.brand { padding: 4px 4px 18px; border-bottom: 1px solid var(--line); }
+.brand h1 { margin: 0; font-size: 20px; line-height: 1.18; letter-spacing: 0; text-wrap: balance; }
+.brand p { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.nav-group { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.nav-group-title { margin: 0 4px 8px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 7px 8px;
+  border-radius: 6px;
+  color: #30322e;
+  font-size: 13px;
+  line-height: 1.25;
+  text-decoration: none;
+}
+.nav-link:hover { background: #ece8df; color: var(--ink); }
+.nav-link span:first-child { width: 22px; flex: 0 0 auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+.main { min-width: 0; padding: 22px clamp(16px, 3vw, 34px) 60px; }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  margin: -22px calc(clamp(16px, 3vw, 34px) * -1) 20px;
+  padding: 14px clamp(16px, 3vw, 34px);
+  border-bottom: 1px solid var(--line);
+  background: rgba(246, 244, 239, 0.88);
+  backdrop-filter: blur(12px);
+}
+.search-wrap { min-width: 0; }
+.search-wrap label { display: block; margin-bottom: 5px; color: var(--muted); font-size: 12px; }
+.search-row { display: flex; gap: 8px; align-items: center; }
+#searchInput {
+  width: min(680px, 100%);
+  height: 38px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0 12px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 14px;
+}
+.tool-buttons { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.tool-buttons button, .source-link {
+  min-height: 36px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0 11px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.tool-buttons button:hover, .source-link:hover { border-color: var(--accent); color: var(--accent); }
+.hero-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 18px;
+  align-items: stretch;
+  margin-bottom: 18px;
+}
+.overview-copy, .metric-grid, .panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.overview-copy { padding: 22px; }
+.eyebrow { margin: 0 0 8px; color: var(--accent); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.overview-copy h2 { margin: 0; font-size: clamp(24px, 3vw, 38px); line-height: 1.08; letter-spacing: 0; text-wrap: balance; }
+.overview-copy p { max-width: 860px; margin: 14px 0 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
+.metric-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: hidden; }
+.metric { padding: 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-width: 0; }
+.metric:nth-child(2n) { border-right: 0; }
+.metric:nth-last-child(-n+2) { border-bottom: 0; }
+.metric strong { display: block; font-size: 28px; line-height: 1; font-variant-numeric: tabular-nums; }
+.metric span { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; line-height: 1.35; }
+.panel { margin: 18px 0; overflow: hidden; }
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--line);
+}
+.panel-head h2 { margin: 0; font-size: 20px; letter-spacing: 0; text-wrap: balance; }
+.panel-head p:not(.eyebrow) { margin: 6px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.table-shell { width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 880px; font-size: 13px; }
+th, td { padding: 10px 11px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; line-height: 1.42; overflow-wrap: anywhere; }
+thead th { position: sticky; top: 0; z-index: 1; background: #eeeae1; color: #353730; font-weight: 700; }
+tbody tr:hover { background: #fbf7ed; }
+tbody tr[hidden] { display: none; }
+.num { font-variant-numeric: tabular-nums; }
+.rank-top { color: var(--accent); font-weight: 800; }
+.sort-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+.sort-button:hover { color: var(--accent); }
+.table-note { padding: 10px 20px 16px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); }
+.markdown-body { padding: 2px 20px 24px; }
+.markdown-body h2, .markdown-body h3, .markdown-body h4 { scroll-margin-top: 86px; letter-spacing: 0; text-wrap: balance; }
+.markdown-body h2 { margin: 24px 0 10px; font-size: 21px; }
+.markdown-body h3 { margin: 22px 0 8px; font-size: 17px; }
+.markdown-body h4 { margin: 18px 0 8px; font-size: 15px; }
+.markdown-body p, .markdown-body li { color: #30322d; font-size: 14px; line-height: 1.68; }
+.markdown-body ul, .markdown-body ol { padding-left: 22px; }
+.markdown-body blockquote {
+  margin: 14px 0;
+  padding: 10px 14px;
+  border-left: 4px solid var(--accent);
+  background: #f4f0e8;
+  color: #2f332c;
+}
+.markdown-body blockquote p { margin: 4px 0; color: #2f332c; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
+.status-strip { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 20px 18px; }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: #faf8f2;
+  color: #3b3d37;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.badge.accent { border-color: rgba(11, 107, 87, .35); color: var(--accent); }
+.badge.warn { border-color: rgba(154, 101, 0, .35); color: var(--accent-2); }
+.badge.danger { border-color: rgba(163, 59, 42, .4); color: var(--danger); }
+.hidden-by-filter { display: none; }
+.empty-state { display: none; padding: 18px 20px; color: var(--muted); }
+.empty-state.visible { display: block; }
+.footer { margin-top: 28px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.source-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px 14px; padding: 0 20px 22px; margin: 0; }
+.source-list li { list-style: none; font-size: 12px; line-height: 1.45; color: var(--muted); }
+.source-list a { color: var(--accent); }
+.timeline { padding: 16px 20px 22px; display: grid; gap: 10px; }
+.timeline-item { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; align-items: start; }
+.timeline-item time { padding: 8px 10px; border-radius: var(--radius); background: #ece8df; color: var(--ink); font-size: 12px; font-weight: 800; text-align: center; font-variant-numeric: tabular-nums; }
+.timeline-item div { padding: 10px 12px; border-left: 3px solid var(--accent); background: #fbfaf6; border-radius: 0 var(--radius) var(--radius) 0; font-size: 13px; line-height: 1.55; }
+.muted { color: var(--muted); }
+@media (max-width: 1080px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  .hero-panel { grid-template-columns: 1fr; }
+  .topbar { grid-template-columns: 1fr; position: sticky; }
+  .tool-buttons { justify-content: flex-start; }
+}
+@media (max-width: 640px) {
+  .main { padding-inline: 12px; }
+  .topbar { margin-inline: -12px; padding-inline: 12px; }
+  .overview-copy { padding: 18px; }
+  .metric-grid { grid-template-columns: 1fr; }
+  .metric, .metric:nth-child(2n), .metric:nth-last-child(-n+2) { border-right: 0; border-bottom: 1px solid var(--line); }
+  .metric:last-child { border-bottom: 0; }
+  .panel-head { flex-direction: column; }
+  table { min-width: 760px; font-size: 12px; }
+  th, td { padding: 8px; }
+  .search-row { flex-direction: column; align-items: stretch; }
+  .badge { white-space: normal; }
+  .timeline-item { grid-template-columns: 1fr; }
+  .source-list { padding-inline: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">跳到主内容</a>
+<div class="app-shell">
+  <aside class="sidebar" aria-label="导航">
+    <div class="brand">
+      <h1>AI 为真，股价会一直涨吗</h1>
+      <p>用四次历史泡沫给当前美股估值定位 · 截至 2026-06-19 · WebSearch（历史/估值）+ smart-search/grok（实时 X 仓位情绪）</p>
+    </div>
+    <nav class="nav-group" aria-label="Primary">
+      <p class="nav-group-title">Dashboard</p>
+      <a class="nav-link" href="#overview"><span>00</span><strong>总览</strong></a>
+      <a class="nav-link" href="#thesis"><span>TH</span><strong>核心论点：技术为真 ≠ 股价不崩</strong></a>
+      <a class="nav-link" href="#valuation"><span>VL</span><strong>估值坐标：当前 vs 1998/2000/1929</strong></a>
+      <a class="nav-link" href="#history"><span>HX</span><strong>历史四次类比表</strong></a>
+      <a class="nav-link" href="#sentiment"><span>SN</span><strong>实时仓位与情绪</strong></a>
+      <a class="nav-link" href="#timeline"><span>EV</span><strong>2026 年 6 月事件线</strong></a>
+      <a class="nav-link" href="#judgment"><span>JG</span><strong>判断与可操作结论</strong></a>
+      <a class="nav-link" href="#sources"><span>SR</span><strong>数据来源</strong></a>
+    </nav>
+  </aside>
+
+  <main class="main" id="main">
+    <div class="topbar" role="search">
+      <div class="search-wrap"><label for="searchInput">全局搜索：年份 / 指标 / 公司 / 风险（CAPE、RCA、capex、套息…）</label>
+        <div class="search-row">
+          <input id="searchInput" type="search" autocomplete="off" placeholder="例如 1929、CAPE、Nvidia、capex、日本加息…" aria-describedby="rowCount">
+          <span class="badge" id="rowCount" aria-live="polite">—</span>
+        </div></div>
+      <div class="tool-buttons">
+        <button type="button" id="resetSearch">重置</button>
+        <a class="source-link" href="#sources">来源</a>
+      </div>
+    </div>
+
+    <section class="hero-panel" id="overview">
+      <div class="overview-copy">
+        <p class="eyebrow">Research Control Room</p>
+        <h2>AI 大概率是对的——但这恰恰救不了股价</h2>
+        <p>你坚信 AI 带来生产力提升，这个判断大概率正确。但历史上每一次泡沫，技术都是真的：铁路、电力、互联网都真的改变了世界，没有一次救得了股价。本页把「对技术的判断」和「对股价的判断」拆开，用四次历史类比 + 当前估值坐标 + 本周实时仓位情绪，给当前美股一个可操作的定位。表格可点表头排序、可顶栏搜索。</p>
+      </div>
+      <div class="metric-grid">
+        <div class="metric"><strong>41.6</strong><span>席勒 CAPE（2026-05）· 140 年来第二高，仅次于 1999-12 的 44.2</span></div>
+        <div class="metric"><strong>35%</strong><span>七巨头占标普 500 市值 · 与 2000 互联网顶峰前七大集中度相同</span></div>
+        <div class="metric"><strong>37</strong><span>CNN 恐惧贪婪指数（6/18，「恐惧」区）· 一个月前还是 61</span></div>
+        <div class="metric"><strong>~100%</strong><span>超大厂 capex / 经营性现金流（年底测算）· 2023 仅 40%，缓冲归零</span></div>
+      </div>
+    </section>
+
+    <section class="panel" id="thesis">
+      <div class="panel-head"><div><p class="eyebrow">Thesis</p>
+        <h2>核心论点：技术为真 ≠ 股价不崩</h2>
+        <p>你的逻辑里有一道裂缝——把两件不同的事当成了同一件。</p></div></div>
+      <div class="markdown-body filter-item">
+        <p>你说「我确定 AI 一定带来生产力提升，坚信不疑」。这个判断<strong>大概率是对的</strong>。但请注意一个被反复误读的点：</p>
+        <blockquote><p><strong>「对技术的判断」和「对股价的判断」是两件完全不同的事。</strong>群众可以同时「看对了未来」和「买错了价格」。</p></blockquote>
+        <p>历史上每一次泡沫，技术都是真的。铁路真的重塑了英国，电力和收音机真的改变了 1920 年代，互联网真的改变了世界——没有一次是「技术是假的」。可这从来都救不了股价。<strong>「技术为真」不是「股价不崩」的保护，恰恰相反，它正是让人愿意把价格推到离谱位置的燃料。</strong></p>
+        <h3>两个反直觉但关键的规律</h3>
+        <ul>
+          <li><strong>生产力红利往往在金融清算之后才兑现（productivity paradox）。</strong>技术先摧毁老公司的估值，真正的赢家常常当时还没上市——1970 年代 IT 革命进行时，标普总市值从占 GDP 的 113%（1968）跌到 45%（1974），而最大赢家微软到 1986 年才 IPO。「看对 AI」和「现在买的这些票能赚钱」之间，可能隔着一场暴跌和好几年。</li>
+          <li><strong>过剩资本建的基础设施造福几十年，但买单的是原始股东。</strong>互联网泡沫修的光纤、数据中心后来养活了整个时代——可大多数 2000 年的投资者血本无归。Amazon 顶部买入长期能赚约 15 倍，<strong>前提是你扛住了 −90% 没割、而且你选的是 Amazon 不是 Pets.com。</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel" id="valuation">
+      <div class="panel-head"><div><p class="eyebrow">Valuation Map</p>
+        <h2>估值坐标：当前 vs 1998 / 2000 / 1929</h2>
+        <p>点表头排序。CAPE = 席勒周期调整市盈率（10 年通胀调整盈利）。当前位置在 140 年历史里排第二贵。</p></div></div>
+      <div class="table-shell"><table class="sortable">
+        <thead><tr>
+          <th><button class="sort-button">时点</button></th>
+          <th><button class="sort-button">年份</button></th>
+          <th><button class="sort-button">席勒 CAPE</button></th>
+          <th><button class="sort-button">前瞻 P/E</button></th>
+          <th><button class="sort-button">其后市场结局</button></th>
+          <th><button class="sort-button">备注</button></th>
+        </tr></thead>
+        <tbody>
+          <tr><td class="rank-top">当前</td><td class="num">2026.06</td><td class="num">41.6</td><td class="num">21–23</td><td>待定</td><td>140 年来第二高；标普首破 7,600，年内 +10%</td></tr>
+          <tr><td>互联网顶峰</td><td class="num">1999.12</td><td class="num">44.2</td><td class="num">~25</td><td>Nasdaq 此后约 −78%，标普两年半腰斩</td><td>140 年里唯一比现在更高的一次</td></tr>
+          <tr><td>互联网「半山腰」</td><td class="num">1998</td><td class="num">~36</td><td class="num">—</td><td>泡沫又涨了约 18 个月才见顶</td><td>多头眼中的当下：「像 1998，不像 2000」</td></tr>
+          <tr><td>大萧条前</td><td class="num">1929.09</td><td class="num">~32</td><td class="num">—</td><td>道指此后约 −89%（至 1932）</td><td>融资融券（杠杆）助推</td></tr>
+          <tr><td>金融危机前</td><td class="num">2007.10</td><td class="num">~27</td><td class="num">~15</td><td>标普此后约 −57%</td><td>估值不算极端，崩在杠杆与信用</td></tr>
+          <tr><td>长期均值</td><td class="num">1881–今</td><td class="num">~17</td><td class="num">~16</td><td>—</td><td>基线；当前是它的 2.4 倍</td></tr>
+        </tbody></table></div>
+      <div class="table-note">口径：CAPE 取 multpl / GuruFocus 公布的席勒数据序列；1998 与 1929/2007 的 CAPE 为约数；前瞻 P/E 部分历史值不可比，以「—」标注。高 CAPE 预测的是「未来 10 年长期回报偏低 + 回撤大」，<strong>不预测崩盘时点</strong>——CAPE 在高位维持数年再均值回归是常态。</div>
+    </section>
+
+    <section class="panel" id="history">
+      <div class="panel-head"><div><p class="eyebrow">History Rhymes</p>
+        <h2>历史四次类比：技术是真的，股票照样崩</h2>
+        <p>每一次，技术都成真了；每一次，原始股东大多血本无归；每一次，红利在清算之后才到。点表头排序。</p></div></div>
+      <div class="table-shell"><table class="sortable">
+        <thead><tr>
+          <th><button class="sort-button">时期</button></th>
+          <th><button class="sort-button">技术（都成真了）</button></th>
+          <th><button class="sort-button">龙头 / 标志</button></th>
+          <th><button class="sort-button">峰值特征</button></th>
+          <th><button class="sort-button">其后股票结局</button></th>
+          <th><button class="sort-button">红利何时兑现</button></th>
+        </tr></thead>
+        <tbody>
+          <tr><td>1840s 铁路狂热（英国）</td><td>铁路网建成，造福一个世纪</td><td>全国铁路投机</td><td class="num">投资达 GDP 7%</td><td>大多数原始投资者破产</td><td>基建养活后世几十年</td></tr>
+          <tr><td>1920s 电力 / 收音机</td><td>电力普及 + 广播兴起</td><td>RCA（当年的「英伟达」）</td><td class="num">PE 72x；股价 $5→$500</td><td>1929–32 崩 98%，多数收音机厂商倒闭</td><td>行业真实爆发，但股东先死</td></tr>
+          <tr><td>1972 Nifty Fifty</td><td>蓝筹成长股信仰</td><td>可口可乐 / IBM / 施乐 / 宝丽来</td><td class="num">高 PE 蓝筹</td><td>1973–74 重挫，部分个股几近归零</td><td>数十年后整体大致追平大盘</td></tr>
+          <tr><td>1970s IT 革命进行中</td><td>个人电脑革命启动</td><td>真赢家微软 1986 才 IPO</td><td class="num">标普 PE 19.5→7.5</td><td>总市值从 GDP 113%（1968）跌到 45%（1974）</td><td>赢家当时根本没上市</td></tr>
+          <tr><td>2000 互联网</td><td>互联网改变一切</td><td>Nasdaq / Amazon</td><td class="num">Nasdaq 5,048</td><td>Nasdaq −78%；Amazon 一度 −90%</td><td>顶买 Amazon 长期仍约 15x（须熬过 −90%）</td></tr>
+        </tbody></table></div>
+      <div class="table-note">共同结构：革命性技术 → 充裕资本 → 投机狂热 → 现实检验 → 暴跌 → 过剩产能成为下一代的地基。技术的真实性，从不是定价过高的保护。</div>
+    </section>
+
+    <section class="panel" id="sentiment">
+      <div class="panel-head"><div><p class="eyebrow">Live Positioning · smart-search / grok 实时 X</p>
+        <h2>实时仓位与情绪（截至 6/18–6/19）</h2>
+        <p>反直觉的点：现在不是「全民狂热」，而是「高位恐慌 + 仓位极度拥挤」——这正是它和 2000 年最大的不同。</p></div></div>
+      <div class="markdown-body filter-item">
+        <h3>不是狂热，是高位恐慌</h3>
+        <ul>
+          <li><strong>CNN 恐惧贪婪指数 6/18 约 37，处于「恐惧」区</strong>，一个月前还是 61。指数在历史高位却读到 Fear——这不是典型的 2000 年式全民狂欢顶。</li>
+          <li><strong>AAII 调查：只有 7% 散户认为 AI 股「不是」泡沫</strong>——即 93% 已认定是泡沫。当所有人都喊泡沫，杀伤逻辑与 2000 年（散户狂热接盘）不同。</li>
+        </ul>
+        <h3>但脆弱性真实而具体：仓位拥挤 + 本周已现裂缝</h3>
+        <ul>
+          <li><strong>拥挤度爆表：</strong>BofA 基金经理调查约 80% 做多半导体 / AI（连续第二个月最拥挤交易），56% 视之为「繁荣」、21% 承认「狂热」；对冲基金半导体仓位约占组合 10%。CTA / 杠杆多头会在任何 unwind 时放大跌幅。</li>
+          <li><strong>集中度 ~49%（更宽口径）：</strong>有高赞贴称标普中 AI 相关已达约 49%，「1800 年代铁路泡沫以来最高」，与「35% = 2000 水平」互相印证。</li>
+          <li><strong>内部人在抛：</strong>NVDA 董事信托、CRWD 等 6 月初卖出数千万至数亿美元。</li>
+          <li><strong>借债 + 现金流缺口：</strong>大型科技公司为 AI 基建发债同比 <strong>+357%</strong>；超大厂 capex 按当前节奏到年底将吃掉<strong>约 100% 经营性现金流</strong>（2023 仅 40%），缓冲垫归零。</li>
+          <li><strong>已经有人爆：</strong>Accenture 因 AI 前景转弱单日约 −17%；Broadcom 指引引发 6 月初半导体抛售。</li>
+        </ul>
+        <h3>多头的反驳也具体</h3>
+        <p>GPU 租金翻倍、需求真实，2026 hyperscaler capex 约 7,600 亿（+84% YoY），「这是多年逻辑，现在不是顶」——很多人主张当前<strong>更像 1998 而非 2000</strong>（泡沫还能再吹 1–2 年）。</p>
+      </div>
+      <div class="status-strip">
+        <span class="badge danger">恐惧贪婪 37 · Fear</span>
+        <span class="badge warn">基金经理 ~80% 做多 AI（最拥挤交易）</span>
+        <span class="badge warn">93% 散户认定泡沫</span>
+        <span class="badge danger">AI 发债 +357% YoY</span>
+        <span class="badge danger">capex ≈ 100% 经营现金流</span>
+        <span class="badge accent">多头：更像 1998 非 2000</span>
+      </div>
+    </section>
+
+    <section class="panel" id="timeline">
+      <div class="panel-head"><div><p class="eyebrow">Catalysts</p><h2>2026 年 6 月事件线</h2></div></div>
+      <div class="timeline">
+        <div class="timeline-item filter-item"><time>06-02</time><div>标普 500 收 7,609.78，<strong>史上首破 7,600</strong>；创 2025-05 以来最长连涨（9 连阳），年内 +10%。Marvell 因黄仁勋「万亿公司」预测单日 +32%。</div></div>
+        <div class="timeline-item filter-item"><time>06-05</time><div>Broadcom 指引 + 半导体抛售，<strong>当天一度像「泡沫开始破裂」</strong>。</div></div>
+        <div class="timeline-item filter-item"><time>06-08</time><div>Alphabet、Amazon 等新交易反转情绪，「即将破裂的泡沫」一个周末后重新充气。</div></div>
+        <div class="timeline-item filter-item"><time>06-中</time><div>Accenture 因「AI 前景转弱」单日约 −17%；内部人抛售加速；@calvinfroedge「AI 集中度 49%、铁路泡沫以来最高」获数千赞。</div></div>
+        <div class="timeline-item filter-item"><time>06-18</time><div>恐惧贪婪指数 ~37（Fear），一月前 61；多空喊话密集（BCA、BofA「10 个熊市路标触发 7 个」、Hayes vs. AI 基建多头）。</div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="judgment">
+      <div class="panel-head"><div><p class="eyebrow">Judgment</p>
+        <h2>判断与可操作结论</h2>
+        <p>把「股票会一直涨吗」换成可执行的问题。</p></div></div>
+      <div class="markdown-body filter-item">
+        <h3>1. 短期最暴力的顶，大概率还没到</h3>
+        <p>恐贪指数在恐惧区、93% 的人已喊泡沫——<strong>真正的 blow-off 顶通常发生在所有人转多、恐惧指数飙到极度贪婪时</strong>。「墙上忧虑」还在，往往意味着还能涨（即「1998 而非 2000」）。<strong>靠估值高去做空 / 空仓择时，大概率被先轧死</strong>（Burry 自己也可能很早）。</p>
+        <h3>2. 但断裂的引信已经插上，而且具体</h3>
+        <p>不再是抽象的「估值高」，而是：<strong>资本开支吃光现金流（缓冲归零）+ 内部人抛售 + 发债 +357% + 套息平仓风险</strong>。任何一条被点燃（尤其「第一家砍 capex 的巨头」或日本加息），拥挤的 80% 多头会同时夺门。</p>
+        <h3>3. 三个该当成警报盯的实时信号</h3>
+        <ul>
+          <li>第一家 hyperscaler <strong>下调 capex 指引</strong>；</li>
+          <li>日元 / 日债剧烈波动（<strong>套息交易平仓</strong>，全球去杠杆触发器）；</li>
+          <li><strong>AI 信用债利差走阔</strong>。</li>
+        </ul>
+        <p>任一出现，就是从「持有」转「减仓」的扳机。</p>
+        <h3>4. 持有期决定一切</h3>
+        <p>10 年不动 + 只拿有现金流的「幸存者」→ 泡沫破了也能熬回来（Amazon 模式）；1–2 年要用的钱，现在这位置不该重仓。</p>
+        <blockquote><p>一句话：你对 AI 的信仰很可能是对的，但「AI 会赢」和「现在这个价格买这些股票会赢」是两道完全不同的题。历史的教训不是「别信技术」，而是<strong>「价格是有上限的，而你的持有期和杠杆决定了你能不能活到红利兑现的那天」</strong>。</p></blockquote>
+      </div>
+      <div class="status-strip">
+        <span class="badge accent">当前姿态：不加杠杆 · 留现金子弹 · 只持有有现金流的幸存者</span>
+        <span class="badge danger">转减仓触发：hyperscaler 砍 capex 指引</span>
+        <span class="badge danger">转减仓触发：日元/日债剧烈波动（套息平仓）</span>
+        <span class="badge danger">转减仓触发：AI 信用债利差走阔</span>
+        <span class="badge warn">慎做：靠估值高直接做空 / 空仓择时</span>
+      </div>
+    </section>
+
+    <section class="panel" id="sources">
+      <div class="panel-head"><div><p class="eyebrow">Sources</p><h2>数据来源</h2>
+        <p>历史 / 估值经 WebSearch；实时仓位情绪经 smart-search（grok 原生 X 检索）。内容由 AI 聚合，可能有误。</p></div></div>
+      <ul class="source-list">
+        <li><a href="https://www.gurufocus.com/economic_indicators/56/sp-500-shiller-cape-ratio">席勒 CAPE ~40（GuruFocus）</a></li>
+        <li><a href="https://www.multpl.com/shiller-pe">CAPE 接近互联网峰值（Multpl）</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/AI_bubble">AI 泡沫综述（Wikipedia）</a></li>
+        <li><a href="https://fortune.com/2026/01/04/is-ai-boom-bubble-pop-tech-stocks-sp500-bull-run/">AI 是否泡沫·历史怎么说（Fortune）</a></li>
+        <li><a href="https://www.man.com/insights/the-ai-bubble">循环融资风险（Man Group）</a></li>
+        <li><a href="https://en.cryptonomist.ch/2026/05/20/michael-burry-ai-bubble-warning/">Burry AI 泡沫警告（Cryptonomist）</a></li>
+        <li><a href="https://cdn.vanderbilt.edu/vu-URL/wp-content/uploads/sites/412/2026/03/23144242/After-the-AI-Crash.pdf">After the AI Crash（Vanderbilt）</a></li>
+        <li><a href="https://www.cnbc.com/2018/12/18/dotcom-bubble-amazon-stock-lost-more-than-90percent-long-term-investors-still-got-rich.html">Amazon 跌 90% 但长期投资者获利（CNBC）</a></li>
+        <li><a href="https://craigmccaskill.com/ai-bubble-history/">铁路狂热类比（Craig McCaskill）</a></li>
+        <li><a href="https://www.sicartassociates.com/rca-nifty-fifty-aol-and-fangs/">RCA / Nifty Fifty 类比（Sicart）</a></li>
+        <li><a href="https://www.nber.org/reporter/summer-2000/technology-and-stock-market">技术与股市·生产力滞后（NBER）</a></li>
+        <li><a href="https://www.cnn.com/markets/fear-and-greed">恐惧贪婪指数（CNN）</a></li>
+        <li><a href="https://thetechmarketer.com/sp-500-record-high-2026-rally/">标普破 7,600 / 9 连涨（TheTechMarketer）</a></li>
+        <li><a href="https://x.com/calvinfroedge/status/2066752418352693308">AI 集中度 49%·铁路以来最高（X @calvinfroedge）</a></li>
+      </ul>
+    </section>
+
+    <p class="empty-state" id="emptyState">没有匹配的内容。</p>
+    <footer class="footer">口径：估值/历史截至 2026-06，实时仓位情绪截至 2026-06-18～19。CAPE 部分历史值为约数；推文点赞为近似值。内容由 AI 聚合，可能有误 · 仅供研究，非投资建议。</footer>
+  </main>
+</div>
+
+<script>
+/* terminal.js — 「研究终端」共享交互：全局搜索过滤 + 表头排序。 */
+(function () {
+  const input = document.getElementById('searchInput');
+  const resetBtn = document.getElementById('resetSearch');
+  const rowCount = document.getElementById('rowCount');
+  const emptyState = document.getElementById('emptyState');
+  const tables = Array.from(document.querySelectorAll('table.sortable'));
+  const items = Array.from(document.querySelectorAll('.filter-item'));
+  const norm = v => (v || '').toLowerCase().trim();
+  const asNum = v => {
+    const c = v.replace(/[$,%+~]/g, '').replace(/[^0-9.\-]/g, '');
+    if (!c || c === '-' || c === '.') return null;
+    const n = Number(c); return Number.isFinite(n) ? n : null;
+  };
+  function update() {
+    if (!input) return;
+    const q = norm(input.value); let vis = 0;
+    tables.forEach(t => Array.from(t.tBodies[0]?.rows || []).forEach(r => {
+      const m = !q || norm(r.innerText).includes(q); r.hidden = !m; if (m) vis++;
+    }));
+    items.forEach(el => {
+      const m = !q || norm(el.innerText).includes(q);
+      el.classList.toggle('hidden-by-filter', !m); if (m) vis++;
+    });
+    if (rowCount) rowCount.textContent = vis + ' 条匹配';
+    if (emptyState) emptyState.classList.toggle('visible', Boolean(q) && vis === 0);
+  }
+  tables.forEach(table => {
+    Array.from(table.tHead?.rows[0]?.cells || []).forEach((th, i) => {
+      const b = th.querySelector('button'); if (!b) return;
+      b.addEventListener('click', () => {
+        const dir = th.dataset.sort === 'asc' ? 'desc' : 'asc';
+        Array.from(th.parentElement.children).forEach(c => c.dataset.sort = '');
+        th.dataset.sort = dir;
+        const rows = Array.from(table.tBodies[0].rows);
+        rows.sort((a, c) => {
+          const av = a.cells[i]?.innerText.trim() || '', bv = c.cells[i]?.innerText.trim() || '';
+          const an = asNum(av), bn = asNum(bv);
+          const cmp = (an !== null && bn !== null) ? an - bn
+            : av.localeCompare(bv, 'zh-Hans-u-co-pinyin', { numeric: true, sensitivity: 'base' });
+          return dir === 'asc' ? cmp : -cmp;
+        });
+        rows.forEach(r => table.tBodies[0].appendChild(r));
+      });
+    });
+  });
+  if (resetBtn && input) resetBtn.addEventListener('click', () => { input.value = ''; update(); input.focus(); });
+  if (input) input.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>
