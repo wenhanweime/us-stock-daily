@@ -1,6 +1,33 @@
 {
   "entries": [
     {
+      "slug": "memory-optics-options-20260623",
+      "title": "存储与光模块盘面情绪速览 · 2026-06-23",
+      "date": "2026-06-23",
+      "tags": [
+        "存储",
+        "光模块",
+        "AI基建",
+        "期权"
+      ],
+      "tickers": [
+        "MU",
+        "WDC",
+        "STX",
+        "SNDK",
+        "LITE",
+        "COHR",
+        "CIEN",
+        "AAOI",
+        "AVGO",
+        "MRVL"
+      ],
+      "teaser": "存储强于光模块，但两边的期权都在给高波动和高拥挤定价。",
+      "cover": null,
+      "path": "research/memory-optics-options-20260623/index.html",
+      "added_at": "2026-06-23 01:22:34"
+    },
+    {
       "slug": "ai-bubble-history-check-2026",
       "title": "AI 为真，股价会一直涨吗 · 用四次历史泡沫给当前美股定位",
       "date": "2026-06-19",
@@ -179,5 +206,5 @@
       "added_at": "2026-06-06 21:03:33"
     }
   ],
-  "last_updated": "2026-06-19 03:57:46"
+  "last_updated": "2026-06-23 01:22:34"
 }
