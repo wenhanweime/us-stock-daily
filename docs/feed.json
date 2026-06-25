@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "date": "2026-06-25",
+      "generated_at": "2026-06-25 12:00:05 +0800",
+      "model": "grok-4.20-multi-agent-xhigh",
+      "unique_tweets": 218,
+      "tickers": [
+        [
+          "$SPY",
+          13
+        ],
+        [
+          "$MU",
+          8
+        ],
+        [
+          "$MRVL",
+          5
+        ],
+        [
+          "$NVDA",
+          5
+        ],
+        [
+          "$GLW",
+          5
+        ],
+        [
+          "$INTC",
+          4
+        ],
+        [
+          "$AMD",
+          4
+        ],
+        [
+          "$QQQ",
+          4
+        ]
+      ],
+      "teaser": "美股观察日报·今日导读（2026-06-25）",
+      "report_path": "reports/2026-06-25.html"
+    },
+    {
       "date": "2026-06-24",
       "generated_at": "2026-06-24 12:00:05 +0800",
       "model": "grok-4.20-multi-agent-xhigh",
@@ -757,5 +799,5 @@
       "report_path": "reports/2026-06-06.html"
     }
   ],
-  "last_updated": "2026-06-24 12:00:05 +0800"
+  "last_updated": "2026-06-25 12:00:05 +0800"
 }
