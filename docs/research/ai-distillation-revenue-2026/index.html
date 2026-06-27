@@ -56,8 +56,9 @@
         <a class="nav-link" href="#pricing"><span>02</span><span>API 单价</span></a>
         <a class="nav-link" href="#model-cost"><span>03</span><span>单模型成本</span></a>
         <a class="nav-link" href="#revenue-share"><span>04</span><span>收入占比</span></a>
-        <a class="nav-link" href="#ai-revenue"><span>05</span><span>AI 收入口径</span></a>
-        <a class="nav-link" href="#sources"><span>06</span><span>来源</span></a>
+        <a class="nav-link" href="#claim-audit"><span>05</span><span>长文审计</span></a>
+        <a class="nav-link" href="#ai-revenue"><span>06</span><span>AI 收入口径</span></a>
+        <a class="nav-link" href="#sources"><span>07</span><span>来源</span></a>
       </nav>
     </aside>
 
@@ -169,6 +170,33 @@
             <li><strong>对 Anthropic：</strong>Claude Code、企业 agent、Bedrock/Vertex/Azure 分发才是披露和报道里反复出现的增长主线。竞品蒸馏可能存在，但不是公开证据能支撑的主叙事。</li>
             <li><strong>对 OpenAI：</strong>官方称月收入约 $2B、企业超过 40%、API 每分钟处理超过 15B token。即使一部分 API 被用于蒸馏，消费、企业和生产推理仍是更可验证的大头。</li>
           </ul>
+        </div>
+      </section>
+
+      <section class="panel filter-item" id="claim-audit">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Claim audit</p>
+            <h2>对“百亿美元蒸馏税”长文的重新验证</h2>
+            <p>长文方向上抓住了蒸馏和合成数据的重要性，但把若干弱证据、错误算术和不可合规假设串成了过强结论。</p>
+          </div>
+        </div>
+        <div class="table-shell">
+          <table>
+            <thead><tr><th>长文断言</th><th>核验结果</th><th>修正判断</th></tr></thead>
+            <tbody>
+              <tr><td>2026 Q1 全球 AI 收入 $25B，超过 $21B 折旧。</td><td><span class="good">基本成立</span>，但 Bloomberg/Exponential View 口径是 excluding China，不是“非中美区”；检索结果还显示这是连续第二个季度超过折旧，并非严格意义的“首次”。</td><td>可作为宏观背景，但不能直接推出蒸馏收入占比。</td></tr>
+              <tr><td>DeepSeek-R1 蒸馏用了约 80 万样本，60 万 reasoning + 20 万 non-reasoning。</td><td><span class="good">成立</span>。DeepSeek-R1 论文 B.3.3/B.4.3 写明约 600k reasoning、约 200k non-reasoning，distillation fine-tune 使用 800k 数据。</td><td>这是优秀蒸馏案例，但 teacher 是 DeepSeek 自家 R1/RL pipeline，不是公开证据显示向 Claude/GPT 付费。</td></tr>
+              <tr><td>80 万样本、1500 input/4000 output，生成 88 亿 token，API 成本 $25,800。</td><td><span class="warn">算术混乱</span>。80万 × (1500+4000) = 44亿 total token，不是 88亿；若按 Sonnet batch $1.5/M input、$7.5/M output，则 12亿 input + 32亿 output 成本约 $25,800，这个成本数字能对上，但 token 总量写错。</td><td>成本可用，但必须明确是“若用 Claude/GPT batch 复刻”的反事实估算，不是 DeepSeek 实际付费。</td></tr>
+              <tr><td>蒸馏 70B SOTA 端到端只要 3-4 万美元。</td><td><span class="warn">对特定 SFT 蒸馏可能近似，对“打造 SOTA 基础模型”过度简化</span>。这不含数据设计、拒绝采样、多轮 RL、评测、人类审阅、失败实验和基础模型预训练成本。</td><td>更稳妥说法：在已有开源 base model 上做一次 80万样本级 SFT 蒸馏，API+单次训练可到数万美元；完整模型研发不是这个数。</td></tr>
+              <tr><td>Anthropic/OpenAI API 收入中 20%-30% 来自合成数据/蒸馏。</td><td><span class="bad">未被验证</span>。未找到公开披露或可信第三方直接给出这一用途占比；Menlo/Gartner 类材料即便证明合成数据增长，也不是 OpenAI/Anthropic API 账单用途分布。</td><td>只能作为高压情景假设。基准仍应低于 1%，激进情景可讨论 1%-5%；20%-30% 需要专门证据。</td></tr>
+              <tr><td>Anthropic 公开指控 MiniMax/Moonshot/DeepSeek 通过 Hydra Cluster、2.4 万欺诈账户、1600 万次 API 交互蒸馏 Claude。</td><td><span class="bad">未验证</span>。多轮精确搜索没有找到 Anthropic 官方公告或主流报道；该断言细节极强，不能在缺来源时引用。</td><td>应删除或标注为未经证实传闻。用它推导收入归因不可靠。</td></tr>
+              <tr><td>全球模型厂商都合规购买 Claude/GPT 来蒸馏竞品模型。</td><td><span class="bad">合规假设不成立</span>。OpenAI Services Agreement 限制“except for a Permitted Exception, use Output to develop AI models that compete with OpenAI”；Anthropic 商业条款限制 access Services to build competing product/service, including to train competing AI models。</td><td>企业可用输出做自身应用、分类器、OpenAI fine-tuning 等许可用途；训练竞争性基础模型通常不是默认合规用途。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="markdown-body">
+          <blockquote><p>因此，谁更准：长文在“蒸馏拉低应用成本”的技术经济方向上更激进、更故事化；本报告在“收入归因”上更准。百亿美元蒸馏税不是不可能的上限情景，但目前证据不足，不能作为基准结论。</p></blockquote>
         </div>
       </section>
 

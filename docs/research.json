@@ -21,7 +21,7 @@
       "teaser": "用官方 API 单价和公开收入 run-rate 反推：蒸馏单个模型通常很便宜，难以解释 2026 全球 AI 收入的大头。",
       "cover": null,
       "path": "research/ai-distillation-revenue-2026/index.html",
-      "added_at": "2026-06-27 15:34:31"
+      "added_at": "2026-06-27 16:05:45"
     },
     {
       "slug": "memory-optics-options-20260623",
@@ -229,5 +229,5 @@
       "added_at": "2026-06-06 21:03:33"
     }
   ],
-  "last_updated": "2026-06-27 15:34:31"
+  "last_updated": "2026-06-27 16:05:45"
 }
