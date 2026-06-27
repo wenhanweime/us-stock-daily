@@ -1,6 +1,29 @@
 {
   "entries": [
     {
+      "slug": "ai-distillation-revenue-2026",
+      "title": "蒸馏成本与 Claude/GPT 收入归因",
+      "date": "2026-06-27",
+      "tags": [
+        "AI基建",
+        "模型经济",
+        "蒸馏",
+        "OpenAI",
+        "Anthropic"
+      ],
+      "tickers": [
+        "NVDA",
+        "MSFT",
+        "AMZN",
+        "GOOGL",
+        "AVGO"
+      ],
+      "teaser": "用官方 API 单价和公开收入 run-rate 反推：蒸馏单个模型通常很便宜，难以解释 2026 全球 AI 收入的大头。",
+      "cover": null,
+      "path": "research/ai-distillation-revenue-2026/index.html",
+      "added_at": "2026-06-27 15:34:31"
+    },
+    {
       "slug": "memory-optics-options-20260623",
       "title": "存储与光模块盘面情绪速览 · 2026-06-23",
       "date": "2026-06-23",
@@ -206,5 +229,5 @@
       "added_at": "2026-06-06 21:03:33"
     }
   ],
-  "last_updated": "2026-06-23 01:22:34"
+  "last_updated": "2026-06-27 15:34:31"
 }

@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="评估用 Claude/GPT 蒸馏模型所需数据量、API 成本，以及这类用途可能占 OpenAI/Anthropic 和全球 AI 收入的比例。">
+  <title>蒸馏成本与 Claude/GPT 收入归因 · 美股投研</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg:#f6f4ef; --surface:#fffdfa; --surface-2:#f0eee8; --ink:#181916; --muted:#676b62;
+      --line:#d9d5ca; --line-strong:#bdb7aa; --accent:#0b6b57; --gold:#9a6500; --danger:#a33b2a; --cool:#315f8a;
+      --shadow:0 18px 45px rgba(42,38,30,.08); --radius:8px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;min-width:320px;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration-color:rgba(11,107,87,.45);text-underline-offset:3px} a:hover{color:var(--accent)}
+    .app-shell{display:grid;grid-template-columns:280px minmax(0,1fr);min-height:100vh}
+    .sidebar{position:sticky;top:0;height:100vh;padding:18px 16px;border-right:1px solid var(--line);background:rgba(255,253,250,.92);backdrop-filter:blur(12px);overflow:auto}
+    .brand{padding:4px 4px 18px;border-bottom:1px solid var(--line)} .brand h1{margin:0;font-size:20px;line-height:1.18;letter-spacing:0}
+    .brand p{margin:8px 0 0;color:var(--muted);font-size:12px;line-height:1.5}
+    .nav-group{padding:14px 0;border-bottom:1px solid var(--line)} .nav-group-title{margin:0 4px 8px;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+    .nav-link{display:flex;gap:8px;align-items:center;min-height:34px;padding:7px 8px;border-radius:6px;color:#30322e;font-size:13px;line-height:1.25;text-decoration:none}
+    .nav-link:hover{background:#ece8df;color:var(--ink)} .nav-link span:first-child{width:22px;flex:0 0 auto;color:var(--muted);font-variant-numeric:tabular-nums}
+    .main{min-width:0;padding:22px clamp(16px,3vw,34px) 60px}
+    .topbar{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;margin:-22px calc(clamp(16px,3vw,34px) * -1) 20px;padding:14px clamp(16px,3vw,34px);border-bottom:1px solid var(--line);background:rgba(246,244,239,.88);backdrop-filter:blur(12px)}
+    .search-wrap label{display:block;margin-bottom:5px;color:var(--muted);font-size:12px} #searchInput{width:min(680px,100%);height:38px;border:1px solid var(--line-strong);border-radius:var(--radius);padding:0 12px;background:var(--surface);color:var(--ink);font-size:14px}
+    .tool-buttons{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}.source-link,.tool-buttons button{min-height:36px;border:1px solid var(--line-strong);border-radius:var(--radius);padding:0 11px;background:var(--surface);color:var(--ink);font:inherit;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;cursor:pointer}
+    .hero-panel{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(280px,.82fr);gap:18px;align-items:stretch;margin-bottom:18px}
+    .overview-copy,.metric-grid,.panel{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow)}
+    .overview-copy{padding:22px}.eyebrow{margin:0 0 8px;color:var(--accent);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+    .overview-copy h2{margin:0;font-size:clamp(25px,3vw,38px);line-height:1.08;letter-spacing:0}.overview-copy p{max-width:880px;margin:14px 0 0;color:var(--muted);font-size:15px;line-height:1.68}
+    .metric-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:hidden}.metric{padding:18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-width:0}.metric:nth-child(2n){border-right:0}.metric:nth-last-child(-n+2){border-bottom:0}
+    .metric strong{display:block;font-size:28px;line-height:1;font-variant-numeric:tabular-nums}.metric span{display:block;margin-top:8px;color:var(--muted);font-size:12px;line-height:1.35}
+    .panel{margin:18px 0;overflow:hidden}.panel-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;padding:18px 20px 14px;border-bottom:1px solid var(--line)}
+    .panel-head h2{margin:0;font-size:20px;letter-spacing:0}.panel-head p:not(.eyebrow){margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
+    .markdown-body{padding:2px 20px 22px}.markdown-body h3{margin:22px 0 8px;font-size:17px}.markdown-body p,.markdown-body li{color:#30322d;font-size:14px;line-height:1.68}.markdown-body ul{padding-left:22px}.markdown-body blockquote{margin:14px 0;padding:10px 14px;border-left:4px solid var(--accent);background:#f4f0e8;color:#2f332c}
+    .table-shell{width:100%;overflow:auto} table{width:100%;border-collapse:separate;border-spacing:0;min-width:880px;font-size:13px} th,td{padding:10px 11px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left;line-height:1.45;overflow-wrap:anywhere} thead th{position:sticky;top:0;background:#eeeae1;color:#353730;font-weight:800} tbody tr:hover{background:#fbf7ed}.num{font-variant-numeric:tabular-nums;white-space:nowrap}.good{color:var(--accent);font-weight:800}.warn{color:var(--gold);font-weight:800}.bad{color:var(--danger);font-weight:800}.cool{color:var(--cool);font-weight:800}
+    .table-note{padding:10px 20px 16px;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}
+    .callout{margin:16px 0;padding:14px;border:1px solid var(--line);border-radius:var(--radius);background:#fbfaf6}.formula{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;background:#f0eee8;border:1px solid var(--line);border-radius:6px;padding:10px;overflow:auto}
+    .source-list{columns:2;column-gap:28px}.source-list li{break-inside:avoid;margin:0 0 6px}
+    footer{margin-top:24px;color:var(--muted);font-size:12px;line-height:1.6}
+    @media (max-width:900px){.app-shell{display:block}.sidebar{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}.hero-panel{grid-template-columns:1fr}.topbar{grid-template-columns:1fr}.tool-buttons{justify-content:flex-start}.source-list{columns:1}}
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>蒸馏成本与收入归因</h1>
+        <p>Claude/GPT teacher token 成本、全球 AI 收入口径、OpenAI/Anthropic 收入占比情景。</p>
+      </div>
+      <nav class="nav-group" aria-label="目录">
+        <p class="nav-group-title">Sections</p>
+        <a class="nav-link" href="#answer"><span>01</span><span>结论</span></a>
+        <a class="nav-link" href="#pricing"><span>02</span><span>API 单价</span></a>
+        <a class="nav-link" href="#model-cost"><span>03</span><span>单模型成本</span></a>
+        <a class="nav-link" href="#revenue-share"><span>04</span><span>收入占比</span></a>
+        <a class="nav-link" href="#ai-revenue"><span>05</span><span>AI 收入口径</span></a>
+        <a class="nav-link" href="#sources"><span>06</span><span>来源</span></a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="search-wrap">
+          <label for="searchInput">筛选页面文本</label>
+          <input id="searchInput" type="search" placeholder="输入 distillation、API、Opus、1700亿、占比...">
+        </div>
+        <div class="tool-buttons">
+          <button type="button" onclick="window.print()">打印</button>
+          <a class="source-link" href="https://wenhanweime.github.io/us-stock-daily/">返回首页</a>
+        </div>
+      </div>
+
+      <section class="hero-panel filter-item" id="answer">
+        <div class="overview-copy">
+          <p class="eyebrow">Bottom line</p>
+          <h2>蒸馏本身不是 2026 AI 收入的主引擎，除非假设出现百万亿级 teacher token 采购。</h2>
+          <p>用 Claude 或 GPT 生成蒸馏数据，单个模型从几十美元到几百万美元都可能，取决于任务窄宽和 teacher 输出 token 规模。常见 task-specific 或行业 copilot 蒸馏只需要 1万到10万条高质量样本，API 成本通常是百到千美元；面向通用小模型或模型家族，成本可上到 10万到数百万美元；只有用闭源 teacher 生成 1万亿级输出 token，才会进入千万美元级。</p>
+          <p>即便把全世界模型厂商都纳入，合理中枢仍是 OpenAI/Anthropic 收入的低个位数以下。蒸馏可以是高毛利、敏感、战略性的 API 用途，但很难解释 Bloomberg/Exponential View 所称 2026 年全球 AI 年化收入约 1700 亿美元的大头。</p>
+        </div>
+        <div class="metric-grid">
+          <div class="metric"><strong>$100-$2k</strong><span>10k-100k 条行业/任务蒸馏，Sonnet 或 GPT-5.4 标准价量级。</span></div>
+          <div class="metric"><strong>$0.1m-$3m</strong><span>10B-100B teacher 输出 token 的较大模型家族蒸馏。</span></div>
+          <div class="metric"><strong>$16m-$33m</strong><span>每 1T 输出 token，按 Sonnet 4.6 或 GPT-5.5，输入 token 约输出一半。</span></div>
+          <div class="metric"><strong>&lt;1%</strong><span>现实/偏积极情景下，占全球 AI 年化收入或 OpenAI+Anthropic 收入的更可能区间。</span></div>
+        </div>
+      </section>
+
+      <section class="panel filter-item" id="pricing">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Pricing inputs</p>
+            <h2>官方 API 价格是成本模型的硬约束</h2>
+            <p>输出 token 是蒸馏成本主项。Batch 通常可打 5 折，企业私价可能更低。</p>
+          </div>
+        </div>
+        <div class="table-shell">
+          <table>
+            <thead><tr><th>Teacher</th><th>输入 $/1M token</th><th>输出 $/1M token</th><th>Batch</th><th>备注</th><th>来源</th></tr></thead>
+            <tbody>
+              <tr><td>OpenAI GPT-5.5</td><td class="num">$5.00</td><td class="num">$30.00</td><td>标准价 50% 折扣</td><td>最贵主力假设，适合复杂代码/专业任务。</td><td><a href="https://openai.com/api/pricing/">OpenAI pricing</a></td></tr>
+              <tr><td>OpenAI GPT-5.4</td><td class="num">$2.50</td><td class="num">$15.00</td><td>标准价 50% 折扣</td><td>与 Claude Sonnet 输出价相同，输入更低。</td><td><a href="https://openai.com/api/pricing/">OpenAI pricing</a></td></tr>
+              <tr><td>Anthropic Claude Opus 4.8/4.7/4.6</td><td class="num">$5.00</td><td class="num">$25.00</td><td>$2.50 / $12.50</td><td>高质量 teacher；Opus 4.7+ tokenizer 对同文本可能多至 35% token。</td><td><a href="https://docs.anthropic.com/en/docs/about-claude/pricing">Anthropic pricing</a></td></tr>
+              <tr><td>Anthropic Claude Sonnet 4.6/4.5</td><td class="num">$3.00</td><td class="num">$15.00</td><td>$1.50 / $7.50</td><td>报告默认中枢 teacher。</td><td><a href="https://docs.anthropic.com/en/docs/about-claude/pricing">Anthropic pricing</a></td></tr>
+              <tr><td>Anthropic Claude Haiku 4.5</td><td class="num">$1.00</td><td class="num">$5.00</td><td>$0.50 / $2.50</td><td>适合初筛、改写、简单标签，不适合作为最强 reasoning teacher。</td><td><a href="https://docs.anthropic.com/en/docs/about-claude/pricing">Anthropic pricing</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-note">公式：成本 = 输入百万 token × 输入单价 + 输出百万 token × 输出单价。蒸馏通常输出更长，所以输出价格决定总成本。</div>
+      </section>
+
+      <section class="panel filter-item" id="model-cost">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Per-model economics</p>
+            <h2>蒸馏一个模型大概需要多少数据、花多少钱</h2>
+            <p>这里估的是 teacher API 生成数据成本，不含学生模型训练、评测、人类审阅、RL、数据清洗和部署。</p>
+          </div>
+        </div>
+        <div class="markdown-body">
+          <div class="formula">默认换算：Claude Sonnet 4.6 = $3/M input + $15/M output；GPT-5.4 = $2.5/M input + $15/M output；GPT-5.5 = $5/M input + $30/M output。</div>
+        </div>
+        <div class="table-shell">
+          <table>
+            <thead><tr><th>目标</th><th>典型数据量</th><th>teacher token 假设</th><th>Sonnet 4.6 成本</th><th>GPT-5.4 成本</th><th>GPT-5.5 成本</th><th>判断</th></tr></thead>
+            <tbody>
+              <tr><td>窄任务分类/抽取/路由</td><td>5k-20k 条</td><td>1.5M-6M input；0.5M-2M output</td><td class="num">$12-$48</td><td class="num">$11-$45</td><td class="num">$23-$90</td><td><span class="good">几乎不是成本问题</span>，关键是样本覆盖和评测。</td></tr>
+              <tr><td>行业 QA / 内部 copilot / Text2SQL</td><td>10k-100k 条</td><td>5M-50M input；8M-80M output</td><td class="num">$135-$1,350</td><td class="num">$133-$1,325</td><td class="num">$265-$2,650</td><td>多数企业项目落在这档；Batch 后可约减半。</td></tr>
+              <tr><td>Alpaca 级 instruction tuning</td><td>约 52k 条</td><td>约数千万 token</td><td class="num">数百美元</td><td class="num">数百美元</td><td class="num">低千美元</td><td>Stanford Alpaca 官方披露 52k 样本生成成本低于 $500，训练 7B 低于 $100。</td></tr>
+              <tr><td>Orca 级 explanation tuning</td><td>百万到 600万条</td><td>1B-6B output；0.5B-3B input</td><td class="num">$16.5k-$99k</td><td class="num">$16.3k-$97.5k</td><td class="num">$32.5k-$195k</td><td>数量大但仍远低于从零训练；历史 GPT-4 单价更高，当前价更低。</td></tr>
+              <tr><td>模型家族/多语种/代码 SLM</td><td>10B-100B output token</td><td>输入约输出 50%</td><td class="num">$165k-$1.65m</td><td class="num">$162.5k-$1.625m</td><td class="num">$325k-$3.25m</td><td><span class="warn">开始有预算感</span>，但对模型厂商仍是小票。</td></tr>
+              <tr><td>闭源 teacher 预训练级合成语料</td><td>1T output token</td><td>500B input；1T output</td><td class="num">$16.5m</td><td class="num">$16.25m</td><td class="num">$32.5m</td><td><span class="bad">极端档</span>。若用 Batch 或私价，账单可低很多；若用 Opus 约 $27.5m/T output。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="markdown-body">
+          <blockquote><p>工程结论：蒸馏的瓶颈通常不是 API 账单，而是数据设计、去重、覆盖、评测、学生模型训练和合规。对模型厂商来说，拿闭源 teacher 买 10B-100B token 是可承受的；拿 1T+ token 反复做，才会变成可见预算项。</p></blockquote>
+        </div>
+      </section>
+
+      <section class="panel filter-item" id="revenue-share">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Revenue attribution</p>
+            <h2>如果全世界模型厂商都蒸馏 Claude/GPT，收入里有多少是蒸馏？</h2>
+            <p>答案取决于“全世界模型厂商”到底买多少 teacher token。下表按年度 teacher 采购量反推收入占比。</p>
+          </div>
+        </div>
+        <div class="table-shell">
+          <table>
+            <thead><tr><th>情景</th><th>年度 teacher 用量假设</th><th>对应 teacher 收入</th><th>占全球 AI 年化收入 $170B</th><th>占 OpenAI+Anthropic ARR $72B</th><th>解释</th></tr></thead>
+            <tbody>
+              <tr><td>保守现实</td><td>总计 0.1T output + 0.05T input</td><td class="num">$1.6m-$3.3m</td><td class="num">&lt;0.01%</td><td class="num">&lt;0.01%</td><td>大量创业公司和企业只做窄任务蒸馏，账单很小。</td></tr>
+              <tr><td>模型厂商普遍采用</td><td>100 家 × 2 次/年 × 10B output；总计 2T output + 1T input</td><td class="num">$33m-$65m</td><td class="num">0.02%-0.04%</td><td class="num">0.05%-0.09%</td><td>这已经假设每家都做较大型模型家族蒸馏。</td></tr>
+              <tr><td>非常积极</td><td>200 家 × 5 次/年 × 100B output；总计 100T output + 50T input</td><td class="num">$1.6B-$3.3B</td><td class="num">1.0%-1.9%</td><td class="num">2.3%-4.5%</td><td>这是能在收入里被看见的档位，但要求极高 token 采购和频繁重做。</td></tr>
+              <tr><td>解释 10% 全球 AI 收入</td><td>需要约 0.5Q-1.0Q output token/年</td><td class="num">约 $17B</td><td class="num">10%</td><td class="num">24%</td><td><span class="bad">很难成立</span>：要接近百万亿级输出 token，且多数需来自付费闭源 teacher。</td></tr>
+              <tr><td>解释 10% OpenAI+Anthropic 收入</td><td>需要约 0.2Q-0.44Q output token/年</td><td class="num">约 $7.2B</td><td class="num">4.2%</td><td class="num">10%</td><td>理论上比上一档低，但仍需巨量、持续、非折扣 teacher token。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-note">区间低端按 Sonnet/GPT-5.4 约 $16.3m-$16.5m 每 1T output 估算，高端按 GPT-5.5 约 $32.5m 每 1T output 估算；输入 token 取输出的一半。Q = quadrillion tokens，百万亿 token。</div>
+        <div class="markdown-body">
+          <h3>归因判断</h3>
+          <ul>
+            <li><strong>对全球 AI 收入：</strong>蒸馏大概率是小项，合理中枢低于 1%。全球收入中更大的部分来自 ChatGPT/Claude 订阅、企业 seat、API 生产推理、coding agent、云上模型服务和行业工作流。</li>
+            <li><strong>对 OpenAI/Anthropic：</strong>如果只看 API/enterprise token 收入，蒸馏可能是一个有战略意义的隐藏类别，但在合理情景下仍更像低个位数，而不是 20%-50% 的主因。</li>
+            <li><strong>对 Anthropic：</strong>Claude Code、企业 agent、Bedrock/Vertex/Azure 分发才是披露和报道里反复出现的增长主线。竞品蒸馏可能存在，但不是公开证据能支撑的主叙事。</li>
+            <li><strong>对 OpenAI：</strong>官方称月收入约 $2B、企业超过 40%、API 每分钟处理超过 15B token。即使一部分 API 被用于蒸馏，消费、企业和生产推理仍是更可验证的大头。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="panel filter-item" id="ai-revenue">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">AI economy context</p>
+            <h2>Bloomberg/Exponential View 的 2026 收入口径怎么用</h2>
+            <p>用户给出的数字基本可对上 2026-06-25 Bloomberg 对 Exponential View 研究的报道。</p>
+          </div>
+        </div>
+        <div class="markdown-body">
+          <p>搜索核验显示，Bloomberg 报道的核心口径是：2026 年 Q1 全球 AI sales/revenue（不含中国）约 <strong>$25B</strong>，超过约 <strong>$21B</strong> 的季度数据中心和 AI 芯片折旧，且已是连续第二个季度超过折旧。相关报道还提到过去 12 个月 AI 收入约 <strong>$110B</strong>，当前年化 run-rate 约 <strong>$170B-$175B</strong>。</p>
+          <p>这个拐点说明 AI 商业化已经开始覆盖硬件折旧，但不能直接推出“蒸馏贡献很大”。折旧比较的是整个 AI 经济的收入与基础设施资本成本；蒸馏只是 teacher API 的一种用途，而且通常是一次性或批处理式数据生成，不是每天按终端用户持续消耗的生产推理。</p>
+          <div class="callout">
+            <strong>我的基准结论：</strong>把“全世界模型厂商都在蒸馏 Claude/GPT”作为假设，可以把 OpenAI/Anthropic 增量 API 收入抬高到千万到几十亿美元级；但要解释全球 AI 年化收入的 10%，需要约 $17B teacher API 收入，对应数百到上千万亿输出 token，证据和经济动机都不足。
+          </div>
+        </div>
+      </section>
+
+      <section class="panel filter-item" id="sources">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Evidence</p>
+            <h2>关键来源与可信度</h2>
+            <p>优先使用官方价格页、公司公告和一手研究；私营公司收入用 run-rate 表示，需等 S-1 或审计口径验证。</p>
+          </div>
+        </div>
+        <div class="markdown-body">
+          <ul class="source-list">
+            <li><a href="https://www.bloomberg.com/news/articles/2026-06-25/ai-demand-begins-to-justify-massive-cost-of-data-center-buildout">Bloomberg: AI demand begins to justify data-center spending boom</a> - $25B vs $21B 折旧口径。</li>
+            <li><a href="https://finance.yahoo.com/technology/ai/articles/ai-demand-begins-justify-massive-110000106.html">Yahoo Finance mirror</a> - Bloomberg 同题转载入口。</li>
+            <li><a href="https://openai.com/api/pricing/">OpenAI API pricing</a> - GPT-5.5、GPT-5.4、Batch 价格。</li>
+            <li><a href="https://docs.anthropic.com/en/docs/about-claude/pricing">Anthropic pricing docs</a> - Claude Opus/Sonnet/Haiku、Batch、prompt caching 价格。</li>
+            <li><a href="https://openai.com/index/accelerating-the-next-phase-ai/">OpenAI March 2026 funding announcement</a> - 月收入 $2B、企业占比、API token/min。</li>
+            <li><a href="https://www.reuters.com/technology/openai-tops-25-billion-annualized-revenue-last-month-information-reports-2026-03-05/">Reuters on OpenAI $25B ARR</a> - 引 The Information，Reuters 未独立验证。</li>
+            <li><a href="https://www.anthropic.com/news/series-h">Anthropic Series H announcement</a> - run-rate revenue crossed $47B。</li>
+            <li><a href="https://crfm.stanford.edu/2023/03/13/alpaca.html">Stanford Alpaca</a> - 52k synthetic examples，生成成本低于 $500。</li>
+            <li><a href="https://github.com/tatsu-lab/stanford_alpaca">Stanford Alpaca GitHub</a> - 数据生成和训练成本说明。</li>
+            <li><a href="https://research.google/blog/distilling-step-by-step-outperforming-larger-language-models-with-less-training-data-and-smaller-model-sizes/">Google Research: Distilling step-by-step</a> - rationale distillation 可用更少数据和更小模型。</li>
+            <li><a href="https://arxiv.org/pdf/2306.02707">Microsoft Orca paper</a> - 5M ChatGPT + 1M GPT-4 explanation traces 的大规模蒸馏案例。</li>
+            <li><a href="https://developer.nvidia.com/blog/llm-model-pruning-and-knowledge-distillation-with-nvidia-nemo-framework/">NVIDIA NeMo pruning and KD</a> - 工程化蒸馏背景。</li>
+          </ul>
+          <h3>可信度折扣</h3>
+          <p>OpenAI 和 Anthropic 的 run-rate 是高速增长私营公司口径，不等于 GAAP 全年收入。Bloomberg/Exponential View 的全球 AI 收入是估算，不是统一会计口径。蒸馏占比没有公司披露，本文只能用 token 单价和使用量情景反推。</p>
+        </div>
+      </section>
+
+      <footer>
+        生成日期：2026-06-27。仅供研究，非投资建议。所有美元均为 USD；价格和收入 run-rate 会快速变化，大额企业私价可能显著低于公开价格。
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    const search = document.getElementById('searchInput');
+    const blocks = [...document.querySelectorAll('.filter-item')];
+    search.addEventListener('input', () => {
+      const q = search.value.trim().toLowerCase();
+      blocks.forEach(block => {
+        block.hidden = q && !block.textContent.toLowerCase().includes(q);
+      });
+    });
+  </script>
+</body>
+</html>
