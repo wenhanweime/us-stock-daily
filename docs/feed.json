@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "date": "2026-06-28",
+      "generated_at": "2026-06-28 12:00:05 +0800",
+      "model": "grok-4.20-multi-agent-xhigh",
+      "unique_tweets": 149,
+      "tickers": [
+        [
+          "$SPY",
+          13
+        ],
+        [
+          "$SPCX",
+          6
+        ],
+        [
+          "$GLW",
+          2
+        ],
+        [
+          "$NVDA",
+          2
+        ],
+        [
+          "$QQQ",
+          2
+        ],
+        [
+          "$XLV",
+          2
+        ],
+        [
+          "$MU",
+          1
+        ],
+        [
+          "$TSM",
+          1
+        ]
+      ],
+      "teaser": "美股观察日报·今日导读（2026-06-28）",
+      "report_path": "reports/2026-06-28.html"
+    },
+    {
       "date": "2026-06-27",
       "generated_at": "2026-06-27 12:00:05 +0800",
       "model": "grok-4.20-multi-agent-xhigh",
@@ -883,5 +925,5 @@
       "report_path": "reports/2026-06-06.html"
     }
   ],
-  "last_updated": "2026-06-27 12:00:05 +0800"
+  "last_updated": "2026-06-28 12:00:05 +0800"
 }
