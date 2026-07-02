@@ -1,6 +1,59 @@
 {
   "entries": [
     {
+      "slug": "x-memory-sentiment-20260701",
+      "title": "X.com 半导体/存储风向 2026-07-01",
+      "date": "2026-07-01",
+      "tags": [
+        "半导体",
+        "存储",
+        "HBM",
+        "DRAM",
+        "NAND",
+        "X情绪"
+      ],
+      "tickers": [
+        "MU",
+        "SNDK",
+        "DRAM",
+        "META",
+        "GM"
+      ],
+      "teaser": "X 最新讨论显示：半导体/存储短线受 Meta 算力过剩叙事、DRAM 诉讼和板块杀估值压制，但 HBM/DRAM 紧缺与 MU 基本面仍支撑买跌声音。",
+      "cover": null,
+      "path": "research/x-memory-sentiment-20260701/index.html",
+      "added_at": "2026-07-01 23:12:10"
+    },
+    {
+      "slug": "themarketmemo-lei-investment-framework",
+      "title": "老雷 TheMarketMemo 投资框架研究",
+      "date": "2026-06-28",
+      "tags": [
+        "美股",
+        "ETF",
+        "个股",
+        "动量",
+        "趋势交易",
+        "商品期货"
+      ],
+      "tickers": [
+        "QQQ",
+        "TQQQ",
+        "IWY",
+        "RSP",
+        "SPMO",
+        "PFF",
+        "VNQ",
+        "NVDA",
+        "AMZN",
+        "TSLA"
+      ],
+      "teaser": "修订版：老雷不是只讲长期ETF，而是市场周期、ETF底仓、个股Alpha、趋势交易和商品期货的多层系统。",
+      "cover": null,
+      "path": "research/themarketmemo-lei-investment-framework/index.html",
+      "added_at": "2026-06-28 20:47:48"
+    },
+    {
       "slug": "ai-distillation-revenue-2026",
       "title": "蒸馏成本与 Claude/GPT 收入归因",
       "date": "2026-06-27",
@@ -229,5 +282,5 @@
       "added_at": "2026-06-06 21:03:33"
     }
   ],
-  "last_updated": "2026-06-27 16:05:45"
+  "last_updated": "2026-07-01 23:12:10"
 }

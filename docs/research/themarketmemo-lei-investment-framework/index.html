@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4ef">
+  <meta name="description" content="基于 X 公共样本、TheMarketMemo 网站、Patreon 公开简介、WordPress 文章与 YouTube 衍生内容，对老雷 LEI 的投资框架进行证据化拆解。">
+  <title>老雷 TheMarketMemo 投资框架研究 · 美股投研</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f4ef;
+      --surface: #fffdfa;
+      --surface-2: #f0eee8;
+      --ink: #181916;
+      --muted: #676b62;
+      --line: #d9d5ca;
+      --line-strong: #bdb7aa;
+      --accent: #0b6b57;
+      --accent-2: #9a6500;
+      --danger: #a33b2a;
+      --cool: #315f8a;
+      --radius: 8px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; min-width: 320px; background: var(--bg); color: var(--ink); line-height: 1.65; }
+    a { color: var(--accent); text-decoration-color: rgba(11, 107, 87, .38); text-underline-offset: 3px; }
+    a:hover { color: #064c3d; }
+    .app-shell { display: grid; grid-template-columns: 286px minmax(0, 1fr); min-height: 100vh; }
+    .sidebar { position: sticky; top: 0; height: 100vh; padding: 22px 16px; border-right: 1px solid var(--line); background: rgba(255, 253, 250, .94); overflow: auto; }
+    .brand { padding: 4px 4px 18px; border-bottom: 1px solid var(--line); }
+    .brand h1 { margin: 0; font-size: 20px; line-height: 1.2; letter-spacing: 0; }
+    .brand p { margin: 9px 0 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .nav-group { padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .nav-group-title { margin: 0 4px 8px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+    .nav-link { display: flex; align-items: center; gap: 8px; min-height: 34px; padding: 7px 8px; border-radius: var(--radius); color: var(--ink); text-decoration: none; }
+    .nav-link span { width: 34px; color: var(--muted); font-size: 11px; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .nav-link strong { font-size: 13px; font-weight: 750; }
+    .nav-link:hover { background: var(--surface-2); color: var(--accent); }
+    .main { min-width: 0; padding: 22px clamp(16px, 3vw, 42px) 42px; }
+    .topline { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; padding: 13px 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+    .topline p { margin: 0; color: var(--muted); font-size: 13px; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 7px; }
+    .badge { display: inline-flex; align-items: center; min-height: 25px; padding: 4px 8px; border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; color: var(--muted); font-size: 12px; font-weight: 700; }
+    .badge.accent { color: var(--accent); border-color: rgba(11, 107, 87, .35); background: rgba(11, 107, 87, .07); }
+    .badge.warn { color: var(--accent-2); border-color: rgba(154, 101, 0, .34); background: rgba(154, 101, 0, .07); }
+    .badge.danger { color: var(--danger); border-color: rgba(163, 59, 42, .34); background: rgba(163, 59, 42, .07); }
+    .hero-panel { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(290px, .65fr); gap: 16px; margin-bottom: 16px; }
+    .hero-copy, .metric-grid, .panel { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+    .hero-copy { padding: clamp(22px, 3vw, 34px); }
+    .eyebrow { margin: 0 0 9px; color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    h1, h2, h3 { letter-spacing: 0; line-height: 1.25; }
+    .hero-copy h2 { margin: 0; max-width: 900px; font-size: clamp(30px, 5vw, 54px); }
+    .hero-copy p { max-width: 870px; margin: 15px 0 0; color: var(--muted); font-size: 15px; }
+    .metric-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; overflow: hidden; }
+    .metric { min-height: 132px; padding: 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .metric:nth-child(2n) { border-right: 0; }
+    .metric:nth-last-child(-n+2) { border-bottom: 0; }
+    .metric strong { display: block; font-size: clamp(27px, 3.6vw, 42px); line-height: 1; font-variant-numeric: tabular-nums; }
+    .metric span { display: block; margin-top: 9px; color: var(--muted); font-size: 12px; }
+    .panel { margin-top: 16px; overflow: hidden; }
+    .panel-head { padding: 18px 20px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #fffdfa 0%, #fbfaf6 100%); }
+    .panel-head h2 { margin: 0; font-size: 22px; }
+    .panel-head p:last-child { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+    .content { padding: 18px 20px 22px; }
+    .content p { margin: 0 0 12px; }
+    .content ul, .content ol { margin: 9px 0 0; padding-left: 22px; }
+    .content li { margin: 6px 0; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .note-card { padding: 14px; border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; }
+    .note-card h3 { margin: 0 0 7px; font-size: 15px; }
+    .note-card p { margin: 0; color: var(--muted); font-size: 13px; }
+    blockquote { margin: 14px 0; padding: 13px 15px; border-left: 4px solid var(--accent); background: rgba(11, 107, 87, .07); color: #23312b; }
+    .table-shell { overflow-x: auto; border-top: 1px solid var(--line); }
+    table { width: 100%; border-collapse: collapse; min-width: 760px; }
+    th, td { padding: 11px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; font-size: 13px; }
+    th { background: #ece8df; color: #393b35; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+    td strong { color: var(--ink); }
+    .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .source-list { display: grid; gap: 8px; margin: 0; padding: 0; }
+    .source-list li { list-style: none; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; font-size: 13px; }
+    .footer { margin: 18px 0 0; color: var(--muted); font-size: 12px; }
+    @media (max-width: 940px) {
+      .app-shell { grid-template-columns: 1fr; }
+      .sidebar { position: static; height: auto; }
+      .hero-panel, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .metric { min-height: 106px; }
+    }
+  </style>
+</head>
+<body>
+<!-- research-site-nav:start -->
+<style>
+.research-site-nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;gap:10px;min-height:42px;padding:7px clamp(14px,3vw,28px);border-bottom:1px solid #d9d5ca;background:rgba(246,244,239,.94);backdrop-filter:blur(12px);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+.research-site-nav a{display:inline-flex;align-items:center;min-height:28px;border:1px solid #d9d5ca;border-radius:8px;padding:3px 10px;background:#fffdfa;color:#181916;text-decoration:none;font-size:13px;line-height:1.2}
+.research-site-nav a:hover{border-color:#0b6b57;color:#0b6b57}
+.research-site-nav .research-site-nav-spacer{flex:1 1 auto}
+.research-site-nav strong{font-size:13px;color:#676b62;font-weight:700;white-space:nowrap}
+@media(max-width:640px){.research-site-nav{gap:6px;overflow-x:auto}.research-site-nav strong{display:none}.research-site-nav a{white-space:nowrap}}
+</style>
+<nav class="research-site-nav" aria-label="站点导航">
+  <a href="../../index.html">返回投研站首页</a>
+  <a href="../index.html">全部研究</a>
+  <span class="research-site-nav-spacer"></span>
+  <strong>美股投研</strong>
+</nav>
+<!-- research-site-nav:end -->
+
+<div class="app-shell">
+  <aside class="sidebar" aria-label="导航">
+    <div class="brand">
+      <h1>老雷 TheMarketMemo 投资框架研究</h1>
+      <p>基于公开 X 样本、站点文章、Patreon 简介、YouTube 与视频衍生整理页。日期：2026-06-28。</p>
+    </div>
+    <nav class="nav-group" aria-label="Primary">
+      <p class="nav-group-title">Research</p>
+      <a class="nav-link" href="#overview"><span>00</span><strong>总览</strong></a>
+      <a class="nav-link" href="#scope"><span>01</span><strong>口径边界</strong></a>
+      <a class="nav-link" href="#map"><span>02</span><strong>渠道证据</strong></a>
+      <a class="nav-link" href="#framework"><span>03</span><strong>总框架</strong></a>
+      <a class="nav-link" href="#stocks"><span>04</span><strong>个股研究</strong></a>
+      <a class="nav-link" href="#growth"><span>05</span><strong>成长股</strong></a>
+      <a class="nav-link" href="#hi5"><span>06</span><strong>Hi5 组合</strong></a>
+      <a class="nav-link" href="#execution"><span>07</span><strong>交易执行</strong></a>
+      <a class="nav-link" href="#macro"><span>08</span><strong>商品宏观</strong></a>
+      <a class="nav-link" href="#risk"><span>09</span><strong>风险盲点</strong></a>
+      <a class="nav-link" href="#usage"><span>10</span><strong>怎么使用</strong></a>
+      <a class="nav-link" href="#sources"><span>11</span><strong>来源</strong></a>
+    </nav>
+  </aside>
+
+  <main class="main" id="main">
+    <div class="topline">
+      <p>修订结论：老雷不是只讲长期 ETF。他的公开体系至少有四层：市场/周期战略、ETF 组合、个股 Alpha、趋势交易与商品期货。</p>
+      <div class="badge-row">
+        <span class="badge accent">ETF</span>
+        <span class="badge accent">个股 Alpha</span>
+        <span class="badge accent">DCA + BTD</span>
+        <span class="badge">MA / EMA</span>
+        <span class="badge">ATR 风控</span>
+        <span class="badge warn">TQQQ / LRS</span>
+      </div>
+    </div>
+
+    <section class="hero-panel" id="overview">
+      <div class="hero-copy">
+        <p class="eyebrow">Executive Summary</p>
+        <h2>他的体系更准确地说是“战略上选战场，战术上打顺风仗”。</h2>
+        <p>公开材料显示，老雷用《孙子兵法》把投资交易拆成两件事：先判断“可以战与不可以战”，再等待“胜于易胜者”。ETF 是他给多数人的低复杂度底盘；个股 Alpha、超级成长股组合、趋势交易、期货商品和杠杆策略，是更高复杂度的分支。上一版过度强调长期 ETF，本版补齐个股和交易层。</p>
+      </div>
+      <div class="metric-grid">
+        <div class="metric"><strong>9,835</strong><span>X 资料页显示的账号发帖量，不等于本次全量获取量</span></div>
+        <div class="metric"><strong>93</strong><span>从 X 未登录 SSR 页面解析到的去重推文样本</span></div>
+        <div class="metric"><strong>181</strong><span>TheMarketMemo WordPress API 公开文章数</span></div>
+        <div class="metric"><strong>56</strong><span>已写入校验记录的外部链接/页面状态</span></div>
+      </div>
+    </section>
+
+    <section class="panel" id="scope">
+      <div class="panel-head">
+        <p class="eyebrow">Coverage Boundary</p>
+        <h2>研究口径与限制</h2>
+        <p>这是源证据研究，不是对付费区的完整复刻，也不是 X API 全库导出。</p>
+      </div>
+      <div class="content">
+        <div class="grid-2">
+          <div class="note-card">
+            <h3>已经覆盖</h3>
+            <p>X 公共可见样本、TheMarketMemo 首页/Hi5/理念/超级成长股页面、WordPress 公开文章、Patreon 公开简介、YouTube oEmbed 标题、多篇视频衍生整理页、代表链接 HTTP 校验。</p>
+          </div>
+          <div class="note-card">
+            <h3>没有覆盖</h3>
+            <p>未取得 X 认证/API 全量历史推文，未进入 Patreon 付费内容，未获取所有 YouTube 原始字幕。因此报告中不会声称“已读完全部 9,835 条推文”。</p>
+          </div>
+        </div>
+        <blockquote>
+          <p>本次最稳的证据链是：官网“我的投资理念”直接写出战略/战术框架；“企业基本面研究速查模板”给出个股研究清单；“超级成长股组合”页面说明他确实有纯 Alpha 股票模型；Hi5 和视频整理页补足 ETF、趋势、杠杆与择时规则。</p>
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="panel" id="map">
+      <div class="panel-head">
+        <p class="eyebrow">Evidence Map</p>
+        <h2>身份、渠道与内容重心</h2>
+        <p>同一套底层逻辑在 X、官网、Patreon、YouTube 中反复出现。</p>
+      </div>
+      <div class="table-shell">
+        <table>
+          <thead>
+            <tr><th>渠道</th><th>本次证据</th><th>可观察内容</th><th>判断</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>X: @TheMarketMemo</strong></td>
+              <td class="num">93 条公开样本；43 条投资相关；22 条外链</td>
+              <td>“让投资更简单”、ETF、Beta/Alpha、不要单一股票、尊重图形、纪律与现金。</td>
+              <td>适合抓他的公开口号和原则，但不能代表全量历史。</td>
+            </tr>
+            <tr>
+              <td><strong>TheMarketMemo 官网</strong></td>
+              <td class="num">181 篇公开文章；91 篇投资相关</td>
+              <td>公开文章、交易笔记、Hi5 组合页面、市场观察、指标和流程。</td>
+              <td>是体系化规则最清晰的来源，尤其是 Hi5。</td>
+            </tr>
+            <tr>
+              <td><strong>Patreon</strong></td>
+              <td class="num">公开简介可读；显示交易笔记集合 525 posts</td>
+              <td>自述 2004 年进入金融市场，主要投资美股和国际大宗商品期货；目标是寻找市场规律、赚最容易赚的钱。</td>
+              <td>说明其付费内容定位为“看他怎么想、怎么做”，但付费正文未纳入。</td>
+            </tr>
+            <tr>
+              <td><strong>YouTube / 衍生整理</strong></td>
+              <td class="num">16 条视频链接；多篇重点视频整理页</td>
+              <td>5 只 ETF、Hi5 再平衡、双均线系统、TQQQ 杠杆策略、趋势五步法、个股选股硬标准、基本面+技术面双框架。</td>
+              <td>用于还原策略细节，但衍生整理页不是官方逐字字幕。</td>
+            </tr>
+            <tr>
+              <td><strong>理念/超级成长股页面</strong></td>
+              <td class="num">官网 2 个专题页</td>
+              <td>“知可以战与不可以战者胜”“善战者胜于易胜者”；ETF 占总投资资本 60% 以上；股票池、选股模型和交易细节在会员区；超级成长股组合不超过 10 只股票，纯 Alpha。</td>
+              <td>说明 ETF 是底盘，不是全部；个股 Alpha 属于更高门槛和部分付费化内容。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" id="framework">
+      <div class="panel-head">
+        <p class="eyebrow">Framework</p>
+        <h2>他的投资逻辑：四层系统</h2>
+        <p>ETF 是其中一层，不是全部。更完整的读法如下。</p>
+      </div>
+      <div class="content">
+        <div class="grid-2">
+          <div class="note-card">
+            <h3>1. 战略层：能不能打</h3>
+            <p>官网“我的投资理念”把战略定义为判断市场周期、是否处在极值区，并参考股指期货多空、期权多空、市场宽度、投资者情绪等数据。这个层面决定是否值得承担风险。</p>
+          </div>
+          <div class="note-card">
+            <h3>2. 底仓层：ETF 和现金流</h3>
+            <p>ETF 占其公开自述总投资资本 60% 以上，是机会成本和现金流来源。Hi5 是这层的规则样本：Alpha、Beta、Cash 三类收益来源配合 DCA+BTD。</p>
+          </div>
+          <div class="note-card">
+            <h3>3. 个股层：用基本面选战场</h3>
+            <p>他并非不研究个股。企业基本面模板明确问商业模式、独占经济优势、成长性、安全性、现金流，目标是决定“值不值得重金投入”。</p>
+          </div>
+          <div class="note-card">
+            <h3>4. 交易层：用技术面选时机</h3>
+            <p>基本面决定“买什么”，技术面决定“何时买、何时卖”。他的公开材料反复强调价格图形、均线、趋势、筹码峰、乖离、市场宽度和情绪极值。</p>
+          </div>
+        </div>
+        <blockquote>
+          <p>一句话：他的体系不是“长期持有 ETF”这么窄，而是“先用宏观和市场状态判断战场，再用 ETF 或个股选择载体，最后用趋势和风控决定仓位与进出”。</p>
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="panel" id="stocks">
+      <div class="panel-head">
+        <p class="eyebrow">Single Stocks</p>
+        <h2>个股研究：战略上先判定“这门生意值不值得参与”</h2>
+        <p>这是上一版缺失最多的部分。公开 WordPress 文章给出了比较完整的个股研究模板。</p>
+      </div>
+      <div class="content">
+        <p>在《企业基本面研究速查模板》中，他把个股研究的目的写得很清楚：投资股票前先建立企业基本认知，判断商业模式、独占经济优势、未来创造价值能力，以及是否值得重金投入；如果值得，再耐心等股灾或黑天鹅。最后一句很关键：基本面模板“目的是定性，是决定值不值得投资的战略问题；在此基础之上，才是交易策略这类战术问题”。</p>
+        <div class="grid-2">
+          <div class="note-card">
+            <h3>天花板</h3>
+            <p>行业/细分行业、未来 5 年景气度、技术变革、未来 3 年销售增速是否下降、企业面对销售下降做了什么。</p>
+          </div>
+          <div class="note-card">
+            <h3>商业模式</h3>
+            <p>B2B 还是 2C；产品/服务构成；最大产品收入占比；客户集中度；订阅/预收收入；应收账款和预收款变化；一年内新产品。</p>
+          </div>
+          <div class="note-card">
+            <h3>企业核心</h3>
+            <p>大股东、最大个人股东、领军人物背景和性格、管理层持股、是否多处担任 CEO、未来战略阐述。</p>
+          </div>
+          <div class="note-card">
+            <h3>经济护城河</h3>
+            <p>产业链位置、高毛利环节、垄断环节、研发/生产/销售强弱项、毛利率、运营利润率、ROIC、专利、定价权、品牌、不可替代性和进入壁垒。</p>
+          </div>
+          <div class="note-card">
+            <h3>成长性</h3>
+            <p>近 3 年收入、每股收入、TTM 收入、收入与运营收入/经营现金流是否同步增长，并至少找一个最大竞争对手对照。</p>
+          </div>
+          <div class="note-card">
+            <h3>安全性与现金流</h3>
+            <p>付息债务、利息支出占经营现金流、可快速变现资产、无息债务、资金占用、经营现金流/收入、资本开支与偿债资金缺口。</p>
+          </div>
+        </div>
+        <blockquote>
+          <p>他的个股观不是“看好公司就买入并永久持有”，而是：先确认企业是否有独占经济优势，再等市场犯错或趋势确认。基本面是战略，买卖点是战术。</p>
+        </blockquote>
+      </div>
+      <div class="table-shell">
+        <table>
+          <thead>
+            <tr><th>分支</th><th>公开材料中的规则</th><th>操作含义</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>认知边界</strong></td><td>衍生整理页强调“安全边际的本质是认知边际”，优先投自己能理解/感知的产品或服务。</td><td>看不懂的 2B、生物科技、复杂政策风险资产，更适合 ETF 或直接不做。</td></tr>
+            <tr><td><strong>硬过滤</strong></td><td>整理页给出收入不低于 1 亿美元、经营现金流为正两道门槛。</td><td>先排除纯故事、纯融资续命、现金流持续为负的标的。</td></tr>
+            <tr><td><strong>成长股</strong></td><td>年收入增速约 30% 以上、现金流增速与收入同步、市值不能过大、赛道天花板足够高。</td><td>寻找仍处于高速成长惯性期、且有足够 TAM 的公司。</td></tr>
+            <tr><td><strong>非成长龙头</strong></td><td>收入规模 100 亿美元以上、寡头格局、现金流/净利润/分红稳定。</td><td>作为压舱石，不追求巨大弹性，而追求可理解的长期复利。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" id="growth">
+      <div class="panel-head">
+        <p class="eyebrow">Growth / Alpha</p>
+        <h2>成长股、百倍股与超级成长股组合</h2>
+        <p>公开官网明确列出“两个指标鉴别真伪成长股、寻找百倍股、怎样投资成长股”；超级成长股组合页面说明其股票 Alpha 模型存在。</p>
+      </div>
+      <div class="content">
+        <div class="grid-2">
+          <div class="note-card">
+            <h3>超级成长股组合</h3>
+            <p>官网写明：由不超过 10 只股票组成，基于数据选股模型，是具备“优胜劣汰机制”的纯 Alpha 美股投资策略，目标是长期高于市场平均回报。页面已转移至 Patreon。</p>
+          </div>
+          <div class="note-card">
+            <h3>惯性</h3>
+            <p>视频整理页用牛顿惯性类比企业：优秀企业倾向继续优秀。观察收入规模增长、运营利润率稳定、经营现金流与收入的稳定比例。</p>
+          </div>
+          <div class="note-card">
+            <h3>动量</h3>
+            <p>动量不是只看涨跌，而是强者恒强的资金与商业正反馈：规模、速度、相对强度同步向上的股票，才是更优先的候选。</p>
+          </div>
+          <div class="note-card">
+            <h3>催化剂</h3>
+            <p>催化剂不创造基本面，但会让市场快速形成共识。整理页列举管理层更迭、拆分、回购、并购重组、监管政策、新品发布、内部人增持等。</p>
+          </div>
+        </div>
+        <p>因此，他的百倍股/成长股思路并不是“低估值买入等奇迹”，而是寻找大 TAM、强商业惯性、价格惯性、相对强势和可能释放价值的催化剂。英伟达和 Meta 被视频整理页用作“催化剂触发重定价”的例子，但这类材料来自第三方整理，不能视为官方逐字稿。</p>
+      </div>
+    </section>
+          <div class="note-card">
+            <h3>5. 用趋势系统处理交易</h3>
+            <p>交易层面不靠基本面叙事，而是尊重价格图形、均线结构和市场成本。“Trade what you see, not what you think.”</p>
+          </div>
+          <div class="note-card">
+            <h3>6. 保留现金与退出机制</h3>
+            <p>他把投资视为一门生意：资本、系统、杠杆、应急措施、失败/退出机制都要明确。</p>
+          </div>
+        </div>
+        <blockquote>
+          <p>最简化的表达：用美国市场的长期上行和 ETF 的自我淘汰机制做底盘，用持续现金流和下跌买入积累仓位，用均线趋势避免在错误环境里放大风险。</p>
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="panel" id="hi5">
+      <div class="panel-head">
+        <p class="eyebrow">Hi5 Portfolio</p>
+        <h2>Hi5：他把“简单投资”落成规则的样本</h2>
+        <p>Hi5 页面是公开材料中最接近实盘规则书的部分。</p>
+      </div>
+      <div class="content">
+        <p>官网 Hi5 页面称，这是真实投资实验，使用 DCA+BTD 积累财富。组合始于 2023 年 8 月，初始资本 50 万加元，至 2026 年 2 月 20 日总资产累积至 122.02 万加元，页面披露复合增长率为 9.43%。这个数字包含持续投入后的资产增长，不能直接等同于纯投资收益率。</p>
+      </div>
+      <div class="table-shell">
+        <table>
+          <thead>
+            <tr><th>ETF</th><th>角色</th><th>老雷的组合逻辑</th><th>我的解读</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>IWY</strong></td><td>Alpha</td><td>罗素 Top 200 超大成长股 ETF。</td><td>用大市值成长股承担进攻端，押美国大企业成长的结构优势。</td></tr>
+            <tr><td><strong>SPMO</strong></td><td>Alpha</td><td>标普 500 动量策略 ETF，2025 年 8 月替换 MOAT。</td><td>从“分析师评估护城河”转向“价格表现决定持仓”，更贴合他尊重市场行为的思想。</td></tr>
+            <tr><td><strong>RSP</strong></td><td>Beta</td><td>标普 500 等权指数 ETF。</td><td>避免市值权重过度集中，作为美国经济平均暴露。</td></tr>
+            <tr><td><strong>PFF</strong></td><td>Cash</td><td>优先股 ETF。</td><td>提供分红/利息型现金流，降低必须卖资产取现的压力。</td></tr>
+            <tr><td><strong>VNQ</strong></td><td>Cash</td><td>房地产信托 ETF。</td><td>用 REITs 租金属性补充现金流，但受利率周期影响较大。</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="content">
+        <h3>DCA+BTD 执行规则</h3>
+        <ol>
+          <li>每次定额增持约 1 万美元，五只 ETF 等金额分配。</li>
+          <li>RSP 当月第一次日跌幅达到 -1%，执行当月第一次定额增持。</li>
+          <li>若当月没有触发 -1%，则在第三个星期五收盘前执行第一次增持，不论涨跌。</li>
+          <li>在第一次增持基础上，若 RSP 月跌幅达到 -5%，执行第二次增持。</li>
+          <li>满足第二次条件后，若再出现“人性之极”，执行第三次增持。</li>
+          <li>每月最多三笔；每年 8 月按等权重再平衡。</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="panel" id="execution">
+      <div class="panel-head">
+        <p class="eyebrow">Execution</p>
+        <h2>交易执行：趋势、筹码、图形和仓位</h2>
+        <p>交易与投资在他的体系中是两套规则：基本面负责选择战场，技术面负责进出和风险边界。</p>
+      </div>
+      <div class="content">
+        <div class="grid-2">
+          <div class="note-card">
+            <h3>双均线系统</h3>
+            <p>MA 是市场平均成本的滞后确认，EMA 对近期价格更敏感。他用 EMA 提供预警，用 MA 确认趋势，关注 20、60、120 日三个周期的同步方向。</p>
+          </div>
+          <div class="note-card">
+            <h3>趋势五步法</h3>
+            <p>从下跌转上涨通常经历：价格站上短期均线、短期均线向上、短中期金叉、短中长期多头排列、大幅乖离后的反向修正。</p>
+          </div>
+          <div class="note-card">
+            <h3>时钟斜率</h3>
+            <p>视频整理页把趋势分成 1-2 点加速上涨、2 点半到 1 点稳定上涨、2 点半到 3 点半横盘、3 点半到 5 点稳定下跌、5-6 点加速下跌。最理想的是 30-60 度稳定趋势。</p>
+          </div>
+          <div class="note-card">
+            <h3>筹码峰和回踩</h3>
+            <p>“基本面+技术面”整理页强调筹码峰是市场公允价格共识。实战上不是追涨，而是在上升趋势中等待价格回踩重要筹码峰或均线组。</p>
+          </div>
+          <div class="note-card">
+            <h3>基本面与交易分离</h3>
+            <p>他公开说“基本面不可以用来做交易”，并将一次大额平仓亏损归因于价格图形与基本面背离时没有尊重图形。</p>
+          </div>
+          <div class="note-card">
+            <h3>TQQQ / LRS</h3>
+            <p>杠杆不是无条件持有，而是用标的指数均线做滤波器：指数在均线上方才适合放大暴露，跌破则退回国债或现金。视频整理中强调参考标的指数，不参考杠杆 ETF 自身均线。</p>
+          </div>
+          <div class="note-card">
+            <h3>四项图形原则</h3>
+            <p>《图形分析的四项基本原则》列出大量、缺口、密集成交区、背离。其目的不是神秘技术分析，而是观察市场突变、人性极值和成本回归。</p>
+          </div>
+          <div class="note-card">
+            <h3>ATR 资金管理</h3>
+            <p>《量化资金管理策略》用 ATR 标准化风险：N = 账户总资金 * 1% / (ATR * 合约乘数)。单一品种上限 4N，高相关 6N，松散相关 10N，单方向 12N。</p>
+          </div>
+          <div class="note-card">
+            <h3>亏损降级</h3>
+            <p>若账户资金损失超过 10%，新建头寸规模按当前总资金的 80% 计算。这是海龟式风控思想：先让自己活下来，再谈收益。</p>
+          </div>
+        </div>
+        <blockquote>
+          <p>他的个股操作不是“看好就买”，而是：基本面入池，趋势确认，回踩关键位置，预设风险边界，图形不对就认错。公开推文里那句“交易你的计划，而不是你的情绪”就是执行层的核心。</p>
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="panel" id="macro">
+      <div class="panel-head">
+        <p class="eyebrow">Macro / Futures</p>
+        <h2>商品期货、宏观与跨资产框架</h2>
+        <p>Patreon 公开简介称其主要投资领域包括国际大宗商品期货；站点中也有商品期货基本面纲要。</p>
+      </div>
+      <div class="content">
+        <div class="grid-2">
+          <div class="note-card">
+            <h3>供需平衡表</h3>
+            <p>《商品期货基本面研究纲要》把供需平衡表放在第一位：需求、供给、库存、surplus/gap，是判断大趋势的基础。</p>
+          </div>
+          <div class="note-card">
+            <h3>边际变化比绝对值更重要</h3>
+            <p>他强调供需的边际变化会非线性影响价格，1000 万吨增量可能不是多跌 30%，而是直接腰斩。</p>
+          </div>
+          <div class="note-card">
+            <h3>预期差</h3>
+            <p>surplus/gap 本身不够，还要和市场预期比较。过剩低于预期，反而可能支撑价格；这就是基本面和价格反应的连接点。</p>
+          </div>
+          <div class="note-card">
+            <h3>周期匹配</h3>
+            <p>商品基本面研究对应的投资周期至少以季度计。用基本面解释一天或一周的行情，在他的框架里是不匹配的。</p>
+          </div>
+          <div class="note-card">
+            <h3>宏观与品种背离</h3>
+            <p>若品种基本面与宏观趋势背离，应出场等待预期明朗。大的行情必须有宏观趋势配合，否则只是局部行情。</p>
+          </div>
+          <div class="note-card">
+            <h3>期货合约细节</h3>
+            <p>他解释主力合约、连续合约和换约缺口：连续合约是算法结果，不可交易；换约缺口本质是情绪缺口，历史上多数会被回补。</p>
+          </div>
+        </div>
+        <p>这说明他的“基本面不可以用来做交易”不是否定基本面，而是反对用滞后的基本面做短线按钮。商品/宏观基本面用于定义大方向和周期，技术面与价格行为用于执行。</p>
+      </div>
+    </section>
+
+    <section class="panel" id="risk">
+      <div class="panel-head">
+        <p class="eyebrow">Risk Review</p>
+        <h2>风险、盲点与需要反证的地方</h2>
+        <p>他的体系有清晰优点，但不能无脑复制。</p>
+      </div>
+      <div class="content">
+        <ul>
+          <li><strong>美国例外论风险：</strong>体系底层依赖美股长期向上和美元资产吸引力。如果估值、财政、政治或全球资本流向发生长期反转，底层假设会承压。</li>
+          <li><strong>现金流要求高：</strong>DCA+BTD 的关键不是“跌了就买”，而是你在下跌时仍有稳定现金流和心理承受能力。没有现金的人会在最需要加仓时失去执行力。</li>
+          <li><strong>贡献与收益需分开：</strong>Hi5 页面展示资产从 50 万加元到 122.02 万加元，但期间有持续投入，因此不能把资产增长率直接当作策略年化收益。</li>
+          <li><strong>因子 ETF 会失效或轮动：</strong>SPMO、IWY、RSP、PFF、VNQ 对动量、成长、利率、房地产周期都有暴露。它不是低风险组合，只是比单一股票更制度化。</li>
+          <li><strong>均线策略会滞后和反复打脸：</strong>MA/EMA 能降低主观预测，但震荡市会产生假信号。趋势系统的真实成本是错过一部分涨幅和忍受多次小亏。</li>
+          <li><strong>杠杆策略不适合多数人：</strong>TQQQ/LRS 需要纪律、税务意识、交易执行和对波动衰减的理解。把它当成“长期只买不卖”会偏离他的公开逻辑。</li>
+          <li><strong>个股 Alpha 复杂度高：</strong>超级成长股组合、股票池和交易细节部分在会员区，公开材料只能还原框架，不能完整复现其调仓与风控。</li>
+          <li><strong>第三方整理页要降权：</strong>北美情报站文章可访问且内容匹配，但它不是官方逐字稿。报告中把它作为“衍生整理证据”，优先级低于官网和 WordPress 原文。</li>
+          <li><strong>证据边界：</strong>本次没有拿到 X 全量推文和 Patreon 付费正文，无法验证他每一次实盘动作与公开原则是否完全一致。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel" id="usage">
+      <div class="panel-head">
+        <p class="eyebrow">Practical Takeaways</p>
+        <h2>如何使用他的内容，而不是盲跟</h2>
+        <p>把它当成框架库，不要当成信号源。</p>
+      </div>
+      <div class="content">
+        <ol>
+          <li>先分清你要学哪一层：市场周期判断、ETF 组合、个股 Alpha、趋势交易、期货商品、杠杆增强。不要把某一层规则拿去套另一层。</li>
+          <li>做个股时先用“企业基本面七类问题”建股票池，再用趋势和筹码位置决定是否出手。不要因为故事好听就跳过现金流和债务。</li>
+          <li>做成长股时重点看收入/现金流惯性、相对强势、TAM、催化剂和估值消化能力。不要把“高成长”误读成“跌了就便宜”。</li>
+          <li>做趋势交易时先用 20/60/120 日均线、时钟斜率、密集成交区、乖离和成交量记录市场状态，再写买卖规则。</li>
+          <li>做期货商品时先做供需平衡表、成本曲线和预期差，不要拿单日新闻替代季度级别基本面。</li>
+          <li>做杠杆时必须先写清楚：参考哪个标的指数、哪条均线、跌破后持什么、何时重新买入、税费和滑点如何处理。</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="panel" id="sources">
+      <div class="panel-head">
+        <p class="eyebrow">Sources</p>
+        <h2>主要来源与校验状态</h2>
+        <p>以下外部链接均在 2026-06-28 通过 HTTP 访问校验，除特别说明外状态为 200。</p>
+      </div>
+      <div class="content">
+        <ul class="source-list">
+          <li><a href="https://x.com/TheMarketMemo">X: TheMarketMemo</a>。资料页显示账号名 LEI，描述为“每個人都在用自己的偏見看世界，希望我的偏見對你有益。”</li>
+          <li><a href="https://themarketmemo.com/">TheMarketMemo 官网</a>。首页写明“老雷｜投資人”，传播“让投资更简单”的观念。</li>
+          <li><a href="https://themarketmemo.com/myphilosophy/">我的投資理念</a>。战略/战术框架的核心来源：知可以战与不可以战者胜，善战者胜于易胜者。</li>
+          <li><a href="https://themarketmemo.com/supergrowth/">超級成長股組合</a>。官网说明该组合由不超过 10 只股票组成，基于数据选股模型，是纯 Alpha 美股投资策略。</li>
+          <li><a href="https://themarketmemo.com/hi5/">Hi5 组合页面</a>。组合构成、DCA+BTD、Alpha/Beta/Cash 分层、再平衡和加仓规则的主要来源。</li>
+          <li><a href="https://www.patreon.com/cw/TheMarketMemo/home">Patreon: 交易筆記 · TheMarketMemo</a>。公开简介说明 2004 年进入金融市场，主要投资美股与国际大宗商品期货。</li>
+          <li><a href="https://themarketmemo.com/memo/71/">企业基本面研究速查模板</a>。个股研究七类问题、独占经济优势、基本面是战略问题的主要来源。</li>
+          <li><a href="https://themarketmemo.com/investment/388/">基本面的洞见</a>。基本面非线性变化、估值波动、产品理解三类赚钱来源。</li>
+          <li><a href="https://themarketmemo.com/investment/3463/">投资，状态与结构</a>。结构变化与状态变化、投资结构变化+交易状态变化。</li>
+          <li><a href="https://themarketmemo.com/investment/781/">商品期货基本面研究纲要</a>。供需平衡表、边际变化、预期差、宏观与品种基本面背离。</li>
+          <li><a href="https://themarketmemo.com/memo/22858/">期货合约那些事</a>。主力合约、连续合约、换约缺口。</li>
+          <li><a href="https://themarketmemo.com/investment/2856/">图形分析的四项基本原则</a>。大量、缺口、密集成交区、背离。</li>
+          <li><a href="https://themarketmemo.com/investment/727/">量化资金管理策略</a>。ATR、N 单位、持仓上限和亏损后降级。</li>
+          <li><a href="https://themarketmemo.com/investment/3190/">你不出错，谁能赢你？</a>。交易频率、趋势交易、生存率、轻仓位+宽止损。</li>
+          <li><a href="https://www.beimeizhan.com/post/vh5BMSBs0P4">美股投资不踩雷：不投清单与选股硬标准</a>。衍生整理页，用于认知边界、收入门槛、现金流门槛、成长股/非成长股区分。</li>
+          <li><a href="https://www.beimeizhan.com/post/qbU7LHPZ4Xo">20年实战总结：基本面+技术面双框架</a>。衍生整理页，用于商业模式/财务/市场定价、筹码峰和风险边界。</li>
+          <li><a href="https://www.beimeizhan.com/post/YtPfvTaSE8k">用自然科学原理解构美股投资</a>。衍生整理页，用于惯性、动量、杠杆和催化剂框架。</li>
+          <li><a href="https://www.youtube.com/watch?v=9x_-TKx3FJM">YouTube: 5隻ETF永不賣出</a> 与 <a href="https://www.beimeizhan.com/post/9x_-TKx3FJM">视频整理页</a>。用于 ETF 组合底层逻辑。</li>
+          <li><a href="https://www.youtube.com/watch?v=tYSihngEDhU">YouTube: Hi5 組合再平衡計劃</a> 与 <a href="https://www.beimeizhan.com/post/tYSihngEDhU">视频整理页</a>。用于 SPMO 替换 MOAT 的因子逻辑。</li>
+          <li><a href="https://www.youtube.com/watch?v=Pe04VShLE1g">YouTube: 移動平均線原理｜雙均線交易系統</a> 与 <a href="https://www.beimeizhan.com/post/Pe04VShLE1g">视频整理页</a>。用于 MA/EMA 与 20/60/120 日框架。</li>
+          <li><a href="https://www.youtube.com/watch?v=cuYIx3ZxNr4">YouTube: 我的槓桿投資策略 #TQQQ</a> 与 <a href="https://www.beimeizhan.com/post/cuYIx3ZxNr4">视频整理页</a>。用于 LRS 与 200 日均线逻辑。</li>
+          <li><a href="https://www.youtube.com/watch?v=TM74mQAXpW0">YouTube: 趨勢轉折與發展的5個關鍵步驟</a> 与 <a href="https://www.beimeizhan.com/post/TM74mQAXpW0">视频整理页</a>。用于趋势五步法。</li>
+          <li><a href="https://www.beimeizhan.com/post/MTmz6OLCykc">趋势交易全攻略：五类趋势形态识别与最优入场策略</a>。衍生整理页，用于时钟斜率、密集成交区和回踩策略。</li>
+          <li><a href="https://www.beimeizhan.com/post/9_0RKCJjDSo">三大指标精准捕捉美股买卖时机</a>。衍生整理页，用于市场宽度、AAII、NAAIM 三指标共振。</li>
+          <li>代表性 X 推文样本：<a href="https://x.com/TheMarketMemo/status/1765149786934788176">让投资更简单五点</a>、<a href="https://x.com/TheMarketMemo/status/1938352308531994820">不要投资任何单一股票</a>、<a href="https://x.com/TheMarketMemo/status/1765083070422810946">尊重图形</a>、<a href="https://x.com/TheMarketMemo/status/1681552612418781185">Beta 与 Alpha</a>、<a href="https://x.com/TheMarketMemo/status/1853325790546723165">现金承接/分红利息</a>。</li>
+        </ul>
+      </div>
+    </section>
+
+    <p class="footer">本报告为公开资料研究与框架归纳，不构成投资建议。证据文件保存在 /Users/pot/automation/us-stock-daily/evidence/themarketmemo_20260628/。</p>
+  </main>
+</div>
+</body>
+</html>

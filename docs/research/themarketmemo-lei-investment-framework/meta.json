@@ -1,0 +1,29 @@
+{
+  "slug": "themarketmemo-lei-investment-framework",
+  "title": "老雷 TheMarketMemo 投资框架研究",
+  "date": "2026-06-28",
+  "tags": [
+    "美股",
+    "ETF",
+    "个股",
+    "动量",
+    "趋势交易",
+    "商品期货"
+  ],
+  "tickers": [
+    "QQQ",
+    "TQQQ",
+    "IWY",
+    "RSP",
+    "SPMO",
+    "PFF",
+    "VNQ",
+    "NVDA",
+    "AMZN",
+    "TSLA"
+  ],
+  "teaser": "修订版：老雷不是只讲长期ETF，而是市场周期、ETF底仓、个股Alpha、趋势交易和商品期货的多层系统。",
+  "cover": null,
+  "path": "research/themarketmemo-lei-investment-framework/index.html",
+  "added_at": "2026-06-28 20:47:48"
+}

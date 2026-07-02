@@ -1,0 +1,24 @@
+{
+  "slug": "x-memory-sentiment-20260701",
+  "title": "X.com 半导体/存储风向 2026-07-01",
+  "date": "2026-07-01",
+  "tags": [
+    "半导体",
+    "存储",
+    "HBM",
+    "DRAM",
+    "NAND",
+    "X情绪"
+  ],
+  "tickers": [
+    "MU",
+    "SNDK",
+    "DRAM",
+    "META",
+    "GM"
+  ],
+  "teaser": "X 最新讨论显示：半导体/存储短线受 Meta 算力过剩叙事、DRAM 诉讼和板块杀估值压制，但 HBM/DRAM 紧缺与 MU 基本面仍支撑买跌声音。",
+  "cover": null,
+  "path": "research/x-memory-sentiment-20260701/index.html",
+  "added_at": "2026-07-01 23:12:10"
+}
