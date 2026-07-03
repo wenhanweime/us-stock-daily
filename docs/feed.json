@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "date": "2026-07-03",
+      "generated_at": "2026-07-03 12:00:05 +0800",
+      "model": "grok-4.20-multi-agent-xhigh",
+      "unique_tweets": 202,
+      "tickers": [
+        [
+          "$MU",
+          16
+        ],
+        [
+          "$NVDA",
+          9
+        ],
+        [
+          "$SPY",
+          9
+        ],
+        [
+          "$QQQ",
+          9
+        ],
+        [
+          "$TSLA",
+          5
+        ],
+        [
+          "$SNDK",
+          4
+        ],
+        [
+          "$AMD",
+          4
+        ],
+        [
+          "$ASTS",
+          4
+        ]
+      ],
+      "teaser": "美股观察日报·今日导读（2026-07-03）",
+      "report_path": "reports/2026-07-03.html"
+    },
+    {
       "date": "2026-07-02",
       "generated_at": "2026-07-02 12:00:02 +0800",
       "model": "grok-4.20-multi-agent-xhigh",
@@ -967,5 +1009,5 @@
       "report_path": "reports/2026-06-06.html"
     }
   ],
-  "last_updated": "2026-07-02 12:00:02 +0800"
+  "last_updated": "2026-07-03 12:00:05 +0800"
 }
