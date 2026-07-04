@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "date": "2026-07-04",
+      "generated_at": "2026-07-04 12:00:05 +0800",
+      "model": "grok-4.20-multi-agent-xhigh",
+      "unique_tweets": 162,
+      "tickers": [
+        [
+          "$NVDA",
+          6
+        ],
+        [
+          "$MU",
+          4
+        ],
+        [
+          "$TSLA",
+          4
+        ],
+        [
+          "$ASTS",
+          4
+        ],
+        [
+          "$QQQ",
+          3
+        ],
+        [
+          "$SPY",
+          3
+        ],
+        [
+          "$MRVL",
+          3
+        ],
+        [
+          "$MSTR",
+          3
+        ]
+      ],
+      "teaser": "美股观察日报·今日导读（2026-07-04）",
+      "report_path": "reports/2026-07-04.html"
+    },
+    {
       "date": "2026-07-03",
       "generated_at": "2026-07-03 12:00:05 +0800",
       "model": "grok-4.20-multi-agent-xhigh",
@@ -1009,5 +1051,5 @@
       "report_path": "reports/2026-06-06.html"
     }
   ],
-  "last_updated": "2026-07-03 12:00:05 +0800"
+  "last_updated": "2026-07-04 12:00:05 +0800"
 }
