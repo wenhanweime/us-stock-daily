@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "date": "2026-07-09",
+      "generated_at": "2026-07-09 12:00:06 +0800",
+      "model": "grok-4.20-multi-agent-xhigh",
+      "unique_tweets": 123,
+      "tickers": [
+        [
+          "$SPCX",
+          6
+        ],
+        [
+          "$MU",
+          4
+        ],
+        [
+          "$XLF",
+          3
+        ],
+        [
+          "$XLV",
+          3
+        ],
+        [
+          "$XLI",
+          3
+        ],
+        [
+          "$IWM",
+          3
+        ],
+        [
+          "$TSLA",
+          3
+        ],
+        [
+          "$ORCL",
+          2
+        ]
+      ],
+      "teaser": "123 条美股高赞讨论聚合",
+      "report_path": "reports/2026-07-09.html"
+    },
+    {
       "date": "2026-07-07",
       "generated_at": "2026-07-07 12:00:06 +0800",
       "model": "grok-4.20-multi-agent-xhigh",
@@ -1093,5 +1135,5 @@
       "report_path": "reports/2026-06-06.html"
     }
   ],
-  "last_updated": "2026-07-07 12:00:06 +0800"
+  "last_updated": "2026-07-09 12:00:06 +0800"
 }
