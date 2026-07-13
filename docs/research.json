@@ -1,6 +1,29 @@
 {
   "entries": [
     {
+      "slug": "adr-us-listing-price-patterns",
+      "title": "跨境赴美上市前后价格趋势:韩股 ADR 与全球案例对比",
+      "date": "2026-07-13",
+      "tags": [
+        "ADR",
+        "跨境上市",
+        "韩股",
+        "半导体",
+        "HBM"
+      ],
+      "tickers": [
+        "000660.KS",
+        "TSM",
+        "CPNG",
+        "BABA",
+        "ARM"
+      ],
+      "teaser": "海力士2026/台积电/Coupang/阿里/Arm:ADR溢价的形成、持续与消散,以及'本土折价'能否被赴美上市治愈",
+      "cover": null,
+      "path": "research/adr-us-listing-price-patterns/index.html",
+      "added_at": "2026-07-13 22:21:47"
+    },
+    {
       "slug": "x-memory-sentiment-20260701",
       "title": "X.com 半导体/存储风向 2026-07-01",
       "date": "2026-07-01",
@@ -282,5 +305,5 @@
       "added_at": "2026-06-06 21:03:33"
     }
   ],
-  "last_updated": "2026-07-01 23:12:10"
+  "last_updated": "2026-07-13 22:21:47"
 }

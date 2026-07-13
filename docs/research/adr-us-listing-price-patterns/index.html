@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4ef">
+  <title>跨境赴美上市前后价格趋势:韩股 ADR 与全球案例对比 · 美股投研</title>
+  <meta name="description" content="海力士2026/台积电/Coupang/阿里/Arm:ADR与直接IPO上市前后本土与美股价格趋势、溢价机制与套利约束的对比研究。">
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f4ef;
+  --surface: #fffdfa;
+  --surface-2: #f0eee8;
+  --ink: #181916;
+  --muted: #676b62;
+  --line: #d9d5ca;
+  --line-strong: #bdb7aa;
+  --accent: #0b6b57;
+  --accent-2: #9a6500;
+  --danger: #a33b2a;
+  --cool: #315f8a;
+  --shadow: 0 18px 45px rgba(42, 38, 30, 0.08);
+  --radius: 8px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
+a { color: inherit; text-decoration-color: rgba(11, 107, 87, 0.45); text-underline-offset: 3px; }
+a:hover { color: var(--accent); }
+button, input, a { touch-action: manipulation; }
+button:focus-visible, input:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid rgba(11, 107, 87, 0.32); outline-offset: 2px; }
+.skip-link { position: fixed; top: 10px; left: 10px; z-index: 100; transform: translateY(-150%); padding: 10px 12px; border-radius: var(--radius); background: var(--ink); color: white; }
+.skip-link:focus { transform: translateY(0); }
+.app-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); min-height: 100vh; }
+.sidebar { position: sticky; top: 0; height: 100vh; padding: max(18px, env(safe-area-inset-top)) 16px 18px max(16px, env(safe-area-inset-left)); border-right: 1px solid var(--line); background: rgba(255, 253, 250, 0.92); backdrop-filter: blur(12px); overflow-y: auto; }
+.brand { padding: 4px 4px 18px; border-bottom: 1px solid var(--line); }
+.brand h1 { margin: 0; font-size: 20px; line-height: 1.18; letter-spacing: 0; text-wrap: balance; }
+.brand p { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.nav-group { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.nav-group-title { margin: 0 4px 8px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+.nav-link { display: flex; align-items: center; gap: 8px; min-height: 34px; padding: 7px 8px; border-radius: 6px; color: #30322e; font-size: 13px; line-height: 1.25; text-decoration: none; }
+.nav-link:hover { background: #ece8df; color: var(--ink); }
+.nav-link span:first-child { width: 22px; flex: 0 0 auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+.main { min-width: 0; padding: 22px clamp(16px, 3vw, 34px) 60px; }
+.topbar { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: center; margin: -22px calc(clamp(16px, 3vw, 34px) * -1) 20px; padding: 14px clamp(16px, 3vw, 34px); border-bottom: 1px solid var(--line); background: rgba(246, 244, 239, 0.88); backdrop-filter: blur(12px); }
+.search-wrap { min-width: 0; }
+.search-wrap label { display: block; margin-bottom: 5px; color: var(--muted); font-size: 12px; }
+.search-row { display: flex; gap: 8px; align-items: center; }
+#searchInput { width: min(680px, 100%); height: 38px; border: 1px solid var(--line-strong); border-radius: var(--radius); padding: 0 12px; background: var(--surface); color: var(--ink); font-size: 14px; }
+.tool-buttons { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.tool-buttons button, .source-link { min-height: 36px; border: 1px solid var(--line-strong); border-radius: var(--radius); padding: 0 11px; background: var(--surface); color: var(--ink); font: inherit; font-size: 13px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; }
+.tool-buttons button:hover, .source-link:hover { border-color: var(--accent); color: var(--accent); }
+.hero-panel { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr); gap: 18px; align-items: stretch; margin-bottom: 18px; }
+.overview-copy, .metric-grid, .panel { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); }
+.overview-copy { padding: 22px; }
+.eyebrow { margin: 0 0 8px; color: var(--accent); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.overview-copy h2 { margin: 0; font-size: clamp(24px, 3vw, 38px); line-height: 1.08; letter-spacing: 0; text-wrap: balance; }
+.overview-copy p { max-width: 860px; margin: 14px 0 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
+.metric-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: hidden; }
+.metric { padding: 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-width: 0; }
+.metric:nth-child(2n) { border-right: 0; }
+.metric:nth-last-child(-n+2) { border-bottom: 0; }
+.metric strong { display: block; font-size: 28px; line-height: 1; font-variant-numeric: tabular-nums; }
+.metric span { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; line-height: 1.35; }
+.panel { margin: 18px 0; overflow: hidden; }
+.panel-head { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; padding: 18px 20px 14px; border-bottom: 1px solid var(--line); }
+.panel-head h2 { margin: 0; font-size: 20px; letter-spacing: 0; text-wrap: balance; }
+.panel-head p:not(.eyebrow) { margin: 6px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.table-shell { width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 880px; font-size: 13px; }
+th, td { padding: 10px 11px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; line-height: 1.42; overflow-wrap: anywhere; }
+thead th { position: sticky; top: 0; z-index: 1; background: #eeeae1; color: #353730; font-weight: 700; }
+tbody tr:hover { background: #fbf7ed; }
+tbody tr[hidden] { display: none; }
+.num { font-variant-numeric: tabular-nums; }
+.sort-button { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; border: 0; padding: 0; background: transparent; color: inherit; font: inherit; font-weight: 700; text-align: left; cursor: pointer; }
+.sort-button:hover { color: var(--accent); }
+.table-note { padding: 10px 20px 16px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); }
+.markdown-body { padding: 2px 20px 24px; }
+.markdown-body h2, .markdown-body h3 { scroll-margin-top: 86px; letter-spacing: 0; text-wrap: balance; }
+.markdown-body h2 { margin: 24px 0 10px; font-size: 21px; }
+.markdown-body h3 { margin: 22px 0 8px; font-size: 17px; }
+.markdown-body p, .markdown-body li { color: #30322d; font-size: 14px; line-height: 1.68; }
+.markdown-body ul, .markdown-body ol { padding-left: 22px; }
+.markdown-body blockquote { margin: 14px 0; padding: 10px 14px; border-left: 4px solid var(--accent); background: #f4f0e8; color: #2f332c; }
+.markdown-body blockquote p { margin: 4px 0; color: #2f332c; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
+.status-strip { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 20px 18px; }
+.badge { display: inline-flex; align-items: center; min-height: 28px; padding: 0 9px; border-radius: 999px; border: 1px solid var(--line-strong); background: #faf8f2; color: #3b3d37; font-size: 12px; white-space: nowrap; }
+.badge.accent { border-color: rgba(11, 107, 87, .35); color: var(--accent); }
+.badge.warn { border-color: rgba(154, 101, 0, .35); color: var(--accent-2); }
+.hidden-by-filter { display: none; }
+.empty-state { display: none; padding: 18px 20px; color: var(--muted); }
+.empty-state.visible { display: block; }
+.footer { margin-top: 28px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.player-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 12px; padding: 16px 20px 22px; }
+.player-card { border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; padding: 14px; min-width: 0; }
+.player-card header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.player-card h3 { margin: 0; font-size: 16px; letter-spacing: 0; }
+.player-card .ticker { font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.player-card dl { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 7px 10px; margin: 0; font-size: 13px; line-height: 1.48; }
+.player-card dt { color: var(--muted); }
+.player-card dd { margin: 0; color: #2c2e29; overflow-wrap: anywhere; }
+.player-card a { color: var(--accent); }
+.chain-map { padding: 16px 20px 22px; display: grid; gap: 12px; }
+.chain-row { display: grid; grid-template-columns: 150px repeat(5, minmax(120px, 1fr)); gap: 8px; align-items: stretch; }
+.chain-title { display: flex; align-items: center; padding: 10px; border-radius: var(--radius); background: #ece8df; font-weight: 800; font-size: 13px; }
+.chain-cell { min-height: 74px; padding: 10px; border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; font-size: 12px; line-height: 1.42; position: relative; }
+.chain-cell strong { display: block; margin-bottom: 5px; color: var(--ink); }
+.chain-cell::after { content: '→'; position: absolute; right: -13px; top: 50%; transform: translateY(-50%); color: var(--line-strong); font-weight: 800; }
+.chain-cell:last-child::after { content: ''; }
+.bottleneck { border-color: rgba(11, 107, 87, .45); background: #eef6f1; }
+.watch { border-color: rgba(154, 101, 0, .42); background: #fff7e8; }
+.risk-node { border-color: rgba(163, 59, 42, .38); background: #faece8; }
+.source-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px 14px; padding: 0 20px 22px; margin: 0; }
+.source-list li { list-style: none; font-size: 12px; line-height: 1.45; color: var(--muted); }
+.source-list a { color: var(--accent); }
+.timeline { padding: 16px 20px 22px; display: grid; gap: 10px; }
+.timeline-item { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; align-items: start; }
+.timeline-item time { padding: 8px 10px; border-radius: var(--radius); background: #ece8df; color: var(--ink); font-size: 12px; font-weight: 800; text-align: center; font-variant-numeric: tabular-nums; }
+.timeline-item div { padding: 10px 12px; border-left: 3px solid var(--accent); background: #fbfaf6; border-radius: 0 var(--radius) var(--radius) 0; font-size: 13px; line-height: 1.55; }
+@media (max-width: 1080px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  .hero-panel { grid-template-columns: 1fr; }
+  .topbar { grid-template-columns: 1fr; position: sticky; }
+  .tool-buttons { justify-content: flex-start; }
+}
+@media (max-width: 900px) { .chain-row { grid-template-columns: 1fr; } .chain-cell::after { content: '↓'; right: 12px; top: auto; bottom: -17px; transform: none; } .chain-cell:last-child::after { content: ''; } }
+@media (max-width: 640px) {
+  .main { padding-inline: 12px; }
+  .topbar { margin-inline: -12px; padding-inline: 12px; }
+  .overview-copy { padding: 18px; }
+  .metric-grid { grid-template-columns: 1fr; }
+  .metric, .metric:nth-child(2n), .metric:nth-last-child(-n+2) { border-right: 0; border-bottom: 1px solid var(--line); }
+  .metric:last-child { border-bottom: 0; }
+  .panel-head { flex-direction: column; }
+  table { min-width: 760px; font-size: 12px; }
+  th, td { padding: 8px; }
+  .search-row { flex-direction: column; align-items: stretch; }
+  .badge { white-space: normal; }
+  .player-grid, .chain-map, .timeline { padding-inline: 12px; }
+  .player-card dl { grid-template-columns: 1fr; }
+  .timeline-item { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
+.brand a{color:inherit;text-decoration:none}
+.brand a:hover{color:var(--accent)}
+.muted{color:var(--muted)}
+  </style>
+</head>
+<body>
+<!-- research-site-nav:start -->
+<style>
+.research-site-nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;gap:10px;min-height:42px;padding:7px clamp(14px,3vw,28px);border-bottom:1px solid #d9d5ca;background:rgba(246,244,239,.94);backdrop-filter:blur(12px);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+.research-site-nav a{display:inline-flex;align-items:center;min-height:28px;border:1px solid #d9d5ca;border-radius:8px;padding:3px 10px;background:#fffdfa;color:#181916;text-decoration:none;font-size:13px;line-height:1.2}
+.research-site-nav a:hover{border-color:#0b6b57;color:#0b6b57}
+.research-site-nav .research-site-nav-spacer{flex:1 1 auto}
+.research-site-nav strong{font-size:13px;color:#676b62;font-weight:700;white-space:nowrap}
+@media(max-width:640px){.research-site-nav{gap:6px;overflow-x:auto}.research-site-nav strong{display:none}.research-site-nav a{white-space:nowrap}}
+</style>
+<nav class="research-site-nav" aria-label="站点导航">
+  <a href="../../index.html">返回投研站首页</a>
+  <a href="../index.html">全部研究</a>
+  <span class="research-site-nav-spacer"></span>
+  <strong>美股投研</strong>
+</nav>
+<!-- research-site-nav:end -->
+
+
+<a class="skip-link" href="#main">跳到主内容</a>
+<div class="app-shell">
+  <aside class="sidebar" aria-label="导航">
+    <div class="brand">
+      <h1>跨境赴美上市前后价格趋势</h1>
+      <p>韩股 ADR 与全球案例对比 · 海力士 2026 / 台积电 / Coupang / 阿里 / Arm · 2026-07-13</p>
+    </div>
+    <nav class="nav-group" aria-label="Primary">
+      <p class="nav-group-title">Dashboard</p>
+      <a class="nav-link" href="#overview"><span>00</span><strong>总览</strong></a>
+      <a class="nav-link" href="#ranking"><span>RK</span><strong>案例对比表</strong></a>
+      <a class="nav-link" href="#chain"><span>MAP</span><strong>溢价形成机制</strong></a>
+      <a class="nav-link" href="#profiles"><span>DD</span><strong>案例档案</strong></a>
+      <a class="nav-link" href="#thesis"><span>TH</span><strong>研究正文</strong></a>
+      <a class="nav-link" href="#timeline"><span>EV</span><strong>事件时间线</strong></a>
+      <a class="nav-link" href="#risk"><span>RK</span><strong>结论与局限</strong></a>
+      <a class="nav-link" href="#sources"><span>SRC</span><strong>数据来源</strong></a>
+    </nav>
+  </aside>
+
+  <main class="main" id="main">
+    <div class="topbar" role="search">
+      <div class="search-wrap"><label for="searchInput">全局搜索案例 / 指标 / 机制</label>
+        <div class="search-row">
+          <input id="searchInput" type="search" autocomplete="off" placeholder="例如 海力士、溢价、套利、Coupang…" aria-describedby="rowCount">
+          <span class="badge" id="rowCount" aria-live="polite">—</span>
+        </div></div>
+      <div class="tool-buttons">
+        <button type="button" id="resetSearch">重置</button>
+        <a class="source-link" href="../../index.html">首页</a>
+        <a class="source-link" href="../index.html">全部研究</a>
+      </div>
+    </div>
+
+    <section class="hero-panel" id="overview">
+      <div class="overview-copy">
+        <p class="eyebrow">Research Control Room</p>
+        <h2>赴美上市能否兑现估值重估:ADR 溢价的形成、持续与消散</h2>
+        <p>覆盖韩国及亚洲公司赴美上市(ADR / 直接 IPO)前后的本土与美股价格行为:上市前本土动能、首日表现、ADR-本土价差与套利约束、"本土折价"是否收窄。核心样本:SK 海力士(2026)、台积电、Coupang(2021)、阿里巴巴(2014)、Arm(2023)及 2005 年 11 只韩国 ADR 横截面。支持全局搜索与表头排序。</p>
+      </div>
+      <div class="metric-grid">
+        <div class="metric"><strong>~16%</strong><span>海力士 ADR 首日对韩股溢价(超购 7 倍)</span></div>
+        <div class="metric"><strong>$265亿</strong><span>海力士募资额,外企美股首发史上最大</span></div>
+        <div class="metric"><strong>10–21%</strong><span>台积电 ADR 长期溢价区间(泡沫期 25–30%)</span></div>
+        <div class="metric"><strong>+1.32%</strong><span>2005 年 11 只韩国 ADR 平均溢价(对照组)</span></div>
+      </div>
+    </section>
+
+    <section class="panel" id="ranking">
+      <div class="panel-head"><div><p class="eyebrow">Case Comparison</p>
+        <h2>案例对比表:上市前后价格行为量化</h2><p>点表头排序;数值列自动按数字排序。</p></div></div>
+      <div class="table-shell"><table class="sortable">
+        <thead><tr>
+          <th><button class="sort-button">公司 / 年份</button></th>
+          <th><button class="sort-button">代码</button></th>
+          <th><button class="sort-button">类型</button></th>
+          <th><button class="sort-button">上市前本土趋势</button></th>
+          <th><button class="sort-button">首日表现</button></th>
+          <th><button class="sort-button">初始溢价</button></th>
+          <th><button class="sort-button">长期走势</button></th>
+        </tr></thead>
+        <tbody>
+          <tr><td>SK 海力士 · 2026</td><td class="num">000660.KS / SKHY</td><td>ADR(纳斯达克)</td><td>AI/HBM 驱动 YTD +350%;上市日韩股冲高 5% 后收跌 0.27%,外资净卖 1.8 万亿韩元</td><td class="num">ADR +13~16%,定价 $149(较韩股溢价 ~3%)</td><td class="num">~16%</td><td>预期回落至 ~10% 但因转换限制持续为正</td></tr>
+          <tr><td>台积电(持续)</td><td class="num">TSM / 2330.TW</td><td>ADR(NYSE, 1997 起)</td><td>半导体周期稳步上行</td><td class="num">—(存量 ADR)</td><td class="num">10–21%</td><td>持续 3–20%+,美股热情期冲 25–30%,价差收窄但不归零</td></tr>
+          <tr><td>Coupang · 2021</td><td class="num">CPNG</td><td>直接 IPO(NYSE)</td><td>韩国电商龙头动能强(无本土上市对照)</td><td class="num">开盘 +81%($35→$63.5),收 +41%</td><td class="num">—(美国主上市)</td><td>2022 年初跌至 $17–18,较峰值跌去约 2/3</td></tr>
+          <tr><td>阿里巴巴 · 2014</td><td class="num">BABA</td><td>直接 IPO(NYSE)</td><td>中国电商高速增长(港股上市为后话)</td><td class="num">开盘 +36%($68→$92.7),收 +38%</td><td class="num">—(美国主上市)</td><td>数周内冲上 $110+,此后随监管与宏观长期波动</td></tr>
+          <tr><td>Arm · 2023</td><td class="num">ARM</td><td>直接 IPO(纳斯达克)</td><td>软银全资,无公开本土股对照;AI 芯片预期升温</td><td class="num">首日约 +25%</td><td class="num">—</td><td>受益 AI 顺风但随半导体周期波动</td></tr>
+          <tr><td>韩国 ADR 横截面 · 2005</td><td class="num">11 只样本</td><td>ADR</td><td>因股而异</td><td class="num">—</td><td class="num">均值 +1.32%(最高 6.22%,最低 -1.41%)</td><td>溢价温和,持续性远弱于印度 ADR(均值 12.15%,最高 39%)</td></tr>
+        </tbody></table></div>
+      <div class="table-note">口径:初始溢价 = ADR 价格相对同权本土股的价差;Coupang/阿里/Arm 为美国主上市,无"本土-ADR 价差"概念,列首日回报作对照。数据日期 2026-07-13,来源见文末。</div>
+    </section>
+
+    <section class="panel" id="chain">
+      <div class="panel-head"><div><p class="eyebrow">Mechanism</p><h2>ADR 溢价形成与消散机制链</h2></div></div>
+      <div class="chain-map">
+        <div class="chain-row">
+          <div class="chain-title">需求侧</div>
+          <div class="chain-cell bottleneck"><strong>美国机构准入</strong>美元计价、美股账户直接买入,绕开韩国开户/换汇/结算</div>
+          <div class="chain-cell"><strong>配置桶重分类</strong>从"亚洲桶"进入"美国桶",基金池扩大</div>
+          <div class="chain-cell bottleneck"><strong>板块顺风</strong>AI/HBM 叙事下超额认购(海力士 7 倍)</div>
+          <div class="chain-cell"><strong>初始溢价</strong>首日 10–17% 常见</div>
+          <div class="chain-cell watch"><strong>短线翻炒</strong>高换手含 flipping 成分</div>
+        </div>
+        <div class="chain-row">
+          <div class="chain-title">套利约束</div>
+          <div class="chain-cell bottleneck"><strong>转换限制</strong>本土股→ADR 创设受配额/审批限制("headroom"),单向转换易撤难设</div>
+          <div class="chain-cell"><strong>交易时段错位</strong>首尔与纽约不重叠,隔夜信息差</div>
+          <div class="chain-cell"><strong>汇率风险</strong>KRW/TWD 对 USD 波动</div>
+          <div class="chain-cell watch"><strong>套利难打平</strong>溢价长期存续(台积电数十年)</div>
+          <div class="chain-cell risk-node"><strong>溢价≠价值</strong>同一公司两个价格,反映制度摩擦</div>
+        </div>
+        <div class="chain-row">
+          <div class="chain-title">折价收敛</div>
+          <div class="chain-cell"><strong>资金渐进流入</strong>募资换汇 ~$10亿/日至 9 月</div>
+          <div class="chain-cell bottleneck"><strong>募资用途</strong>投产能/设备(ASML)抵消 2.5% 稀释</div>
+          <div class="chain-cell watch"><strong>治理折价</strong>财阀结构与股东回报问题非上市可解</div>
+          <div class="chain-cell"><strong>再评级路径</strong>类台积电"熟悉度→流入→重估"良性循环</div>
+          <div class="chain-cell risk-node"><strong>不完全收敛</strong>本土折价缓解但难消除</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="profiles">
+      <div class="panel-head"><div><p class="eyebrow">Deep Dive</p><h2>重点案例档案</h2></div></div>
+      <div class="player-grid">
+        <article class="player-card filter-item">
+          <header><h3>SK 海力士(2026)</h3><span class="ticker">000660.KS / SKHY</span></header>
+          <dl>
+            <dt>事件</dt><dd>2026-07-10 纳斯达克 ADR 上市(临时代码 SKHYV),10 ADR = 1 普通股,定价 $149,募 $265 亿,史上最大外企美股首发</dd>
+            <dt>首日</dt><dd>ADR 对韩股溢价 ~16%;韩股本土收跌 0.27%,外资净卖 $12 亿(再平衡)</dd>
+            <dt>估值</dt><dd>前瞻 P/E 4.8x vs Micron 6.6x、行业中位 29.8x——"韩国折价"仍显著</dd>
+            <dt>展望</dt><dd>分析师预期溢价回落至 ~10%;HBM 占英伟达需求 60–70% 是核心支撑</dd>
+          </dl>
+        </article>
+        <article class="player-card filter-item">
+          <header><h3>台积电(长期对照)</h3><span class="ticker">TSM / 2330.TW</span></header>
+          <dl>
+            <dt>机制</dt><dd>1997 年上市 NYSE;ADR 创设受台湾监管配额限制,套利单向受阻</dd>
+            <dt>溢价</dt><dd>历史 10–21%,2000/2021/2024–25 热情期冲 25–30%;有套利交易反被轧的案例</dd>
+            <dt>启示</dt><dd>美股准入改善熟悉度与流动性,但数十年未完全消除价差——转换机制是根因</dd>
+          </dl>
+        </article>
+        <article class="player-card filter-item">
+          <header><h3>Coupang(2021)</h3><span class="ticker">CPNG</span></header>
+          <dl>
+            <dt>事件</dt><dd>2021-03 NYSE 直接 IPO(非 ADR),定价 $35</dd>
+            <dt>首日</dt><dd>开盘 +81% 至 $63.5,收盘 +41% 至 $49.25,市值约 $840 亿</dd>
+            <dt>后续</dt><dd>盈利担忧下 2022 年初跌至 $17–18,较峰值跌约 2/3——首日热度不代表长期</dd>
+          </dl>
+        </article>
+        <article class="player-card filter-item">
+          <header><h3>阿里巴巴(2014)</h3><span class="ticker">BABA</span></header>
+          <dl>
+            <dt>事件</dt><dd>2014-09 NYSE IPO,定价 $68,募 ~$250 亿(当时纪录,2026 被海力士超越)</dd>
+            <dt>首日</dt><dd>开盘 $92.7(+36%),收 +38%;数周内上摸 $110+</dd>
+            <dt>后续</dt><dd>监管与宏观压力下长期波动,近期约 $112</dd>
+          </dl>
+        </article>
+        <article class="player-card filter-item">
+          <header><h3>Arm(2023)</h3><span class="ticker">ARM</span></header>
+          <dl>
+            <dt>事件</dt><dd>2023-09 纳斯达克 IPO,软银控股,英/日关联但无公开本土对照股</dd>
+            <dt>首日</dt><dd>约 +25%</dd>
+            <dt>后续</dt><dd>AI 顺风与半导体周期交织,波动明显</dd>
+          </dl>
+        </article>
+        <article class="player-card filter-item">
+          <header><h3>韩国 ADR 横截面(2005)</h3><span class="ticker">11 只样本</span></header>
+          <dl>
+            <dt>数据</dt><dd>平均溢价 +1.32%(最高 6.22%、最低 -1.41%)</dd>
+            <dt>对照</dt><dd>同期印度 ADR 平均 12.15%(最高 39%)且经年不散</dd>
+            <dt>结论</dt><dd>套利受限越严重溢价越顽固;流动性与汇率解释力弱,制度壁垒是主因</dd>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel" id="thesis">
+      <div class="panel-head"><div><p class="eyebrow">Thesis</p><h2>研究正文</h2></div></div>
+      <div class="markdown-body filter-item">
+        <blockquote><p><strong>核心结论:</strong>亚洲科技公司(尤其 AI 链)赴美上市可靠地产生强劲初始需求与 10–17% 的持续美股溢价,根因是转换摩擦 + 美国机构准入改善;上市能部分催化"本土折价"收窄(扩大投资者基础、渐进再评级),但极少完全消除折价。本土股在上市日常因外资再平衡呈现平淡甚至下跌。</p></blockquote>
+
+        <h2>一、上市前本土表现与公告反应</h2>
+        <p>高成长科技公司在赴美公告前,本土股价通常已被板块顺风推高:海力士到 2026 年 6 月底 YTD 涨超 350%,一度超越三星电子成为 KOSPI 市值第一(约 297 万韩元/股,市值超 2 千万亿韩元)。ADR 计划于 6 月 24 日公布、7 月初递交 SEC 文件,明显在把握 AI 窗口。历史模式上,与 AI/高成长叙事挂钩的公告可在前几周抬升本土股 5–15%,幅度取决于市场情绪与稀释担忧。</p>
+        <p>但<strong>上市当日</strong>的本土反应常见"冲高回落":海力士韩股 7 月 10/11 日盘中 +5% 后收跌 0.27%,外资净卖逾 1.8 万亿韩元(约 $12 亿),市场解读为组合再平衡而非基本面否定。公告激发预期、上市日触发套利与再平衡卖压,是跨案例的共同节奏。</p>
+
+        <h2>二、首日与上市后 ADR 表现</h2>
+        <p>海力士 ADR 首日表现异常强劲:定价 $149(较韩股三日均价溢价 2.7–3%),1.779 亿份 ADR 售罄、超购 7 倍、逾 1000 家机构参与路演;收盘对同权韩股溢价约 16–17%。高换手中含短线翻炒成分。对比 2005 年 11 只韩国 ADR 平均仅 +1.32% 的温和溢价,本轮溢价体现了 AI 稀缺标的 + 转换限制的叠加。</p>
+        <p>直接 IPO 案例的首日"爆冲"更猛但性质不同(IPO 抑价):Coupang 开盘 +81%/收 +41%;阿里开盘 +36%/收 +38%;Arm 约 +25%。高知名度亚洲科技股首日 15–40% 的正回报是普遍规律,但此后走势分化极大。</p>
+
+        <h2>三、长期价差、套利与"本土折价"</h2>
+        <p>当本土股→ADR 的创设受配额或审批限制("headroom"),套利无法快速打平价差,溢价便可长期存续:台积电 ADR 溢价数十年徘徊于 3–21%,美股热情期突破 25–30%,甚至出现做空溢价的套利交易被轧的案例。海力士的 16% 首日溢价同源:HBM 领导地位(供英伟达 60–70% 需求)的抢购叠加转换摩擦;分析师预期数月内回落至 ~10% 但保持为正。</p>
+        <p>2005 年研究发现,流动性与汇率风险对溢价的解释力很弱,<strong>制度壁垒与两地投资者预期差异</strong>才是主因(部分 ADR 与标普 500 相关性高于本土指数);印度 ADR(均值 12.15%)远高于韩国正是套利受限程度的映射。台湾研究还显示 ADR 价格常引领本土开盘,美股波动解释了 IT 类标的相当大的回报方差。</p>
+        <p>关于"韩国折价"(海力士前瞻 P/E 4.8x vs Micron 6.6x、行业中位 29.84x):分析师分歧明显。乐观者预期类台积电的"熟悉度→流入→重估"良性循环,且 ADR 把股票从"亚洲配置桶"重分类进"美国桶"可解锁更大资金池;谨慎者指出单日数据不足为凭——若美股溢价长存而首尔不涨,恰恰印证治理/财阀问题未解。募资 $265 亿将渐进换汇入韩(约 $10 亿/日至 9 月),投向设备(ASML)与产能(2034 年晶圆产量翻三倍),若使用高效可抵消 2.5% 新股稀释。</p>
+        <p>反面教材同样重要:Coupang 上市后一年跌去约 2/3(盈利质疑),阿里长期受监管与宏观压制,Arm 随周期波动——<strong>首日热度与长期回报几乎无关</strong>。1990–2002 年 ADR IPO 研究亦显示:早期正超额回报(IPO 强于 SEO)之后,长线普遍跑输,与本土 IPO 的长期表现规律一致;牛市窗口上市与熊市窗口的累计回报路径也显著不同。</p>
+
+        <h2>四、影响首发溢价与后续走势的共性因素</h2>
+        <ul>
+          <li><strong>被压抑的美国需求 + 板块顺风</strong>:AI/HBM 稀缺标的引发超购(海力士 7 倍,Baillie Gifford、Coatue 大额认购)。</li>
+          <li><strong>转换限制(最主导)</strong>:创设受限使套利失效,美股价格可长期脱离本土(海力士、台积电同理)。</li>
+          <li><strong>准入与熟悉度</strong>:美元计价、美国券商直接交易,绕开韩国开户/换汇/结算;配置桶重分类扩大买方池。</li>
+          <li><strong>治理与本土市场认知</strong>:"韩国折价"根源在财阀结构与股东回报,上市本身不能治本。</li>
+          <li><strong>流动性/汇率/时差</strong>:次要因素,但增加波动(韩国重大新闻常在美股闭市时落地)。</li>
+          <li><strong>募资使用效率</strong>:决定长期成败——投入真实增长可抵消稀释,否则只是换了估值场所。</li>
+          <li><strong>宏观与地缘</strong>:美国利率预期、半岛风险影响持续性。</li>
+        </ul>
+
+        <h2>五、结论</h2>
+        <p>赴美上市为韩国及亚洲同行提供了实质性的资本市场通道,并能维持部分缓解——但无法根除——本土估值折价的溢价。海力士 2026 交易是模板级案例:$265 亿募资、16% 溢价、7 倍超购,对 Micron 的再评级催化明确,但本土股当日不涨反跌。台积电数十年 10–20%+ 溢价而价差不归零,与 2005 年跨国数据(套利越受限溢价越高:印度 >> 韩国/台湾)共同指向:<strong>转换机制与制度壁垒才是价差的第一性原因</strong>。对三星等潜在跟随者,ADR 是"不放弃首尔主上市而获取全球资本"的可行模型,成败系于募资是否转化为真实增长;若无更深层治理改善,"韩国折价"不会自动消失。</p>
+      </div>
+    </section>
+
+    <section class="panel" id="timeline">
+      <div class="panel-head"><div><p class="eyebrow">Catalysts</p><h2>事件时间线</h2></div></div>
+      <div class="timeline">
+        <div class="timeline-item filter-item"><time>1997</time><div>台积电 ADR 登陆 NYSE,开启台湾半导体美股双挂牌长周期;此后 ADR 溢价成为常态。</div></div>
+        <div class="timeline-item filter-item"><time>2005-07</time><div>11 只韩国 ADR 横截面快照:平均溢价仅 +1.32%,远低于印度(12.15%)——套利约束差异的经典对照。</div></div>
+        <div class="timeline-item filter-item"><time>2014-09-19</time><div>阿里巴巴 NYSE IPO:定价 $68,开盘 +36%,募 ~$250 亿创当时纪录。</div></div>
+        <div class="timeline-item filter-item"><time>2021-03-11</time><div>Coupang NYSE 直接 IPO:开盘 +81%、收 +41%;此后一年内跌去约 2/3。</div></div>
+        <div class="timeline-item filter-item"><time>2023-09</time><div>Arm 纳斯达克 IPO:首日约 +25%,AI 叙事下的软银资产证券化。</div></div>
+        <div class="timeline-item filter-item"><time>2026-06-24</time><div>海力士公布 ADR 计划;本土股 YTD 已 +350%,一度登顶 KOSPI 市值。</div></div>
+        <div class="timeline-item filter-item"><time>2026-07-09</time><div>定价 $149/ADR,超购 7 倍,募 $265 亿——外企美股首发史上最大。</div></div>
+        <div class="timeline-item filter-item"><time>2026-07-10</time><div>SKHYV 纳斯达克首日:ADR 对韩股溢价 ~16%;韩股收跌 0.27%,外资净卖 $12 亿。</div></div>
+        <div class="timeline-item filter-item"><time>2026-09(预期)</time><div>募资换汇(~$10 亿/日)完成窗口;观察溢价是否如预期回落至 ~10%。</div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="risk">
+      <div class="panel-head"><div><p class="eyebrow">Risk & Limits</p><h2>结论要点与研究局限</h2></div></div>
+      <div class="status-strip">
+        <span class="badge accent">规律:AI 链 ADR 首日溢价 10–17%,转换受限则长期存续</span>
+        <span class="badge accent">规律:上市日本土股常因再平衡收平/收跌</span>
+        <span class="badge warn">警示:首日爆涨与长期回报几乎无关(Coupang -2/3)</span>
+        <span class="badge warn">观察:海力士溢价能否守住 ~10%、首尔端是否跟涨</span>
+        <span class="badge">局限:Coupang/阿里/Arm 为美国主上市,无本土-ADR 价差对照</span>
+        <span class="badge">局限:量化细节以海力士/台积电最全,其余案例较稀疏</span>
+        <span class="badge">局限:海力士仅上市首日数据,不足以判定折价是否收敛</span>
+      </div>
+    </section>
+
+    <section class="panel" id="sources">
+      <div class="panel-head"><div><p class="eyebrow">Sources</p><h2>数据来源(37 源精选)</h2></div></div>
+      <ul class="source-list">
+        <li><a href="https://www.cnbc.com/2026/07/10/sk-hynix-debuts-on-nasdaq-will-that-bridge-its-korea-discount-.html">CNBC · SK Hynix debuts on Nasdaq — Korea discount?(2026-07-10)</a></li>
+        <li><a href="https://www.reuters.com/world/asia-pacific/sk-hynix-us-listing-more-than-seven-times-oversubscribed-source-says-2026-07-09/">Reuters · 海力士美股发行超购逾 7 倍(2026-07-09)</a></li>
+        <li><a href="https://www.wsj.com/tech/sk-hynix-raises-26-51-billion-through-adr-offering-865f35cf">WSJ · 海力士 ADR 募资 $265.1 亿</a></li>
+        <li><a href="https://www.koreaherald.com/article/10804650">Korea Herald · 外企美股首发纪录</a></li>
+        <li><a href="https://www.theinvestor.co.kr/article/10806083">The Investor · 海力士纳斯达克上市对韩国的意义</a></li>
+        <li><a href="https://finance.biggo.com/news/051613d8-1f58-476e-8283-4e1a7ed78cdf">BigGo Finance · 创纪录 ADR 未能拉动首尔股价</a></li>
+        <li><a href="https://cryptobriefing.com/sk-hynix-nasdaq-asian-chipmaker-adrs/">Crypto Briefing · 或引发亚洲芯片股 ADR 潮</a></li>
+        <li><a href="https://www.asiae.co.kr/cn/article/2026042321373150582">亚洲经济(中文) · 稀释担忧与资金使用效率</a></li>
+        <li><a href="https://www.acadian-asset.com/investment-insights/owenomics/tsmc-totally-stupid-market-chaos">Acadian · TSMC ADR 溢价的市场混乱</a></li>
+        <li><a href="https://finance.yahoo.com/news/popular-arbitrage-trade-backfires-tsmc-015127717.html">Yahoo Finance · TSMC 套利交易被轧</a></li>
+        <li><a href="https://www.cnbc.com/2021/03/11/coupang-ipo-cpng-begins-trading-on-the-nyse.html">CNBC · Coupang IPO 首日(2021-03-11)</a></li>
+        <li><a href="https://koreascience.kr/article/JAKO202311651937020.page">Korea Science · Coupang IPO 研究(2023)</a></li>
+        <li><a href="https://www.reuters.com/article/business/alibaba-surges-38-percent-on-massive-demand-in-market-debut-idUSKBN0HD2CJ/">Reuters · 阿里首日 +38%(2014)</a></li>
+        <li><a href="https://time.com/3398957/alibaba-ipo-china/">Time · 阿里 IPO 全解(2014)</a></li>
+        <li><a href="https://archive.nyu.edu/bitstream/2451/25945/2/Saxena.pdf">NYU(Saxena, 2006) · ADR 溢价与套利实证研究</a></li>
+        <li><a href="https://www.sciedupress.com/journal/index.php/ijfr/article/viewFile/4942/2896">Sciedu Press · 台湾 ADR 与本土股价格发现</a></li>
+        <li><a href="https://exa.ai/library/publication/k764py0wdzs">ADR IPO 长短期表现研究合集(1986–2002 样本)</a></li>
+        <li><a href="https://investsnips.com/list-of-south-korean-stocks-on-u-s-exchanges">InvestSnips · 在美上市韩国股票清单</a></li>
+      </ul>
+    </section>
+
+    <p class="empty-state" id="emptyState">没有匹配的内容。</p>
+    <footer class="footer">研究引擎:gpt-researcher(smartsearch 双源检索 Exa+Tavily · Firecrawl 抓取 · 37 源) · 生成 2026-07-13 · 数据以来源报道为准 · 仅供研究,非投资建议。</footer>
+  </main>
+</div>
+
+<script>
+(function () {
+  const input = document.getElementById('searchInput');
+  const resetBtn = document.getElementById('resetSearch');
+  const rowCount = document.getElementById('rowCount');
+  const emptyState = document.getElementById('emptyState');
+  const tables = Array.from(document.querySelectorAll('table.sortable'));
+  const items = Array.from(document.querySelectorAll('.filter-item'));
+  const norm = v => (v || '').toLowerCase().trim();
+  const asNum = v => {
+    const c = v.replace(/[$,%+~]/g, '').replace(/[^0-9.\-]/g, '');
+    if (!c || c === '-' || c === '.') return null;
+    const n = Number(c); return Number.isFinite(n) ? n : null;
+  };
+  function update() {
+    if (!input) return;
+    const q = norm(input.value); let vis = 0;
+    tables.forEach(t => Array.from(t.tBodies[0]?.rows || []).forEach(r => {
+      const m = !q || norm(r.innerText).includes(q); r.hidden = !m; if (m) vis++;
+    }));
+    items.forEach(el => {
+      const m = !q || norm(el.innerText).includes(q);
+      el.classList.toggle('hidden-by-filter', !m); if (m) vis++;
+    });
+    if (rowCount) rowCount.textContent = vis + ' 条匹配';
+    if (emptyState) emptyState.classList.toggle('visible', Boolean(q) && vis === 0);
+  }
+  tables.forEach(table => {
+    Array.from(table.tHead?.rows[0]?.cells || []).forEach((th, i) => {
+      const b = th.querySelector('button'); if (!b) return;
+      b.addEventListener('click', () => {
+        const dir = th.dataset.sort === 'asc' ? 'desc' : 'asc';
+        Array.from(th.parentElement.children).forEach(c => c.dataset.sort = '');
+        th.dataset.sort = dir;
+        const rows = Array.from(table.tBodies[0].rows);
+        rows.sort((a, c) => {
+          const av = a.cells[i]?.innerText.trim() || '', bv = c.cells[i]?.innerText.trim() || '';
+          const an = asNum(av), bn = asNum(bv);
+          const cmp = (an !== null && bn !== null) ? an - bn
+            : av.localeCompare(bv, 'zh-Hans-u-co-pinyin', { numeric: true, sensitivity: 'base' });
+          return dir === 'asc' ? cmp : -cmp;
+        });
+        rows.forEach(r => table.tBodies[0].appendChild(r));
+      });
+    });
+  });
+  if (resetBtn && input) resetBtn.addEventListener('click', () => { input.value = ''; update(); input.focus(); });
+  if (input) input.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>
