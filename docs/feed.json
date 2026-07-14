@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "date": "2026-07-14",
+      "generated_at": "2026-07-14 12:00:05 +0800",
+      "model": "grok-4.20-0309-non-reasoning",
+      "unique_tweets": 198,
+      "tickers": [
+        [
+          "$SPY",
+          12
+        ],
+        [
+          "$NVDA",
+          11
+        ],
+        [
+          "$AVGO",
+          8
+        ],
+        [
+          "$MU",
+          6
+        ],
+        [
+          "$QQQ",
+          5
+        ],
+        [
+          "$AMD",
+          5
+        ],
+        [
+          "$TSLA",
+          4
+        ],
+        [
+          "$SKHY",
+          3
+        ]
+      ],
+      "teaser": "今日美股圈在X上最核心情绪是AI市场整体温和看多（技术面健康反弹、半导体制图重建），但受中国AI内存公司上海贝昂（688825）冲刺上市话题驱动，市场也充斥着对",
+      "report_path": "reports/2026-07-14.html"
+    },
+    {
       "date": "2026-07-13",
       "generated_at": "2026-07-13 12:00:06 +0800",
       "model": "grok-4.20-multi-agent-xhigh",
@@ -1303,5 +1345,5 @@
       "report_path": "reports/2026-06-06.html"
     }
   ],
-  "last_updated": "2026-07-13 12:00:06 +0800"
+  "last_updated": "2026-07-14 12:00:05 +0800"
 }
