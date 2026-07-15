@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "date": "2026-07-15",
+      "generated_at": "2026-07-15 12:00:12 +0800",
+      "model": "grok-4.20-0309-non-reasoning",
+      "unique_tweets": 143,
+      "tickers": [
+        [
+          "$MU",
+          13
+        ],
+        [
+          "$SPY",
+          11
+        ],
+        [
+          "$QQQ",
+          7
+        ],
+        [
+          "$NVDA",
+          7
+        ],
+        [
+          "$MRVL",
+          6
+        ],
+        [
+          "$AMD",
+          3
+        ],
+        [
+          "$AVGO",
+          3
+        ],
+        [
+          "$USO",
+          2
+        ]
+      ],
+      "teaser": "143 条美股高赞讨论聚合",
+      "report_path": "reports/2026-07-15.html"
+    },
+    {
       "date": "2026-07-14",
       "generated_at": "2026-07-14 12:00:05 +0800",
       "model": "grok-4.20-0309-non-reasoning",
@@ -1345,5 +1387,5 @@
       "report_path": "reports/2026-06-06.html"
     }
   ],
-  "last_updated": "2026-07-14 12:00:05 +0800"
+  "last_updated": "2026-07-15 12:00:12 +0800"
 }
