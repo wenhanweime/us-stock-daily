@@ -1,6 +1,27 @@
 {
   "entries": [
     {
+      "slug": "meituan-longcat-2-domestic-ai-infrastructure",
+      "title": "美团 LongCat-2.0：国产算力、训练 Infra 与商业化深度研究",
+      "date": "2026-07-17",
+      "tags": [
+        "AI基建",
+        "国产算力",
+        "大模型",
+        "昇腾",
+        "LongCat"
+      ],
+      "tickers": [
+        "3690.HK",
+        "688795.SH",
+        "688802.SH"
+      ],
+      "teaser": "五万卡国产训推的证据链：芯片型号判断、三年训练爬坡、供应商协同、算力储备与商业化。",
+      "cover": null,
+      "path": "research/meituan-longcat-2-domestic-ai-infrastructure/index.html",
+      "added_at": "2026-07-17 15:59:09"
+    },
+    {
       "slug": "adr-us-listing-price-patterns",
       "title": "跨境赴美上市前后价格趋势:韩股 ADR 与全球案例对比",
       "date": "2026-07-13",
@@ -305,5 +326,5 @@
       "added_at": "2026-06-06 21:03:33"
     }
   ],
-  "last_updated": "2026-07-13 22:21:47"
+  "last_updated": "2026-07-17 15:59:09"
 }

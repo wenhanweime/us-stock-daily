@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4ef">
+  <title>美团 LongCat-2.0 国产算力与商业化深度研究 · 美股投研</title>
+  <style>
+/* theme.css — 「研究终端」共享设计系统
+   提取自 AI 基建投资研究仪表盘，供首页 + 每日观察 + 研报模板统一复用。
+   配色: warm paper #f6f4ef / 墨 #181916 / 绿 #0b6b57 / 金 #9a6500 / 红 #a33b2a / 蓝 #315f8a */
+
+:root {
+  color-scheme: light;
+  --bg: #f6f4ef;
+  --surface: #fffdfa;
+  --surface-2: #f0eee8;
+  --ink: #181916;
+  --muted: #676b62;
+  --line: #d9d5ca;
+  --line-strong: #bdb7aa;
+  --accent: #0b6b57;
+  --accent-2: #9a6500;
+  --danger: #a33b2a;
+  --cool: #315f8a;
+  --shadow: 0 18px 45px rgba(42, 38, 30, 0.08);
+  --radius: 8px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration-color: rgba(11, 107, 87, 0.45); text-underline-offset: 3px; }
+a:hover { color: var(--accent); }
+button, input, a { touch-action: manipulation; }
+button:focus-visible, input:focus-visible, a:focus-visible, summary:focus-visible {
+  outline: 3px solid rgba(11, 107, 87, 0.32);
+  outline-offset: 2px;
+}
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  transform: translateY(-150%);
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: white;
+}
+.skip-link:focus { transform: translateY(0); }
+.app-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); min-height: 100vh; }
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: max(18px, env(safe-area-inset-top)) 16px 18px max(16px, env(safe-area-inset-left));
+  border-right: 1px solid var(--line);
+  background: rgba(255, 253, 250, 0.92);
+  backdrop-filter: blur(12px);
+  overflow-y: auto;
+}
+.brand { padding: 4px 4px 18px; border-bottom: 1px solid var(--line); }
+.brand h1 { margin: 0; font-size: 20px; line-height: 1.18; letter-spacing: 0; text-wrap: balance; }
+.brand p { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.nav-group { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.nav-group-title { margin: 0 4px 8px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 7px 8px;
+  border-radius: 6px;
+  color: #30322e;
+  font-size: 13px;
+  line-height: 1.25;
+  text-decoration: none;
+}
+.nav-link:hover { background: #ece8df; color: var(--ink); }
+.nav-link span:first-child { width: 22px; flex: 0 0 auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+.main { min-width: 0; padding: 22px clamp(16px, 3vw, 34px) 60px; }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  margin: -22px calc(clamp(16px, 3vw, 34px) * -1) 20px;
+  padding: 14px clamp(16px, 3vw, 34px);
+  border-bottom: 1px solid var(--line);
+  background: rgba(246, 244, 239, 0.88);
+  backdrop-filter: blur(12px);
+}
+.search-wrap { min-width: 0; }
+.search-wrap label { display: block; margin-bottom: 5px; color: var(--muted); font-size: 12px; }
+.search-row { display: flex; gap: 8px; align-items: center; }
+#searchInput {
+  width: min(680px, 100%);
+  height: 38px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0 12px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 14px;
+}
+.tool-buttons { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.tool-buttons button, .source-link {
+  min-height: 36px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0 11px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.tool-buttons button:hover, .source-link:hover { border-color: var(--accent); color: var(--accent); }
+.hero-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 18px;
+  align-items: stretch;
+  margin-bottom: 18px;
+}
+.overview-copy, .metric-grid, .panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.overview-copy { padding: 22px; }
+.eyebrow { margin: 0 0 8px; color: var(--accent); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.overview-copy h2 { margin: 0; font-size: clamp(24px, 3vw, 38px); line-height: 1.08; letter-spacing: 0; text-wrap: balance; }
+.overview-copy p { max-width: 860px; margin: 14px 0 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
+.metric-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: hidden; }
+.metric { padding: 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-width: 0; }
+.metric:nth-child(2n) { border-right: 0; }
+.metric:nth-last-child(-n+2) { border-bottom: 0; }
+.metric strong { display: block; font-size: 28px; line-height: 1; font-variant-numeric: tabular-nums; }
+.metric span { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; line-height: 1.35; }
+.panel { margin: 18px 0; overflow: hidden; }
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--line);
+}
+.panel-head h2 { margin: 0; font-size: 20px; letter-spacing: 0; text-wrap: balance; }
+.panel-head p:not(.eyebrow) { margin: 6px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.table-shell { width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 880px; font-size: 13px; }
+th, td { padding: 10px 11px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; line-height: 1.42; overflow-wrap: anywhere; }
+thead th { position: sticky; top: 0; z-index: 1; background: #eeeae1; color: #353730; font-weight: 700; }
+tbody tr:hover { background: #fbf7ed; }
+tbody tr[hidden] { display: none; }
+.num, td:nth-child(6), td:nth-child(10) { font-variant-numeric: tabular-nums; }
+.rank-top { color: var(--accent); font-weight: 800; }
+.sort-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+.sort-button:hover { color: var(--accent); }
+.table-note { padding: 10px 20px 16px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); }
+.doc-map { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; padding: 16px 20px 20px; }
+.doc-chip {
+  display: block;
+  min-height: 72px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fbfaf6;
+  text-decoration: none;
+}
+.doc-chip:hover { border-color: var(--accent); background: #f3f0e8; }
+.doc-chip span { display: block; color: var(--muted); font-size: 11px; margin-bottom: 6px; }
+.doc-chip strong { display: block; font-size: 13px; line-height: 1.35; overflow-wrap: anywhere; }
+.markdown-body { padding: 2px 20px 24px; }
+.markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 { scroll-margin-top: 86px; letter-spacing: 0; text-wrap: balance; }
+.markdown-body h2 { margin: 24px 0 10px; font-size: 21px; }
+.markdown-body h3 { margin: 22px 0 8px; font-size: 17px; }
+.markdown-body h4 { margin: 18px 0 8px; font-size: 15px; }
+.markdown-body p, .markdown-body li { color: #30322d; font-size: 14px; line-height: 1.68; }
+.markdown-body ul, .markdown-body ol { padding-left: 22px; }
+.markdown-body blockquote {
+  margin: 14px 0;
+  padding: 10px 14px;
+  border-left: 4px solid var(--accent);
+  background: #f4f0e8;
+  color: #2f332c;
+}
+.markdown-body blockquote p { margin: 4px 0; color: #2f332c; }
+.markdown-body pre {
+  overflow-x: auto;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #171914;
+  color: #f8f3e7;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.markdown-body code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
+.status-strip { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 20px 18px; }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: #faf8f2;
+  color: #3b3d37;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.badge.accent { border-color: rgba(11, 107, 87, .35); color: var(--accent); }
+.badge.warn { border-color: rgba(154, 101, 0, .35); color: var(--accent-2); }
+.hidden-by-filter { display: none; }
+.empty-state { display: none; padding: 18px 20px; color: var(--muted); }
+.empty-state.visible { display: block; }
+.footer { margin-top: 28px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+@media (max-width: 1080px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  .nav-group:last-child { display: none; }
+  .hero-panel { grid-template-columns: 1fr; }
+  .topbar { grid-template-columns: 1fr; position: sticky; }
+  .tool-buttons { justify-content: flex-start; }
+}
+@media (max-width: 640px) {
+  .main { padding-inline: 12px; }
+  .topbar { margin-inline: -12px; padding-inline: 12px; }
+  .overview-copy { padding: 18px; }
+  .metric-grid { grid-template-columns: 1fr; }
+  .metric, .metric:nth-child(2n), .metric:nth-last-child(-n+2) { border-right: 0; border-bottom: 1px solid var(--line); }
+  .metric:last-child { border-bottom: 0; }
+  .panel-head { flex-direction: column; }
+  table { min-width: 760px; font-size: 12px; }
+  th, td { padding: 8px; }
+  .search-row { flex-direction: column; align-items: stretch; }
+  .badge { white-space: normal; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+.visual-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr); gap: 16px; padding: 16px 20px 22px; }
+.visual-card { border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; overflow: hidden; min-width: 0; }
+.visual-card h3 { margin: 0; padding: 14px 14px 8px; font-size: 16px; letter-spacing: 0; text-wrap: balance; }
+.visual-card p { margin: 0; padding: 0 14px 14px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+.diagram-wrap { overflow-x: auto; padding: 12px; overscroll-behavior-x: contain; }
+.diagram { width: 100%; min-width: 780px; height: auto; display: block; }
+.diagram text { font-family: inherit; fill: #20221e; }
+.diagram .node { fill: #fffdfa; stroke: #bdb7aa; stroke-width: 1.2; }
+.diagram .node-strong { fill: #eef6f1; stroke: #0b6b57; stroke-width: 1.4; }
+.diagram .node-warn { fill: #fff3d8; stroke: #9a6500; stroke-width: 1.3; }
+.diagram .node-risk { fill: #faece8; stroke: #a33b2a; stroke-width: 1.2; }
+.diagram .link { fill: none; stroke: #8f8a80; stroke-width: 1.2; marker-end: url(#arrow); }
+.diagram .link-strong { fill: none; stroke: #0b6b57; stroke-width: 2; marker-end: url(#arrow-green); }
+.diagram .label { font-size: 12px; font-weight: 700; }
+.diagram .small { font-size: 10.5px; fill: #676b62; }
+.diagram .lane { fill: #f2efe7; stroke: #d9d5ca; stroke-width: 1; }
+.player-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 12px; padding: 16px 20px 22px; }
+.player-card { border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; padding: 14px; min-width: 0; }
+.player-card header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.player-card h3 { margin: 0; font-size: 16px; letter-spacing: 0; }
+.player-card .ticker { font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.player-card dl { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 7px 10px; margin: 0; font-size: 13px; line-height: 1.48; }
+.player-card dt { color: var(--muted); }
+.player-card dd { margin: 0; color: #2c2e29; overflow-wrap: anywhere; }
+.player-card a { color: var(--accent); }
+.chain-map { padding: 16px 20px 22px; display: grid; gap: 12px; }
+.chain-row { display: grid; grid-template-columns: 150px repeat(5, minmax(120px, 1fr)); gap: 8px; align-items: stretch; }
+.chain-title { display: flex; align-items: center; padding: 10px; border-radius: var(--radius); background: #ece8df; font-weight: 800; font-size: 13px; }
+.chain-cell { min-height: 74px; padding: 10px; border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; font-size: 12px; line-height: 1.42; position: relative; }
+.chain-cell strong { display: block; margin-bottom: 5px; color: var(--ink); }
+.chain-cell::after { content: '→'; position: absolute; right: -13px; top: 50%; transform: translateY(-50%); color: var(--line-strong); font-weight: 800; }
+.chain-cell:last-child::after { content: ''; }
+.bottleneck { border-color: rgba(11, 107, 87, .45); background: #eef6f1; }
+.watch { border-color: rgba(154, 101, 0, .42); background: #fff7e8; }
+.risk-node { border-color: rgba(163, 59, 42, .38); background: #faece8; }
+.source-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px 14px; padding: 0 20px 22px; margin: 0; }
+.source-list li { list-style: none; font-size: 12px; line-height: 1.45; color: var(--muted); }
+.source-list a { color: var(--accent); }
+.timeline { padding: 16px 20px 22px; display: grid; gap: 10px; }
+.timeline-item { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; align-items: start; }
+.timeline-item time { padding: 8px 10px; border-radius: var(--radius); background: #ece8df; color: var(--ink); font-size: 12px; font-weight: 800; text-align: center; font-variant-numeric: tabular-nums; }
+.timeline-item div { padding: 10px 12px; border-left: 3px solid var(--accent); background: #fbfaf6; border-radius: 0 var(--radius) var(--radius) 0; font-size: 13px; line-height: 1.55; }
+@media (max-width: 900px) { .visual-grid { grid-template-columns: 1fr; } .chain-row { grid-template-columns: 1fr; } .chain-cell::after { content: '↓'; right: 12px; top: auto; bottom: -17px; transform: none; } .chain-cell:last-child::after { content: ''; } }
+@media (max-width: 640px) { .player-grid, .visual-grid, .chain-map, .timeline { padding-inline: 12px; } .player-card dl { grid-template-columns: 1fr; } .timeline-item { grid-template-columns: 1fr; } }
+
+/* ---- 站点 chrome 补充（首页 / 日报）---- */
+.brand a{color:inherit;text-decoration:none}
+.brand a:hover{color:var(--accent)}
+.lede-inline{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.muted{color:var(--muted)}
+.back-link{color:var(--muted);font-size:13px}
+.back-link:hover{color:var(--accent)}
+
+  </style>
+</head>
+<body>
+<!-- research-site-nav:start -->
+<style>
+.research-site-nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;gap:10px;min-height:42px;padding:7px clamp(14px,3vw,28px);border-bottom:1px solid #d9d5ca;background:rgba(246,244,239,.94);backdrop-filter:blur(12px);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+.research-site-nav a{display:inline-flex;align-items:center;min-height:28px;border:1px solid #d9d5ca;border-radius:8px;padding:3px 10px;background:#fffdfa;color:#181916;text-decoration:none;font-size:13px;line-height:1.2}
+.research-site-nav a:hover{border-color:#0b6b57;color:#0b6b57}
+.research-site-nav .research-site-nav-spacer{flex:1 1 auto}
+.research-site-nav strong{font-size:13px;color:#676b62;font-weight:700;white-space:nowrap}
+@media(max-width:640px){.research-site-nav{gap:6px;overflow-x:auto}.research-site-nav strong{display:none}.research-site-nav a{white-space:nowrap}}
+</style>
+<nav class="research-site-nav" aria-label="站点导航">
+  <a href="../../index.html">返回投研站首页</a>
+  <a href="../index.html">全部研究</a>
+  <span class="research-site-nav-spacer"></span>
+  <strong>美股投研</strong>
+</nav>
+<!-- research-site-nav:end -->
+
+<a class="skip-link" href="#main">跳到主内容</a>
+<nav class="research-site-nav" aria-label="站点导航" style="position:sticky;top:0;z-index:1000;display:flex;align-items:center;gap:10px;min-height:42px;padding:7px clamp(14px,3vw,28px);border-bottom:1px solid var(--line);background:rgba(246,244,239,.94);backdrop-filter:blur(12px)">
+  <a class="source-link" href="../../index.html">返回投研站首页</a><a class="source-link" href="../index.html">全部研究</a><span style="flex:1"></span><strong style="font-size:13px;color:var(--muted)">AI Infrastructure Research</strong>
+</nav>
+<div class="app-shell">
+<aside class="sidebar" aria-label="导航"><div class="brand"><h1>LongCat-2.0 国产算力</h1><p>芯片型号、五万卡集群、训练 Infra、供应商、开源与商业化 · 2026-07-17</p></div><nav class="nav-group"><a class="nav-link" href="#overview"><span>00</span><strong>总览</strong></a><a class="nav-link" href="#1"><span>01</span><strong>训练硬件</strong></a><a class="nav-link" href="#2-5"><span>02</span><strong>集群规模</strong></a><a class="nav-link" href="#3"><span>03</span><strong>训练时间线</strong></a><a class="nav-link" href="#4"><span>04</span><strong>厂商协同</strong></a><a class="nav-link" href="#5"><span>05</span><strong>后训练与推理</strong></a><a class="nav-link" href="#6"><span>06</span><strong>投资与选型</strong></a><a class="nav-link" href="#7"><span>07</span><strong>算力储备</strong></a><a class="nav-link" href="#8"><span>08</span><strong>下一代瓶颈</strong></a><a class="nav-link" href="#9-deepseek-v4-glm"><span>09</span><strong>同行对比</strong></a><a class="nav-link" href="#10"><span>10</span><strong>开源商业化</strong></a><a class="nav-link" href="#11_1"><span>11</span><strong>复述口径</strong></a><a class="nav-link" href="#12"><span>12</span><strong>待确认问题</strong></a><a class="nav-link" href="#_3"><span>SRC</span><strong>参考来源</strong></a></nav></aside>
+<main class="main" id="main">
+<div class="topbar" role="search"><div class="search-wrap"><label for="searchInput">搜索芯片 / 集群 / 训练 / 推理 / 商业化</label><div class="search-row"><input id="searchInput" type="search" autocomplete="off" placeholder="例如 910B、950PR、摩尔线程、MFU…"><span class="badge" id="rowCount">—</span></div></div><div class="tool-buttons"><button id="resetSearch" type="button">重置</button><a class="source-link" href="#_3">来源</a></div></div>
+<section class="hero-panel" id="overview"><div class="overview-copy"><p class="eyebrow">Evidence-led Research</p><h2>把“5 万卡国产训练”拆成可验证的工程事实</h2><p>结论严格分为官方确认、高概率推断和尚无公开证据。核心判断：若训练主平台为昇腾，Atlas A2 / 910B 最可能是主力；950PR 并非训练定位，950DT 又尚未上市。</p></div><div class="metric-grid"><div class="metric"><strong>1.6T</strong><span>总参数，平均激活约 48B</span></div><div class="metric"><strong>50K+</strong><span>逻辑集群单任务峰值规模</span></div><div class="metric"><strong>35T+</strong><span>模型卡披露的预训练 Tokens</span></div><div class="metric"><strong>1T/day</strong><span>稳态日吞吐上限口径</span></div></div></section>
+<section class="panel" id="research"><div class="panel-head"><div><p class="eyebrow">Full Report</p><h2>完整研究报告</h2><p>包含硬件判断、训练时间线、同行对比、算力储备与商业化。</p></div></div><div class="markdown-body filter-item"><h1 id="longcat-20">美团 LongCat-2.0 国产算力与商业化深度研究</h1>
+<p>生成日期：2026-07-17</p>
+<h2 id="_1">结论先行</h2>
+<p>LongCat-2.0 的真正价值，不只是“用国产卡把一个 1.6T MoE 模型训出来”，而是美团证明了自己已经拥有一套从算子、通信、调度、容错、数值正确性到大规模推理的国产 AI 基础设施。公开证据可以确认：模型从零预训练，预训练数据超过 30T tokens（模型卡称超过 35T），训练和大规模部署均在国产 AI ASIC 超级集群上完成；国产算力工程始于 2023 年，2024 年进入万卡阶段，最终峰值训练规模超过 5 万卡，稳态吞吐超过 1T tokens/day。</p>
+<p>最敏感的芯片型号并未被美团公开。综合时间线、华为产品路线和美团开源的 NPU 推理代码，最合理的判断是：如果核心训练平台是华为昇腾，主力更可能是 Atlas A2 / Ascend 910B 家族，后期可能兼容或引入 910C；950PR 不应被写成训练主卡，因为华为官方将其定位为 Prefill 和推荐，真正面向训练的 950DT 要到 2026 年第四季度才上市。现有公开证据不足以证明“5 万卡全部是华为”，也不足以证明训练任务中存在 910B 与 910C 混跑。</p>
+<p>“5 万卡”更接近一个逻辑统一训练集群上的单作业峰值，而不是把多期采购、多地库存简单累加。官方使用单数“在五万卡集群上完成”，项目报道进一步称“峰值训练规模超过 5 万张、迄今国产平台规模最大的训练任务”。物理层面很可能由多个 SuperPod、机房单元或网络域组成，但它们被统一编排为同一个训练环境。</p>
+<p>美团对摩尔线程、沐曦等国产芯片企业的投资，并不等于 LongCat-2.0 的预训练采用了这些公司的卡。可证实的是：LongCat-2.0 开源后，摩尔线程用 MTT S5000 + MUSA/SGLang 完成推理适配，沐曦用曦云 C 系列 + MXMACA 完成 Day-0 推理适配。公开材料没有显示二者参与 5 万卡预训练。这体现出“资本布局用于保留供应链选项，核心生产选型仍服从规模、稳定性和软件生态”的现实落差。</p>
+<h2 id="_2">关键问题判断表</h2>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>判断</th>
+<th style="text-align: right;">置信度</th>
+<th>公开证据边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>训练卡是否为 950PR</td>
+<td>基本可排除其作为主训练卡</td>
+<td style="text-align: right;">高</td>
+<td>950PR 官方定位 Prefill/推荐；950DT 才面向训练且 2026Q4 才上市</td>
+</tr>
+<tr>
+<td>是否为昇腾 910B</td>
+<td>若为华为，910B/A2 是最可能主力</td>
+<td style="text-align: right;">中高</td>
+<td>开源 NPU 栈明确支持 Atlas A2、依赖 910b-ops；但美团未点名训练厂商</td>
+</tr>
+<tr>
+<td>是否混合 910B + 910C</td>
+<td>公司算力池可能异构，单次同步训练作业内混跑概率低</td>
+<td style="text-align: right;">中</td>
+<td>代码兼容 910B/910C；未披露实际训练拓扑</td>
+</tr>
+<tr>
+<td>5 万卡是单集群还是累加</td>
+<td>更像单个逻辑集群、单作业峰值</td>
+<td style="text-align: right;">高</td>
+<td>官方称“五万卡集群”；项目报道称“峰值训练规模超过5万”</td>
+</tr>
+<tr>
+<td>摩尔线程、沐曦是否参与预训练</td>
+<td>未发现公开证据；已确认推理适配</td>
+<td style="text-align: right;">高</td>
+<td>两家公司公告均描述开源后的 Day-0 推理适配</td>
+</tr>
+<tr>
+<td>后训练是否用国产算力</td>
+<td>是，官方称 MOPD 在国产算力集群上融合</td>
+<td style="text-align: right;">高</td>
+<td>但未披露是否使用与预训练完全相同的卡池和规模</td>
+</tr>
+<tr>
+<td>线上推理是否国产</td>
+<td>核心大规模部署是国产 ASIC；开源部署同时支持 GPU/NPU</td>
+<td style="text-align: right;">高</td>
+<td>具体线上流量在各类卡之间的比例未披露</td>
+</tr>
+<tr>
+<td>内外部 Token 分配</td>
+<td>没有公开绝对量和比例</td>
+<td style="text-align: right;">高</td>
+<td>只有 OpenRouter 调用排名、外部配额和价格</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1">1. 训练硬件：能确认什么，不能确认什么</h2>
+<h3 id="11">1.1 官方刻意不披露具体芯片厂商</h3>
+<p>美团官方技术博客只使用“五万卡国产算力集群”和“AI ASIC superpods”等表述，没有披露厂商和卡型。CNA/AFP 的报道也明确写道，美团没有披露训练采用哪家中国芯片厂商。这意味着任何把 5 万卡直接写成“全是 910B”“全是 950PR”或“华为、摩尔线程、沐曦混合”的说法，都超出了公开证据。</p>
+<h3 id="12-950pr">1.2 为什么 950PR 不是合理答案</h3>
+<p>华为 2025 年 9 月公布的产品路线非常关键：Ascend 950PR 面向 Prefill 和推荐，2026 年一季度上市；Ascend 950DT 面向 Decode 和训练，计划 2026 年四季度上市。LongCat-2.0 在 2026 年 6 月已经完成超过 35T tokens 的训练并发布，因此不可能依赖尚未上市的 950DT 完成核心预训练。950PR 虽然可以承担部分推理 Prefill 或推荐任务，但不应被当成 LongCat-2.0 的主训练卡。</p>
+<h3 id="13-910b-atlas-a2">1.3 为什么 910B / Atlas A2 是最强候选</h3>
+<p>美团开源的 SGLang-FluentLLM NPU 分支明确给出 LongCat-2.0 在“昇腾 Atlas A2 Pod”上的部署样例，规模为 192 卡，单机 16 卡，并要求安装 CANN 的 <code>910b-ops</code>。仓库中的多个自定义算子也以 <code>ascend910b</code> 为目标 SoC；启动脚本同时识别 910B 和 910C。这直接证明美团为 LongCat-2.0 做了较深的昇腾 910B/A2 推理工程，而不是仅做一层框架兼容。</p>
+<p>时间线也支持 910B：美团在 2023 年 7 月正式启动国产算力适配，2024 年 7 月获得超过 16,000 卡的国产集群。彼时 910B/A2 是最成熟、最可能达到万卡交付规模的国产 AI ASIC 平台；910C/A3 更可能承担后期扩容、兼容或推理任务。由于美团未点名，报告将“910B/A2 为主力”列为中高置信度推断，而不是官方事实。</p>
+<h3 id="14">1.4 混合部署应区分两个层面</h3>
+<p>公司级算力池出现异构几乎是必然的：不同批次可能有 910B、910C、其他国产 GPU 以及历史存量海外 GPU，分别承担训练、评测、后训练、推理、推荐和内部业务。但单次大规模同步训练作业通常更偏好同代、同规格、同软件版本和同拓扑的卡，因为异构混跑会被最慢设备拖住 step time，并放大显存、算子、通信和容错复杂度。</p>
+<p>因此更合理的形态是“分阶段、分作业、分资源池异构”，而不是在同一个 5 万卡训练 job 里任意混合 910B、910C、摩尔线程和沐曦。</p>
+<h2 id="2-5">2. 5 万卡到底代表什么</h2>
+<p>官方称“最终在五万卡集群上完成万亿参数模型的全流程训练与推理”，项目亲历者报道则称“峰值训练规模超过 5 万张国产算力卡，是迄今国产平台规模最大的训练任务”。这两种表述共同支持：5 万卡是训练任务达到的并发峰值，而不是多年累计采购量。</p>
+<p>“单集群”在这里应理解为逻辑统一的训练集群。物理上，它可能由多个 SuperPod、机柜组、网络域甚至多个机房单元构成，通过统一调度、通信和 checkpoint 系统形成一个作业。公开资料没有披露是否跨地域、是否跨数据中心，也没有证据支持把“5–6 万卡”解释成多个互不协同的小集群简单相加。</p>
+<p>从官方的“超过 35T tokens”和“稳态超过 1T tokens/day”做量级校验，完整预训练仅在稳态阶段就至少需要约 35 天；模型卡又称训练跨越“数百万 accelerator-days”，除以约 5 万卡，对应至少数十天的全量运行。因此实际 full run 更可能是 1–2 个月量级，而“三年”指的是国产平台从适配、验证到规模化的工程周期，并非一个训练作业连续跑了三年。</p>
+<h2 id="3">3. 国产训练的三年爬坡路径</h2>
+<p>公开采访给出了一条相当清晰的工程时间线：</p>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>阶段</th>
+<th>关键结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2023 年上半年</td>
+<td>内部论证</td>
+<td>判断大模型核心算子相对有限，国产训练原理上可行</td>
+</tr>
+<tr>
+<td>2023 年 7 月</td>
+<td>正式启动</td>
+<td>与算力厂商建立周会和高频技术交流机制</td>
+</tr>
+<tr>
+<td>2023 年 9 月</td>
+<td>成建制适配</td>
+<td>从单算子验证推进到端到端训练</td>
+</tr>
+<tr>
+<td>2024 年春节前后</td>
+<td>首次闭环</td>
+<td>跑出首个 Loss，数值与主流芯片接近</td>
+</tr>
+<tr>
+<td>2024 年 7 月</td>
+<td>万卡交付</td>
+<td>超过 16,000 卡集群交付，一周左右跑通端到端作业</td>
+</tr>
+<tr>
+<td>2024–2025</td>
+<td>体系重构</td>
+<td>重写算子、通信、调度、工具链，建设确定性和自动恢复</td>
+</tr>
+<tr>
+<td>2026 年上半年</td>
+<td>5 万卡 full run</td>
+<td>完成 1.6T MoE、35T+ tokens 的全流程训练与大规模部署</td>
+</tr>
+</tbody>
+</table>
+<p>核心难点不是单卡算力，而是系统工程：</p>
+<ul>
+<li>稳定性：任何一张卡、链路或进程故障都可能挂掉同步作业。团队建设了卡间通信异常处理、弹性扩缩卡、自动重调度和自动恢复，将月均日故障率降低 70% 以上，项目报道给出的训练稳定性超过 92%。</li>
+<li>正确性：万卡阶段暴露出随机比特翻转、数值不一致和难以复现的问题。团队建设确定性算子、Bitwise 一致性验证和参数检测，并优化关键模块计算精度与 Reduce 逻辑。</li>
+<li>算子生态：早期国产平台开发一个算子可能需要一个月以上。确定性 FlashAttention 反向算子一度比非确定性版本慢 20–70 倍，美团自研后把性能损失压到约 5%；Scatter 类算子也通过新并行算法提升数十倍。</li>
+<li>通信与调度：万卡首次启动时，调度系统甚至因为作业内存统计超过整数上限而无法正常展示；MoE 的 All-to-All、流水线并行和超节点拓扑需要重新设计。</li>
+<li>显存与带宽：1.6T 总参数、1M context、MoE 专家路由使 HBM 容量、访存带宽和片间互联成为比峰值 FLOPS 更现实的约束。</li>
+</ul>
+<p>结果层面，美团披露训练 MFU 提升 1.5 倍、稳态吞吐超过 1T tokens/day，模型卡称完整训练没有回滚或不可恢复的 Loss spike。需要注意，“没有回滚”不等于“没有硬件故障或作业重启”，而是指容错和恢复没有造成不可逆训练损失。</p>
+<h2 id="4">4. 芯片供应商支持与技术反馈</h2>
+<p>公开信息无法量化华为投入了多少工程师、是否驻场、是否提供专门版本或 SLA，但可以确认供应商参与程度很深：美团从 2023 年 7 月就建立厂商周会和高频技术交流；开源仓库要求从“华为生态工程师”获取部分 CANN/Community SDK，并基于 CANN 官方 <code>ops-transformer</code> 的具体分支、提交和合并请求制作 910B 自定义算子补丁。</p>
+<p>美团向供应商反馈的问题很可能覆盖以下几类：</p>
+<ul>
+<li>确定性 FlashAttention、Scatter、Reduce 等算子的性能与正确性；</li>
+<li>HCCL/集合通信异常、MoE All-to-All 延迟、超节点内外通信一致性；</li>
+<li>HBM 容量、长上下文 KV-cache、权重预取和访存瓶颈；</li>
+<li>驱动、编译器、调试器和错误定位工具的可用性；</li>
+<li>随机比特翻转、卡间性能离散、故障检测和自动隔离。</li>
+</ul>
+<p>这些反馈显然推动了软件栈和算子层迭代，但公开材料不足以证明它们直接改变了某一代芯片的硅设计、驱动版本或硬件规格。可以安全表述为“形成了模型—Infra—芯片的持续协同优化闭环”，不宜具体声称“美团推动华为从某版本升级到某版本”。</p>
+<h2 id="5">5. 后训练与推理是否仍在国产集群</h2>
+<p>美团开源文章明确写道，后训练阶段采用多教师在线蒸馏，将 Agent、Reasoning、Interaction 三类专家通过 MOPD 在国产算力集群上无缝融合。因此后训练不是转回海外 GPU 的公开案例。没有披露的是：后训练是否使用与预训练同一批卡、是否达到 5 万卡规模，以及不同 SFT/RL/蒸馏任务如何切分资源。</p>
+<p>推理侧的证据更强。模型卡称完整训练和大规模部署均建立在 AI ASIC superpods 上；官方还公开了针对国产卡的模型、芯片适配与部署协同优化，包括：</p>
+<ul>
+<li>Attention absorb、Indexer 与 MLA prolog 并行；</li>
+<li>KVP 切分 KV-cache，缓解 1M context 的 I/O 和显存压力；</li>
+<li>ScMoE 利用控核能力并行 Dense 与 MoE 分支；</li>
+<li>Super Kernel 减少 kernel launch 开销；</li>
+<li>Weight Prefetch 隐藏 I/O 延迟；</li>
+<li>PD 分离、Expert Parallel、序列并行和异步负载均衡。</li>
+</ul>
+<p>开源 NPU 样例在 Atlas A2 192 卡上采用 64 卡 Prefill + 128 卡 Decode。摩尔线程和沐曦也已完成推理适配。这说明未来推理可以比训练更异构：训练强调同质性和全局同步，推理可以按 Prefill、Decode、上下文长度、精度和成本把流量拆到不同硬件池。</p>
+<h2 id="6">6. 投资版图与实际训练选型的落差</h2>
+<p>CNA/AFP 报道称美团投资了摩尔线程和 MetaX（沐曦）。摩尔线程上市时，美团旗下三快科技已出现在股东体系中，并通过深圳三快网络参与战略配售。沐曦也被报道为美团投资的国产芯片公司。</p>
+<p>但 LongCat-2.0 的公开协同只证明了两家公司在开源后完成推理适配：</p>
+<ul>
+<li>摩尔线程：MTT S5000 + MUSA 软件栈 + SGLang-MUSA，完成模型加载、推理引擎、关键算子、部署和精度验证；</li>
+<li>沐曦：曦云 C 系列 + MXMACA，完成 Day-0 推理适配，强调长上下文、多卡协同和 SGLang/vLLM 兼容。</li>
+</ul>
+<p>没有证据表明二者进入 5 万卡预训练主集群。原因并不矛盾：战略投资的目标是获得供应链可选项、生态关系和潜在财务回报；生产训练选型则要求一次性交付规模、长期稳定性、工具链成熟度、网络拓扑、运维体系和单位有效算力成本。投资组合可以多元，核心训练平台往往只能集中。</p>
+<h2 id="7">7. 美团算力储备与未来采购</h2>
+<p>美团没有公开“总共有多少 AI 卡、各型号多少、未来采购多少”的清单。5 万卡只能证明一次训练任务可调度到的峰值规模，不能等同于公司全部算力储备，也不能证明这些卡全部自有；其中可能包含自建、云租赁、合作集群或长期容量合同。</p>
+<p>财报可以提供外围尺度：2025 年研发费用为 259.98 亿元，同比增长 23.5%，公司称主要由 AI 等公司级投入增加推动；电子设备新增账面投入为 102.42 亿元，高于 2024 年的 64.72 亿元；年末已承诺但尚未发生的物业、厂房与设备资本开支为 51.33 亿元；现金及现金等价物与短期理财合计约 1,668 亿元。电子设备并不等于 AI 加速卡，但这些数字说明美团有持续扩张计算基础设施的财务能力。</p>
+<p>最可能的采购策略不是只押一家，而是“训练主平台集中 + 推理多平台扩展”：保持一套经过验证的主训练集群，同时让 910C/950 系列、摩尔线程、沐曦等在推理、评测、特定工作负载和下一代集群招标中竞争。</p>
+<h2 id="8">8. 出口管制升级后能否支撑下一代模型</h2>
+<p>现有国产集群足以证明美团可以完成 LongCat-2.0 这一代模型的完整训练，但“能完成一次”不等于“拥有充裕算力”。下一代模型的瓶颈更可能出现在有效算力和研发迭代速度，而非模型是否能启动。</p>
+<p>如果下一代模型把激活参数、训练 tokens 或长上下文训练比例提高一倍，训练计算量可能上升 2–4 倍。沿用 5 万张 910B 级别卡，理论上仍可通过延长训练周期完成，但会显著压缩并行实验、消融、后训练和线上推理资源。真正制约前沿能力的将是：</p>
+<ul>
+<li>HBM 容量与带宽，尤其是更大 MoE、优化器状态和百万上下文；</li>
+<li>超节点 scale-up 互联和跨节点 All-to-All；</li>
+<li>大规模故障率、备件供应、芯片良率和运维效率；</li>
+<li>电力、液冷、机柜密度和网络建设周期；</li>
+<li>CANN/MUSA/MXMACA 等软件版本的成熟度；</li>
+<li>是否有足够资源同时跑主训练、多个实验和大规模在线服务。</li>
+</ul>
+<p>华为 950DT 和 Atlas 950 SuperPoD 的训练能力要到 2026 年四季度才进入市场，可能成为美团下一代训练平台的候选，但量产、软件成熟和实际交付节奏仍是变量。结论是：现有平台具备“保底完成下一代”的基础，但若模型规模和研发节奏同步上升，仅靠现有 5 万卡存量很难保持国际前沿实验密度。</p>
+<h2 id="9-deepseek-v4-glm">9. 与 DeepSeek V4、智谱 GLM 的工程与战略差异</h2>
+<p>公开资料对 DeepSeek V4 和智谱 GLM-5/5.1 的核心表述是国产芯片推理适配。DeepSeek V4 官方模型材料没有宣称完整预训练在国产芯片完成；智谱官方则明确写“国产芯片支持线上推理集群”，并列出华为昇腾、摩尔线程、寒武纪、昆仑芯、沐曦、燧原和海光等平台。二者都体现出部署层的多芯片兼容，但不应自动等同于原生国产预训练。</p>
+<p>两类工程的差别如下：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>国产推理适配</th>
+<th>LongCat 原生国产训练</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>起点</td>
+<td>模型权重和架构基本确定后移植</td>
+<td>从基座设计、预训练开始围绕硬件共设计</td>
+</tr>
+<tr>
+<td>主要工作</td>
+<td>权重加载、量化、推理算子、KV-cache、调度、精度验证</td>
+<td>前反向算子、优化器、集合通信、并行策略、checkpoint、确定性、长期容错</td>
+</tr>
+<tr>
+<td>时间尺度</td>
+<td>Day-0 到数周/数月</td>
+<td>多年平台建设 + 数十天 full run</td>
+</tr>
+<tr>
+<td>硬件要求</td>
+<td>可以多厂商并行适配</td>
+<td>主训练 job 更依赖同质硬件和统一软件栈</td>
+</tr>
+<tr>
+<td>战略意义</td>
+<td>扩大部署选择、降低推理成本</td>
+<td>证明前沿模型研发不再依赖受管制训练 GPU</td>
+</tr>
+</tbody>
+</table>
+<p>LongCat 并非完全没有参考 DeepSeek。其官方 README 明确写道，LongCat Sparse Attention 是为解决 DeepSeek Sparse Attention 中 Lightning Indexer 的输出不连续和平方级打分瓶颈而设计，说明模型架构层吸收了 DeepSeek 的公开研究。但美团国产训练 Infra 在 2023 年已经启动，早于 DeepSeek V4；目前没有证据表明其训练集群、调度、容错和算子体系直接复制了 DeepSeek 的国产适配方案。更准确的说法是“模型架构借鉴公开研究，国产训练平台长期独立建设”。</p>
+<h2 id="10">10. 开源范围与商业化</h2>
+<h3 id="101">10.1 开源动机</h3>
+<p>美团官方把开源定义为“技术路径的公开”和“生态邀约”，希望盘活存量国产算力。更深层的商业逻辑包括：</p>
+<ul>
+<li>用开放权重扩大开发者和 Agent 工具生态，形成事实标准；</li>
+<li>用公开的国产推理栈降低企业采用门槛，反向扩大 API 和私有部署需求；</li>
+<li>把一次巨额训练投入摊薄到外部生态和品牌影响力；</li>
+<li>展示国产训练能力，为下一轮芯片采购和产业合作增加议价权；</li>
+<li>为美团内部本地生活 AI、编码、运营和商家工具积累外部反馈。</li>
+</ul>
+<h3 id="102">10.2 实际开源了什么</h3>
+<p>已开放的内容包括：</p>
+<ul>
+<li>BF16、FP8、INT8 等多精度模型权重，MIT License，允许免费商用；</li>
+<li>Hugging Face、GitHub、ModelScope 模型卡和部署说明；</li>
+<li>GPU 侧 SGLang 部署 recipe；</li>
+<li>NPU 侧 SGLang-FluentLLM、Atlas A2 部署样例和大量 910B 定制推理算子；</li>
+<li>模型架构、评测和核心推理优化文档。</li>
+</ul>
+<p>未发现开源的内容包括：</p>
+<ul>
+<li>预训练数据及清洗配方；</li>
+<li>完整预训练框架、5 万卡调度系统和自动恢复平台；</li>
+<li>训练用的全部前反向算子、通信实现和生产配置；</li>
+<li>SFT/RL/MOPD 的完整后训练代码、数据和奖励系统；</li>
+<li>真实训练拓扑、卡型分布、故障日志和供应商版本信息。</li>
+</ul>
+<p>因此“全栈开源”更准确地理解为“权重 + 多平台推理栈基本开放”，不是把训练 Infra 全部交付社区。</p>
+<h3 id="103-token">10.3 Token 用量、计费与商业化节奏</h3>
+<p>公开信息没有给出 LongCat 内部和外部的绝对 Token 用量，也没有披露内部结算规则。官方只披露 LongCat-2.0 预览版曾进入 OpenRouter 全球调用量前三，并在 Hermes、Claude Code、OpenClaw 等场景排名靠前。这里更接近调用次数或平台排名，不等于 Token 总量。</p>
+<p>外部商业化已经从免费测试转为“资源包 + 按量计费”：LongCat-2.0 限时价格为未命中缓存输入 2 元/百万 tokens、命中缓存输入 0.04 元/百万 tokens、输出 8 元/百万 tokens；资源包中缓存命中免费，资源包限量、分时段发售，30 天有效。2026 年 4 月预览测试初始额度为每日 500 万 tokens，提交反馈后单日最高可刷新到 1.2 亿 tokens。</p>
+<p>这些机制释放了三个信号：第一，美团以低价和缓存优惠争夺 Agent Coding 的长上下文流量；第二，限量资源包和分时抢购说明服务仍受容量约束，需要主动整形需求；第三，当前线上发票规则以个人电子发票为主，表明公开 API 商业化仍在早期，企业级合同、私有部署和内部业务价值可能比短期 API 收入更重要。</p>
+<p>内部结算没有公开资料。参考大型互联网公司的常见做法，更可能按 GPU/NPU 时、预留容量、Token、服务优先级和峰值保障进行内部成本分摊，而不是直接照搬外部零售价。该判断属于同行类比，不是美团确认信息。</p>
+<h2 id="11_1">11. 可以安全对外复述的口径</h2>
+<ol>
+<li>美团公开确认的是“五万卡国产算力集群”和“AI ASIC superpods”，没有公开芯片厂商和型号。</li>
+<li>950PR 是 Prefill/推荐芯片，不是华为路线图里的主训练芯片；950DT 才面向训练，但在 LongCat-2.0 发布时尚未上市。</li>
+<li>开源 NPU 代码明确支持 Atlas A2/910B，因此“910B/A2 为主”是目前最强的技术推断，但仍不是官方确认。</li>
+<li>5 万卡是逻辑统一训练集群的峰值任务规模，不应理解成多年采购累加；物理上可能由多个 SuperPod 组成。</li>
+<li>摩尔线程和沐曦已完成推理适配，尚无公开证据证明参与 5 万卡预训练。</li>
+<li>后训练在国产算力集群完成；训练、后训练、推理是否完全使用同一批卡，没有披露。</li>
+<li>LongCat 借鉴了 DeepSeek DSA 的公开架构思路，但国产训练 Infra 从 2023 年起独立建设。</li>
+<li>权重与推理栈开放较完整，训练数据、训练框架和 5 万卡生产 Infra 没有开源。</li>
+<li>内外部 Token 量和内部结算未披露；外部 API 已开始低价计费，商业化重点明显偏向开发者生态和 Agent Coding。</li>
+</ol>
+<h2 id="12">12. 尚待内部人士确认的问题清单</h2>
+<p>如果能够接触 LongCat Infra、采购或芯片适配工程师，最有信息增量的问题是：</p>
+<ul>
+<li>2024 年 7 月交付的 16,000 卡集群具体是什么型号？最终 5 万卡是否来自同一代产品？</li>
+<li>5 万卡 full run 的 world size 峰值、平均有效卡数和稳定运行天数分别是多少？</li>
+<li>物理上跨了多少 SuperPod、机房或网络域，是否跨园区？</li>
+<li>预训练、长上下文中训、SFT、RL、MOPD 分别使用什么卡型和规模？</li>
+<li>单次作业内是否允许 910B/910C 异构，还是通过资源池隔离？</li>
+<li>与供应商周会中最频繁的前三类问题是什么？哪些进入了 CANN、驱动或固件版本？</li>
+<li>摩尔线程、沐曦是否在开源前参与过内部精度或性能 POC？是否获得过训练订单？</li>
+<li>5 万卡是自有资产、云上长期容量还是联合建设？折旧和电力成本如何归集？</li>
+<li>LongCat 内部 Token 日均量、外部 API 日均量、峰值并发和成本回收率是多少？</li>
+<li>下一代模型计划主要依赖 910C、950DT、其他国产 GPU，还是继续扩大 A2 存量集群？</li>
+</ul>
+<h2 id="_3">参考来源</h2>
+<ol>
+<li><a href="https://www.meituan.com/news/NN260630164005904">美团：LongCat-2.0 发布公告</a></li>
+<li><a href="https://tech.meituan.com/2026/06/30/LongCat2.0.html">美团技术团队：LongCat-2.0 全流程国产训推</a></li>
+<li><a href="https://tech.meituan.com/2026/07/12/LongCat-2.0-Open-source.html">美团技术团队：正式开源及国产卡推理代码</a></li>
+<li><a href="https://huggingface.co/meituan-longcat/LongCat-2.0">LongCat-2.0 Hugging Face 模型卡</a></li>
+<li><a href="https://github.com/meituan-longcat/LongCat-2.0">LongCat-2.0 GitHub</a></li>
+<li><a href="https://github.com/meituan-longcat/SGLang-FluentLLM/blob/npu/npu_test/ReadMe.md">SGLang-FluentLLM NPU / Atlas A2 部署样例</a></li>
+<li><a href="https://www.huawei.com/en/news/2025/9/hc-xu-keynote-speech">华为：Ascend 950 芯片与 SuperPoD 路线图</a></li>
+<li><a href="https://zhidx.com/p/572037.html">智东西：5 万卡项目亲历者与工程时间线</a></li>
+<li><a href="https://companies.caixin.com/2026-07-06/102461485.html">财新：华为昇腾、摩尔线程、沐曦完成推理适配</a></li>
+<li><a href="https://www.metax-tech.com/ndetail/12624.html">沐曦：曦云 C 系列 Day-0 适配 LongCat-2.0</a></li>
+<li><a href="https://www.ithome.com/0/973/037.htm">IT之家：摩尔线程 MTT S5000 推理适配</a></li>
+<li><a href="https://longcat.chat/platform/docs/zh/pricing/long-cat-2.0">LongCat API 定价</a></li>
+<li><a href="https://longcat.chat/platform/docs/zh/token-pack">LongCat Token 资源包规则</a></li>
+<li><a href="https://longcat.chat/platform/docs/zh/ChangeLog.html">LongCat API 更新日志</a></li>
+<li><a href="https://media-meituan.todayir.com/20260424065602168712120049_en.pdf">美团 2025 年年报</a></li>
+<li><a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash/raw/60d8d70770c6776ff598c94bb586a859a38244f1/README.md">DeepSeek-V4 官方模型说明</a></li>
+<li><a href="https://api-docs.deepseek.com/zh-cn/news/news260424">DeepSeek-V4 官方发布说明</a></li>
+<li><a href="https://www.zhipuai.cn/zh/research/154">智谱 GLM-5 官方发布说明</a></li>
+<li><a href="https://www.zhipuai.cn/zh/research/159">智谱 GLM-5 技术报告与国产推理适配</a></li>
+<li><a href="https://www.channelnewsasia.com/business/china-meituan-ai-model-domestic-chips-6221006">CNA/AFP：美团未披露芯片厂商及国产芯片投资</a></li>
+</ol>
+<blockquote>
+<p>口径说明：本报告严格区分官方确认、媒体采访和技术推断。涉及具体芯片型号、卡型分布、内部 Token、采购计划及供应商人力投入的部分，如无公开一手材料，均不作为确定事实。仅供研究，非投资建议。</p>
+</blockquote></div></section>
+<p class="empty-state" id="emptyState">没有匹配的内容。</p><footer class="footer">数据截至 2026-07-17。具体训练芯片型号、内部 Token、采购计划等未披露项均已标注证据边界。仅供研究，非投资建议。</footer>
+</main></div>
+<script>
+/* terminal.js — 「研究终端」共享交互：全局搜索过滤 + 表头排序。
+   依赖元素（可选，缺失自动跳过）：#searchInput #resetSearch #rowCount #emptyState
+   过滤目标：table.sortable 的行 + .filter-item 元素。 */
+(function () {
+  const input = document.getElementById('searchInput');
+  const resetBtn = document.getElementById('resetSearch');
+  const rowCount = document.getElementById('rowCount');
+  const emptyState = document.getElementById('emptyState');
+  const tables = Array.from(document.querySelectorAll('table.sortable'));
+  const items = Array.from(document.querySelectorAll('.filter-item'));
+  const norm = v => (v || '').toLowerCase().trim();
+  const asNum = v => {
+    const c = v.replace(/[$,%+~]/g, '').replace(/[^0-9.\-]/g, '');
+    if (!c || c === '-' || c === '.') return null;
+    const n = Number(c); return Number.isFinite(n) ? n : null;
+  };
+  function update() {
+    if (!input) return;
+    const q = norm(input.value); let vis = 0;
+    tables.forEach(t => Array.from(t.tBodies[0]?.rows || []).forEach(r => {
+      const m = !q || norm(r.innerText).includes(q); r.hidden = !m; if (m) vis++;
+    }));
+    items.forEach(el => {
+      const m = !q || norm(el.innerText).includes(q);
+      el.classList.toggle('hidden-by-filter', !m); if (m) vis++;
+    });
+    if (rowCount) rowCount.textContent = vis + ' 条匹配';
+    if (emptyState) emptyState.classList.toggle('visible', Boolean(q) && vis === 0);
+  }
+  tables.forEach(table => {
+    Array.from(table.tHead?.rows[0]?.cells || []).forEach((th, i) => {
+      const b = th.querySelector('button'); if (!b) return;
+      b.addEventListener('click', () => {
+        const dir = th.dataset.sort === 'asc' ? 'desc' : 'asc';
+        Array.from(th.parentElement.children).forEach(c => c.dataset.sort = '');
+        th.dataset.sort = dir;
+        const rows = Array.from(table.tBodies[0].rows);
+        rows.sort((a, c) => {
+          const av = a.cells[i]?.innerText.trim() || '', bv = c.cells[i]?.innerText.trim() || '';
+          const an = asNum(av), bn = asNum(bv);
+          const cmp = (an !== null && bn !== null) ? an - bn
+            : av.localeCompare(bv, 'zh-Hans-u-co-pinyin', { numeric: true, sensitivity: 'base' });
+          return dir === 'asc' ? cmp : -cmp;
+        });
+        rows.forEach(r => table.tBodies[0].appendChild(r));
+      });
+    });
+  });
+  if (resetBtn && input) resetBtn.addEventListener('click', () => { input.value = ''; update(); input.focus(); });
+  if (input) input.addEventListener('input', update);
+  update();
+})();
+
+</script>
+</body>
+</html>
