@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "date": "2026-07-19",
+      "generated_at": "2026-07-19 12:00:04 +0800",
+      "model": "grok-4.3-fast",
+      "unique_tweets": 120,
+      "tickers": [
+        [
+          "$MU",
+          8
+        ],
+        [
+          "$SPY",
+          7
+        ],
+        [
+          "$NVDA",
+          6
+        ],
+        [
+          "$SPCX",
+          6
+        ],
+        [
+          "$MRVL",
+          6
+        ],
+        [
+          "$QQQ",
+          5
+        ],
+        [
+          "$TSLA",
+          4
+        ],
+        [
+          "$SKHY",
+          3
+        ]
+      ],
+      "teaser": "美股圈在 X 上核心情绪是“科技/AI股回调明显，市场在等待7月29日FOMC降息前数据与具体财报验证”，同时新兴“代币化美股”与“rToken高效资金利用”工",
+      "report_path": "reports/2026-07-19.html"
+    },
+    {
       "date": "2026-07-18",
       "generated_at": "2026-07-18 12:00:06 +0800",
       "model": "grok-4.3-fast",
@@ -1513,5 +1555,5 @@
       "report_path": "reports/2026-06-06.html"
     }
   ],
-  "last_updated": "2026-07-18 12:00:06 +0800"
+  "last_updated": "2026-07-19 12:00:04 +0800"
 }
