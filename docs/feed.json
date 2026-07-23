@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "date": "2026-07-23",
+      "generated_at": "2026-07-23 12:00:04 +0800",
+      "model": "grok-4.3-fast",
+      "unique_tweets": 138,
+      "tickers": [
+        [
+          "$SPY",
+          15
+        ],
+        [
+          "$MU",
+          9
+        ],
+        [
+          "$QQQ",
+          7
+        ],
+        [
+          "$NVDA",
+          7
+        ],
+        [
+          "$TSLA",
+          5
+        ],
+        [
+          "$AMD",
+          5
+        ],
+        [
+          "$SMCI",
+          4
+        ],
+        [
+          "$GOOGL",
+          3
+        ]
+      ],
+      "teaser": "今日美股圈在X（Twitter）上核心情绪是AI服务器/存储板块强势反弹（SMCI +19.8%、存储股多只大涨）主导反弹，但七巨头财报“卖出新闻”压顶（Alp",
+      "report_path": "reports/2026-07-23.html"
+    },
+    {
       "date": "2026-07-22",
       "generated_at": "2026-07-22 12:00:05 +0800",
       "model": "grok-4.3-fast",
@@ -1639,5 +1681,5 @@
       "report_path": "reports/2026-06-06.html"
     }
   ],
-  "last_updated": "2026-07-22 12:00:05 +0800"
+  "last_updated": "2026-07-23 12:00:04 +0800"
 }
