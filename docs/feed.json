@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "date": "2026-07-24",
+      "generated_at": "2026-07-24 12:00:04 +0800",
+      "model": "grok-4.3-fast",
+      "unique_tweets": 133,
+      "tickers": [
+        [
+          "$AMD",
+          7
+        ],
+        [
+          "$MRVL",
+          6
+        ],
+        [
+          "$NVDA",
+          5
+        ],
+        [
+          "$AVGO",
+          5
+        ],
+        [
+          "$TSLA",
+          4
+        ],
+        [
+          "$MU",
+          4
+        ],
+        [
+          "$ETN",
+          3
+        ],
+        [
+          "$SMCI",
+          2
+        ]
+      ],
+      "teaser": "133 条美股高赞讨论聚合",
+      "report_path": "reports/2026-07-24.html"
+    },
+    {
       "date": "2026-07-23",
       "generated_at": "2026-07-23 12:00:04 +0800",
       "model": "grok-4.3-fast",
@@ -1681,5 +1723,5 @@
       "report_path": "reports/2026-06-06.html"
     }
   ],
-  "last_updated": "2026-07-23 12:00:04 +0800"
+  "last_updated": "2026-07-24 12:00:04 +0800"
 }
