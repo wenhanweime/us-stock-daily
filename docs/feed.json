@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "date": "2026-07-25",
+      "generated_at": "2026-07-25 12:00:05 +0800",
+      "model": "grok-4.20-0309-non-reasoning",
+      "unique_tweets": 150,
+      "tickers": [
+        [
+          "$TSLA",
+          8
+        ],
+        [
+          "$NVDA",
+          8
+        ],
+        [
+          "$AMD",
+          6
+        ],
+        [
+          "$MU",
+          5
+        ],
+        [
+          "$MRVL",
+          3
+        ],
+        [
+          "$AVGO",
+          3
+        ],
+        [
+          "$DRAM",
+          2
+        ],
+        [
+          "$SPY",
+          2
+        ]
+      ],
+      "teaser": "美股观察日报·今日导读（2026-07-25，覆盖美股7月24日交易日及盘后/隔夜X讨论）",
+      "report_path": "reports/2026-07-25.html"
+    },
+    {
       "date": "2026-07-24",
       "generated_at": "2026-07-24 12:00:04 +0800",
       "model": "grok-4.3-fast",
@@ -1723,5 +1765,5 @@
       "report_path": "reports/2026-06-06.html"
     }
   ],
-  "last_updated": "2026-07-24 12:00:04 +0800"
+  "last_updated": "2026-07-25 12:00:05 +0800"
 }
