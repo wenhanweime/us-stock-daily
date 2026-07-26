@@ -9,13 +9,14 @@
         "外汇",
         "IBKR",
         "香港银行",
+        "银行费率",
         "资金合规"
       ],
       "tickers": [],
-      "teaser": "监管原文、银行费率、香港收款与IBKR规则核验：先判断合规入口，再比较中行直汇、汇丰/渣打同名通道与券商入金。",
+      "teaser": "兴业寰宇人生、中行、农行、中信、招行：境内人民币互转、同名外币划转及香港汇款全部费用对比。",
       "cover": null,
       "path": "research/cn-hk-ibkr-funding-2026/index.html",
-      "added_at": "2026-07-26 12:56:14"
+      "added_at": "2026-07-26 15:33:02"
     },
     {
       "slug": "meituan-longcat-2-domestic-ai-infrastructure",
@@ -343,5 +344,5 @@
       "added_at": "2026-06-06 21:03:33"
     }
   ],
-  "last_updated": "2026-07-26 12:56:14"
+  "last_updated": "2026-07-26 15:33:02"
 }

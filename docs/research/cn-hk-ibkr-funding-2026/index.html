@@ -392,9 +392,9 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
     </nav>
   </aside>
   <main class="main" id="main">
-    <div class="topbar" role="search"><div class="search-wrap"><label for="searchInput">搜索银行、费用、规则或操作步骤</label><div class="search-row"><input id="searchInput" type="search" autocomplete="off" placeholder="例如 中行、汇丰、IBKR、第三方入金…" aria-describedby="rowCount"><span class="badge" id="rowCount" aria-live="polite">—</span></div></div><div class="tool-buttons"><button type="button" id="resetSearch">重置</button><a class="source-link" href="#sources">来源</a></div></div>
+    <div class="topbar" role="search"><div class="search-wrap"><label for="searchInput">搜索银行、费用、规则或操作步骤</label><div class="search-row"><input id="searchInput" type="search" autocomplete="off" placeholder="例如 寰宇、中行、农行、中信、招行…" aria-describedby="rowCount"><span class="badge" id="rowCount" aria-live="polite">—</span></div></div><div class="tool-buttons"><button type="button" id="resetSearch">重置</button><a class="source-link" href="#sources">来源</a></div></div>
 
-    <section class="hero-panel" id="overview"><div class="overview-copy"><p class="eyebrow">Cross-Border Funding</p><h2>先判断能不能做，再优化费用</h2><p>真实目的若是把境内个人资金转到香港后购买境外证券，年度便利化购汇和经常项目汇款并不是合规入口。外汇账户中已有美元、持有同名香港账户或多走一家银行，都不会改变资金用途。合法境外资金则可以从香港同名账户按 IBKR Portal 指令入金。</p></div><div class="metric-grid"><div class="metric"><strong>5万美元</strong><span>经常项目年度便利化额度，不是境外投资额度</span></div><div class="metric"><strong>1‰</strong><span>中行跨境及境内跨行外币标准手续费率</span></div><div class="metric"><strong>0元</strong><span>符合等级的汇丰/渣打两地同名转账银行侧费用</span></div><div class="metric"><strong>同名</strong><span>香港银行到 IBKR 的核心账户要求</span></div></div></section>
+    <section class="hero-panel" id="overview"><div class="overview-copy"><p class="eyebrow">Cross-Border Funding</p><h2>先判断能不能做，再优化费用</h2><p>真实目的若是把境内个人资金转到香港后购买境外证券，年度便利化购汇和经常项目汇款并不是合规入口。外汇账户中已有美元、持有同名香港账户或多走一家银行，都不会改变资金用途。合法境外资金则可以从香港同名账户按 IBKR Portal 指令入金。</p></div><div class="metric-grid"><div class="metric"><strong>0元</strong><span>五家银行手机银行人民币跨行转账</span></div><div class="metric"><strong>前30笔</strong><span>寰宇人生跨境汇款手续费及电讯费全免</span></div><div class="metric"><strong>5万美元</strong><span>经常项目便利化额度，不是境外投资额度</span></div><div class="metric"><strong>同名</strong><span>境内外币划转及IBKR入金的核心要求</span></div></div></section>
 
     <section class="panel" id="verdict"><div class="panel-head"><div><p class="eyebrow">Decision</p><h2>首选、备选与不建议路径</h2><p>按真实资金来源和用途分流。</p></div></div><div class="decision-band">
       <div class="decision-row filter-item"><div class="decision-label">首选</div><p><strong>境内资金 + 境外证券投资：</strong>改走港股通、QDII/境内跨境基金，或符合资格的跨境理财通南向通。<br><strong>资金已合法在境外：</strong>本人香港银行同名账户 → IBKR Client Portal 创建入金通知 → FPS/eDDA/本地转账或 SWIFT。<br><strong>合法经常项目汇香港：</strong>中行大陆直接汇到汇丰香港或渣打香港等其他本人同名账户，无需经过另一家内地银行。</p></div>
@@ -402,15 +402,40 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
       <div class="decision-row filter-item"><div class="decision-label danger">不建议</div><p>虚报旅游/留学用途后入金券商；借用亲友额度；拆分汇款；第三方账户入金 IBKR；美元先结汇再重新购汇；外币现钞、地下钱庄、虚拟币 OTC 或来源不透明通道。</p></div>
     </div></section>
 
-    <section class="panel" id="fees"><div class="panel-head"><div><p class="eyebrow">Verified Tariffs</p><h2>官方费率对比</h2><p>费率仅用于合法、银行可受理的资金用途。点表头可排序。</p></div></div><div class="table-shell"><table class="sortable"><thead><tr><th><button class="sort-button">路径</button></th><th><button class="sort-button">手续费</button></th><th><button class="sort-button">固定费</button></th><th><button class="sort-button">总行侧区间</button></th><th><button class="sort-button">判断</button></th></tr></thead><tbody>
-      <tr><td>中行大陆 → 香港其他银行</td><td>1‰，50–260元</td><td>港澳台电讯费80元；全额到账另15/25美元</td><td class="num">130–340元起</td><td>一次性合法经常项目最直接</td></tr>
-      <tr><td>中行境内跨行外币</td><td>1‰，50–260元</td><td>电讯费如有</td><td class="num">50–260元起</td><td>只适合接入长期两地银行通道</td></tr>
-      <tr><td>民生电子渠道 → 香港</td><td>0.5‰，25–100元</td><td>港澳台电报费50元</td><td class="num cost-good">75–150元</td><td>资金本来就在民生时有优势</td></tr>
-      <tr><td>汇丰中国 → 汇丰香港同名</td><td>私人银行/卓越理财免费</td><td>运筹理财实际20美元等值</td><td class="num cost-good">0元（符合等级）</td><td>两地账户 + 关系等级已就绪</td></tr>
-      <tr><td>渣打中国 → 渣打香港同名</td><td>优先理财/优先私人理财免费</td><td>中间代理行费也免</td><td class="num cost-good">0元（符合等级）</td><td>两地账户 + 关系等级已就绪</td></tr>
-      <tr><td>招商银行普通境外汇款</td><td>0.1%，100–1000元</td><td>通讯费150元</td><td class="num cost-bad">250–1150元</td><td>先看 App 客户优惠再决定</td></tr>
-      <tr><td>工行 / 建行</td><td>本轮未取得可稳定复核的全国现行价目</td><td>以确认页为准</td><td class="num">待询价</td><td>不采用二手攻略数字</td></tr>
-    </tbody></table></div><div class="table-note">中行示例：10,000美元、汇率7.20时，手续费约72元 + 电讯费80元 = 约152元；50,000美元时手续费封顶260元 + 80元 = 340元。中间行费、收款行费和汇率点差另计。</div></section>
+    <section class="panel" id="fees"><div class="panel-head"><div><p class="eyebrow">Verified Tariffs</p><h2>五家内地银行费用对比</h2><p>按个人储蓄账户、本人同名账户和普通客户等级比较。费率仅用于合法、银行可受理的资金用途。</p></div></div>
+      <h3>境内人民币：从各行手机银行发起均为0元</h3><div class="table-shell"><table class="sortable"><thead><tr><th><button class="sort-button">汇出银行</button></th><th><button class="sort-button">手机银行跨行</button></th><th><button class="sort-button">其他渠道</button></th></tr></thead><tbody>
+        <tr><td>兴业寰宇人生</td><td class="num cost-good">0元</td><td>电子渠道全免；银联自助渠道每月首笔免费，第2笔起4元</td></tr>
+        <tr><td>中国银行</td><td class="num cost-good">0元</td><td>网银5,000元以内免费，以上按柜台分档标准</td></tr>
+        <tr><td>农业银行</td><td class="num cost-good">0元</td><td>掌上银行暂不收取；网银5,000元以内免费，以上四折、最高20元</td></tr>
+        <tr><td>中信银行</td><td class="num cost-good">0元</td><td>个人网银、移动银行均免费</td></tr>
+        <tr><td>招商银行</td><td class="num cost-good">0元</td><td>App/个人网银普通、快速、实时跨行均不收手续费</td></tr>
+      </tbody></table></div><div class="table-note">五张卡之间20个有向人民币转账组合均为0元，前提是从汇出行自己的手机银行发起；收款行通常不另收入账费。</div>
+
+      <h3>境内同名外币跨行</h3><div class="table-shell"><table class="sortable"><thead><tr><th><button class="sort-button">汇出银行</button></th><th><button class="sort-button">手续费</button></th><th><button class="sort-button">渠道及其他费用</button></th></tr></thead><tbody>
+        <tr><td>兴业银行</td><td>0.1%，20–100元</td><td>电讯费、代收他行费如有另收；寰宇人生跨境前30笔优惠不自动覆盖境内跨行</td></tr>
+        <tr><td>中国银行</td><td>0.1%，50–260元</td><td>跨行柜台划转，另收电讯费（如有）；线上能否办理以页面为准</td></tr>
+        <tr><td>农业银行</td><td>不高于0.1%，20–250元</td><td>本行同城免费；跨行同业费用另计，通常柜台办理</td></tr>
+        <tr><td>中信银行</td><td>0.1%，20–200元</td><td>网银/移动银行未开通外币跨行，需柜台；邮电费如有另收</td></tr>
+        <tr><td>招商银行</td><td>招行本人账户互转免费</td><td>公开页未给个人境内外币跨行统一价格，需柜台按币种询价</td></tr>
+      </tbody></table></div>
+
+      <h3>内地银行 → 香港同名账户</h3><div class="table-shell"><table class="sortable"><thead><tr><th><button class="sort-button">汇出银行</button></th><th><button class="sort-button">手续费</button></th><th><button class="sort-button">固定费</button></th><th><button class="sort-button">全额到账/其他</button></th></tr></thead><tbody>
+        <tr><td>兴业寰宇人生</td><td class="cost-good">活动期前30笔0元</td><td class="cost-good">前30笔电讯费0元</td><td>2026-07-01至2027-06-30；≤1万美元可选SWIFT GO，另50元</td></tr>
+        <tr><td>兴业普通标准</td><td>0.1%，50–200元</td><td>报文电讯费100元</td><td>SWIFT GO另50元；现钞另计钞转汇价差</td></tr>
+        <tr><td>中国银行</td><td>0.1%，50–260元</td><td>港澳台电讯费80元</td><td>美元全额到账另15或25美元</td></tr>
+        <tr><td>农业银行</td><td>0.1%，20–200元</td><td>对私境外普通报文80元</td><td>全额到账另25美元或等值人民币</td></tr>
+        <tr><td>中信银行电子渠道</td><td>0.1%，20–180元</td><td>电报费80元</td><td>全额到账另200元；柜台手续费上限250元</td></tr>
+        <tr><td>招商银行</td><td>0.1%，100–1000元</td><td>通讯费150元</td><td>OUR预扣至少25美元且仍可能追收；现钞另收钞汇互转费</td></tr>
+      </tbody></table></div>
+
+      <h3>美元费用示例</h3><div class="table-shell"><table class="sortable"><thead><tr><th><button class="sort-button">汇出银行</button></th><th><button class="sort-button">10,000美元</button></th><th><button class="sort-button">50,000美元</button></th></tr></thead><tbody>
+        <tr><td>兴业寰宇人生前30笔</td><td class="num cost-good">0元；SWIFT GO为50元</td><td class="num cost-good">0元；中间行费或发生</td></tr>
+        <tr><td>中国银行</td><td class="num">约152元</td><td class="num">约340元</td></tr>
+        <tr><td>农业银行</td><td class="num">约152元</td><td class="num">约280元</td></tr>
+        <tr><td>中信电子渠道</td><td class="num">约152元</td><td class="num">约260元</td></tr>
+        <tr><td>招商银行</td><td class="num cost-bad">约250元</td><td class="num cost-bad">约510元</td></tr>
+      </tbody></table></div><div class="table-note">示例按1美元=7.20元人民币、普通SHA汇款计算，仅含内地汇出行手续费和固定电讯/通讯费；不含购汇点差、中间行费、香港收款行费。渣打香港个人汇入免费；中银香港超过等值500港元通常收60港元；汇丰香港2026年8月1日起个人汇入免费。</div>
+    </section>
 
     <section class="panel" id="rules"><div class="panel-head"><div><p class="eyebrow">Regulatory Boundary</p><h2>三个决定性规则</h2></div></div><div class="markdown-body filter-item"><h3>1. 便利化额度不是投资额度</h3><p>国家外汇管理局《个人购汇申请书》明确写明：不得用于境外买房、证券投资、购买人寿保险和投资性返还分红类保险等尚未开放的资本项目。每年等值5万美元是经常项目结售汇便利化额度。</p><h3>2. 已有美元仍要审核用途</h3><p>《经常项目外汇业务指引（2020年版）》第六十四条把境内个人外汇账户汇出限定为经常项目支出，并要求银行做购汇用途与付汇用途一致性审核。已有美元只是不需要再次购汇，不等于可以汇去投资。</p><h3>3. 境内同名跨行外币原则上可办</h3><p>第六十七条允许个人外汇账户资金在本人账户之间、本人和近亲属账户之间境内划转。中行也公开提供同行/跨行多币种境内汇款；实际以柜台最稳。</p></div><div class="callout">把钱先汇到香港本人账户、随后再入金券商，并不会把资本项目投资变成经常项目。报告不提供虚报用途、借额度或规避审核的操作指引。</div></section>
 
@@ -428,11 +453,17 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
       <li><a href="https://www.safe.gov.cn/tianjin/2022/0402/1887.html">外汇局天津市分局：个人外汇账户境内划转范围</a></li>
       <li><a href="https://www.boc.cn/pbservice/pb4/200806/t20080626_761.html">中国银行：个人境内汇款</a></li>
       <li><a href="https://pic.bankofchina.com/bocappd/pricelist/202511/P020251110646838136627.pdf">中国银行：个人客户服务收费价目表</a></li>
-      <li><a href="https://www.cmbc.cn/grkh/cgjr/kjhk/hc/index.htm">中国民生银行：电汇汇出及收费标准</a></li>
+      <li><a href="https://www.cib.com.cn/cn/personal/debit/">兴业银行：寰宇人生借记卡</a></li>
+      <li><a href="https://www.cib.com.cn/cn/aboutCIB/about/charges/adjustment/combined.html">兴业银行：综合服务价目表</a></li>
+      <li><a href="https://www.cib.com.cn/cn/aboutCIB/about/charges/adjustment/retail.html">兴业银行：零售服务价目表</a></li>
+      <li><a href="https://www.abchina.com/cn/publicplate/sfbz/fwjgbz/">农业银行：市场调节价服务价格标准</a></li>
+      <li><a href="https://www.abchina.com/cn/publicplate/sfbz/fwjgbz/202109/t20210929_2047241.htm">农业银行：外汇及资金交易业务价目表</a></li>
+      <li><a href="https://www.citicbank.com/common/financialnews/jmfwb2/201606/P020260408627560578511.pdf">中信银行：个人常用服务项目索引</a></li>
       <li><a href="https://www.cmbchina.com/personalbank/gb/page/standfee.htm">招商银行：转账汇款收费标准</a></li>
       <li><a href="https://www.hsbc.com.cn/content/dam/hsbc/cn/docs/document-download/tariff-of-accouts-and-services.pdf">汇丰中国：2026年6月16日起账户和服务费率</a></li>
       <li><a href="https://www.sc.com/cn/free-global-fund/">渣打中国：免费的全球资金电汇</a></li>
       <li><a href="https://www.hsbc.com.hk/content/dam/hsbc/hk/docs/ways-to-bank/bank-tariff/20260801-guide.pdf">汇丰香港：2026年8月1日起个人银行服务费率</a></li>
+      <li><a href="https://www.bochk.com/en/crossborder/remittance/charges.html">中银香港：跨境汇款收费</a></li>
       <li><a href="https://av.sc.com/hk/content/docs/hk-service-charges-en.pdf">渣打香港：个人服务收费表</a></li>
       <li><a href="https://www.ibkrguides.com/kb/article-4717.htm">IBKR：IBHK第三方入金FAQ</a></li>
       <li><a href="https://www.ibkrguides.com/kb/en-us/how-to-deposit-hkd.htm">IBKR：HKD存取款方式FAQ</a></li>
