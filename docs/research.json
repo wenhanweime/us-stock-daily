@@ -1,6 +1,23 @@
 {
   "entries": [
     {
+      "slug": "cn-hk-ibkr-funding-2026",
+      "title": "中国内地到香港再入金盈透：合规边界、费用与操作路径",
+      "date": "2026-07-26",
+      "tags": [
+        "跨境汇款",
+        "外汇",
+        "IBKR",
+        "香港银行",
+        "资金合规"
+      ],
+      "tickers": [],
+      "teaser": "监管原文、银行费率、香港收款与IBKR规则核验：先判断合规入口，再比较中行直汇、汇丰/渣打同名通道与券商入金。",
+      "cover": null,
+      "path": "research/cn-hk-ibkr-funding-2026/index.html",
+      "added_at": "2026-07-26 12:36:20"
+    },
+    {
       "slug": "meituan-longcat-2-domestic-ai-infrastructure",
       "title": "美团 LongCat-2.0：国产算力、训练 Infra 与商业化深度研究",
       "date": "2026-07-17",
@@ -326,5 +343,5 @@
       "added_at": "2026-06-06 21:03:33"
     }
   ],
-  "last_updated": "2026-07-17 15:59:09"
+  "last_updated": "2026-07-26 12:36:20"
 }

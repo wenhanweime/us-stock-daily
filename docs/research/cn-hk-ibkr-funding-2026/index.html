@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4ef">
+  <title>中国内地到香港再入金盈透：合规边界、费用与操作路径</title>
+  <meta name="description" content="核验监管原文、银行价目表、香港收款与IBKR官方规则，给出首选、备选、不建议路径和逐步操作清单。">
+  <style>
+/* theme.css — 「研究终端」共享设计系统
+   提取自 AI 基建投资研究仪表盘，供首页 + 每日观察 + 研报模板统一复用。
+   配色: warm paper #f6f4ef / 墨 #181916 / 绿 #0b6b57 / 金 #9a6500 / 红 #a33b2a / 蓝 #315f8a */
+
+:root {
+  color-scheme: light;
+  --bg: #f6f4ef;
+  --surface: #fffdfa;
+  --surface-2: #f0eee8;
+  --ink: #181916;
+  --muted: #676b62;
+  --line: #d9d5ca;
+  --line-strong: #bdb7aa;
+  --accent: #0b6b57;
+  --accent-2: #9a6500;
+  --danger: #a33b2a;
+  --cool: #315f8a;
+  --shadow: 0 18px 45px rgba(42, 38, 30, 0.08);
+  --radius: 8px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration-color: rgba(11, 107, 87, 0.45); text-underline-offset: 3px; }
+a:hover { color: var(--accent); }
+button, input, a { touch-action: manipulation; }
+button:focus-visible, input:focus-visible, a:focus-visible, summary:focus-visible {
+  outline: 3px solid rgba(11, 107, 87, 0.32);
+  outline-offset: 2px;
+}
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  transform: translateY(-150%);
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: white;
+}
+.skip-link:focus { transform: translateY(0); }
+.app-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); min-height: 100vh; }
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: max(18px, env(safe-area-inset-top)) 16px 18px max(16px, env(safe-area-inset-left));
+  border-right: 1px solid var(--line);
+  background: rgba(255, 253, 250, 0.92);
+  backdrop-filter: blur(12px);
+  overflow-y: auto;
+}
+.brand { padding: 4px 4px 18px; border-bottom: 1px solid var(--line); }
+.brand h1 { margin: 0; font-size: 20px; line-height: 1.18; letter-spacing: 0; text-wrap: balance; }
+.brand p { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.nav-group { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.nav-group-title { margin: 0 4px 8px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 7px 8px;
+  border-radius: 6px;
+  color: #30322e;
+  font-size: 13px;
+  line-height: 1.25;
+  text-decoration: none;
+}
+.nav-link:hover { background: #ece8df; color: var(--ink); }
+.nav-link span:first-child { width: 22px; flex: 0 0 auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+.main { min-width: 0; padding: 22px clamp(16px, 3vw, 34px) 60px; }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  margin: -22px calc(clamp(16px, 3vw, 34px) * -1) 20px;
+  padding: 14px clamp(16px, 3vw, 34px);
+  border-bottom: 1px solid var(--line);
+  background: rgba(246, 244, 239, 0.88);
+  backdrop-filter: blur(12px);
+}
+.search-wrap { min-width: 0; }
+.search-wrap label { display: block; margin-bottom: 5px; color: var(--muted); font-size: 12px; }
+.search-row { display: flex; gap: 8px; align-items: center; }
+#searchInput {
+  width: min(680px, 100%);
+  height: 38px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0 12px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 14px;
+}
+.tool-buttons { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.tool-buttons button, .source-link {
+  min-height: 36px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0 11px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.tool-buttons button:hover, .source-link:hover { border-color: var(--accent); color: var(--accent); }
+.hero-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 18px;
+  align-items: stretch;
+  margin-bottom: 18px;
+}
+.overview-copy, .metric-grid, .panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.overview-copy { padding: 22px; }
+.eyebrow { margin: 0 0 8px; color: var(--accent); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.overview-copy h2 { margin: 0; font-size: clamp(24px, 3vw, 38px); line-height: 1.08; letter-spacing: 0; text-wrap: balance; }
+.overview-copy p { max-width: 860px; margin: 14px 0 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
+.metric-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: hidden; }
+.metric { padding: 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-width: 0; }
+.metric:nth-child(2n) { border-right: 0; }
+.metric:nth-last-child(-n+2) { border-bottom: 0; }
+.metric strong { display: block; font-size: 28px; line-height: 1; font-variant-numeric: tabular-nums; }
+.metric span { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; line-height: 1.35; }
+.panel { margin: 18px 0; overflow: hidden; }
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--line);
+}
+.panel-head h2 { margin: 0; font-size: 20px; letter-spacing: 0; text-wrap: balance; }
+.panel-head p:not(.eyebrow) { margin: 6px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.table-shell { width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 880px; font-size: 13px; }
+th, td { padding: 10px 11px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; line-height: 1.42; overflow-wrap: anywhere; }
+thead th { position: sticky; top: 0; z-index: 1; background: #eeeae1; color: #353730; font-weight: 700; }
+tbody tr:hover { background: #fbf7ed; }
+tbody tr[hidden] { display: none; }
+.num, td:nth-child(6), td:nth-child(10) { font-variant-numeric: tabular-nums; }
+.rank-top { color: var(--accent); font-weight: 800; }
+.sort-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+.sort-button:hover { color: var(--accent); }
+.table-note { padding: 10px 20px 16px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); }
+.doc-map { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; padding: 16px 20px 20px; }
+.doc-chip {
+  display: block;
+  min-height: 72px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fbfaf6;
+  text-decoration: none;
+}
+.doc-chip:hover { border-color: var(--accent); background: #f3f0e8; }
+.doc-chip span { display: block; color: var(--muted); font-size: 11px; margin-bottom: 6px; }
+.doc-chip strong { display: block; font-size: 13px; line-height: 1.35; overflow-wrap: anywhere; }
+.markdown-body { padding: 2px 20px 24px; }
+.markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 { scroll-margin-top: 86px; letter-spacing: 0; text-wrap: balance; }
+.markdown-body h2 { margin: 24px 0 10px; font-size: 21px; }
+.markdown-body h3 { margin: 22px 0 8px; font-size: 17px; }
+.markdown-body h4 { margin: 18px 0 8px; font-size: 15px; }
+.markdown-body p, .markdown-body li { color: #30322d; font-size: 14px; line-height: 1.68; }
+.markdown-body ul, .markdown-body ol { padding-left: 22px; }
+.markdown-body blockquote {
+  margin: 14px 0;
+  padding: 10px 14px;
+  border-left: 4px solid var(--accent);
+  background: #f4f0e8;
+  color: #2f332c;
+}
+.markdown-body blockquote p { margin: 4px 0; color: #2f332c; }
+.markdown-body pre {
+  overflow-x: auto;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #171914;
+  color: #f8f3e7;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.markdown-body code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
+.status-strip { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 20px 18px; }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: #faf8f2;
+  color: #3b3d37;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.badge.accent { border-color: rgba(11, 107, 87, .35); color: var(--accent); }
+.badge.warn { border-color: rgba(154, 101, 0, .35); color: var(--accent-2); }
+.hidden-by-filter { display: none; }
+.empty-state { display: none; padding: 18px 20px; color: var(--muted); }
+.empty-state.visible { display: block; }
+.footer { margin-top: 28px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+@media (max-width: 1080px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  .nav-group:last-child { display: none; }
+  .hero-panel { grid-template-columns: 1fr; }
+  .topbar { grid-template-columns: 1fr; position: sticky; }
+  .tool-buttons { justify-content: flex-start; }
+}
+@media (max-width: 640px) {
+  .main { padding-inline: 12px; }
+  .topbar { margin-inline: -12px; padding-inline: 12px; }
+  .overview-copy { padding: 18px; }
+  .metric-grid { grid-template-columns: 1fr; }
+  .metric, .metric:nth-child(2n), .metric:nth-last-child(-n+2) { border-right: 0; border-bottom: 1px solid var(--line); }
+  .metric:last-child { border-bottom: 0; }
+  .panel-head { flex-direction: column; }
+  table { min-width: 760px; font-size: 12px; }
+  th, td { padding: 8px; }
+  .search-row { flex-direction: column; align-items: stretch; }
+  .badge { white-space: normal; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+.visual-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr); gap: 16px; padding: 16px 20px 22px; }
+.visual-card { border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; overflow: hidden; min-width: 0; }
+.visual-card h3 { margin: 0; padding: 14px 14px 8px; font-size: 16px; letter-spacing: 0; text-wrap: balance; }
+.visual-card p { margin: 0; padding: 0 14px 14px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+.diagram-wrap { overflow-x: auto; padding: 12px; overscroll-behavior-x: contain; }
+.diagram { width: 100%; min-width: 780px; height: auto; display: block; }
+.diagram text { font-family: inherit; fill: #20221e; }
+.diagram .node { fill: #fffdfa; stroke: #bdb7aa; stroke-width: 1.2; }
+.diagram .node-strong { fill: #eef6f1; stroke: #0b6b57; stroke-width: 1.4; }
+.diagram .node-warn { fill: #fff3d8; stroke: #9a6500; stroke-width: 1.3; }
+.diagram .node-risk { fill: #faece8; stroke: #a33b2a; stroke-width: 1.2; }
+.diagram .link { fill: none; stroke: #8f8a80; stroke-width: 1.2; marker-end: url(#arrow); }
+.diagram .link-strong { fill: none; stroke: #0b6b57; stroke-width: 2; marker-end: url(#arrow-green); }
+.diagram .label { font-size: 12px; font-weight: 700; }
+.diagram .small { font-size: 10.5px; fill: #676b62; }
+.diagram .lane { fill: #f2efe7; stroke: #d9d5ca; stroke-width: 1; }
+.player-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 12px; padding: 16px 20px 22px; }
+.player-card { border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; padding: 14px; min-width: 0; }
+.player-card header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.player-card h3 { margin: 0; font-size: 16px; letter-spacing: 0; }
+.player-card .ticker { font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.player-card dl { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 7px 10px; margin: 0; font-size: 13px; line-height: 1.48; }
+.player-card dt { color: var(--muted); }
+.player-card dd { margin: 0; color: #2c2e29; overflow-wrap: anywhere; }
+.player-card a { color: var(--accent); }
+.chain-map { padding: 16px 20px 22px; display: grid; gap: 12px; }
+.chain-row { display: grid; grid-template-columns: 150px repeat(5, minmax(120px, 1fr)); gap: 8px; align-items: stretch; }
+.chain-title { display: flex; align-items: center; padding: 10px; border-radius: var(--radius); background: #ece8df; font-weight: 800; font-size: 13px; }
+.chain-cell { min-height: 74px; padding: 10px; border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; font-size: 12px; line-height: 1.42; position: relative; }
+.chain-cell strong { display: block; margin-bottom: 5px; color: var(--ink); }
+.chain-cell::after { content: '→'; position: absolute; right: -13px; top: 50%; transform: translateY(-50%); color: var(--line-strong); font-weight: 800; }
+.chain-cell:last-child::after { content: ''; }
+.bottleneck { border-color: rgba(11, 107, 87, .45); background: #eef6f1; }
+.watch { border-color: rgba(154, 101, 0, .42); background: #fff7e8; }
+.risk-node { border-color: rgba(163, 59, 42, .38); background: #faece8; }
+.source-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px 14px; padding: 0 20px 22px; margin: 0; }
+.source-list li { list-style: none; font-size: 12px; line-height: 1.45; color: var(--muted); }
+.source-list a { color: var(--accent); }
+.timeline { padding: 16px 20px 22px; display: grid; gap: 10px; }
+.timeline-item { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; align-items: start; }
+.timeline-item time { padding: 8px 10px; border-radius: var(--radius); background: #ece8df; color: var(--ink); font-size: 12px; font-weight: 800; text-align: center; font-variant-numeric: tabular-nums; }
+.timeline-item div { padding: 10px 12px; border-left: 3px solid var(--accent); background: #fbfaf6; border-radius: 0 var(--radius) var(--radius) 0; font-size: 13px; line-height: 1.55; }
+@media (max-width: 900px) { .visual-grid { grid-template-columns: 1fr; } .chain-row { grid-template-columns: 1fr; } .chain-cell::after { content: '↓'; right: 12px; top: auto; bottom: -17px; transform: none; } .chain-cell:last-child::after { content: ''; } }
+@media (max-width: 640px) { .player-grid, .visual-grid, .chain-map, .timeline { padding-inline: 12px; } .player-card dl { grid-template-columns: 1fr; } .timeline-item { grid-template-columns: 1fr; } }
+
+/* ---- 站点 chrome 补充（首页 / 日报）---- */
+.brand a{color:inherit;text-decoration:none}
+.brand a:hover{color:var(--accent)}
+.lede-inline{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.muted{color:var(--muted)}
+.back-link{color:var(--muted);font-size:13px}
+.back-link:hover{color:var(--accent)}
+
+.decision-band { padding: 0 20px; }
+.decision-row { display: grid; grid-template-columns: 150px minmax(0,1fr); gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.decision-row:last-child { border-bottom: 0; }
+.decision-label { font-weight: 800; color: var(--accent); }
+.decision-label.warn { color: var(--accent-2); }
+.decision-label.danger { color: var(--danger); }
+.decision-row p { margin: 0; color: #30322d; font-size: 14px; line-height: 1.68; }
+.route-flow { padding: 4px 20px 20px; }
+.route-step { display: grid; grid-template-columns: 54px minmax(0,1fr); gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.route-step:last-child { border-bottom: 0; }
+.step-no { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid var(--line-strong); border-radius: 50%; color: var(--accent); font-weight: 800; font-variant-numeric: tabular-nums; }
+.route-step h3 { margin: 0 0 6px; font-size: 16px; }
+.route-step p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.62; }
+.callout { margin: 16px 20px 20px; padding: 14px 16px; border-left: 4px solid var(--danger); background: #f8eee9; color: #44251f; font-size: 14px; line-height: 1.65; }
+.callout.good { border-left-color: var(--accent); background: #edf5f1; color: #183b31; }
+.compact-list { margin: 0; padding: 16px 42px 20px; }
+.compact-list li { margin: 8px 0; color: #30322d; font-size: 14px; line-height: 1.62; }
+.source-list { margin: 0; padding: 16px 42px 22px; }
+.source-list li { margin: 9px 0; color: var(--muted); font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+.cost-good { color: var(--accent); font-weight: 800; }
+.cost-warn { color: var(--accent-2); font-weight: 800; }
+.cost-bad { color: var(--danger); font-weight: 800; }
+@media (max-width: 640px) { .decision-row { grid-template-columns: 1fr; gap: 6px; } .route-step { grid-template-columns: 44px minmax(0,1fr); } }
+
+  </style>
+</head>
+<body>
+<!-- research-site-nav:start -->
+<style>
+.research-site-nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;gap:10px;min-height:42px;padding:7px clamp(14px,3vw,28px);border-bottom:1px solid #d9d5ca;background:rgba(246,244,239,.94);backdrop-filter:blur(12px);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+.research-site-nav a{display:inline-flex;align-items:center;min-height:28px;border:1px solid #d9d5ca;border-radius:8px;padding:3px 10px;background:#fffdfa;color:#181916;text-decoration:none;font-size:13px;line-height:1.2}
+.research-site-nav a:hover{border-color:#0b6b57;color:#0b6b57}
+.research-site-nav .research-site-nav-spacer{flex:1 1 auto}
+.research-site-nav strong{font-size:13px;color:#676b62;font-weight:700;white-space:nowrap}
+@media(max-width:640px){.research-site-nav{gap:6px;overflow-x:auto}.research-site-nav strong{display:none}.research-site-nav a{white-space:nowrap}}
+</style>
+<nav class="research-site-nav" aria-label="站点导航">
+  <a href="../../index.html">返回投研站首页</a>
+  <a href="../index.html">全部研究</a>
+  <span class="research-site-nav-spacer"></span>
+  <strong>美股投研</strong>
+</nav>
+<!-- research-site-nav:end -->
+
+<a class="skip-link" href="#main">跳到主内容</a>
+<nav class="research-site-nav" aria-label="站点导航" style="position:sticky;top:0;z-index:1000;display:flex;align-items:center;gap:10px;min-height:42px;padding:7px clamp(14px,3vw,28px);border-bottom:1px solid var(--line);background:rgba(246,244,239,.94);backdrop-filter:blur(12px)">
+  <a class="source-link" href="../../index.html">返回投研站首页</a><a class="source-link" href="../index.html">全部研究</a><span style="flex:1 1 auto"></span><strong style="font-size:13px;color:var(--muted)">资金路径研究</strong>
+</nav>
+<div class="app-shell">
+  <aside class="sidebar" aria-label="导航">
+    <div class="brand"><h1>内地 → 香港 → IBKR</h1><p>合规边界、银行费用与操作路径<br>核验日期：2026-07-26</p></div>
+    <nav class="nav-group" aria-label="Primary"><p class="nav-group-title">Research Map</p>
+      <a class="nav-link" href="#overview"><span>00</span><strong>结论总览</strong></a>
+      <a class="nav-link" href="#verdict"><span>01</span><strong>路径选择</strong></a>
+      <a class="nav-link" href="#fees"><span>02</span><strong>官方费率</strong></a>
+      <a class="nav-link" href="#rules"><span>03</span><strong>监管边界</strong></a>
+      <a class="nav-link" href="#routes"><span>04</span><strong>操作路径</strong></a>
+      <a class="nav-link" href="#checklist"><span>05</span><strong>逐步清单</strong></a>
+      <a class="nav-link" href="#sources"><span>06</span><strong>官方来源</strong></a>
+    </nav>
+  </aside>
+  <main class="main" id="main">
+    <div class="topbar" role="search"><div class="search-wrap"><label for="searchInput">搜索银行、费用、规则或操作步骤</label><div class="search-row"><input id="searchInput" type="search" autocomplete="off" placeholder="例如 中行、汇丰、IBKR、第三方入金…" aria-describedby="rowCount"><span class="badge" id="rowCount" aria-live="polite">—</span></div></div><div class="tool-buttons"><button type="button" id="resetSearch">重置</button><a class="source-link" href="#sources">来源</a></div></div>
+
+    <section class="hero-panel" id="overview"><div class="overview-copy"><p class="eyebrow">Cross-Border Funding</p><h2>先判断能不能做，再优化费用</h2><p>真实目的若是把境内个人资金转到香港后购买境外证券，年度便利化购汇和经常项目汇款并不是合规入口。已有美元、同名香港账户或多走一家银行，都不会改变资金用途。合法境外资金则可以从香港同名账户按 IBKR Portal 指令入金。</p></div><div class="metric-grid"><div class="metric"><strong>5万美元</strong><span>经常项目年度便利化额度，不是境外投资额度</span></div><div class="metric"><strong>1‰</strong><span>中行跨境及境内跨行外币标准手续费率</span></div><div class="metric"><strong>0元</strong><span>符合等级的汇丰/渣打两地同名转账银行侧费用</span></div><div class="metric"><strong>同名</strong><span>香港银行到 IBKR 的核心账户要求</span></div></div></section>
+
+    <section class="panel" id="verdict"><div class="panel-head"><div><p class="eyebrow">Decision</p><h2>首选、备选与不建议路径</h2><p>按真实资金来源和用途分流。</p></div></div><div class="decision-band">
+      <div class="decision-row filter-item"><div class="decision-label">首选</div><p><strong>境内资金 + 境外证券投资：</strong>改走港股通、QDII/境内跨境基金，或符合资格的跨境理财通南向通。<br><strong>资金已合法在境外：</strong>本人香港银行同名账户 → IBKR Client Portal 创建入金通知 → FPS/eDDA/本地转账或 SWIFT。<br><strong>合法经常项目汇香港：</strong>中行大陆直接汇到汇丰香港或渣打香港等其他本人同名账户，无需经过另一家内地银行。</p></div>
+      <div class="decision-row filter-item"><div class="decision-label warn">备选</div><p>已有两地汇丰账户且达到卓越理财，或已有两地渣打账户且达到优先理财时，可用同集团同名通道。现有中行美元先做境内同名跨行，再用环球转账 / Global Link；适合长期、重复、账户关系已就绪的用户。</p></div>
+      <div class="decision-row filter-item"><div class="decision-label danger">不建议</div><p>虚报旅游/留学用途后入金券商；借用亲友额度；拆分汇款；第三方账户入金 IBKR；美元先结汇再重新购汇；外币现钞、地下钱庄、虚拟币 OTC 或来源不透明通道。</p></div>
+    </div></section>
+
+    <section class="panel" id="fees"><div class="panel-head"><div><p class="eyebrow">Verified Tariffs</p><h2>官方费率对比</h2><p>费率仅用于合法、银行可受理的资金用途。点表头可排序。</p></div></div><div class="table-shell"><table class="sortable"><thead><tr><th><button class="sort-button">路径</button></th><th><button class="sort-button">手续费</button></th><th><button class="sort-button">固定费</button></th><th><button class="sort-button">总行侧区间</button></th><th><button class="sort-button">判断</button></th></tr></thead><tbody>
+      <tr><td>中行大陆 → 香港其他银行</td><td>1‰，50–260元</td><td>港澳台电讯费80元；全额到账另15/25美元</td><td class="num">130–340元起</td><td>一次性合法经常项目最直接</td></tr>
+      <tr><td>中行境内跨行外币</td><td>1‰，50–260元</td><td>电讯费如有</td><td class="num">50–260元起</td><td>只适合接入长期两地银行通道</td></tr>
+      <tr><td>民生电子渠道 → 香港</td><td>0.5‰，25–100元</td><td>港澳台电报费50元</td><td class="num cost-good">75–150元</td><td>资金本来就在民生时有优势</td></tr>
+      <tr><td>汇丰中国 → 汇丰香港同名</td><td>私人银行/卓越理财免费</td><td>运筹理财实际20美元等值</td><td class="num cost-good">0元（符合等级）</td><td>两地账户 + 关系等级已就绪</td></tr>
+      <tr><td>渣打中国 → 渣打香港同名</td><td>优先理财/优先私人理财免费</td><td>中间代理行费也免</td><td class="num cost-good">0元（符合等级）</td><td>两地账户 + 关系等级已就绪</td></tr>
+      <tr><td>招商银行普通境外汇款</td><td>0.1%，100–1000元</td><td>通讯费150元</td><td class="num cost-bad">250–1150元</td><td>先看 App 客户优惠再决定</td></tr>
+      <tr><td>工行 / 建行</td><td>本轮未取得可稳定复核的全国现行价目</td><td>以确认页为准</td><td class="num">待询价</td><td>不采用二手攻略数字</td></tr>
+    </tbody></table></div><div class="table-note">中行示例：10,000美元、汇率7.20时，手续费约72元 + 电讯费80元 = 约152元；50,000美元时手续费封顶260元 + 80元 = 340元。中间行费、收款行费和汇率点差另计。</div></section>
+
+    <section class="panel" id="rules"><div class="panel-head"><div><p class="eyebrow">Regulatory Boundary</p><h2>三个决定性规则</h2></div></div><div class="markdown-body filter-item"><h3>1. 便利化额度不是投资额度</h3><p>国家外汇管理局《个人购汇申请书》明确写明：不得用于境外买房、证券投资、购买人寿保险和投资性返还分红类保险等尚未开放的资本项目。每年等值5万美元是经常项目结售汇便利化额度。</p><h3>2. 已有美元仍要审核用途</h3><p>《经常项目外汇业务指引（2020年版）》第六十四条把境内个人外汇账户汇出限定为经常项目支出，并要求银行做购汇用途与付汇用途一致性审核。已有美元只是不需要再次购汇，不等于可以汇去投资。</p><h3>3. 境内同名跨行外币原则上可办</h3><p>第六十七条允许个人外汇账户资金在本人账户之间、本人和近亲属账户之间境内划转。中行也公开提供同行/跨行多币种境内汇款；实际以柜台最稳。</p></div><div class="callout">把钱先汇到香港本人账户、随后再入金券商，并不会把资本项目投资变成经常项目。报告不提供虚报用途、借额度或规避审核的操作指引。</div></section>
+
+    <section class="panel" id="routes"><div class="panel-head"><div><p class="eyebrow">Operating Routes</p><h2>三类场景的正确操作</h2></div></div><div class="route-flow">
+      <div class="route-step filter-item"><div class="step-no">A</div><div><h3>境内资金，真实目标是 IBKR 投资</h3><p>停止个人购汇/经常项目汇款路线。根据标的选择港股通、QDII、境内跨境ETF/基金，或符合资格时使用跨境理财通南向通。先解决合规入口，不做银行跳转优化。</p></div></div>
+      <div class="route-step filter-item"><div class="step-no">B</div><div><h3>合法经常项目从中行汇到香港</h3><p>准备真实交易材料 → 确认中行余额为现汇 → 取得香港汇丰/渣打同名账户的账号、SWIFT、银行地址 → 中行直接发 SWIFT → 小额测试 → 保存费用预览、回单与香港入账流水。中银香港账户被封不影响中行向其他香港银行汇款。</p></div></div>
+      <div class="route-step filter-item"><div class="step-no">C</div><div><h3>合法境外资金从香港入金 IBKR</h3><p>Client Portal 创建入金通知 → 选择页面实际提供的币种和方式 → 香港HKD优先比较FPS/eDDA/本地转账 → 发送账户与IBKR完全同名 → 填写指定付款附言 → 首笔小额 → 入账后再汇主款。</p></div></div>
+    </div><div class="callout good">IBKR官方说明：FPS一般数小时、eDDA在初始授权确认后一般数分钟、本地银行转账一般数小时；IBKR不收存款费。具体方式取决于香港银行所在地和IBKR开户实体，必须以当前Portal为准。</div></section>
+
+    <section class="panel" id="checklist"><div class="panel-head"><div><p class="eyebrow">Execution Checklist</p><h2>逐步操作清单</h2></div></div><ol class="compact-list filter-item"><li><strong>确认来源：</strong>境内工资/经营所得、此前购汇余额、境外工资、资产出售或投资收益；整理流水和证明。</li><li><strong>确认用途：</strong>若答案是“入金IBKR买境外证券”，境内便利化购汇路线停止。</li><li><strong>确认余额性质：</strong>中行美元是现汇还是现钞；跨境优先用现汇。</li><li><strong>确认名字：</strong>内地银行、香港银行与IBKR的英文姓名、证件信息一致；联名账户持有人组合也要一致。</li><li><strong>确认账户实体：</strong>在IBKR Portal查看开户实体和实际可用入金方式，不照抄攻略收款账号。</li><li><strong>比较购汇：</strong>同一分钟比较各银行最终确认页的人民币支出/外币到账；卖出价每差0.01元，10,000美元就差100元。</li><li><strong>逐项问费：</strong>手续费、电讯费、中间行费、收款费、全额到账费和退汇费分别确认。</li><li><strong>先小额测试：</strong>小额到账、附言匹配和姓名校验通过后再发主款。</li><li><strong>保留证据：</strong>费用预览、购汇/汇款申请、SWIFT回单、香港流水、IBKR入账记录和资金来源材料。</li></ol></section>
+
+    <section class="panel" id="sources"><div class="panel-head"><div><p class="eyebrow">Primary Sources</p><h2>官方来源</h2><p>监管、银行和券商一手页面优先。</p></div></div><ol class="source-list">
+      <li><a href="https://www.gov.cn/gongbao/content/2020/content_5560296.htm">中国政府网：《经常项目外汇业务指引（2020年版）》</a></li>
+      <li><a href="https://www.safe.gov.cn/zhejiang/file/file/20170728/a75b6faf32344c449a5152137f3064ab.pdf?n=%E4%B8%AA%E4%BA%BA%E8%B4%AD%E6%B1%87%E7%94%B3%E8%AF%B7%E4%B9%A6%EF%BC%88%E6%9F%9C%E9%9D%A2%E7%89%88%EF%BC%89">国家外汇管理局：《个人购汇申请书》</a></li>
+      <li><a href="https://www.safe.gov.cn/tianjin/2022/0402/1887.html">外汇局天津市分局：个人外汇账户境内划转范围</a></li>
+      <li><a href="https://www.boc.cn/pbservice/pb4/200806/t20080626_761.html">中国银行：个人境内汇款</a></li>
+      <li><a href="https://pic.bankofchina.com/bocappd/pricelist/202511/P020251110646838136627.pdf">中国银行：个人客户服务收费价目表</a></li>
+      <li><a href="https://www.cmbc.cn/grkh/cgjr/kjhk/hc/index.htm">中国民生银行：电汇汇出及收费标准</a></li>
+      <li><a href="https://www.cmbchina.com/personalbank/gb/page/standfee.htm">招商银行：转账汇款收费标准</a></li>
+      <li><a href="https://www.hsbc.com.cn/content/dam/hsbc/cn/docs/document-download/tariff-of-accouts-and-services.pdf">汇丰中国：2026年6月16日起账户和服务费率</a></li>
+      <li><a href="https://www.sc.com/cn/free-global-fund/">渣打中国：免费的全球资金电汇</a></li>
+      <li><a href="https://www.hsbc.com.hk/content/dam/hsbc/hk/docs/ways-to-bank/bank-tariff/20260801-guide.pdf">汇丰香港：2026年8月1日起个人银行服务费率</a></li>
+      <li><a href="https://av.sc.com/hk/content/docs/hk-service-charges-en.pdf">渣打香港：个人服务收费表</a></li>
+      <li><a href="https://www.ibkrguides.com/kb/article-4717.htm">IBKR：IBHK第三方入金FAQ</a></li>
+      <li><a href="https://www.ibkrguides.com/kb/en-us/how-to-deposit-hkd.htm">IBKR：HKD存取款方式FAQ</a></li>
+      <li><a href="https://www.ibkrguides.com/brokerportal/transferandpay/edda-deposit.htm">IBKR：eDDA入金说明</a></li>
+    </ol></section>
+
+    <p class="empty-state" id="emptyState">没有匹配的内容。</p><footer class="footer">资料核验日期：2026-07-26。银行费用与账户资格会调整，以提交前确认页为准。本页仅提供政策、银行与券商操作研究，不构成法律、税务或投资建议。</footer>
+  </main>
+</div>
+
+<script>
+/* terminal.js — 「研究终端」共享交互：全局搜索过滤 + 表头排序。
+   依赖元素（可选，缺失自动跳过）：#searchInput #resetSearch #rowCount #emptyState
+   过滤目标：table.sortable 的行 + .filter-item 元素。 */
+(function () {
+  const input = document.getElementById('searchInput');
+  const resetBtn = document.getElementById('resetSearch');
+  const rowCount = document.getElementById('rowCount');
+  const emptyState = document.getElementById('emptyState');
+  const tables = Array.from(document.querySelectorAll('table.sortable'));
+  const items = Array.from(document.querySelectorAll('.filter-item'));
+  const norm = v => (v || '').toLowerCase().trim();
+  const asNum = v => {
+    const c = v.replace(/[$,%+~]/g, '').replace(/[^0-9.\-]/g, '');
+    if (!c || c === '-' || c === '.') return null;
+    const n = Number(c); return Number.isFinite(n) ? n : null;
+  };
+  function update() {
+    if (!input) return;
+    const q = norm(input.value); let vis = 0;
+    tables.forEach(t => Array.from(t.tBodies[0]?.rows || []).forEach(r => {
+      const m = !q || norm(r.innerText).includes(q); r.hidden = !m; if (m) vis++;
+    }));
+    items.forEach(el => {
+      const m = !q || norm(el.innerText).includes(q);
+      el.classList.toggle('hidden-by-filter', !m); if (m) vis++;
+    });
+    if (rowCount) rowCount.textContent = vis + ' 条匹配';
+    if (emptyState) emptyState.classList.toggle('visible', Boolean(q) && vis === 0);
+  }
+  tables.forEach(table => {
+    Array.from(table.tHead?.rows[0]?.cells || []).forEach((th, i) => {
+      const b = th.querySelector('button'); if (!b) return;
+      b.addEventListener('click', () => {
+        const dir = th.dataset.sort === 'asc' ? 'desc' : 'asc';
+        Array.from(th.parentElement.children).forEach(c => c.dataset.sort = '');
+        th.dataset.sort = dir;
+        const rows = Array.from(table.tBodies[0].rows);
+        rows.sort((a, c) => {
+          const av = a.cells[i]?.innerText.trim() || '', bv = c.cells[i]?.innerText.trim() || '';
+          const an = asNum(av), bn = asNum(bv);
+          const cmp = (an !== null && bn !== null) ? an - bn
+            : av.localeCompare(bv, 'zh-Hans-u-co-pinyin', { numeric: true, sensitivity: 'base' });
+          return dir === 'asc' ? cmp : -cmp;
+        });
+        rows.forEach(r => table.tBodies[0].appendChild(r));
+      });
+    });
+  });
+  if (resetBtn && input) resetBtn.addEventListener('click', () => { input.value = ''; update(); input.focus(); });
+  if (input) input.addEventListener('input', update);
+  update();
+})();
+
+</script>
+</body>
+</html>
