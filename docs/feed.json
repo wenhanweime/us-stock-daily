@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "date": "2026-07-31",
+      "generated_at": "2026-07-31 12:00:04 +0800",
+      "model": "grok-4.3-fast",
+      "unique_tweets": 133,
+      "tickers": [
+        [
+          "$MU",
+          13
+        ],
+        [
+          "$NVDA",
+          10
+        ],
+        [
+          "$QQQ",
+          8
+        ],
+        [
+          "$MRVL",
+          8
+        ],
+        [
+          "$SNDK",
+          5
+        ],
+        [
+          "$SPY",
+          5
+        ],
+        [
+          "$TSLA",
+          5
+        ],
+        [
+          "$AMD",
+          3
+        ]
+      ],
+      "teaser": "今天美股在X上核心情绪是AI与半导体板块反转反弹（微软财报超预期、NVDA Jensen Huang访谈、AMD新卡、$MU/$SNDK大涨），少数长期多头坚持",
+      "report_path": "reports/2026-07-31.html"
+    },
+    {
       "date": "2026-07-30",
       "generated_at": "2026-07-30 12:00:05 +0800",
       "model": "grok-4.3-fast",
@@ -1975,5 +2017,5 @@
       "report_path": "reports/2026-06-06.html"
     }
   ],
-  "last_updated": "2026-07-30 12:00:05 +0800"
+  "last_updated": "2026-07-31 12:00:04 +0800"
 }
