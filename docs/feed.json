@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "date": "2026-08-03",
+      "generated_at": "2026-08-03 12:00:01 +0800",
+      "model": "grok-4.20-0309-non-reasoning",
+      "unique_tweets": 207,
+      "tickers": [
+        [
+          "$MU",
+          8
+        ],
+        [
+          "$SPY",
+          6
+        ],
+        [
+          "$MRVL",
+          6
+        ],
+        [
+          "$QQQ",
+          5
+        ],
+        [
+          "$AMD",
+          5
+        ],
+        [
+          "$NVDA",
+          4
+        ],
+        [
+          "$AVGO",
+          3
+        ],
+        [
+          "$TSLA",
+          3
+        ]
+      ],
+      "teaser": "美股圈在 X 上核心情绪是“AI 基本面验证期”，7 月财报季的 Amazon/AWS 强劲表现（+15%+）与 Micron/Apple 短线回调后，周末期货",
+      "report_path": "reports/2026-08-03.html"
+    },
+    {
       "date": "2026-08-02",
       "generated_at": "2026-08-02 12:00:05 +0800",
       "model": "grok-4.20-0309-non-reasoning",
@@ -2101,5 +2143,5 @@
       "report_path": "reports/2026-06-06.html"
     }
   ],
-  "last_updated": "2026-08-02 12:00:05 +0800"
+  "last_updated": "2026-08-03 12:00:01 +0800"
 }
