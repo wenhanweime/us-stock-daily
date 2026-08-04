@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "date": "2026-08-04",
+      "generated_at": "2026-08-04 12:00:05 +0800",
+      "model": "grok-4.20-0309-non-reasoning",
+      "unique_tweets": 141,
+      "tickers": [
+        [
+          "$NVDA",
+          11
+        ],
+        [
+          "$AMD",
+          6
+        ],
+        [
+          "$MU",
+          6
+        ],
+        [
+          "$PLTR",
+          5
+        ],
+        [
+          "$QQQ",
+          5
+        ],
+        [
+          "$SPY",
+          4
+        ],
+        [
+          "$SNDK",
+          4
+        ],
+        [
+          "$AMZN",
+          3
+        ]
+      ],
+      "teaser": "今日美股在X上最核心情绪是“史诗级反弹”：三大指数全面大涨，道指刷新历史新高，纳指+2.13%，七巨头科技股（含Magnificent 7）强势回暖，核心驱动是",
+      "report_path": "reports/2026-08-04.html"
+    },
+    {
       "date": "2026-08-03",
       "generated_at": "2026-08-03 12:00:01 +0800",
       "model": "grok-4.20-0309-non-reasoning",
@@ -2143,5 +2185,5 @@
       "report_path": "reports/2026-06-06.html"
     }
   ],
-  "last_updated": "2026-08-03 12:00:01 +0800"
+  "last_updated": "2026-08-04 12:00:05 +0800"
 }
