@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "date": "2026-08-06",
+      "generated_at": "2026-08-06 12:00:03 +0800",
+      "model": "grok-4.20-0309-non-reasoning",
+      "unique_tweets": 99,
+      "tickers": [
+        [
+          "$SPCX",
+          8
+        ],
+        [
+          "$NVDA",
+          3
+        ],
+        [
+          "$SPY",
+          3
+        ],
+        [
+          "$PLTR",
+          2
+        ],
+        [
+          "$AMD",
+          2
+        ],
+        [
+          "$TSLA",
+          2
+        ],
+        [
+          "$SPCE",
+          1
+        ],
+        [
+          "$DELL",
+          1
+        ]
+      ],
+      "teaser": "美股观察日报·今日导读（2026-08-06）",
+      "report_path": "reports/2026-08-06.html"
+    },
+    {
       "date": "2026-08-05",
       "generated_at": "2026-08-05 12:00:05 +0800",
       "model": "grok-4.20-0309-non-reasoning",
@@ -2227,5 +2269,5 @@
       "report_path": "reports/2026-06-06.html"
     }
   ],
-  "last_updated": "2026-08-05 12:00:05 +0800"
+  "last_updated": "2026-08-06 12:00:03 +0800"
 }
