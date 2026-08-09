@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4ef">
+  <title>SK 海力士 000660.KS · 存储行情下半场 · 下周操作计划 · 美股投研</title>
+  <style>
+/* theme.css — 「研究终端」共享设计系统
+   提取自 AI 基建投资研究仪表盘，供首页 + 每日观察 + 研报模板统一复用。
+   配色: warm paper #f6f4ef / 墨 #181916 / 绿 #0b6b57 / 金 #9a6500 / 红 #a33b2a / 蓝 #315f8a */
+
+:root {
+  color-scheme: light;
+  --bg: #f6f4ef;
+  --surface: #fffdfa;
+  --surface-2: #f0eee8;
+  --ink: #181916;
+  --muted: #676b62;
+  --line: #d9d5ca;
+  --line-strong: #bdb7aa;
+  --accent: #0b6b57;
+  --accent-2: #9a6500;
+  --danger: #a33b2a;
+  --cool: #315f8a;
+  --shadow: 0 18px 45px rgba(42, 38, 30, 0.08);
+  --radius: 8px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration-color: rgba(11, 107, 87, 0.45); text-underline-offset: 3px; }
+a:hover { color: var(--accent); }
+button, input, a { touch-action: manipulation; }
+button:focus-visible, input:focus-visible, a:focus-visible, summary:focus-visible {
+  outline: 3px solid rgba(11, 107, 87, 0.32);
+  outline-offset: 2px;
+}
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  transform: translateY(-150%);
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: white;
+}
+.skip-link:focus { transform: translateY(0); }
+.app-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); min-height: 100vh; }
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: max(18px, env(safe-area-inset-top)) 16px 18px max(16px, env(safe-area-inset-left));
+  border-right: 1px solid var(--line);
+  background: rgba(255, 253, 250, 0.92);
+  backdrop-filter: blur(12px);
+  overflow-y: auto;
+}
+.brand { padding: 4px 4px 18px; border-bottom: 1px solid var(--line); }
+.brand h1 { margin: 0; font-size: 20px; line-height: 1.18; letter-spacing: 0; text-wrap: balance; }
+.brand p { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.nav-group { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.nav-group-title { margin: 0 4px 8px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 7px 8px;
+  border-radius: 6px;
+  color: #30322e;
+  font-size: 13px;
+  line-height: 1.25;
+  text-decoration: none;
+}
+.nav-link:hover { background: #ece8df; color: var(--ink); }
+.nav-link span:first-child { width: 22px; flex: 0 0 auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+.main { min-width: 0; padding: 22px clamp(16px, 3vw, 34px) 60px; }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  margin: -22px calc(clamp(16px, 3vw, 34px) * -1) 20px;
+  padding: 14px clamp(16px, 3vw, 34px);
+  border-bottom: 1px solid var(--line);
+  background: rgba(246, 244, 239, 0.88);
+  backdrop-filter: blur(12px);
+}
+.search-wrap { min-width: 0; }
+.search-wrap label { display: block; margin-bottom: 5px; color: var(--muted); font-size: 12px; }
+.search-row { display: flex; gap: 8px; align-items: center; }
+#searchInput {
+  width: min(680px, 100%);
+  height: 38px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0 12px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 14px;
+}
+.tool-buttons { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.tool-buttons button, .source-link {
+  min-height: 36px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0 11px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.tool-buttons button:hover, .source-link:hover { border-color: var(--accent); color: var(--accent); }
+.hero-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 18px;
+  align-items: stretch;
+  margin-bottom: 18px;
+}
+.overview-copy, .metric-grid, .panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.overview-copy { padding: 22px; }
+.eyebrow { margin: 0 0 8px; color: var(--accent); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.overview-copy h2 { margin: 0; font-size: clamp(24px, 3vw, 38px); line-height: 1.08; letter-spacing: 0; text-wrap: balance; }
+.overview-copy p { max-width: 860px; margin: 14px 0 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
+.metric-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: hidden; }
+.metric { padding: 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-width: 0; }
+.metric:nth-child(2n) { border-right: 0; }
+.metric:nth-last-child(-n+2) { border-bottom: 0; }
+.metric strong { display: block; font-size: 28px; line-height: 1; font-variant-numeric: tabular-nums; }
+.metric span { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; line-height: 1.35; }
+.panel { margin: 18px 0; overflow: hidden; }
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--line);
+}
+.panel-head h2 { margin: 0; font-size: 20px; letter-spacing: 0; text-wrap: balance; }
+.panel-head p:not(.eyebrow) { margin: 6px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.table-shell { width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 880px; font-size: 13px; }
+th, td { padding: 10px 11px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; line-height: 1.42; overflow-wrap: anywhere; }
+thead th { position: sticky; top: 0; z-index: 1; background: #eeeae1; color: #353730; font-weight: 700; }
+tbody tr:hover { background: #fbf7ed; }
+tbody tr[hidden] { display: none; }
+.num, td:nth-child(6), td:nth-child(10) { font-variant-numeric: tabular-nums; }
+.rank-top { color: var(--accent); font-weight: 800; }
+.sort-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+.sort-button:hover { color: var(--accent); }
+.table-note { padding: 10px 20px 16px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); }
+.doc-map { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; padding: 16px 20px 20px; }
+.doc-chip {
+  display: block;
+  min-height: 72px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fbfaf6;
+  text-decoration: none;
+}
+.doc-chip:hover { border-color: var(--accent); background: #f3f0e8; }
+.doc-chip span { display: block; color: var(--muted); font-size: 11px; margin-bottom: 6px; }
+.doc-chip strong { display: block; font-size: 13px; line-height: 1.35; overflow-wrap: anywhere; }
+.markdown-body { padding: 2px 20px 24px; }
+.markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 { scroll-margin-top: 86px; letter-spacing: 0; text-wrap: balance; }
+.markdown-body h2 { margin: 24px 0 10px; font-size: 21px; }
+.markdown-body h3 { margin: 22px 0 8px; font-size: 17px; }
+.markdown-body h4 { margin: 18px 0 8px; font-size: 15px; }
+.markdown-body p, .markdown-body li { color: #30322d; font-size: 14px; line-height: 1.68; }
+.markdown-body ul, .markdown-body ol { padding-left: 22px; }
+.markdown-body blockquote {
+  margin: 14px 0;
+  padding: 10px 14px;
+  border-left: 4px solid var(--accent);
+  background: #f4f0e8;
+  color: #2f332c;
+}
+.markdown-body blockquote p { margin: 4px 0; color: #2f332c; }
+.markdown-body pre {
+  overflow-x: auto;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #171914;
+  color: #f8f3e7;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.markdown-body code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
+.status-strip { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 20px 18px; }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: #faf8f2;
+  color: #3b3d37;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.badge.accent { border-color: rgba(11, 107, 87, .35); color: var(--accent); }
+.badge.warn { border-color: rgba(154, 101, 0, .35); color: var(--accent-2); }
+.hidden-by-filter { display: none; }
+.empty-state { display: none; padding: 18px 20px; color: var(--muted); }
+.empty-state.visible { display: block; }
+.footer { margin-top: 28px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+@media (max-width: 1080px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  .nav-group:last-child { display: none; }
+  .hero-panel { grid-template-columns: 1fr; }
+  .topbar { grid-template-columns: 1fr; position: sticky; }
+  .tool-buttons { justify-content: flex-start; }
+}
+@media (max-width: 640px) {
+  .main { padding-inline: 12px; }
+  .topbar { margin-inline: -12px; padding-inline: 12px; }
+  .overview-copy { padding: 18px; }
+  .metric-grid { grid-template-columns: 1fr; }
+  .metric, .metric:nth-child(2n), .metric:nth-last-child(-n+2) { border-right: 0; border-bottom: 1px solid var(--line); }
+  .metric:last-child { border-bottom: 0; }
+  .panel-head { flex-direction: column; }
+  table { min-width: 760px; font-size: 12px; }
+  th, td { padding: 8px; }
+  .search-row { flex-direction: column; align-items: stretch; }
+  .badge { white-space: normal; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+.visual-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr); gap: 16px; padding: 16px 20px 22px; }
+.visual-card { border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; overflow: hidden; min-width: 0; }
+.visual-card h3 { margin: 0; padding: 14px 14px 8px; font-size: 16px; letter-spacing: 0; text-wrap: balance; }
+.visual-card p { margin: 0; padding: 0 14px 14px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+.diagram-wrap { overflow-x: auto; padding: 12px; overscroll-behavior-x: contain; }
+.diagram { width: 100%; min-width: 780px; height: auto; display: block; }
+.diagram text { font-family: inherit; fill: #20221e; }
+.diagram .node { fill: #fffdfa; stroke: #bdb7aa; stroke-width: 1.2; }
+.diagram .node-strong { fill: #eef6f1; stroke: #0b6b57; stroke-width: 1.4; }
+.diagram .node-warn { fill: #fff3d8; stroke: #9a6500; stroke-width: 1.3; }
+.diagram .node-risk { fill: #faece8; stroke: #a33b2a; stroke-width: 1.2; }
+.diagram .link { fill: none; stroke: #8f8a80; stroke-width: 1.2; marker-end: url(#arrow); }
+.diagram .link-strong { fill: none; stroke: #0b6b57; stroke-width: 2; marker-end: url(#arrow-green); }
+.diagram .label { font-size: 12px; font-weight: 700; }
+.diagram .small { font-size: 10.5px; fill: #676b62; }
+.diagram .lane { fill: #f2efe7; stroke: #d9d5ca; stroke-width: 1; }
+.player-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 12px; padding: 16px 20px 22px; }
+.player-card { border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; padding: 14px; min-width: 0; }
+.player-card header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.player-card h3 { margin: 0; font-size: 16px; letter-spacing: 0; }
+.player-card .ticker { font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.player-card dl { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 7px 10px; margin: 0; font-size: 13px; line-height: 1.48; }
+.player-card dt { color: var(--muted); }
+.player-card dd { margin: 0; color: #2c2e29; overflow-wrap: anywhere; }
+.player-card a { color: var(--accent); }
+.chain-map { padding: 16px 20px 22px; display: grid; gap: 12px; }
+.chain-row { display: grid; grid-template-columns: 150px repeat(5, minmax(120px, 1fr)); gap: 8px; align-items: stretch; }
+.chain-title { display: flex; align-items: center; padding: 10px; border-radius: var(--radius); background: #ece8df; font-weight: 800; font-size: 13px; }
+.chain-cell { min-height: 74px; padding: 10px; border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; font-size: 12px; line-height: 1.42; position: relative; }
+.chain-cell strong { display: block; margin-bottom: 5px; color: var(--ink); }
+.chain-cell::after { content: '→'; position: absolute; right: -13px; top: 50%; transform: translateY(-50%); color: var(--line-strong); font-weight: 800; }
+.chain-cell:last-child::after { content: ''; }
+.bottleneck { border-color: rgba(11, 107, 87, .45); background: #eef6f1; }
+.watch { border-color: rgba(154, 101, 0, .42); background: #fff7e8; }
+.risk-node { border-color: rgba(163, 59, 42, .38); background: #faece8; }
+.source-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px 14px; padding: 0 20px 22px; margin: 0; }
+.source-list li { list-style: none; font-size: 12px; line-height: 1.45; color: var(--muted); }
+.source-list a { color: var(--accent); }
+.timeline { padding: 16px 20px 22px; display: grid; gap: 10px; }
+.timeline-item { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; align-items: start; }
+.timeline-item time { padding: 8px 10px; border-radius: var(--radius); background: #ece8df; color: var(--ink); font-size: 12px; font-weight: 800; text-align: center; font-variant-numeric: tabular-nums; }
+.timeline-item div { padding: 10px 12px; border-left: 3px solid var(--accent); background: #fbfaf6; border-radius: 0 var(--radius) var(--radius) 0; font-size: 13px; line-height: 1.55; }
+@media (max-width: 900px) { .visual-grid { grid-template-columns: 1fr; } .chain-row { grid-template-columns: 1fr; } .chain-cell::after { content: '↓'; right: 12px; top: auto; bottom: -17px; transform: none; } .chain-cell:last-child::after { content: ''; } }
+@media (max-width: 640px) { .player-grid, .visual-grid, .chain-map, .timeline { padding-inline: 12px; } .player-card dl { grid-template-columns: 1fr; } .timeline-item { grid-template-columns: 1fr; } }
+
+/* ---- 站点 chrome 补充（首页 / 日报）---- */
+.brand a{color:inherit;text-decoration:none}
+.brand a:hover{color:var(--accent)}
+.lede-inline{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.muted{color:var(--muted)}
+.back-link{color:var(--muted);font-size:13px}
+.back-link:hover{color:var(--accent)}
+
+  </style>
+
+<body>
+<!-- research-site-nav:start -->
+<style>
+.research-site-nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;gap:10px;min-height:42px;padding:7px clamp(14px,3vw,28px);border-bottom:1px solid #d9d5ca;background:rgba(246,244,239,.94);backdrop-filter:blur(12px);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+.research-site-nav a{display:inline-flex;align-items:center;min-height:28px;border:1px solid #d9d5ca;border-radius:8px;padding:3px 10px;background:#fffdfa;color:#181916;text-decoration:none;font-size:13px;line-height:1.2}
+.research-site-nav a:hover{border-color:#0b6b57;color:#0b6b57}
+.research-site-nav .research-site-nav-spacer{flex:1 1 auto}
+.research-site-nav strong{font-size:13px;color:#676b62;font-weight:700;white-space:nowrap}
+@media(max-width:640px){.research-site-nav{gap:6px;overflow-x:auto}.research-site-nav strong{display:none}.research-site-nav a{white-space:nowrap}}
+</style>
+<nav class="research-site-nav" aria-label="站点导航">
+  <a href="../../index.html">返回投研站首页</a>
+  <a href="../index.html">全部研究</a>
+  <span class="research-site-nav-spacer"></span>
+  <strong>美股投研</strong>
+</nav>
+<!-- research-site-nav:end -->
+
+<a class="skip-link" href="#main">跳到主内容</a>
+<nav class="research-site-nav" aria-label="站点导航" style="position:sticky;top:0;z-index:1000;display:flex;align-items:center;gap:10px;min-height:42px;padding:7px clamp(14px,3vw,28px);border-bottom:1px solid var(--line);background:rgba(246,244,239,.94);backdrop-filter:blur(12px)">
+  <a class="source-link" href="../../index.html">返回投研站首页</a>
+  <a class="source-link" href="../index.html">全部研究</a>
+  <span style="flex:1 1 auto"></span>
+  <strong style="font-size:13px;color:var(--muted)">美股投研 · 交易计划</strong>
+</nav>
+<div class="app-shell">
+  <aside class="sidebar" aria-label="导航">
+    <div class="brand">
+      <h1>SK 海力士 · 下周操作计划</h1>
+      <p>000660.KS · SKHY (ADR) · 数据截至 2026-08-10 · USD/KRW≈1,407</p>
+    </div>
+    <nav class="nav-group" aria-label="Primary">
+      <p class="nav-group-title">Dashboard</p>
+      <a class="nav-link" href="#overview"><span>00</span><strong>总览</strong></a>
+      <a class="nav-link" href="#plan"><span>PLAN</span><strong>下周操作面板</strong></a>
+      <a class="nav-link" href="#chain"><span>MAP</span><strong>行情传导链</strong></a>
+      <a class="nav-link" href="#levels"><span>LV</span><strong>关键价位速查</strong></a>
+      <a class="nav-link" href="#thesis"><span>TH</span><strong>研究正文</strong></a>
+      <a class="nav-link" href="#timeline"><span>EV</span><strong>事件 / 催化日历</strong></a>
+      <a class="nav-link" href="#risk"><span>RK</span><strong>风控规则</strong></a>
+      <a class="nav-link" href="#sources"><span>SRC</span><strong>资料来源</strong></a>
+    </nav>
+  </aside>
+
+  <main class="main" id="main">
+    <div class="topbar" role="search">
+      <div class="search-wrap"><label for="searchInput">全局搜索价位 / 情景 / 催化剂 / 风险</label>
+        <div class="search-row">
+          <input id="searchInput" type="search" autocomplete="off" placeholder="例如 156、股东回报、CPI、124.6…" aria-describedby="rowCount">
+          <span class="badge" id="rowCount" aria-live="polite">—</span>
+        </div></div>
+      <div class="tool-buttons">
+        <button type="button" id="resetSearch">重置</button>
+        <a class="source-link" href="../../index.html">首页</a>
+        <a class="source-link" href="../index.html">全部研究</a>
+      </div>
+    </div>
+
+    <section class="hero-panel" id="overview">
+      <div class="overview-copy">
+        <p class="eyebrow">Sk Hynix · Trading Plan · W33</p>
+        <h2>存储行情下半场：从拥挤崩塌，到股东回报博弈</h2>
+        <p>2Q26 创纪录财报（营收 ₩79.3T / OPM 76%）挡不住「黑三日」−50% 回撤：拥挤度出清、中国威胁叙事、ADR 上市后的预期兑现叠在一起。超级周期基本面未破（BofA 延伸至 2027 底、HBM 售罄至 2027），但趋势已被打坏。下周关键词：股东回报细则（静默期 8/4 解除，公司承诺 Q3 内落地）+ 美国 7 月 CPI。这不是趋势市，是事件驱动的高波动箱体 —— 请按下方「操作面板」分批、带止损、不追高。</p>
+      </div>
+      <div class="metric-grid">
+        <div class="metric"><strong>₩142.2万</strong><span>8/7 收盘 (单日 −4.9%) · ADR $137.9 · 自峰值回撤 −52.4%</span></div>
+        <div class="metric"><strong>₩337万</strong><span>13 家券商平均目标价 (+96% 空间) · 区间 148万 ~ 470万</span></div>
+        <div class="metric"><strong>OPM 76%</strong><span>2Q26 营收 ₩79.3T (+257% YoY) · 净现金 ₩69.4T · HBM4 量产</span></div>
+        <div class="metric"><strong>RSI 40.3</strong><span>MA5 154.6万 / MA10 155.4万 / MA20 172.5万 / MA50 212.4万 — 全线之下</span></div>
+      </div>
+    </section>
+
+    <section class="panel" id="plan">
+      <div class="panel-head"><div><p class="eyebrow">Week Plan 8/10–8/14</p>
+        <h2>下周操作面板：四情景 + 触发 + 仓位动作</h2><p>点表头排序；价位单位=万韩元（1,000 韩元=0.1 万）。量能口径：近 5 日均量约 505 万股、近 20 日均量约 646 万股。</p></div></div>
+      <div class="table-shell"><table class="sortable">
+        <thead><tr>
+          <th><button class="sort-button">情景</button></th>
+          <th><button class="sort-button">触发条件</button></th>
+          <th><button class="sort-button">目标 / 区间</button></th>
+          <th><button class="sort-button">仓位动作</button></th>
+          <th><button class="sort-button">失效 / 风控</button></th>
+        </tr></thead>
+        <tbody>
+          <tr class="filter-item"><td><strong>A · 偏多确认</strong></td><td>放量（≥800 万股）收盘站上 156–157 且随后回踩不破</td><td>166–172 → 191.9（7/23 高点）</td><td>右侧加仓至 ≤7 成；突破回踩确认再补</td><td>重新跌破 150 或量能不继 → 退回基准</td></tr>
+          <tr class="filter-item"><td><strong>B · 基准箱体</strong></td><td>135–157 万区间运行，无方向性突破</td><td>小区间做 T：156–157 减 / 135–137 补</td><td>底仓 4–5 成，不追高不恐慌</td><td>日均量 <500 万股且重心下移 → 降仓至 3 成</td></tr>
+          <tr class="filter-item"><td><strong>C · 破位下行</strong></td><td>收盘失守 135 → 128.7（7/30 低）→ 124.6（7/29 恐慌低）</td><td>下看 110–117 万</td><td>破 124.6 减仓至 ≤10%，反弹不抢</td><td>收盘收复 135 万 → 警报解除回基准</td></tr>
+          <tr class="filter-item"><td><strong>D · 事件驱动</strong></td><td>股东回报细则（Q3 内承诺期）/ 美 7 月 CPI（~8/12）</td><td>细则超预期（回购+特别股息）→ 171–192；细则平淡 → 回 B 箱体</td><td>大幅高开不追；低开缩量企稳可接（76% OPM + 69.4T 净现金锚）</td><td>细则落地后无增量资金 → 逢反弹降仓</td></tr>
+        </tbody></table></div>
+      <div class="table-note">操作框架口径：1）右侧信号优先于左侧猜测；2）所有价位以收盘价确认；3）仓位上限含 ADR 合计敞口；4）本表为研究框架，非投资建议。</div>
+    </section>
+
+    <section class="panel" id="chain">
+      <div class="panel-head"><div><p class="eyebrow">Supply Chain</p><h2>2026 内存行情传导链：从供需到情绪</h2></div></div>
+      <div class="chain-map">
+        <div class="chain-row">
+          <div class="chain-title"><!-- -->需求</div>
+          <div class="chain-cell bottleneck"><strong>数据中心 &gt;70% 高端内存</strong>TrendForce；大厂 AI 资本开支续增；Micron HBM 售罄至 2027；Kioxia 2026 NAND 全数承诺</div>
+          <div class="chain-cell bottleneck"><strong>供给受物理约束</strong>HBM/DRAM 同厂同硅片互相挤占；BofA：AI 内存需 3–4 倍常规产能；SK 会长：2030 前供给缺口 ~20%</div>
+          <div class="chain-cell"><strong>价格再创新高</strong>7 月 D램/낸드 合约纪录；Q3 PC D램 合约 +13~20%（7/6 已现「涨幅放缓」警示）</div>
+          <div class="chain-cell watch"><strong>盈利 &gt; 政策/资金</strong>2Q26 OPM 76%；HBM4 量产；LTA×10+ 客户；股东回报静默期 8/4 解除</div>
+          <div class="chain-cell risk-node"><strong>情绪/拥挤</strong>CXMT 上市首日 +466% 市值第一；中光刻机消息；MSCI EM 三巨头 ~29% 权重 → 波动放大</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="levels">
+      <div class="panel-head"><div><p class="eyebrow">Levels</p><h2>关键价位速查卡</h2></div></div>
+      <div class="player-grid">
+        <article class="player-card filter-item">
+          <header><h3>支撑梯队</h3><span class="ticker">SUPPORT</span></header>
+          <dl>
+            <dt>140.9 万</dt><dd>8/7 盘中低 —— 短期第一道</dd>
+            <dt>128.7 万</dt><dd>7/30 低点 —— 恐慌区上沿</dd>
+            <dt>124.6 万</dt><dd>7/29 恐慌低 —— <strong>生命线</strong>，收盘失守=减仓信号</dd>
+          </dl>
+        </article>
+        <article class="player-card filter-item">
+          <header><h3>阻力梯队</h3><span class="ticker">RESIST</span></header>
+          <dl>
+            <dt>149–151 万</dt><dd>8/6 收盘 / 8/4–5 中枢 —— 首道压力</dd>
+            <dt>156–158 万</dt><dd>8/3 低 + 7/31 低 —— 反转确认位</dd>
+            <dt>165–172 万</dt><dd>8/5 高 / 7/31 收盘 —— 反弹兑现区</dd>
+            <dt>191.9 万</dt><dd>7/23 高点 —— 事件驱动的上限锚</dd>
+          </dl>
+        </article>
+        <article class="player-card filter-item">
+          <header><h3>均线 & 量能</h3><span class="ticker">TECH</span></header>
+          <dl>
+            <dt>MA5 154.6 · MA10 155.4</dt><dd>短线修复目标，站上才算止跌</dd>
+            <dt>MA20 172.5 · MA50 212.4</dt><dd>趋势压制，反弹到 172 附近是兑现区</dd>
+            <dt>RSI14 40.3</dt><dd>未到超卖（30 以下），不宜单边赌反弹</dd>
+            <dt>量能 5.05M / 20d 6.46M</dt><dd>缩量筑底 or 放量破位，盯这两个极端</dd>
+          </dl>
+        </article>
+        <article class="player-card filter-item">
+          <header><h3>估值 & 共识</h3><span class="ticker">VALU</span></header>
+          <dl>
+            <dt>平均目标价 ₩337 万</dt><dd>13 家券商近 1 个月，距现价 +96%</dd>
+            <dt>最高 470 万（한투）</dt><dd>7/30 提出 —— 多头锚</dd>
+            <dt>最低 148 万（BNK）</dt><dd>Hold，观点=需求峰值+中国竞争+过剩风险 —— 空头锚</dd>
+            <dt>市值约 $7,400 亿</dt><dd>ADR（SKHY）上市定价 $149 · 首日 $170</dd>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel" id="thesis">
+      <div class="panel-head"><div><p class="eyebrow">Thesis</p><h2>研究正文：为什么这么走，下周赌什么</h2></div></div>
+      <div class="markdown-body filter-item">
+        <blockquote><p><strong>一句话结论：</strong>超级循环的基本面（需求、供给约束、定价权、财报质量）没有破，破的是「拥挤度和估值重定价」。股价已从 298.7 万峰值回撤 −52%，经历黑三日（7/28–30）+7/31 史上最大单日反弹（KOSPI +17.9%）后进入高波动箱体。下周=股东回报细则（承诺 Q3 内，静默期 8/4 解除）+ 美 7 月 CPI 的事件窗口：<strong>155 万上方不追，128–133 万左侧分批，放量收上 156–157 才右侧加仓；收盘跌破 124.6 万无条件减仓至 ≤10%。</strong></p></blockquote>
+
+        <h3>① 现实：超级周期没结束，但预期已被打满</h3>
+        <p><strong>基本面锚（事实，来源见文末）：</strong>2Q26（7/29 公布）营收 ₩79.3T（+257% YoY / +51% QoQ）、营业利润 ₩60.5T、OPM 76%、净利 ₩93.9T（含一次性税项、净利率 118%）、净现金 ₩69.4T；HBM4 开始量产出货、HBM4E 完成客户样品；与 10+ 家客户完成长期供货协议（LTA）；M15X 提前、2027 年龙仁一期投产、新增先进封装 P&amp;T7 与 NAND 厂 M17。行业面：TrendForce 口径数据中心消耗 2026 年 >70% 高端内存；BofA 将超级周期时间表延至 2027 年底（情景可及 2030）；Micron HBM 售罄至 2027、Kioxia 2026 NAND 全数承诺、SK 董事长称 2030 年前全球供给缺口约 20%。</p>
+        <p><strong>为什么创纪录还要跌（事实 + 市场解读）：</strong>1）预期过满 —— 「纪录」低于已被推到极限的买方预期（媒体直接定性为低于市场期望），卖事实；2）拥挤度崩塌 —— MSCI 新兴市场指数中 SK/三星/台积电三家权重已达 ~29%，全球机构被动降杠杆，BlackRock 减持、Fidelity 提示过热；3）中国威胁叙事 —— CXMT 7/27 上交所上市首日 +466~472%、成为存储板块市值第一，叠加「中国开始自产光刻设备」消息、YMTC 扩产；4）股东回报沟通失败 —— 千亿美元级净现金（SK+三星合计约 $2,630 亿，Reuters 称超 NVIDIA 两倍）却沿用 50% FCF 政策、坚持「年底公布」，Micron 已承诺 FCF 100% 返还，反差直接被卖方和媒体点名。</p>
+
+        <h3>② 下周（8/10–14）的四个变量</h3>
+        <ul>
+          <li><strong>股东回报细则（第一变量）：</strong>8/7 盘后公告季度股息 ₩375/股（总额仅 ₩2,733 亿，股息率 ~0.03%）并承诺「Q3 内确定并公布额外股东回报方案」。25 天 ADR 静默期已于 8/4 夜（韩时）解除，Citi 要求 Q3 财报前公布积极方案，摩根士丹利明确「下周动能核心=回购」。市场周四（8/5）已传过「特别股东回报政策」消息并引发盘中脉冲 —— 说明该题材对定价高度敏感，细则措辞（回购额度/是否注销/特别股息）直接决定箱体上沿还是下沿。</li>
+          <li><strong>美 7 月 CPI（~8/12 周三，以官方日程为准）：</strong>利率预期是超大盘风险偏好的总开关；若通胀反弹压制降息预期，高波动高估值品种首当其冲。</li>
+          <li><strong>周五收盘前仓位决策：</strong>8/15 光复节（周六）+ 8/17 代休日（周一，KRX 休市），形成三日连休 —— 周五尾盘别留重仓裸敞口，且 8/17 休市会让 ADR 周一晚间（美东）独自定价。</li>
+          <li><strong>下一轮锚（8 月下旬）：</strong>Fed Jackson Hole（~8/21±）、NVIDIA FQ2 财报（~8/26±）—— 板块情绪总闸，决定 9 月的反弹高度，不属本周操作范围。</li>
+        </ul>
+
+        <h3>③ 这是什么行情形态（技术 + 资金）</h3>
+        <p>6 个月轨迹：2 月 85–100 万 → 6/22 收 291.9 万（盘中峰值 298.7 万）→ 7/10 ADR 上市（$149 定价/$170 首日）→ 7/13 −13% → 7/23 反弹至 194.8 万 → 黑三日 → 7/29 恐慌低 124.6 万（−58% 距峰值）→ 7/31 KOSPI +17.9% 史上最大单日涨幅、SK 单日 +20%+ → 8/3–7 阴跌收 142.2 万。技术特征：价格全线低于 MA5/10/20/50（MA20 172.5、MA50 212.4），RSI14 40.3 但未到 30 超卖 —— <strong>趋势向下、超卖不极端</strong>；5 日均量 505 万低于 20 日均量 646 万 —— 抛压边际收敛但接盘意愿也没进场。这种结构下，单日 ±10~20% 的极端波动是常态（上周刚演示过），任何单一收盘价都不构成趋势信号，务必用「连续两个收盘价 + 量能」确认。</p>
+
+        <h3>④ 什么会推翻这个框架（失效清单）</h3>
+        <ul>
+          <li>Q3 合约价指引转负 / TrendForce 月度均价环比下跌 ——「价格」引擎熄火，盈利预期下修。</li>
+          <li>CXMT/YMTC 在 HBM 或主流 D램 形成可供货的产能 → 竞争格局证伪（BNK 空头观点成立）。</li>
+          <li>下一个财季的 LTA 续约价格低于市场预期 / 大客户（NVIDIA、超大规模）砍单传闻。</li>
+          <li>股东回报细则落地后既无回购规模、也无特别股息，且继续拖延 —— 情绪二次失望。</li>
+          <li>宏观面：美 CPI 超预期引发流动性急转 / 中美科技出口管制升级。</li>
+        </ul>
+
+        <h3>⑤ 风险清单与合规提示</h3>
+        <ul>
+          <li><strong>波动率极端：</strong>本周刚出现单日 ±17~20%（7/28–31），杠杆/期权保证金风险极高，ADR 与韩股双通道注意隔夜跳空。</li>
+          <li><strong>事件密集：</strong>股东回报细则可随时以盘后公告形式落地（参考 8/7），务必设置价格而非新闻触发条件。</li>
+          <li>汇率为 USD/KRW ≈ 1,407（8/9）—— 韩股以韩元计，本报告价位均为 KRW；ADR 价格仅作隔夜情绪标尺。</li>
+          <li>本报告为研究框架，不构成投资建议；仓位、止损、目标价请自行校准到个人风险承受能力。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel" id="timeline">
+      <div class="panel-head"><div><p class="eyebrow">Catalysts</p><h2>事件 / 催化日历</h2></div></div>
+      <div class="timeline">
+        <div class="timeline-item filter-item"><time>08-10<br>周一</time><div><strong>KRX 09:00 开盘</strong>：消化 8/7 盘后公告（股息 ₩375/股 + 承诺 Q3 内股东回报方案）；重点观察外资/法人净买卖与 ADR 隔夜方向；摩根士丹利称「回购=下周动能核心」。</div></div>
+        <div class="timeline-item filter-item"><time>~08-12<br>周三</time><div><strong>美国 7 月 CPI</strong>（以官方日程为准）：利率与风险偏好总开关，高估值高波动品种对通胀读数敏感。</div></div>
+        <div class="timeline-item filter-item"><time>08-14<br>周五</time><div><strong>收盘前仓位决策</strong>：8/15 光复节（周六）+ 8/17 代休日（周一 KRX 休市）= 三日连休；周五尾盘控制裸敞口。</div></div>
+        <div class="timeline-item filter-item"><time>~08-21±</time><div>Fed Jackson Hole —— 9 月利率路径锚。</div></div>
+        <div class="timeline-item filter-item"><time>~08-26±</time><div><strong>NVIDIA FQ2 财报</strong>（往年同期）：板块情绪总闸，决定 9 月反弹高度。</div></div>
+        <div class="timeline-item filter-item"><time>09-30 前</time><div><strong>股东回报细则承诺期限</strong>（Q3 内确定并公布）：本事件窗口的最大待兑现催化。</div></div>
+        <div class="timeline-item filter-item"><time>已发生</time><div>8/7 盘后：季度股息 ₩375/股 + Q3 内回报方案承诺 · 8/5 「特别股东回报」传闻 · 8/4 静默期解除 · 7/31 KOSPI +17.9%（史上最大涨幅）· 7/29 2Q26 纪录（卖事实 −10%）· 7/28–30 黑三日 · 7/27 CXMT 上市 +466% · 7/10 ADR 上市 $170 · 7/13 首轮 −13%</div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="risk">
+      <div class="panel-head"><div><p class="eyebrow">Risk Rules</p><h2>风控规则（写进交易单再动手）</h2></div></div>
+      <div class="status-strip">
+        <span class="badge accent">看多触发：量能 ≥800 万股 且 收盘站上 156–157 万</span>
+        <span class="badge">中性：135–150 万 缩量箱体（日量 &lt;500 万股）</span>
+        <span class="badge warn">观察：128.7 万前低守卫 · 回报细则措辞（回购/特别股息/股息率）· Q3 合约价涨幅</span>
+        <span class="badge warn">反弹兑现：172 万 / 191.9 万 前高附近分批减</span>
+        <span class="badge" style="border-color:rgba(163,59,42,.4);color:var(--danger)">止损：收盘破 124.6 万 → 减仓至 ≤10%，反弹不抢</span>
+      </div>
+      <div class="table-note">合计敞口（韩股+ADR）单票 ≤7 成；右侧信号优先；所有触发以收盘价为准。</div>
+    </section>
+
+    <section class="panel" id="sources">
+      <div class="panel-head"><div><p class="eyebrow">Sources</p><h2>资料来源（证据目录 SKHynix_20260810/）</h2></div></div>
+      <ul class="source-list">
+        <li><a href="https://news.skhynix.co.kr/q2-2026-business-results/">SK hynix Newsroom：2026 Q2 经营业绩（2026-07-29）</a></li>
+        <li><a href="https://www.sedaily.com/article/20077200">首尔经济：投资者压力下 SK 海力士「纳斯达克级」股东回报（2026-08-08）</a></li>
+        <li><a href="https://www.yna.co.kr/view/AKR20260801014400008">联合新闻：目标价平均仍高出现价 96%（2026-08-02）</a></li>
+        <li><a href="https://news.einfomax.co.kr/news/articleView.html?idxno=4424668">연합인포맥스：华尔街看 SK 海力士 13% 急跌（2026-07-13）</a></li>
+        <li><a href="https://www.chosun.com/economy/money/2026/07/30/O62DDUYFEJEP5EG7O5HAH4LN5Q/">朝鲜日报：한투「SK 海力士看 470 万」（2026-07-30）</a></li>
+        <li><a href="https://www.joongang.co.kr/article/25450422">中央日报：7 月 D램·낸드 再创新高 / Q3 PC D램 +20% 展望</a></li>
+        <li><a href="https://www.yna.co.kr/view/AKR20260706072100003">联合新闻：Q3 D램 涨幅放缓至 13–18% 警示（2026-07-06）</a></li>
+        <li><a href="https://www.chosun.com/economy/money/2026/07/27/TY7GVH3BWFG5JFVDMXPUE2VXUE/">朝鲜日报：CXMT 上市当日市值第一（2026-07-27）</a></li>
+        <li><a href="https://www.ig.com/en/news-and-trade-ideas/memory-chip-stocks-rally-2026-260708">IG：2026 内存超级周期（BofA 延至 2027 底）</a></li>
+        <li><a href="https://analysis-atlas.com/research/ai-memory-supercycle-hbm-rally/">Analysis Atlas：AI 内存超级周期层级拆解（HBM 结构性 vs 周期型）</a></li>
+        <li><a href="https://www.cnbc.com/2026/07/09/meet-sk-hynix-the-trillion-dollar-chipmaker-debuting-on-us-markets-.html">CNBC：市值万亿 SK 海力士纳指 ADR 上市（2026-07-09）</a></li>
+        <li>行情数据：Yahoo Finance 000660.KS 6 个月日线、SKHY 日线（证据目录 json）</li>
+      </ul>
+    </section>
+
+    <p class="footer">数据截至 2026-08-10 凌晨（周一，KRX 09:00 KST 开盘前）。价位单位万 = 万韩元；USD/KRW ≈ 1,407。本报告为投研框架，不构成投资建议。证据与抓取文件：~/automation/us-stock-daily/evidence/SKHynix_20260810/</p>
+  </main>
+</div>
+</div>
+
+<script>
+/* terminal.js — 「研究终端」共享交互：全局搜索过滤 + 表头排序。
+   依赖元素（可选，缺失自动跳过）：#searchInput #resetSearch #rowCount #emptyState
+   过滤目标：table.sortable 的行 + .filter-item 元素。 */
+(function () {
+  const input = document.getElementById('searchInput');
+  const resetBtn = document.getElementById('resetSearch');
+  const rowCount = document.getElementById('rowCount');
+  const emptyState = document.getElementById('emptyState');
+  const tables = Array.from(document.querySelectorAll('table.sortable'));
+  const items = Array.from(document.querySelectorAll('.filter-item'));
+  const norm = v => (v || '').toLowerCase().trim();
+  const asNum = v => {
+    const c = v.replace(/[$,%+~]/g, '').replace(/[^0-9.\-]/g, '');
+    if (!c || c === '-' || c === '.') return null;
+    const n = Number(c); return Number.isFinite(n) ? n : null;
+  };
+  function update() {
+    if (!input) return;
+    const q = norm(input.value); let vis = 0;
+    tables.forEach(t => Array.from(t.tBodies[0]?.rows || []).forEach(r => {
+      const m = !q || norm(r.innerText).includes(q); r.hidden = !m; if (m) vis++;
+    }));
+    items.forEach(el => {
+      const m = !q || norm(el.innerText).includes(q);
+      el.classList.toggle('hidden-by-filter', !m); if (m) vis++;
+    });
+    if (rowCount) rowCount.textContent = vis + ' 条匹配';
+    if (emptyState) emptyState.classList.toggle('visible', Boolean(q) && vis === 0);
+  }
+  tables.forEach(table => {
+    Array.from(table.tHead?.rows[0]?.cells || []).forEach((th, i) => {
+      const b = th.querySelector('button'); if (!b) return;
+      b.addEventListener('click', () => {
+        const dir = th.dataset.sort === 'asc' ? 'desc' : 'asc';
+        Array.from(th.parentElement.children).forEach(c => c.dataset.sort = '');
+        th.dataset.sort = dir;
+        const rows = Array.from(table.tBodies[0].rows);
+        rows.sort((a, c) => {
+          const av = a.cells[i]?.innerText.trim() || '', bv = c.cells[i]?.innerText.trim() || '';
+          const an = asNum(av), bn = asNum(bv);
+          const cmp = (an !== null && bn !== null) ? an - bn
+            : av.localeCompare(bv, 'zh-Hans-u-co-pinyin', { numeric: true, sensitivity: 'base' });
+          return dir === 'asc' ? cmp : -cmp;
+        });
+        rows.forEach(r => table.tBodies[0].appendChild(r));
+      });
+    });
+  });
+  if (resetBtn && input) resetBtn.addEventListener('click', () => { input.value = ''; update(); input.focus(); });
+  if (input) input.addEventListener('input', update);
+  update();
+})();
+
+</script>
+</body>
+</html>

@@ -1,6 +1,25 @@
 {
   "entries": [
     {
+      "slug": "sk-hynix-next-week-plan-2026",
+      "title": "SK 海力士下周操作计划：存储行情下半场",
+      "date": "2026-08-10",
+      "tags": [
+        "存储",
+        "HBM",
+        "周期",
+        "交易计划"
+      ],
+      "tickers": [
+        "000660.KS",
+        "SKHY"
+      ],
+      "teaser": "2Q26 纪录挡不住黑三日 −52% 回撤：拥挤出清但超级周期未破。下周赌股东回报细则 + 7 月 CPI，四情景操作面板 + 价位止损。现价 ₩142.2万，均 TP ₩337万。",
+      "cover": null,
+      "path": "research/sk-hynix-next-week-plan-2026/index.html",
+      "added_at": "2026-08-10 01:17:25"
+    },
+    {
       "slug": "cn-hk-ibkr-funding-2026",
       "title": "中国内地到香港再入金盈透：合规边界、费用与操作路径",
       "date": "2026-07-26",
@@ -344,5 +363,5 @@
       "added_at": "2026-06-06 21:03:33"
     }
   ],
-  "last_updated": "2026-07-26 15:33:02"
+  "last_updated": "2026-08-10 01:17:25"
 }
