@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4ef">
+  <title>Anthropic 招股书观点：真实搜索路径与首轮发现· 美股投研</title>
+  <style>/* theme.css — 「研究终端」共享设计系统
+   提取自 AI 基建投资研究仪表盘，供首页 + 每日观察 + 研报模板统一复用。
+   配色: warm paper #f6f4ef / 墨 #181916 / 绿 #0b6b57 / 金 #9a6500 / 红 #a33b2a / 蓝 #315f8a */
+
+:root {
+  color-scheme: light;
+  --bg: #f6f4ef;
+  --surface: #fffdfa;
+  --surface-2: #f0eee8;
+  --ink: #181916;
+  --muted: #676b62;
+  --line: #d9d5ca;
+  --line-strong: #bdb7aa;
+  --accent: #0b6b57;
+  --accent-2: #9a6500;
+  --danger: #a33b2a;
+  --cool: #315f8a;
+  --shadow: 0 18px 45px rgba(42, 38, 30, 0.08);
+  --radius: 8px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration-color: rgba(11, 107, 87, 0.45); text-underline-offset: 3px; }
+a:hover { color: var(--accent); }
+button, input, a { touch-action: manipulation; }
+button:focus-visible, input:focus-visible, a:focus-visible, summary:focus-visible {
+  outline: 3px solid rgba(11, 107, 87, 0.32);
+  outline-offset: 2px;
+}
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  transform: translateY(-150%);
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: white;
+}
+.skip-link:focus { transform: translateY(0); }
+.app-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); min-height: 100vh; }
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: max(18px, env(safe-area-inset-top)) 16px 18px max(16px, env(safe-area-inset-left));
+  border-right: 1px solid var(--line);
+  background: rgba(255, 253, 250, 0.92);
+  backdrop-filter: blur(12px);
+  overflow-y: auto;
+}
+.brand { padding: 4px 4px 18px; border-bottom: 1px solid var(--line); }
+.brand h1 { margin: 0; font-size: 20px; line-height: 1.18; letter-spacing: 0; text-wrap: balance; }
+.brand p { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.nav-group { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.nav-group-title { margin: 0 4px 8px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 7px 8px;
+  border-radius: 6px;
+  color: #30322e;
+  font-size: 13px;
+  line-height: 1.25;
+  text-decoration: none;
+}
+.nav-link:hover { background: #ece8df; color: var(--ink); }
+.nav-link span:first-child { width: 22px; flex: 0 0 auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+.main { min-width: 0; padding: 22px clamp(16px, 3vw, 34px) 60px; }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  margin: -22px calc(clamp(16px, 3vw, 34px) * -1) 20px;
+  padding: 14px clamp(16px, 3vw, 34px);
+  border-bottom: 1px solid var(--line);
+  background: rgba(246, 244, 239, 0.88);
+  backdrop-filter: blur(12px);
+}
+.search-wrap { min-width: 0; }
+.search-wrap label { display: block; margin-bottom: 5px; color: var(--muted); font-size: 12px; }
+.search-row { display: flex; gap: 8px; align-items: center; }
+#searchInput {
+  width: min(680px, 100%);
+  height: 38px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0 12px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 14px;
+}
+.tool-buttons { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.tool-buttons button, .source-link {
+  min-height: 36px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0 11px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.tool-buttons button:hover, .source-link:hover { border-color: var(--accent); color: var(--accent); }
+.hero-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 18px;
+  align-items: stretch;
+  margin-bottom: 18px;
+}
+.overview-copy, .metric-grid, .panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.overview-copy { padding: 22px; }
+.eyebrow { margin: 0 0 8px; color: var(--accent); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.overview-copy h2 { margin: 0; font-size: clamp(24px, 3vw, 38px); line-height: 1.08; letter-spacing: 0; text-wrap: balance; }
+.overview-copy p { max-width: 860px; margin: 14px 0 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
+.metric-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: hidden; }
+.metric { padding: 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-width: 0; }
+.metric:nth-child(2n) { border-right: 0; }
+.metric:nth-last-child(-n+2) { border-bottom: 0; }
+.metric strong { display: block; font-size: 28px; line-height: 1; font-variant-numeric: tabular-nums; }
+.metric span { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; line-height: 1.35; }
+.panel { margin: 18px 0; overflow: hidden; }
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--line);
+}
+.panel-head h2 { margin: 0; font-size: 20px; letter-spacing: 0; text-wrap: balance; }
+.panel-head p:not(.eyebrow) { margin: 6px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.table-shell { width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 880px; font-size: 13px; }
+th, td { padding: 10px 11px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; line-height: 1.42; overflow-wrap: anywhere; }
+thead th { position: sticky; top: 0; z-index: 1; background: #eeeae1; color: #353730; font-weight: 700; }
+tbody tr:hover { background: #fbf7ed; }
+tbody tr[hidden] { display: none; }
+.num, td:nth-child(6), td:nth-child(10) { font-variant-numeric: tabular-nums; }
+.rank-top { color: var(--accent); font-weight: 800; }
+.sort-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+.sort-button:hover { color: var(--accent); }
+.table-note { padding: 10px 20px 16px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); }
+.doc-map { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; padding: 16px 20px 20px; }
+.doc-chip {
+  display: block;
+  min-height: 72px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fbfaf6;
+  text-decoration: none;
+}
+.doc-chip:hover { border-color: var(--accent); background: #f3f0e8; }
+.doc-chip span { display: block; color: var(--muted); font-size: 11px; margin-bottom: 6px; }
+.doc-chip strong { display: block; font-size: 13px; line-height: 1.35; overflow-wrap: anywhere; }
+.markdown-body { padding: 2px 20px 24px; }
+.markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 { scroll-margin-top: 86px; letter-spacing: 0; text-wrap: balance; }
+.markdown-body h2 { margin: 24px 0 10px; font-size: 21px; }
+.markdown-body h3 { margin: 22px 0 8px; font-size: 17px; }
+.markdown-body h4 { margin: 18px 0 8px; font-size: 15px; }
+.markdown-body p, .markdown-body li { color: #30322d; font-size: 14px; line-height: 1.68; }
+.markdown-body ul, .markdown-body ol { padding-left: 22px; }
+.markdown-body blockquote {
+  margin: 14px 0;
+  padding: 10px 14px;
+  border-left: 4px solid var(--accent);
+  background: #f4f0e8;
+  color: #2f332c;
+}
+.markdown-body blockquote p { margin: 4px 0; color: #2f332c; }
+.markdown-body pre {
+  overflow-x: auto;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #171914;
+  color: #f8f3e7;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.markdown-body code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
+.status-strip { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 20px 18px; }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: #faf8f2;
+  color: #3b3d37;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.badge.accent { border-color: rgba(11, 107, 87, .35); color: var(--accent); }
+.badge.warn { border-color: rgba(154, 101, 0, .35); color: var(--accent-2); }
+.hidden-by-filter { display: none; }
+.empty-state { display: none; padding: 18px 20px; color: var(--muted); }
+.empty-state.visible { display: block; }
+.footer { margin-top: 28px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+@media (max-width: 1080px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  .nav-group:last-child { display: none; }
+  .hero-panel { grid-template-columns: 1fr; }
+  .topbar { grid-template-columns: 1fr; position: sticky; }
+  .tool-buttons { justify-content: flex-start; }
+}
+@media (max-width: 640px) {
+  .main { padding-inline: 12px; }
+  .topbar { margin-inline: -12px; padding-inline: 12px; }
+  .overview-copy { padding: 18px; }
+  .metric-grid { grid-template-columns: 1fr; }
+  .metric, .metric:nth-child(2n), .metric:nth-last-child(-n+2) { border-right: 0; border-bottom: 1px solid var(--line); }
+  .metric:last-child { border-bottom: 0; }
+  .panel-head { flex-direction: column; }
+  table { min-width: 760px; font-size: 12px; }
+  th, td { padding: 8px; }
+  .search-row { flex-direction: column; align-items: stretch; }
+  .badge { white-space: normal; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+.visual-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr); gap: 16px; padding: 16px 20px 22px; }
+.visual-card { border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; overflow: hidden; min-width: 0; }
+.visual-card h3 { margin: 0; padding: 14px 14px 8px; font-size: 16px; letter-spacing: 0; text-wrap: balance; }
+.visual-card p { margin: 0; padding: 0 14px 14px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+.diagram-wrap { overflow-x: auto; padding: 12px; overscroll-behavior-x: contain; }
+.diagram { width: 100%; min-width: 780px; height: auto; display: block; }
+.diagram text { font-family: inherit; fill: #20221e; }
+.diagram .node { fill: #fffdfa; stroke: #bdb7aa; stroke-width: 1.2; }
+.diagram .node-strong { fill: #eef6f1; stroke: #0b6b57; stroke-width: 1.4; }
+.diagram .node-warn { fill: #fff3d8; stroke: #9a6500; stroke-width: 1.3; }
+.diagram .node-risk { fill: #faece8; stroke: #a33b2a; stroke-width: 1.2; }
+.diagram .link { fill: none; stroke: #8f8a80; stroke-width: 1.2; marker-end: url(#arrow); }
+.diagram .link-strong { fill: none; stroke: #0b6b57; stroke-width: 2; marker-end: url(#arrow-green); }
+.diagram .label { font-size: 12px; font-weight: 700; }
+.diagram .small { font-size: 10.5px; fill: #676b62; }
+.diagram .lane { fill: #f2efe7; stroke: #d9d5ca; stroke-width: 1; }
+.player-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 12px; padding: 16px 20px 22px; }
+.player-card { border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; padding: 14px; min-width: 0; }
+.player-card header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.player-card h3 { margin: 0; font-size: 16px; letter-spacing: 0; }
+.player-card .ticker { font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.player-card dl { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 7px 10px; margin: 0; font-size: 13px; line-height: 1.48; }
+.player-card dt { color: var(--muted); }
+.player-card dd { margin: 0; color: #2c2e29; overflow-wrap: anywhere; }
+.player-card a { color: var(--accent); }
+.chain-map { padding: 16px 20px 22px; display: grid; gap: 12px; }
+.chain-row { display: grid; grid-template-columns: 150px repeat(5, minmax(120px, 1fr)); gap: 8px; align-items: stretch; }
+.chain-title { display: flex; align-items: center; padding: 10px; border-radius: var(--radius); background: #ece8df; font-weight: 800; font-size: 13px; }
+.chain-cell { min-height: 74px; padding: 10px; border: 1px solid var(--line); border-radius: var(--radius); background: #fbfaf6; font-size: 12px; line-height: 1.42; position: relative; }
+.chain-cell strong { display: block; margin-bottom: 5px; color: var(--ink); }
+.chain-cell::after { content: '→'; position: absolute; right: -13px; top: 50%; transform: translateY(-50%); color: var(--line-strong); font-weight: 800; }
+.chain-cell:last-child::after { content: ''; }
+.bottleneck { border-color: rgba(11, 107, 87, .45); background: #eef6f1; }
+.watch { border-color: rgba(154, 101, 0, .42); background: #fff7e8; }
+.risk-node { border-color: rgba(163, 59, 42, .38); background: #faece8; }
+.source-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px 14px; padding: 0 20px 22px; margin: 0; }
+.source-list li { list-style: none; font-size: 12px; line-height: 1.45; color: var(--muted); }
+.source-list a { color: var(--accent); }
+.timeline { padding: 16px 20px 22px; display: grid; gap: 10px; }
+.timeline-item { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; align-items: start; }
+.timeline-item time { padding: 8px 10px; border-radius: var(--radius); background: #ece8df; color: var(--ink); font-size: 12px; font-weight: 800; text-align: center; font-variant-numeric: tabular-nums; }
+.timeline-item div { padding: 10px 12px; border-left: 3px solid var(--accent); background: #fbfaf6; border-radius: 0 var(--radius) var(--radius) 0; font-size: 13px; line-height: 1.55; }
+@media (max-width: 900px) { .visual-grid { grid-template-columns: 1fr; } .chain-row { grid-template-columns: 1fr; } .chain-cell::after { content: '↓'; right: 12px; top: auto; bottom: -17px; transform: none; } .chain-cell:last-child::after { content: ''; } }
+@media (max-width: 640px) { .player-grid, .visual-grid, .chain-map, .timeline { padding-inline: 12px; } .player-card dl { grid-template-columns: 1fr; } .timeline-item { grid-template-columns: 1fr; } }
+
+/* ---- 站点 chrome 补充（首页 / 日报）---- */
+.brand a{color:inherit;text-decoration:none}
+.brand a:hover{color:var(--accent)}
+.lede-inline{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.muted{color:var(--muted)}
+.back-link{color:var(--muted);font-size:13px}
+.back-link:hover{color:var(--accent)}
+
+/* 首页深度研究卡片：标题占整行，ticker 换到下方且可换行（修复长 ticker 挤压标题） */
+.player-card .card-title{margin:0 0 5px;font-size:17px;line-height:1.42;letter-spacing:0;text-wrap:balance}
+.player-card .card-title a{color:var(--ink);text-decoration:none}
+.player-card .card-title a:hover{color:var(--accent)}
+.player-card .card-tickers{margin:0 0 9px;color:var(--accent);font-size:12.5px;
+  font-variant-numeric:tabular-nums;line-height:1.5;overflow-wrap:anywhere}
+.player-card .card-teaser{margin:0 0 11px;color:var(--muted);font-size:13px;line-height:1.55;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+h1{font-size:clamp(24px,3vw,34px)} h2{margin-top:32px} table{display:block;overflow:auto} th,td{vertical-align:top;min-width:140px;padding:12px} p,li{line-height:1.8}</style>
+</head>
+<body>
+<!-- research-site-nav:start -->
+<style>
+.research-site-nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;gap:10px;min-height:42px;padding:7px clamp(14px,3vw,28px);border-bottom:1px solid #d9d5ca;background:rgba(246,244,239,.94);backdrop-filter:blur(12px);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+.research-site-nav a{display:inline-flex;align-items:center;min-height:28px;border:1px solid #d9d5ca;border-radius:8px;padding:3px 10px;background:#fffdfa;color:#181916;text-decoration:none;font-size:13px;line-height:1.2}
+.research-site-nav a:hover{border-color:#0b6b57;color:#0b6b57}
+.research-site-nav .research-site-nav-spacer{flex:1 1 auto}
+.research-site-nav strong{font-size:13px;color:#676b62;font-weight:700;white-space:nowrap}
+@media(max-width:640px){.research-site-nav{gap:6px;overflow-x:auto}.research-site-nav strong{display:none}.research-site-nav a{white-space:nowrap}}
+</style>
+<nav class="research-site-nav" aria-label="站点导航">
+  <a href="../../index.html">返回投研站首页</a>
+  <a href="../index.html">全部研究</a>
+  <span class="research-site-nav-spacer"></span>
+  <strong>美股投研</strong>
+</nav>
+<!-- research-site-nav:end -->
+
+
+<a class="skip-link" href="#main">跳到主内容</a>
+<nav class="research-site-nav" aria-label="站点导航" style="position:sticky;top:0;z-index:1000;display:flex;align-items:center;gap:10px;min-height:42px;padding:7px clamp(14px,3vw,28px);border-bottom:1px solid var(--line);background:rgba(246,244,239,.94);backdrop-filter:blur(12px)">
+  <a class="source-link" href="../../index.html">返回投研站首页</a>
+  <a class="source-link" href="../index.html">全部研究</a>
+  <span style="flex:1 1 auto"></span>
+  <strong style="font-size:13px;color:var(--muted)">美股投研</strong>
+</nav>
+<div class="app-shell">
+  <!-- ============ 侧栏：品牌 + 导航（按报告章节填 nav-link） ============ -->
+  <aside class="sidebar" aria-label="导航">
+    <div class="brand">
+      <h1>Anthropic 招股书观点：真实搜索路径与首轮发现</h1>
+      <p>2026-10-28 · 通用 query 规划实跑</p>
+    </div>
+    <nav class="nav-group" aria-label="Primary"><a class="nav-link" href="#_1"><span>1</span><strong>实际执行路径</strong></a><a class="nav-link" href="#_2"><span>2</span><strong>已核验的不同作者视角</strong></a><a class="nav-link" href="#_3"><span>3</span><strong>实跑暴露的问题</strong></a><a class="nav-link" href="#_4"><span>4</span><strong>可复核材料</strong></a></nav>
+  </aside>
+
+  <main class="main" id="main">
+    <!-- ============ 顶栏：全局搜索（自动过滤表格行 + .filter-item） ============ -->
+    <div class="topbar" role="search">
+      <div class="search-wrap"><label for="searchInput">搜索作者 / 查询 / 观点</label>
+        <div class="search-row">
+          <input id="searchInput" type="search" autocomplete="off" placeholder="例如 Tunguz、算力、原文…" aria-describedby="rowCount">
+          <span class="badge" id="rowCount" aria-live="polite">—</span>
+        </div></div>
+      <div class="tool-buttons">
+        <button type="button" id="resetSearch">重置</button>
+        <a class="source-link" href="../../index.html">首页</a>
+        <a class="source-link" href="../index.html">全部研究</a>
+        <!-- 可放原始来源链接：<a class="source-link" href="#sources">来源</a> -->
+      </div>
+    </div>
+
+<section class="panel"><div style="padding:22px;line-height:1.8"><h1 id="anthropic">Anthropic 招股书观点研究：实际搜索路径与首轮发现</h1>
+<p>2026-10-28。目的：实跑通用 deep-research 的查询规划，观察它能否根据结果换词、找作者、追踪分歧。本次没有改动 skill，也没有使用上一任务的领域词汇。</p>
+<p>先确认研究对象：Anthropic 于 2026-10-26 公开递交 S-1；这与 6 月的秘密递交不同。公开递交也不代表 IPO 已完成。<a href="https://www.anthropic.com/news/s1-sec">公司公告</a> / <a href="https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm">SEC 原文</a></p>
+<h2 id="_1">实际执行路径</h2>
+<p>这次分为 skill 原生执行器和补充网页核验两条路径。下面的 6 条是执行器实际派发的逻辑查询；一个查询会调用多个来源，因此不等于 6 次网络请求。补充检索另列于 query-trace.json，不能把它们算成执行器自动发现。</p>
+<table>
+<thead>
+<tr>
+<th>轮次</th>
+<th>实际 query</th>
+<th>为什么搜、结果如何改变下一步</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Anthropic S-1</td>
+<td>将“招股书”映射为法定英文文件名称。13 个结果里找到公司公告和 SEC 原文，也混入旧秘密递交报道。</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Anthropic S-1 analysis</td>
+<td>单独寻找解读。发现 Tomasz Tunguz 的署名文章、财务讨论与视频访谈；转向作者与争议主题。</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Anthropic 招股书</td>
+<td>换中文渠道，而非叠加更多限制词。Google 7 条、搜狗微信 10 条；同时发现一份相关 ETF 招股书，应排除。</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Tomasz Tunguz Anthropic</td>
+<td>作者名来自上一轮真实结果。检索同时带出作者较早文章，说明姓名查询仍需核对日期，不能把旧观点包装为对本次 S-1 的反应。</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Anthropic compute commitments</td>
+<td>从解读中的“算力承诺”展开，检索合同风险及来源。返回草案报道、公司合作公告和不同计算口径，需回到同版文件核验。</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Anthropic Virtual Collaborators</td>
+<td>探索产品方向。这条未加引号，混入无关公司目录，属于低质量返回；但也发现 Anima 的署名解读。</td>
+</tr>
+</tbody>
+</table>
+<p>补充网页核验随后执行 <code>Anthropic "Virtual Collaborators" "S-1"</code>，结果更集中于原始文件与对应章节；读取 Anima 原文确认作者是 Avishay Cohen，不能因为标题含 Dario Amodei 就误认作者。读取 SEC 对应章节，核对产品方向。沿 Dan Primack 原文链接读到 Dario 9 月文章，明确其是背景观点，而非招股书发布后的评论。</p>
+<p>原生执行器累计返回 78 个去重 URL；这只是检索量，并非 78 篇可靠原文或 78 位独立作者。最终状态为 <code>rounds_exhausted</code>、<code>sufficient=false</code>，保留原文核验与社交覆盖缺口。本报告的观点归纳另外使用补充原文阅读，不宣称仅靠执行器就完成了研究。</p>
+<h2 id="_2">已核验的不同作者视角</h2>
+<table>
+<thead>
+<tr>
+<th>作者、日期</th>
+<th>原文明说的观点</th>
+<th>对 AI 方向的含义与边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tomasz Tunguz，10 月 26 日</td>
+<td>偏乐观：任务成本下降与收入增长形成正反馈，他用 Jevons 效应解释需求扩张；同时提示长期算力支出与按量收入的不匹配。</td>
+<td>他的判断支持“单位任务更便宜，使用量可能更大”，而非自动推出模型公司最终利润率必然很高。<a href="https://tomtunguz.com/anthropics-s1-grew-eleven-fold">作者原文</a></td>
+</tr>
+<tr>
+<td>吴俊宇，《财经》，10 月 27 日</td>
+<td>单季营业盈利初步显示商业化能力；但提前锁定算力形成双向杠杆，收入减速时会反噬利润。</td>
+<td>我的推论：企业需求能否持续扩张、效率能否跑赢算力成本，是检验 AI 商业路径的重要变量；这不是作者对 AGI 时间表的预测。<a href="https://www.mycaijing.com/article/detail/586417?source_id=40">作者原文</a></td>
+</tr>
+<tr>
+<td>Avishay Cohen，Anima，10 月 26 日</td>
+<td>将产品变化概括为从回答问题走向完成工作；同时强调权限、行动记录、人类监督和可靠性。</td>
+<td>这是明确的产品方向判断：编程 agent 向更广泛工作流延伸。文章含自家产品导流，应视为行业参与者观点。<a href="https://animaapp.com/blog/agentic/anthropic-ipo-claude-s1-dario-amodei-agentic-workforce/">作者原文</a></td>
+</tr>
+<tr>
+<td>Dan Primack，Axios，10 月 27 日</td>
+<td>质疑安全表态与发布节奏的关系。</td>
+<td>这是治理和发展节奏视角。<a href="https://www.axios.com/2026/10/27/anthropic-ipo-cash">作者原文</a></td>
+</tr>
+</tbody>
+</table>
+<p>另有背景原文：Dario Amodei 的 9 月文章主张让安全措施跟上能力进展，并提出第三方评估、行业与政府协调。这是当事人的方向主张，不能当成独立外部评价，也不是对 10 月公开招股书的评论。<a href="https://darioamodei.com/post/we-must-pace-the-frontier">Dario 原文</a></p>
+<p>SEC 自身将 Claude Code 定位为 Virtual Collaborators 的当前实例，强调认知工作及向更广泛工作流扩展；这是公司的战略叙事。其 pacing 段落也区分行业标准与公司自身发布安排。因此不能仅凭“支持安全协调”推断“公司已承诺单方面放慢所有模型发布”。<a href="https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm">SEC 原文</a></p>
+<p>综合以上材料，我的判断是：值得比较的分歧在于效率提升会带来多大新增需求、长期算力如何被收入覆盖，以及自主工作需要何种治理。这些材料不足以推出统一的 AGI 到来时间。</p>
+<h2 id="_3">实跑暴露的问题</h2>
+<ul>
+<li>关键词短只是手段。固定术语需要保留完整含义，必要时加引号；<code>Virtual Collaborators</code> 的噪声就是反例。</li>
+<li>补充检索曾预先猜测 Thompson，也曾添加“AI、作者”等泛词，没有得到可靠对应原文；这两类尝试不应继续扩展或充当已发现作者。</li>
+<li>作者、发布日期和转载谱系都需要阅读核验；Axios 同文的 newsletter 不能多算一个声音，9 月草案报道不能与 10 月正式公开文件混用。</li>
+<li>Smart Search 主入口多次失败，Exa/Tavily 仍返回结果；last30days 返回 1 条 YouTube，X 连接失败。这不能支持“社区没有其他观点”。</li>
+<li>当前是 agent 读结果后提供下一轮决策，脚本负责执行、校验与记录；本次证明能进行跨领域的语义规划，但不能凭一个案例声称稳定解决了 query 智能拆解，也没有对照实验能证明召回率提升多少。</li>
+</ul>
+<h2 id="_4">可复核材料</h2>
+<p>同目录 <code>plan.json</code> 保存逐轮决策；<code>runner/manifest.json</code> 保存实际查询、来源健康与停止状态；<code>runner/sources.jsonl</code> 保存结果；<code>query-trace.json</code> 另列补充网页查询。原始中间材料留在本地，公开报告只含上述摘要和公开来源链接。</p></div></section>
+  </main>
+</div>
+
+<script>/* terminal.js — 「研究终端」共享交互：全局搜索过滤 + 表头排序。
+   依赖元素（可选，缺失自动跳过）：#searchInput #resetSearch #rowCount #emptyState
+   过滤目标：table.sortable 的行 + .filter-item 元素。 */
+(function () {
+  const input = document.getElementById('searchInput');
+  const resetBtn = document.getElementById('resetSearch');
+  const rowCount = document.getElementById('rowCount');
+  const emptyState = document.getElementById('emptyState');
+  const tables = Array.from(document.querySelectorAll('table.sortable'));
+  const items = Array.from(document.querySelectorAll('.filter-item'));
+  const norm = v => (v || '').toLowerCase().trim();
+  const asNum = v => {
+    const c = v.replace(/[$,%+~]/g, '').replace(/[^0-9.\-]/g, '');
+    if (!c || c === '-' || c === '.') return null;
+    const n = Number(c); return Number.isFinite(n) ? n : null;
+  };
+  function update() {
+    if (!input) return;
+    const q = norm(input.value); let vis = 0;
+    tables.forEach(t => Array.from(t.tBodies[0]?.rows || []).forEach(r => {
+      const m = !q || norm(r.innerText).includes(q); r.hidden = !m; if (m) vis++;
+    }));
+    items.forEach(el => {
+      const m = !q || norm(el.innerText).includes(q);
+      el.classList.toggle('hidden-by-filter', !m); if (m) vis++;
+    });
+    if (rowCount) rowCount.textContent = vis + ' 条匹配';
+    if (emptyState) emptyState.classList.toggle('visible', Boolean(q) && vis === 0);
+  }
+  tables.forEach(table => {
+    Array.from(table.tHead?.rows[0]?.cells || []).forEach((th, i) => {
+      const b = th.querySelector('button'); if (!b) return;
+      b.addEventListener('click', () => {
+        const dir = th.dataset.sort === 'asc' ? 'desc' : 'asc';
+        Array.from(th.parentElement.children).forEach(c => c.dataset.sort = '');
+        th.dataset.sort = dir;
+        const rows = Array.from(table.tBodies[0].rows);
+        rows.sort((a, c) => {
+          const av = a.cells[i]?.innerText.trim() || '', bv = c.cells[i]?.innerText.trim() || '';
+          const an = asNum(av), bn = asNum(bv);
+          const cmp = (an !== null && bn !== null) ? an - bn
+            : av.localeCompare(bv, 'zh-Hans-u-co-pinyin', { numeric: true, sensitivity: 'base' });
+          return dir === 'asc' ? cmp : -cmp;
+        });
+        rows.forEach(r => table.tBodies[0].appendChild(r));
+      });
+    });
+  });
+  if (resetBtn && input) resetBtn.addEventListener('click', () => { input.value = ''; update(); input.focus(); });
+  if (input) input.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>

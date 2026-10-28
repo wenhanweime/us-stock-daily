@@ -1,0 +1,15 @@
+{
+  "slug": "anthropic-s1-query-trace-2026-10-28",
+  "title": "Anthropic 招股书观点：真实搜索路径与首轮发现",
+  "date": "2026-10-28",
+  "tags": [
+    "AI",
+    "Anthropic",
+    "研究方法"
+  ],
+  "tickers": [],
+  "teaser": "实跑6条原生查询，记录补充检索与失败路径；比较不同作者观点，区分AI方向判断与推论。",
+  "cover": null,
+  "path": "research/anthropic-s1-query-trace-2026-10-28/index.html",
+  "added_at": "2026-10-28 22:17:02"
+}
