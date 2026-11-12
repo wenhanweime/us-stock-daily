@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "date": "2026-11-12",
+      "generated_at": "2026-11-12 12:00:04 +0800",
+      "model": "grok-4.20-0309-non-reasoning",
+      "unique_tweets": 196,
+      "tickers": [
+        [
+          "$NVDA",
+          12
+        ],
+        [
+          "$QQQ",
+          11
+        ],
+        [
+          "$SPY",
+          8
+        ],
+        [
+          "$AVGO",
+          7
+        ],
+        [
+          "$MU",
+          6
+        ],
+        [
+          "$AMD",
+          6
+        ],
+        [
+          "$CRWV",
+          2
+        ],
+        [
+          "$MRVL",
+          2
+        ]
+      ],
+      "teaser": "美股观察日报·今日导读",
+      "report_path": "reports/2026-11-12.html"
+    },
+    {
       "date": "2026-11-11",
       "generated_at": "2026-11-11 12:00:04 +0800",
       "model": "grok-4.20-0309-non-reasoning",
@@ -2353,5 +2395,5 @@
       "report_path": "reports/2026-06-06.html"
     }
   ],
-  "last_updated": "2026-11-11 12:00:04 +0800"
+  "last_updated": "2026-11-12 12:00:04 +0800"
 }
