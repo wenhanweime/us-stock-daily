@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "date": "2026-11-22",
+      "generated_at": "2026-11-22 12:00:05 +0800",
+      "model": "grok-4.20-0309-non-reasoning",
+      "unique_tweets": 213,
+      "tickers": [
+        [
+          "$NVDA",
+          13
+        ],
+        [
+          "$SPY",
+          9
+        ],
+        [
+          "$MU",
+          8
+        ],
+        [
+          "$QQQ",
+          6
+        ],
+        [
+          "$AMD",
+          6
+        ],
+        [
+          "$ANT",
+          4
+        ],
+        [
+          "$AVGO",
+          4
+        ],
+        [
+          "$MRVL",
+          4
+        ]
+      ],
+      "teaser": "我将检索 X 上近期关于美股的高互动讨论，重点使用 Top 模式并按点赞/互动排序。",
+      "report_path": "reports/2026-11-22.html"
+    },
+    {
       "date": "2026-11-21",
       "generated_at": "2026-11-21 12:00:00 +0800",
       "model": "grok-4.20-0309-non-reasoning",
@@ -2647,5 +2689,5 @@
       "report_path": "reports/2026-06-06.html"
     }
   ],
-  "last_updated": "2026-11-21 12:00:00 +0800"
+  "last_updated": "2026-11-22 12:00:05 +0800"
 }
